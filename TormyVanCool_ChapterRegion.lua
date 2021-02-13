@@ -1,4 +1,26 @@
--- Ver. 2.0 by Tormy Van Cool
+-- @description Chapter region for podcasts and recorded broadcasts
+-- @author Tormy Van Cool
+-- @version 2.0
+-- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterRegion.gif
+-- @about
+--   # Chapter Region for Podcasts and Recorded Broadcasts
+--
+--   It's an ideal feature for Podcasts and Recorded Broadcasts
+--   It enables the user to highlight all the embedded songs by just a click.
+--
+--   By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
+--   Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
+--
+--   It creates a region with the following line preceded by the ID3 Tag "CHAP="
+--   "CHAP=Title:title_of_the_song|Performer:Performer_of_the_song|Duration:Duration_in_seconds"
+--
+--   This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
+--
+--   Key features:
+--   - It can work also as Armed Action
+--   - It creates a region that contains the required Tags without sintaxis errors.
+--   - It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.
+-- Ver. 1.0 made by by Tormy Van Cool 01 feb 2021
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
