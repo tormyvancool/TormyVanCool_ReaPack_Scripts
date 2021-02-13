@@ -1,0 +1,21 @@
+<?xml version="1.0" econding="utf-8"?>
+<index version="1" name="Tormy Van Cool ReaPack Scripts">
+    <category name="Utility">
+        <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="Add/Edit 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
+            <version name="2.0" author="Tormy Van Cool">
+                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/56d129aa18eb0457be02e3b356f2e61ae636c2cd/ChapterMarker.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
+            <version name="2.0" author="Tormy Van Cool">
+                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/56d129aa18eb0457be02e3b356f2e61ae636c2cd/ChapterRegion.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_ChapterMarkerUpdater.lua" type="script" desc="Updates SideCar.TXT file, when markers are moved on the time line.">
+            <version name="1.0" author="Tormy Van Cool">
+                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/56d129aa18eb0457be02e3b356f2e61ae636c2cd/ChapterMarkerUpdater.lua</source>
+            </version>
+        </reapack>
+    </category>
+</index>
+        
