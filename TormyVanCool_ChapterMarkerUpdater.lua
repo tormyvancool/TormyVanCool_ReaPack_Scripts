@@ -1,5 +1,14 @@
+-- @description Chapter Marker Updater for Audiobooks
+-- @author Tormy Van Cool
+-- @version 1.1
+-- @about
+--   # Chapter Marker Updater for Audiobooks
+--
+--   The script, updates the PROJECT_NAME.SideCar.txt file, when markers are renamed and/or moved.
+--   Just calling the script, it remove the old file, with a new updated one.
+--
+--   Once done, it returns a popup window that informs the users, that everything is perfectly done.
 --------------------------------------------------------------------
--- Ver. 1.1 by Tormy Van Cool
 -- Gets the project's name and open the SideCr file to be ovewritten
 --------------------------------------------------------------------
 chap = "CHAP="
