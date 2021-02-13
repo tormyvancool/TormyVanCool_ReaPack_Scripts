@@ -3,17 +3,17 @@
     <category name="Utility">
         <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="Add/Edit 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <version name="2.0" author="Tormy Van Cool">
-                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ff1d65f8c62349ee918554272b10fb9bb2669909/TormyVanCool_ChapterMarker.lua</source>
+                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9e3fd59c0a86508a9e2df56c7c07e7ae4d972d6e/TormyVanCool_ChapterMarker.lua</source>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
+        <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
             <version name="2.0" author="Tormy Van Cool">
-                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ff1d65f8c62349ee918554272b10fb9bb2669909/TormyVanCool_ChapterMarkerUpdater.lua</source>
+                <source main="main" file="TormyVanCool_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9e3fd59c0a86508a9e2df56c7c07e7ae4d972d6e/TormyVanCool_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_ChapterMarkerUpdater.lua" type="script" desc="Updates SideCar.TXT file, when markers are moved on the time line.">
+        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="Updates SideCar.TXT file, when markers are moved on the time line.">
             <version name="1.1" author="Tormy Van Cool">
-                <source>https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ff1d65f8c62349ee918554272b10fb9bb2669909/TormyVanCool_ChapterRegion.lua</source>
+                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9e3fd59c0a86508a9e2df56c7c07e7ae4d972d6e/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
     </category>
