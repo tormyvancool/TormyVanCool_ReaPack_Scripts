@@ -1,4 +1,21 @@
--- ver. 2.0 Made by Tormy Van Cool (BR) Feb 01 2021
+
+
+-- @description Chapter marker for audiobooks (ID3 Metatag "CHAP=Chapter_Title")
+-- @author Tormy Van Cool
+-- @version 2.0
+-- @screenshot Example: ChapterMarker.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif
+-- @about
+--   # Chapter Marker for Audiobooks
+--
+--   It adds  ID3 Metatag "CHAP=Chapter_Title_by_the_User" by a pop up that asks to the user, the title of each chapter.
+--   Then it adds the marker with the correct tag at the mouse position
+--
+--   Key features:
+--   - Asks for the title of each chapter by a pop up field
+--   - It can be used very effectively as Armed Action
+--   - It add the prefix "CHAP=" to any title inserted by the user, avoiding sintaxis errors
+--   - When metadata is used, rendering an MP3, "CHAP=" is automatically added
+-- ver. 1.0 Made by Tormy Van Cool (BR) Feb 01 2021
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
