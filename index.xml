@@ -2,19 +2,19 @@
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Utility">
         <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="Add/Edit 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the point in which a chapter should be added,\line a popup window asks for the chapter title. \par
+                    Writing it and giving \b OK, \b0 a marker will be added with the ID3 TAG "\b CHAP=\b0 " followed by the inserted title.\par
+                    Automatically  a SideCar file is created into the directory of teh project, where the file .RPP is placed.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
             <version name="2.0.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
                 <changelog><![CDATA[Created a SideCAr.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
             </version>
-            <metadata>
-                <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the point in which a chapter should be added, a popup window asks for the chapter title. \par
-                    Writing it and giving \b OK, \b0 a marker will be added with the ID3 TAG "\b CHAP=\b0 " followed by the inserted title.\par
-                    Automatically  a SideCar file is created into the directory of the project, where the file .RPP is placed.\f1\fs22\par
-                    }]]>
-                </description>
-            </metadata>
         </reapack>
         <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
             <version name="2.0.1" author="Tormy Van Cool">
@@ -22,6 +22,24 @@
             </version>
         </reapack>
         <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="Updates SideCar.TXT file, when markers are moved on the time line.">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
+                    {\colortbl ;\red255\green0\blue0;}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the item containing a song,\line A region will be created and a pop-up will ask for:\par
+                    \pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1\qj\b Song title:\b0   (\cf1\b mandatory field\cf0\b0 )\par
+                    \b{\pntext\f2\'B7\tab}Performer: \b0 (\cf1\b mandatory field\cf0\b0 )\par
+                    \b{\pntext\f2\'B7\tab}Year of production: \b0 [if you don't know it, just leave it blank]\par
+                    \b{\pntext\f2\'B7\tab}Label(s): \b0 if you don't know it/them, just leave it blank\par
+                    \pard\sa200\sl276\slmult1\qj\par
+                    Onece click on OK, the duration of the song is automatically calculated in seconds.\line A region will be created with the following coded name:\par
+                    \pard\sa200\sl276\slmult1\b CHAP=Title:\b0\i given_title\b\i0 |Performer:\b0\i given_performer\b\i0 |Year:\b0\i year_of_production\b\i0 |Label:\b0\i given_label\b\i0 |Duration:\b0\i duration_in_seconds\i0\par
+                    \pard\sa200\sl276\slmult1\qj In case the last 2 fields are not inserted, the string is reduced to the following format:\par
+                    \b CHAP=Title:\b0\i given_title\b\i0 |Performer:\b0\i given_performer\b\i0 |Duration:\b0\i duration_in_seconds\i0\par
+                    At the same time, a SideCar file is created into the directory of the project, where the file  \b .RPP\b0  is placed.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
             <version name="1.1.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterRegion.lua</source>
             </version>
