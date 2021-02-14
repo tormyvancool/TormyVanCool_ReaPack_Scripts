@@ -8,7 +8,17 @@
             </version>
             <metadata>
                 <description>
-                    <![CDATA[{\rtf1 {\fonttbl {\f0 Helvetica;}} \f0\fs22 Activating/arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.}]]>
+                    <![CDATA[
+                        {\rtf1\ansi\deff0
+                            {\fonttbl
+                                {\f0 \fswiss Helvetica;}
+                                    {\f1 Courier;}
+                        }
+                        {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+                        \widowctrl\hyphauto
+                        {\pard \ql \f0 \sa180 \li0 \fi0 Activating/Arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.
+                        \par}}
+                    ]]>
                 </description>
             </metadata>
         </reapack>
