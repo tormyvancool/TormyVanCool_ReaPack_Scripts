@@ -2,7 +2,7 @@
 
 -- @description Chapter marker for audiobooks (ID3 Metatag "CHAP=Chapter_Title")
 -- @author Tormy Van Cool
--- @version 2.0
+-- @version 2.0.1
 -- @screenshot Example: ChapterMarker.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif
 -- @about
 --   # Chapter Marker for Audiobooks
@@ -23,7 +23,7 @@ reaper.Undo_BeginBlock()
 chap = "CHAP="
 pipe = "|"
 LF = "\n"
-extention = ".AudioBookSideCar.txt"
+extension = ".AudioBookSideCar.txt"
 UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 
 --------------------------------------------------------------------
@@ -153,7 +153,7 @@ end
 
 local pj_name=reaper.GetProjectName(0, "")
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extention
+pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extension
 
 
 cursor_pos = SecondsToClock(cursor_pos)

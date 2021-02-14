@@ -1,6 +1,6 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.0
+-- @version 2.0.1
 -- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterRegion.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
@@ -28,7 +28,7 @@ reaper.Undo_BeginBlock()
 chap = "CHAP="
 pipe = "|"
 LF = "\n"
-extention = ".PodcastSideCar.txt"
+extension = ".PodcastSideCar.txt"
 UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 
 
@@ -42,7 +42,7 @@ if pj_name == "" then
   return
 end
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extention
+pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extension
 SideCar = io.open(pj_path..'\\'..pj_name, "w")
 
 

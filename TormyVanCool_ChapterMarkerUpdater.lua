@@ -1,6 +1,6 @@
 -- @description Chapter Marker Updater for Audiobooks
 -- @author Tormy Van Cool
--- @version 1.1
+-- @version 1.1.1
 -- @about
 --   # Chapter Marker Updater for Audiobooks
 --
@@ -12,13 +12,13 @@
 -- Gets the project's name and open the SideCr file to be ovewritten
 --------------------------------------------------------------------
 chap = "CHAP="
-extention = ".AudioBookSideCar.txt"
+extension = ".AudioBookSideCar.txt"
 pipe = "|"
 LF = "\n"
 
 local pj_name=reaper.GetProjectName(0, "")
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extention
+pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extension
 SideCar = io.open(pj_path..'\\'..pj_name, "w")
 
 
