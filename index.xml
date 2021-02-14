@@ -5,7 +5,11 @@
             <version name="2.0.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
                 <changelog><![CDATA[Created a SideCAr.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
-                <description><![CDATA[{\rtf1 {\fonttbl {\f0 Helvetica;}} \f0\fs60 Activating/arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.}]]></description>
+                <metadata>
+                    <description>
+                        <![CDATA[{\rtf1 {\fonttbl {\f0 Helvetica;}} \f0\fs60 Activating/arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.}]]>
+                    </description>
+                </metadata>
             </version>
         </reapack>
         <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
@@ -19,5 +23,26 @@
             </version>
         </reapack>
     </category>
+    <metadata>
+        <description>
+        <![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+            {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+            \widowctrl\hyphauto
+
+            {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Tormy Van Cool's ReaScripts for {\field{\*\fldinst{HYPERLINK "http://reaper.fm"}}{\fldrslt{\ul
+            Cockos REAPER
+            }}}
+            \par}
+            {\pard \qc \f0 \sa180 \li0 \fi0 \emdash\emdash\emdash\emdash\emdash\par}
+            {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Content\par}
+            {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Scripts written by Tormy Van Cool\par}
+            {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Scripts written for Tormy Van Cool\par}
+            {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Scripts moded by Tormy Van Cool\par}
+            {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Scripts needed for other scripts on this repository\sa180\par}{\fldrslt{\ul
+            ReaPack
+            }}}}
+        }]]>
+        </descritpion>
+    </metadata>
 </index>
         
