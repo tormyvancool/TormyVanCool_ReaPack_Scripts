@@ -4,6 +4,7 @@
         <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="Add/Edit 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <version name="2.0.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
+                <changelog><![CDATA[Created a SideCAr.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
                 <description><![CDATA[{\rtf1 {\fonttbl {\f0 Helvetica;}} \f0\fs60 Activating/arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.}]]></description>
             </version>
         </reapack>
