@@ -28,8 +28,9 @@
         <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
         {\colortbl ;\red0\green0\blue255;}
         {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22          \par
-        \ul Tormy Van Cool's ReaScripts\ulnone  for \b Cockos REAPER \b0{\field{\*\fldinst{HYPERLINK "https://www.reaper.fm"}}{\fldrslt{\ul\cf1 https://www.reaper.fm}}}\f0\fs22\par
-        \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Scripts written by Tormy Van Cool\par
+        \pard\sl240\slmult1\ul\fs28 Tormy Van Cool's ReaScripts\ulnone  for \b Cockos REAPER \b0{\field{\*\fldinst{HYPERLINK "https://www.reaper.fm"}}{\fldrslt{\ul\cf1 https://www.reaper.fm}}}\f0\fs22\par
+        \par
+        \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Scripts written by Tormy Van Cool\par
         {\pntext\f1\'B7\tab}Scripts written for Tormy Van Cool\par
         {\pntext\f1\'B7\tab}Scripts moded by Tormy Van Cool\par
         {\pntext\f1\'B7\tab}Scripts needed for other scripts on this repository\par
