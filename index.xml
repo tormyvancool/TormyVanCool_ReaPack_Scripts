@@ -19,9 +19,8 @@
         <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
             <metadata>
                 <description>
-                    <![CDATA[{{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\fs24\par
-                    \pard\sa200\sl360\slmult1\qj When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
                     }]]>
                 </description>
             </metadata>
