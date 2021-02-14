@@ -9,15 +9,11 @@
             <metadata>
                 <description>
                     <![CDATA[
-                        {\rtf1\ansi\deff0
-                            {\fonttbl
-                                {\f0 \fswiss Helvetica;}
-                                    {\f1 Courier;}
+                        {\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                        \viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the point in which a chapter should be added, a popup window asks for the chapter title. \par
+                        Writing it and giving \b OK, \b0 a marker will be added with the ID3 TAG "\b CHAP=\b0 " followed by the inserted title.\par
+                        Automatically  a SideCar file is created into the directory of teh project, where the file .RPP is placed.\f1\fs22\par
                         }
-                        {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-                        \widowctrl\hyphauto
-                        {\pard \ql \f0 \sa180 \li0 \fi0 Activating/Arming this script, clicking on the point in which a chapter should be added, a popup window asks for the chapter title. Writing it and giving OK a marker will be added with the ID3 TAG CHAP= followed by the inserted title.
-                        \par}}
                     ]]>
                 </description>
             </metadata>
