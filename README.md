@@ -17,3 +17,8 @@ Warning
 -------
 To install the Podcast/Audiobook scripts, this library is mandatory. Please install it and activate it first.
 * https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/raw/master/ultraschall_api_index.xml
+
+
+To activate it:
+
+_Actions > Script: ultraschall_Add_Developertools_To_Reaper.lua > Run/Close_
