@@ -16,7 +16,7 @@
                 <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
             </version>
             <version name="2.1" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
+                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4d6be3b99621c46b94558c5a96d2a6dafc88c64c/TormyVanCool_ChapterMarker.lua</source>
                 <changelog>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
                 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Changed the format into:\par
