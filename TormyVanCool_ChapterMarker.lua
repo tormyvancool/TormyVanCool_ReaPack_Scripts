@@ -2,7 +2,7 @@
 
 -- @description Chapter marker for audiobooks (ID3 Metatag "CHAP=Chapter_Title")
 -- @author Tormy Van Cool
--- @version 2.0.1
+-- @version 2.1
 -- @screenshot Example: ChapterMarker.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif
 -- @about
 --   # Chapter Marker for Audiobooks
@@ -125,8 +125,14 @@ end
 -- and the user shoudl fill it in
 -- The field is mandatory
 --------------------------------------------------------------------
+if string.match(ChapRid( markerNAME, chap), pipe..'(.*)') == nil then
+  InputVariable = ChapRid( markerNAME, chap)
+else
+  InputVariable = string.match(ChapRid( markerNAME, chap), pipe..'(.*)') 
+end
+
 repeat
-  retval, InputString=reaper.GetUserInputs("AUDIOBOOK: CHAPTERS", 1, "Chapter Title,extrawidth=400", ChapRid(markerNAME, chap))
+  retval, InputString=reaper.GetUserInputs("AUDIOBOOK: CHAPTERS", 1, "Chapter Title,extrawidth=400", InputVariable)
   if InputString == "" then
     reaper.MB("The field is empty!", "WARNING",5)
   end
@@ -140,10 +146,11 @@ InputString=InputString:upper() -- all letters turned in capitals
 --------------------------------------------------------------------
 -- Marker and related variable, construction
 --------------------------------------------------------------------
-local name = chap..InputString
 local color = reaper.ColorToNative(180,60,50)|0x1000000
 local _, num_markers, _ = reaper.CountProjectMarkers(0)
 local cursor_pos = reaper.GetCursorPosition()
+local roundup = math.floor(math.abs(cursor_pos))
+local name = chap..roundup..pipe..InputString
 if flag == false then
   reaper.AddProjectMarker2(0, 0, cursor_pos, 0, name, num_markers+1, color)
   else
@@ -175,7 +182,9 @@ i = 0
 while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   if string.match(name, chap) then
-   local SideCar_ = SecondsToClock(pos)..pipe..ChapRid(name, chap)..LF
+   --local SideCar_ = SecondsToClock(pos)..pipe..ChapRid(name, chap)..LF
+   local SideCar_ = ChapRid(name, chap)
+   SideCar_ = ChapRid(SideCar_, pipe, ',1,"')..'"'..LF
    SideCar:write( SideCar_ )
   end
   i = i+1

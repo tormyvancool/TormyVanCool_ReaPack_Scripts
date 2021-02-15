@@ -13,7 +13,19 @@
             </metadata>
             <version name="2.0.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
-                <changelog><![CDATA[Created a SideCAr.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
+                <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
+            </version>
+            <version name="2.1" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
+                <changelog>
+                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Changed the format into:\par
+                \b CHAP=\b0\i seconds_from_the_beginning_of_the_file\b\i0 |\b0\i chapter_title\i0\par
+                The SideCar.txt file, reports now in this way:\par
+                \i seconds_from_the_beginning_of_the_file\b\i0 ,1,"\b0\i chapter_title\b\i0 "\par
+                \b0 The '\b ,1,' \b0 is added for compatibility with certain radio automation softwares, not capable to fully read MP3s\par
+                }]]>
+                </changelog>
             </version>
         </reapack>
         <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="Add/Edit Regions with title: 'CHAP=Title:|Performer:|year:|Label:|Duration|' for each item  containing music, for Podcasts/Redcorded Broadcasts, witha SideCar.TXT file">
