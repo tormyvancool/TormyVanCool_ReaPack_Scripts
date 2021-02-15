@@ -22,3 +22,8 @@ To install the Podcast/Audiobook scripts, this library is mandatory. Please inst
 To activate it:
 
 _Actions > Script: ultraschall_Add_Developertools_To_Reaper.lua > Run/Close_
+
+
+
+ChapterMarkers in function:
+![..](Chapters.gif)
