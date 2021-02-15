@@ -11,7 +11,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.0.1" author="Tormy Van Cool">
+            <version name="2.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
                 <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
             </version>
@@ -32,7 +32,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.0.1" author="Tormy Van Cool">
+            <version name="1.1.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
@@ -56,7 +56,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.1.1" author="Tormy Van Cool">
+            <version name="2.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
