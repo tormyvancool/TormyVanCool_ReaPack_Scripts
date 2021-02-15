@@ -18,13 +18,9 @@
             <version name="2.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4d6be3b99621c46b94558c5a96d2a6dafc88c64c/TormyVanCool_ChapterMarker.lua</source>
                 <changelog>
-                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
-                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Changed the format into:\par
-                \b CHAP=\b0\i seconds_from_the_beginning_of_the_file\b\i0 |\b0\i chapter_title\i0\par
-                The SideCar.txt file, reports now in this way:\par
-                \i seconds_from_the_beginning_of_the_file\b\i0 ,1,"\b0\i chapter_title\b\i0 "\par
-                \b0 The '\b ,1,' \b0 is added for compatibility with certain radio automation softwares, not capable to fully read MP3s\par
-                }]]>
+                <![CDATA[
+                Changed marker format into: CHAP=seconds_from_the_beginning_of_the_file|chapter_title. The SideCar.txt file, reports now in this way: seconds_from_the_beginning_of_the_file,1,"chapter_title" The ',1,' is added for compatibility with certain radio automation softwares, not capable to fully read MP3s
+                ]]>
                 </changelog>
             </version>
         </reapack>
