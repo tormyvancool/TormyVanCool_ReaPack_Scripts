@@ -1,7 +1,7 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.0.1
--- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterRegion.gif
+-- @version 2.1
+-- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
 --
@@ -12,7 +12,7 @@
 --   Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
 --
 --   It creates a region with the following line preceded by the ID3 Tag "CHAP="
---   "CHAP=Title:title_of_the_song|Performer:Performer_of_the_song|Duration:Duration_in_seconds"
+--   "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds"
 --
 --   This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
 --
@@ -56,7 +56,8 @@ function create_region(region_name, region_ID, flag)
  local color = 0
  local ts_start, ts_end = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
  if ts_start == ts_end then return end
- reaper.AddProjectMarker2(0, true, ts_start, ts_end, region_name, -1, color)
+ local item_start = math.floor(ts_start*100) /100
+ reaper.AddProjectMarker2(0, true, ts_start, ts_end, chap..item_start..pipe..region_name, -1, color)
 end
 
 function get_item_length()
@@ -150,19 +151,19 @@ regionNAME = ChapRid(regionNAME, chap)
 regionNAME = Split(regionNAME, pipe)
   
 if flag then
- if regionNAME[1] ~= nil then
-    SongTitle = ChapRid(regionNAME[1], "Title:")
-    SongPerformer = ChapRid(regionNAME[2], "Performer:")
+ if regionNAME[2] ~= nil then
+    SongTitle = regionNAME[2]
+    SongPerformer = regionNAME[3]
     
     -- Not mandatory fields
     if regionNAME[3] ~= nil then
-      songYear = ChapRid(regionNAME[3], "Year:")
+      songYear = regionNAME[4]
     else
       songYear = ""
     end
     
     if regionNAME[4] ~= nil then
-      songLabel = ChapRid(regionNAME[4], "Label:")
+      songLabel = regionNAME[5]
     else
       songLabel =""
     end
@@ -187,7 +188,7 @@ end
 -- first decimal
 --------------------------------------------------------------------
 local roundup = math.floor(get_item_length() * 10) / 10
-itemduration ='Duration:'..roundup
+itemduration = roundup
 
 
 --------------------------------------------------------------------
@@ -206,26 +207,26 @@ if retval then
   end
 end
 until( t[1] ~= "" and t[2]~= "" )
-InputString_TITLE='Title:'..t[1]:upper()
-InputString_PERFORMER='Performer:'..t[2]:upper()
+InputString_TITLE = t[1]:upper()
+InputString_PERFORMER= t[2]:upper()
 
 
 --------------------------------------------------------------------
 -- Checks for presence of data in not-mandatory fields
 --------------------------------------------------------------------
 if t[3] ~= "" then
-    InputString_PRODUCTION_YEAR = pipe..'Year:'..t[3]:upper()
+    InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
     --InputString_PRODUCTION_YEAR_SideCar = ' - '..t[3]:upper()
   else
-    InputString_PRODUCTION_YEAR = pipe..'Year:'..t[3]:upper()
+    InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
     --InputString_PRODUCTION_YEAR_SideCar = ""
 end
 
 if t[4] ~= "" then
-    InputString_PRODUCTION_LABEL = pipe..'Label:'..t[4]:upper()
+    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
     --InputString_PRODUCTION_LABEL_SideCar = ' - '..t[4]:upper()
    else
-    InputString_PRODUCTION_LABEL = pipe..'Label:'..t[4]:upper()
+    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
     --InputString_PRODUCTION_LABEL_SideCar = ""
 end
 
@@ -233,7 +234,7 @@ end
 --------------------------------------------------------------------
 -- Creates Region and Titles it
 --------------------------------------------------------------------
-local song = chap..InputString_TITLE..pipe..InputString_PERFORMER..InputString_PRODUCTION_YEAR..InputString_PRODUCTION_LABEL..pipe..itemduration
+local song = InputString_TITLE..pipe..InputString_PERFORMER..InputString_PRODUCTION_YEAR..InputString_PRODUCTION_LABEL..pipe..itemduration
 create_region(song, regionID, flag)
 reaper.Main_OnCommand(40020,0)
 
@@ -256,8 +257,10 @@ i = 0
 while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   local item_start = math.floor(math.abs(pos))
+  reaper.ShowConsoleMsg(name)
   if string.match(name, chap) and string.match(name, pipe) then
-    SideCar_ = ChapRid(name, chap, "")
+    SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
+    --[[
     SideCar_ = ChapRid(SideCar_, "Title:", "")
     SideCar_ = ChapRid(SideCar_, "Performer:", "")
     SideCar_ = ChapRid(SideCar_, "Duration:", "")
@@ -265,6 +268,7 @@ while i < numMarkers-1 do
     SideCar_ = ChapRid(SideCar_, "Label:"..pipe, "")
     SideCar_ = ChapRid(SideCar_, "Year:", "")
     SideCar_ = ChapRid(SideCar_, "Label:", "")
+    ]]
     SideCar_ = ChapRid(SideCar_, pipe, " - ")
     SideCar_ = item_start..',1,'..'"'..SideCar_..'"'
     SideCar:write( SideCar_..LF )
