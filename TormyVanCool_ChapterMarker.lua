@@ -134,7 +134,7 @@ end
 repeat
   retval, InputString=reaper.GetUserInputs("AUDIOBOOK: CHAPTERS", 1, "Chapter Title,extrawidth=400", InputVariable)
   if InputString == "" then
-    reaper.MB("The field is empty!", "WARNING",5)
+   if reaper.MB("The field is empty!", "WARNING",5) == 2 then return end
   end
 until InputString ~= ""
 
