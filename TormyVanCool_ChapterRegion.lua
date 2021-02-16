@@ -257,7 +257,7 @@ i = 0
 while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   local item_start = math.floor(math.abs(pos))
-  reaper.ShowConsoleMsg(name)
+  --reaper.ShowConsoleMsg(name)
   if string.match(name, chap) and string.match(name, pipe) then
     SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
     --[[
