@@ -1,6 +1,6 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.1
+-- @version 2.1 
 -- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
