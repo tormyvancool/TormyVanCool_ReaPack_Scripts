@@ -16,7 +16,7 @@
                 <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
             </version>
             <version name="2.1" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/916d293ac2a62f233423bcd86b8dd1236a5b4124/TormyVanCool_ChapterRegion.lua</source>
+                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3eca394256df9e752d86698b749c5f49e368ab2d/TormyVanCool_ChapterMarker.lua</source>
                 <changelog>
                 <![CDATA[
                 Changed marker format into: CHAP=seconds_from_the_beginning_of_the_file|chapter_title. The SideCar.txt file, reports now in this way: seconds_from_the_beginning_of_the_file,1,"chapter_title" The ',1,' is added for compatibility with certain radio automation softwares, not capable to fully read MP3s
@@ -59,7 +59,7 @@
                 </description>
             </metadata>
             <version name="2.1" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterRegion.lua</source>
+                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/916d293ac2a62f233423bcd86b8dd1236a5b4124/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
     </category>
