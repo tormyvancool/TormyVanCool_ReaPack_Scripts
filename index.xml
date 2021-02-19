@@ -64,7 +64,7 @@
         </reapack>
     </category>
     <category name="Rendering">
-        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: Prepares stems to be exported for the real length $of each track.">
+        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: Prepares stems to be exported for the real length of each track.">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
