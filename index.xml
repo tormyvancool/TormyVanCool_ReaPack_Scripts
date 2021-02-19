@@ -63,6 +63,32 @@
             </version>
         </reapack>
     </category>
+    <category name="Rendering">
+        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: Prepares stems to be exported for the real length $of each track.">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 EXPORT STEMS\b0    Performs the following actions:\par
+                    \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1   Gets the cursor position\par
+                    {\pntext\f1\'B7\tab}  Selects all tracks\par
+                    {\pntext\f1\'B7\tab}  Insert empty item\par
+                    {\pntext\f1\'B7\tab}  Glue all items on all tracks\par
+                    {\pntext\f1\'B7\tab}  Calls the rendering window\par
+                    {\pntext\f1\'B7\tab}  Unslects all tracks\par
+                    {\pntext\f1\'B7\tab}  Selects all items for stems\par
+                    {\pntext\f1\'B7\tab}  Calls the rendering window\par
+                    \pard\sl276\slmult1\par
+                    Once exported, each track has a duration form the begining of the song\par
+                    to the end of the track itself, not to the very end of the song.\par
+                    This saves HD space, making shorter files\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8524d4502738d92a29505488d195b04f6eef2452/TormyVanCool_ExportStems.lua</source>
+            </version>
+        </reapack>
+    </category>
     <metadata>
         <description>
         <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
