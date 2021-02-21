@@ -1,6 +1,6 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.1 
+-- @version 2.4
 -- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
@@ -88,6 +88,18 @@ function Split(s, delimiter)
         table.insert(result, match);
     end
     return result;
+end
+
+function SecondsToClock(seconds) -- Turns seconds into the format: "hh:mm:ss"
+  local seconds = tonumber(seconds)
+  if seconds <= 0 then
+    return "00:00:00";
+  else
+    hours = string.format("%02.f", math.floor(seconds/3600));
+    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    return mins..":"..secs
+  end
 end
 
 --------------------------------------------------------------------
@@ -196,7 +208,7 @@ itemduration = roundup
 --------------------------------------------------------------------
 repeat
 retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 2, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label", SongTitle..LF..SongPerformer)
-InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"') -- No reserved characters can be written
+InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|') -- No reserved characters can be written
 if retval==false then return end
 if retval then
   t = {}
@@ -257,19 +269,11 @@ i = 0
 while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   local item_start = math.floor(math.abs(pos))
-  --reaper.ShowConsoleMsg(name)
   if string.match(name, chap) and string.match(name, pipe) then
     SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
-    --[[
-    SideCar_ = ChapRid(SideCar_, "Title:", "")
-    SideCar_ = ChapRid(SideCar_, "Performer:", "")
-    SideCar_ = ChapRid(SideCar_, "Duration:", "")
-    SideCar_ = ChapRid(SideCar_, "Year:"..pipe, "")
-    SideCar_ = ChapRid(SideCar_, "Label:"..pipe, "")
-    SideCar_ = ChapRid(SideCar_, "Year:", "")
-    SideCar_ = ChapRid(SideCar_, "Label:", "")
-    ]]
-    SideCar_ = ChapRid(SideCar_, pipe, " - ")
+    a, b, c = string.match(SideCar_, "(.*)|(.*)|(.*)")
+    reaper.ShowConsoleMsg(c)
+    SideCar_ = a..' - '..b..' - '..SecondsToClock(c)
     SideCar_ = item_start..',1,'..'"'..SideCar_..'"'
     SideCar:write( SideCar_..LF )
   end
