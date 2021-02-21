@@ -70,7 +70,7 @@
                 </description>
             </metadata>
             <version name="2.4" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0c6d0420bb6780fd9c8d06a9bdb8beda318d7d69/TormyVanCool_ChapterRegion.lua</source>
+                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/638cf8ac0f211c85a563380354af056d9cd67bd3/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
     </category>
