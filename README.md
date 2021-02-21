@@ -26,4 +26,10 @@ _Actions > Script: ultraschall_Add_Developertools_To_Reaper.lua > Run/Close_
 
 
 ChapterMarkers in function:
+-------
 ![..](Chapters.gif)
+
+
+ChapterRegions in function:
+-------
+![..](Regions.gif)
