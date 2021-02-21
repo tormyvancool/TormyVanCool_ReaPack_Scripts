@@ -195,7 +195,7 @@ itemduration = roundup
 -- Asks for user's inputs
 --------------------------------------------------------------------
 repeat
-retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 4, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label", SongTitle..LF..SongPerformer..LF..songYear..LF..songLabel)
+retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 2, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label", SongTitle..LF..SongPerformer)
 InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"') -- No reserved characters can be written
 if retval==false then return end
 if retval then
@@ -214,27 +214,27 @@ InputString_PERFORMER= t[2]:upper()
 --------------------------------------------------------------------
 -- Checks for presence of data in not-mandatory fields
 --------------------------------------------------------------------
-if t[3] ~= "" then
-    InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
-    --InputString_PRODUCTION_YEAR_SideCar = ' - '..t[3]:upper()
-  else
-    InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
-    --InputString_PRODUCTION_YEAR_SideCar = ""
-end
+-- if t[3] ~= "" then
+--     InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
+--     --InputString_PRODUCTION_YEAR_SideCar = ' - '..t[3]:upper()
+--   else
+--     InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
+--     --InputString_PRODUCTION_YEAR_SideCar = ""
+-- end
 
-if t[4] ~= "" then
-    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
-    --InputString_PRODUCTION_LABEL_SideCar = ' - '..t[4]:upper()
-   else
-    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
-    --InputString_PRODUCTION_LABEL_SideCar = ""
-end
+-- if t[4] ~= "" then
+--    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
+--    --InputString_PRODUCTION_LABEL_SideCar = ' - '..t[4]:upper()
+--   else
+--    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
+--    --InputString_PRODUCTION_LABEL_SideCar = ""
+-- end
 
 
 --------------------------------------------------------------------
 -- Creates Region and Titles it
 --------------------------------------------------------------------
-local song = InputString_TITLE..pipe..InputString_PERFORMER..InputString_PRODUCTION_YEAR..InputString_PRODUCTION_LABEL..pipe..itemduration
+local song = InputString_TITLE..pipe..InputString_PERFORMER..pipe..itemduration
 create_region(song, regionID, flag)
 reaper.Main_OnCommand(40020,0)
 
