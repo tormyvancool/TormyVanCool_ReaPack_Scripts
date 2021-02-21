@@ -28,7 +28,7 @@ reaper.Undo_BeginBlock()
 chap = "CHAP="
 pipe = "|"
 LF = "\n"
-extension = ".PodcastSideCar.txt"
+extension = ".txt"
 UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 
 
