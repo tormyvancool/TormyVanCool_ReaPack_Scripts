@@ -272,7 +272,6 @@ while i < numMarkers-1 do
   if string.match(name, chap) and string.match(name, pipe) then
     SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
     a, b, c = string.match(SideCar_, "(.*)|(.*)|(.*)")
-    reaper.ShowConsoleMsg(c)
     SideCar_ = a..' - '..b..' - '..SecondsToClock(c)
     SideCar_ = item_start..',1,'..'"'..SideCar_..'"'
     SideCar:write( SideCar_..LF )
