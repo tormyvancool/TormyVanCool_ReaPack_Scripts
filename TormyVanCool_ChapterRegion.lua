@@ -1,6 +1,6 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.4
+-- @version 2.5
 -- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
@@ -25,24 +25,27 @@
 -- Script Initialization
 --------------------------------------------------------------------
 reaper.Undo_BeginBlock()
-chap = "CHAP="
-pipe = "|"
-LF = "\n"
-extension = ".txt"
-UltraschallLua = "/UserPlugins/ultraschall_api.lua"
+local chap = "CHAP="
+local pipe = "|"
+local LF = "\n"
+local extension = ".txt"
+local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
+local author = reaper.GetSetProjectAuthor(0, 0, '')
+
 
 
 --------------------------------------------------------------------
 -- Checks whehether the project is saved
 -- Assigns the name to the SideCar opening it
 --------------------------------------------------------------------
-local pj_name=reaper.GetProjectName(0, "")
-if pj_name == "" then 
+local pj_name_ = reaper.GetProjectName(0, "")
+if pj_name_ == "" then 
   reaper.MB("Save the Project, first!",'WARNING',0)
   return
 end
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-pj_name = string.gsub(string.gsub(pj_name, ".rpp", ""), ".RPP", "")..extension
+pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
+local pj_name = pj_name_..extension
 SideCar = io.open(pj_path..'\\'..pj_name, "w")
 
 
@@ -266,17 +269,43 @@ i = 0
 -- Writes the SideCar file down, all the regions with a name
 -- starting with "CHAP="
 --------------------------------------------------------------------
+local item_start_ = {}
+local item_end_ = {}
+
 while i < numMarkers-1 do
+
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
-  local item_start = math.floor(math.abs(pos))
+  item_start_[i] = math.floor(math.abs(pos))
+  
   if string.match(name, chap) and string.match(name, pipe) then
-    SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
-    a, b, c = string.match(SideCar_, "(.*)|(.*)|(.*)")
+    local SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
+    local a, b, c = string.match(SideCar_, "(.*)|(.*)|(.*)")
+    item_end_[i] = item_start_[i] + math.floor(c) + 1
+    if item_start_[i-1] == nil then item_start_[i-1] = 0 end
+    if item_end_[i-1] == nil then item_end_[i-1] = 0 end    
+    local diff = item_start_[i]-item_end_[i-1]
+    
     SideCar_ = a..' - '..b..' - '..SecondsToClock(c)
-    SideCar_ = item_start..',1,'..'"'..SideCar_..'"'
-    SideCar:write( SideCar_..LF )
+    if item_start_[i] == 0 then item_start_[i] = 1 end
+    SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
+    
+    if item_end_[i-1] == 0 then item_end_[i-1] = 1 end
+
+      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
+
+    if diff  > 15 then
+       -- Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
+        SideCar:write( Broadcast_ID..LF )
+        SideCar:write( SideCar_..LF )
+      else
+        SideCar:write( SideCar_..LF )
+    end
+    
   end
   i = i+1
+end
+if item_start_[i] == nil then
+  SideCar:write( item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..' >"'..LF )
 end
 
 SideCar:close()
