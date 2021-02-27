@@ -1,6 +1,6 @@
 -- @description Chapter region for podcasts and recorded broadcasts
 -- @author Tormy Van Cool
--- @version 2.5
+-- @version 2.5.1
 -- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 -- @about
 --   # Chapter Region for Podcasts and Recorded Broadcasts
@@ -305,6 +305,7 @@ while i < numMarkers-1 do
   i = i+1
 end
 if item_start_[i] == nil then
+  item_end_[i-1] = item_end_[i-1]-3 -- 3 sceonds before EOF returns the Broadcast ID
   SideCar:write( item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..' >"'..LF )
 end
 
