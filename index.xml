@@ -100,6 +100,25 @@
             </version>
         </reapack>
     </category>
+    <category name="Various">
+        <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                    {\colortbl ;\red255\green0\blue0;}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 What is PROGRAM RUNNER?\b0\par
+                    \cf1\b\i Program Runner\cf0\i0  \b0 is an utility that helps you to run any external program, without write any Code!!\line By just 1 click, \cf1\b\i Program Runner\i0   \cf0\b0 creates a proper dedicated script, that fires-up the program you wanted. Any!! From Word to Excel, to Chrome, to MP3TAG, to DDP_to_CUE, to any ...\par
+                    The created script is automatically loaded/imported into the Action List, and it will be always available to you.\par
+                    You can assign it to a button on a toolbar, or to any menu (the Main one as well as a contextual one and so on).\par
+                    It turns this operation from \i nerdy \i0 to \b user friendly one\b0\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/19f6c8542e4a0b4a34bb810f8bedf00d25144d5b/TormyVanCool_Program_Runner.lua</source>
+            </version>
+        </reapack>
+    </category>
     <metadata>
         <description>
         <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
