@@ -52,7 +52,7 @@ scripts_Path = scripts_Path:gsub("\\", "/") .. '/scripts/TormyVanCool_Program_Ru
 reaper.RecursiveCreateDirectory( scripts_Path, 1 )
 scripts_Path =  scripts_Path .. InputString:match("(.+)%..+") .. extension
 if file_exists(scripts_Path) == true then
-  custom_Reaction = reaper.MB("A file with this name already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
+  custom_Reaction = reaper.MB("A file with the name '"..InputString:match("(.+)%..+") .. extension .."'' already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
 end
 
 if custom_Reaction == nil or custom_Reaction == 6 then
