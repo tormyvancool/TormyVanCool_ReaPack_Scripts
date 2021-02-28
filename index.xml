@@ -115,7 +115,7 @@
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/19f6c8542e4a0b4a34bb810f8bedf00d25144d5b/TormyVanCool_Program_Runner.lua</source>
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0066a76bd1e107571aa4ea913477451f3035b7c5/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
     </category>
