@@ -1,7 +1,7 @@
 --[[
 @description It creates scripts that are supposed to fire-up an external program, after have selected it
 @author: Tormy Van Cool
-@version: 1.0
+@version: 1.0.1
 @about
 # First release made 28 feb 2021
 it requires ULTRASCHALL Library
@@ -16,6 +16,7 @@ local LF = "\n"
 local extension = ".lua"
 local script_File = nil
 local custom_Reaction = nil
+local sub_Folder = "/scripts/TormyVanCool_Program_Runner_Scripts/"
 
 
 --------------------------------------------------------------------
@@ -45,14 +46,12 @@ InputString = get_FileNameExt(fileNames)
 -- Check for pre-existent file with tsame name
 -- Creates the file
 --------------------------------------------------------------------
-
 scripts_Path = reaper.GetResourcePath()
- 
-scripts_Path = scripts_Path:gsub("\\", "/") .. '/scripts/TormyVanCool_Program_Runner/'
+scripts_Path = scripts_Path:gsub("\\", "/") .. sub_Subfolder
 reaper.RecursiveCreateDirectory( scripts_Path, 1 )
 scripts_Path =  scripts_Path .. InputString:match("(.+)%..+") .. extension
 if file_exists(scripts_Path) == true then
-  custom_Reaction = reaper.MB("A file with the name '"..InputString:match("(.+)%..+") .. extension .."'' already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
+  custom_Reaction = reaper.MB("A file with the name '"..InputString:match("(.+)%..+"):upper()  .. extension:upper() .."'' already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
 end
 
 if custom_Reaction == nil or custom_Reaction == 6 then
