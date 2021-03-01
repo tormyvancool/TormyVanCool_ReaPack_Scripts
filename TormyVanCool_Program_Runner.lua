@@ -1,10 +1,14 @@
 --[[
 @description It creates scripts that are supposed to fire-up an external program, after have selected it
 @author: Tormy Van Cool
-@version: 1.0.1
+@version: 1.0.2
 @about
 # First release made 28 feb 2021
-it requires ULTRASCHALL Library
+Versioning:
+1.0 File creation 28.02.2021
+1.0.1 Declared all variable at the begnining of the file
+      CApitalized the filename into reaper.MB() when the fiel already exists
+1.0.2 When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
 ]]
 --local retval, folder = reaper.JS_Dialog_BrowseForFolder( caption, initialFolder )
 
@@ -47,11 +51,11 @@ InputString = get_FileNameExt(fileNames)
 -- Creates the file
 --------------------------------------------------------------------
 scripts_Path = reaper.GetResourcePath()
-scripts_Path = scripts_Path:gsub("\\", "/") .. sub_Subfolder
+scripts_Path = scripts_Path:gsub("\\", "/") .. sub_Folder
 reaper.RecursiveCreateDirectory( scripts_Path, 1 )
 scripts_Path =  scripts_Path .. InputString:match("(.+)%..+") .. extension
 if file_exists(scripts_Path) == true then
-  custom_Reaction = reaper.MB("A file with the name '"..InputString:match("(.+)%..+"):upper()  .. extension:upper() .."'' already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
+  custom_Reaction = reaper.MB("A file with the name '"..InputString:match("(.+)%..+"):upper()  .. extension:upper() .."' already exists.\nWould you like to overwrite it?", "WARNING",4) -- 6 yes, 7 no
 end
 
 if custom_Reaction == nil or custom_Reaction == 6 then
@@ -74,5 +78,6 @@ script_File:write('reaper.BR_Win32_ShellExecute("open", path, "", "", 1)')
 script_File:close()
 reaper.AddRemoveReaScript(true, 0, scripts_Path, true)
 --reaper.PromptForAction( 1, 1, 1 )
-reaper.ShowActionList()
+--reaper.ShowActionList()
+reaper.Main_OnCommand(1528, 0)
 reaper.Undo_OnStateChangeEx("PROGRAM RUNNER", -1, -1)
