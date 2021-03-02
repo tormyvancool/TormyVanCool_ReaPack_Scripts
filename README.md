@@ -39,4 +39,9 @@ ChapterRegions in function:
 
 Program_Runner in function:
 -------
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=GzpWgQH7ZEs
+" target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" 
+alt="IMAGE ALT TEXT HERE" width="560" height="315" border="10" /></a>
+
 ![..](Program_Runner.gif)
+
