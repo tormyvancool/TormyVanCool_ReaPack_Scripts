@@ -1,7 +1,7 @@
 <?xml version="1.0" econding="utf-8"?>
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Markers">
-        <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="AUDIOBOOKS Chapter Marker Add/Edit 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
+        <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
@@ -38,7 +38,7 @@
         </reapack>
     </category>
     <category name="Regions">
-        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="PODCASTS: Chatper Region, adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="PODCASTS: CHAPTER REGION. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
@@ -75,7 +75,7 @@
         </reapack>
     </category>
     <category name="Rendering">
-        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: Prepares stems to be exported for the real length of each track.">
+        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: EXPORT STEMS. Prepares stems to be exported for the real length of each track.">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
@@ -101,7 +101,7 @@
         </reapack>
     </category>
     <category name="Various">
-        <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
+        <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: PROGRAM RUNNER. It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
