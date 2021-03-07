@@ -1,26 +1,67 @@
--- @description Chapter region for podcasts and recorded broadcasts
--- @author Tormy Van Cool
--- @version 2.5.1
--- @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
--- @about
---   # Chapter Region for Podcasts and Recorded Broadcasts
---
---   It's an ideal feature for Podcasts and Recorded Broadcasts
---   It enables the user to highlight all the embedded songs by just a click.
---
---   By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
---   Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
---
---   It creates a region with the following line preceded by the ID3 Tag "CHAP="
---   "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds"
---
---   This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
---
---   Key features:
---   - It can work also as Armed Action
---   - It creates a region that contains the required Tags without sintaxis errors.
---   - It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.
--- Ver. 1.0 made by by Tormy Van Cool 01 feb 2021
+--[[
+@description Chapter region for podcasts and recorded broadcasts
+@author Tormy Van Cool
+@version 2.5.1
+@screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
+@changelog:
+v1.0 (01 feb 2021)
+  + Initial release
+v1.0.1
+  + Implementation SideCar.txt
+v1.0.2
+  + Added Production Year field
+  + Added Label field
+v1.1
+  + Song Title field: mandatory
+  + Performer field: mandatory
+v1.2
+  + Added Offset parameter
+v1.3
+  # Functions declarations
+v1.3 > v2.0
+  # Correction minor bugs
+v2.0
+  - Removed field titling: Offset:, Title:, Performer:, Duration:
+  + Added Podcast Title and Artist if speaker talks for more than 5 seconds 
+  + Added final Podcast Line on SideCar file
+v2.1
+  # Minor corrections/adjustments on variable declarations
+  - Removed Production Year field
+  - Removed Label field
+v2.2
+  # correction reaper.ShowConsoleMsg() was opening
+v2.3
+  + Due problems with MB Studio, chagned the flag from 1 to 12
+v2.4
+  - Removed the changes from 1 to 12 beign the issue located somewhere else in MB Studio rather than into the SideCar
+v2.5
+  # SideCar.txt file: removed the extension PROJECT_NAME.Sidecar.txt with just PROJECT_NAME.txt
+v2.5.1
+  + Converted the song duration for the SideCar into mm:ss instead s
+  + At the very end, if the song ends at the end of the file, 3 seconds before the end, the name of the  podcast is added with " >"
+  + Podcast name added if spekarr talsk more than 15 seconds
+v2.6
+  + Added name of the podcast each time there is a song, separated by column
+  + Substituted the '-' as forbidden character, removing it from the project name if used.
+  + Added square brackets to indicate duration of the song, into SideCar file
+  + Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
+  # Instead of -3 seconds form the end, it's -5 seconds from the end
+  # Podcast name added if spekarr talsk more than 7 seconds
+@about
+# Chapter Region for Podcasts and Recorded Broadcasts
+  It's an ideal feature for Podcasts and Recorded Broadcasts
+  It enables the user to highlight all the embedded songs by just a click.
+  By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
+  Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
+  It creates a region with the following line preceded by the ID3 Tag "CHAP="
+  "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds"
+  This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
+  Key features:
+  - It can work also as Armed Action
+  - It creates a region that contains the required Tags without sintaxis errors.
+  - It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.
+Ver. 1.0 made by by Tormy Van Cool 01 feb 2021
+]]
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
@@ -32,21 +73,6 @@ local extension = ".txt"
 local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 
-
-
---------------------------------------------------------------------
--- Checks whehether the project is saved
--- Assigns the name to the SideCar opening it
---------------------------------------------------------------------
-local pj_name_ = reaper.GetProjectName(0, "")
-if pj_name_ == "" then 
-  reaper.MB("Save the Project, first!",'WARNING',0)
-  return
-end
-local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
-local pj_name = pj_name_..extension
-SideCar = io.open(pj_path..'\\'..pj_name, "w")
 
 
 --------------------------------------------------------------------
@@ -104,6 +130,23 @@ function SecondsToClock(seconds) -- Turns seconds into the format: "hh:mm:ss"
     return mins..":"..secs
   end
 end
+
+
+
+--------------------------------------------------------------------
+-- Checks whehether the project is saved
+-- Assigns the name to the SideCar opening it
+--------------------------------------------------------------------
+local pj_name_ = reaper.GetProjectName(0, "")
+if pj_name_ == "" then 
+  reaper.MB("Save the Project, first!",'WARNING',0)
+  return
+end
+local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
+pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
+local pj_name = ChapRid(pj_name_..extension, "-", " ")
+SideCar = io.open(pj_path..'\\'..pj_name, "w")
+
 
 --------------------------------------------------------------------
 -- Loads the mandatory library
@@ -285,15 +328,15 @@ while i < numMarkers-1 do
     if item_end_[i-1] == nil then item_end_[i-1] = 0 end    
     local diff = item_start_[i]-item_end_[i-1]
     
-    SideCar_ = a..' - '..b..' - '..SecondsToClock(c)
+    SideCar_ = pj_name_..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
     if item_start_[i] == 0 then item_start_[i] = 1 end
     SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
     
     if item_end_[i-1] == 0 then item_end_[i-1] = 1 end
 
-      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
+      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' ('..author:upper()..')"'
 
-    if diff  > 15 then
+    if diff  > 7 then
        -- Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
         SideCar:write( Broadcast_ID..LF )
         SideCar:write( SideCar_..LF )
@@ -305,8 +348,8 @@ while i < numMarkers-1 do
   i = i+1
 end
 if item_start_[i] == nil then
-  item_end_[i-1] = item_end_[i-1]-3 -- 3 seconds  before EOF returns the Broadcast ID
-  SideCar:write( item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..' >"'..LF )
+  item_end_[i-1] = item_end_[i-1]-5 -- 5 seconds  before EOF returns the Broadcast ID
+  SideCar:write( item_end_[i-1]..',1,"'..pj_name_:upper()..' ('..author:upper()..') >"'..LF )
 end
 
 SideCar:close()
