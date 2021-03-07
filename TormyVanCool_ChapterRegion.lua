@@ -47,6 +47,8 @@ v2.6
   + Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
   # Instead of -3 seconds form the end, it's -5 seconds from the end
   # Podcast name added if spekarr talsk more than 7 seconds
+v2.6.1
+  # Crrecete minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
@@ -144,8 +146,9 @@ if pj_name_ == "" then
 end
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
 pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
-local pj_name = ChapRid(pj_name_..extension, "-", " ")
+local pj_name = pj_name_..extension
 SideCar = io.open(pj_path..'\\'..pj_name, "w")
+pj_name = ChapRid(pj_name_..extension, "-", " ")
 
 
 --------------------------------------------------------------------
@@ -328,7 +331,7 @@ while i < numMarkers-1 do
     if item_end_[i-1] == nil then item_end_[i-1] = 0 end    
     local diff = item_start_[i]-item_end_[i-1]
     
-    SideCar_ = pj_name_..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
+    SideCar_ = ChapRid(pj_name_:upper(), " - ", " ")..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
     if item_start_[i] == 0 then item_start_[i] = 1 end
     SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
     
