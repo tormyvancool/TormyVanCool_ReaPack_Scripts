@@ -43,5 +43,3 @@ Program_Runner in function:
 " target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
-![..](Program_Runner.gif)
-
