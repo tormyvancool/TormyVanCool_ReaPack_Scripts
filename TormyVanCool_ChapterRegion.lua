@@ -1,7 +1,7 @@
 --[[
 @description Chapter region for podcasts and recorded broadcasts
 @author Tormy Van Cool
-@version 2.5.1
+@version 2.6.2
 @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 @changelog:
 v1.0 (01 feb 2021)
@@ -48,7 +48,9 @@ v2.6
   # Instead of -3 seconds form the end, it's -5 seconds from the end
   # Podcast name added if spekarr talsk more than 7 seconds
 v2.6.1
-  # Crrecete minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
+  # Corrected minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
+v2.6.2
+  + Parsed the "-" into file name and replaced with ">" due certain javascripts like icecast.min.js
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
@@ -84,7 +86,7 @@ function create_region(region_name, region_ID, flag)
  if region_ID ~= "" and flag == true then
     reaper.DeleteProjectMarker(0, region_ID, 1)
  end
- local color = 0
+ local color = reaper.ColorToNative(57,65,34)
  local ts_start, ts_end = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
  if ts_start == ts_end then return end
  local item_start = math.floor(ts_start*100) /100
@@ -317,7 +319,8 @@ i = 0
 --------------------------------------------------------------------
 local item_start_ = {}
 local item_end_ = {}
-
+local pj_name_clean = ChapRid(pj_name_:upper(), "-", ">")
+local author_clean = ChapRid(author:upper(), "-", "&")
 while i < numMarkers-1 do
 
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
@@ -331,13 +334,13 @@ while i < numMarkers-1 do
     if item_end_[i-1] == nil then item_end_[i-1] = 0 end    
     local diff = item_start_[i]-item_end_[i-1]
     
-    SideCar_ = ChapRid(pj_name_:upper(), " - ", " ")..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
+    SideCar_ = pj_name_clean..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
     if item_start_[i] == 0 then item_start_[i] = 1 end
     SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
     
     if item_end_[i-1] == 0 then item_end_[i-1] = 1 end
 
-      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' ('..author:upper()..')"'
+      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_clean..' ('..author_clean..')"'
 
     if diff  > 7 then
        -- Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
@@ -352,7 +355,7 @@ while i < numMarkers-1 do
 end
 if item_start_[i] == nil then
   item_end_[i-1] = item_end_[i-1]-5 -- 5 seconds  before EOF returns the Broadcast ID
-  SideCar:write( item_end_[i-1]..',1,"'..pj_name_:upper()..' ('..author:upper()..') >"'..LF )
+  SideCar:write( item_end_[i-1]..',1,"'..pj_name_clean..' ('..author_clean..') >"'..LF )
 end
 
 SideCar:close()
