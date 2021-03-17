@@ -1,14 +1,19 @@
 --[[
 @description It creates scripts that are supposed to fire-up an external program, after have selected it
 @author: Tormy Van Cool
-@version: 1.0.2
+@version: 1.0.3
 @about
 # First release made 28 feb 2021
 Versioning:
-1.0 File creation 28.02.2021
-1.0.1 Declared all variable at the begnining of the file
-      CApitalized the filename into reaper.MB() when the fiel already exists
-1.0.2 When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
+1.0
+  + File creation 28.02.2021
+1.0.1
+  + Declared all variable at the begnining of the file
+  + Capitalized the filename into reaper.MB() when the fiel already exists
+1.0.2
+  + When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
+1.0.3
+  + Chek for the presence of the UltraShall library
 ]]
 --local retval, folder = reaper.JS_Dialog_BrowseForFolder( caption, initialFolder )
 
@@ -35,6 +40,30 @@ function get_FileNameExt(file)
       return file:match("^.+/(.+)$")
 end
 
+--------------------------------------------------------------------
+-- Loads the mandatory library
+--------------------------------------------------------------------
+if file_exists(reaper.GetResourcePath().."/UserPlugins/ultraschall_api.lua") == false then 
+  local v = [[
+            ULTRASCHALL Library should be installed.
+            Copy the follwing link
+          
+            https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/raw/master/ultraschall_api_index.xml
+           
+            into:
+          
+            Extensions > ReaPack > Import repositories...
+          
+            install it and activate it by runinng:
+          
+            Actions > Script: ultraschall_Add_Developertools_To_Reaper.lua > Run/Close
+            ]]
+
+  reaper.MB(v,'ATTENTION',0)
+  return
+else
+  dofile(reaper.GetResourcePath()..UltraschallLua)
+end
 
 --------------------------------------------------------------------
 -- Retrieves the program to fire-up and its path
