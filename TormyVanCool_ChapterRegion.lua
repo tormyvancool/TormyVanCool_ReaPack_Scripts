@@ -1,7 +1,7 @@
 --[[
 @description Chapter region for podcasts and recorded broadcasts
 @author Tormy Van Cool
-@version 2.6.2
+@version 2.7
 @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 @changelog:
 v1.0 (01 feb 2021)
@@ -51,6 +51,24 @@ v2.6.1
   # Corrected minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
 v2.6.2
   + Parsed the "-" into file name and replaced with ">" due certain javascripts like icecast.min.js
+v2.7
+  # Due compatibility with MB Studio Radio Automation 
+  # Flipped Title and Artist
+  + Added Production Year field
+  + Added Label field
+  + Field Year is checked against only number or NULL values
+  + Added pop up error windows for missing Song Tile and missing Performer
+  + Check out the YEAR is 4 digits figure
+  - Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
+  + Added "offset,1,"performer - title - production_year - lebel - duration mm:ss"" on SideCar .TXT file for compatibility with MB Studio, agreed together with Maurizio Burato directly
+  + Added "PROJECT_NAME - Author" into SideCar .TXT when interval betwwen songsOR between the beginning of the file is more than 7 seconds
+  + Added "PROJECT_NAME - Author >" into SideCar .TXT 5 seconds before the EOF
+  + Added " | End Part N >" when the Podcast is splitted in 2 or more parts, and project name contains the name of the parts separated by a dash from the podcast name.
+    i.e. Project Name "PODCAST_TITLE - PART 1" Author (ALT+ENTER tab INFO) "Tormy Van Cool", and the file ends at second 1004, 5 second before the EOF, the result is
+    999,1,"PODCAST_TITLE > TORMY VAN COOL | End  Part 1 >"
+    In case the Podcast is not splitted in parts, it returns
+    999,1,"PODCAST_TITLE > TORMY VAN COOL | The  End >"
+    
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
@@ -76,7 +94,8 @@ local LF = "\n"
 local extension = ".txt"
 local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 local author = reaper.GetSetProjectAuthor(0, 0, '')
-
+local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = ""
+local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = ""
 
 
 --------------------------------------------------------------------
@@ -106,7 +125,7 @@ function ChapRid(chappy, seed, subs ) -- Get rid of the "CHAP=" ID3 Tag or other
   local ridchap
   if subs == nil then subs = "" end
   if chappy == nil then return end
-  ridchap = string.gsub (chappy, seed,  subs)
+  local ridchap = string.gsub (chappy, seed,  subs)
   return ridchap
 end
 
@@ -128,9 +147,9 @@ function SecondsToClock(seconds) -- Turns seconds into the format: "hh:mm:ss"
   if seconds <= 0 then
     return "00:00:00";
   else
-    hours = string.format("%02.f", math.floor(seconds/3600));
-    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
-    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    local hours = string.format("%02.f", math.floor(seconds/3600));
+    local mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    local secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
     return mins..":"..secs
   end
 end
@@ -220,22 +239,22 @@ if flag then
     
     -- Not mandatory fields
     if regionNAME[3] ~= nil then
-      songYear = regionNAME[4]
+      SongYear = regionNAME[4]
     else
-      songYear = ""
+      SongYear = ""
     end
     
     if regionNAME[4] ~= nil then
-      songLabel = regionNAME[5]
+      SongLabel = regionNAME[5]
     else
-      songLabel =""
+      SongLabel =""
     end
  end
 else
   SongTitle = ""
   SongPerformer = ""
-  songYear = ""
-  songLabel = ""
+  SongYear = ""
+  SongLabel = ""
 end
 
 --------------------------------------------------------------------
@@ -258,7 +277,7 @@ itemduration = roundup
 -- Asks for user's inputs
 --------------------------------------------------------------------
 repeat
-retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 2, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label", SongTitle..LF..SongPerformer)
+retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 4, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label", SongTitle..LF..SongPerformer..LF..SongYear..LF..SongLabel)
 InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|') -- No reserved characters can be written
 if retval==false then return end
 if retval then
@@ -269,7 +288,26 @@ if retval then
       t[i] = line
   end
 end
-until( t[1] ~= "" and t[2]~= "" )
+if tonumber(t[3]) == nil and t[3] ~= "N/A" and t[3] ~= '' then
+  reaper.MB("Error Field YEAR\n\nAccepted only:\n- NUMBERS, i.e. 1995\n- EMPTY FIELD (in case YEAR is unknown)","WARNING",0,0)
+  flag = false
+ else
+  flag = true
+end
+if t[1]== "" then
+  reaper.MB("Field SONG TITLE is MANDATORY","ERROR",0,0)
+end
+if t[2]== "" then
+  reaper.MB("Field PERFORMER is MANDATORY","ERROR",0,0)
+end
+if string.len(tostring(t[3])) ~= 4 and string.len(tostring(t[3])) > 0 and tostring(t[3]) ~= "N/A" then
+   reaper.MB("YEAR must be 4 (four) digits","WARNING",0)
+   warning_ = false
+else
+   warning_ = true
+end
+
+until( t[1] ~= "" and t[2]~= "" and flag == true and warning_ == true)
 InputString_TITLE = t[1]:upper()
 InputString_PERFORMER= t[2]:upper()
 
@@ -277,27 +315,24 @@ InputString_PERFORMER= t[2]:upper()
 --------------------------------------------------------------------
 -- Checks for presence of data in not-mandatory fields
 --------------------------------------------------------------------
--- if t[3] ~= "" then
---     InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
---     --InputString_PRODUCTION_YEAR_SideCar = ' - '..t[3]:upper()
---   else
---     InputString_PRODUCTION_YEAR = pipe..t[3]:upper()
---     --InputString_PRODUCTION_YEAR_SideCar = ""
--- end
+if t[3] ~= "" then
+  InputString_PRODUCTION_YEAR = t[3]:upper()
+else
+  InputString_PRODUCTION_YEAR = 'N/A'
+  --InputString_PRODUCTION_YEAR_SideCar = ""
+end
 
--- if t[4] ~= "" then
---    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
---    --InputString_PRODUCTION_LABEL_SideCar = ' - '..t[4]:upper()
---   else
---    InputString_PRODUCTION_LABEL = pipe..t[4]:upper()
---    --InputString_PRODUCTION_LABEL_SideCar = ""
--- end
-
+if t[4] ~= "" then
+  InputString_PRODUCTION_LABEL = t[4]:upper()
+else
+  InputString_PRODUCTION_LABEL = 'N/A'
+  --InputString_PRODUCTION_LABEL_SideCar = ""
+end
 
 --------------------------------------------------------------------
 -- Creates Region and Titles it
 --------------------------------------------------------------------
-local song = InputString_TITLE..pipe..InputString_PERFORMER..pipe..itemduration
+local song = InputString_TITLE..pipe..InputString_PERFORMER..pipe..InputString_PRODUCTION_YEAR..pipe..InputString_PRODUCTION_LABEL..pipe..itemduration
 create_region(song, regionID, flag)
 reaper.Main_OnCommand(40020,0)
 
@@ -328,19 +363,26 @@ while i < numMarkers-1 do
   
   if string.match(name, chap) and string.match(name, pipe) then
     local SideCar_ = string.match(ChapRid(name, chap, ""), pipe..'(.*)')
-    local a, b, c = string.match(SideCar_, "(.*)|(.*)|(.*)")
-    item_end_[i] = item_start_[i] + math.floor(c) + 1
+    local a, b, c, d, e = string.match(SideCar_, "(.*)|(.*)|(.*)|(.*)|(.*)")
+    --[[
+      a = title
+      b = performer
+      c = production year
+      d = label(s)
+      e = song's duration
+    ]]--
+    item_end_[i] = item_start_[i] + math.floor(e) + 1
     if item_start_[i-1] == nil then item_start_[i-1] = 0 end
     if item_end_[i-1] == nil then item_end_[i-1] = 0 end    
     local diff = item_start_[i]-item_end_[i-1]
     
-    SideCar_ = pj_name_clean..': '..a..' - '..b..' ['..SecondsToClock(c)..']'
+    SideCar_ = b..' - '..a..' - '..c..' - '..d..' - '..SecondsToClock(e)
     if item_start_[i] == 0 then item_start_[i] = 1 end
-    SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
+      SideCar_ = item_start_[i]..',1,'..'"'..SideCar_..'"'
     
     if item_end_[i-1] == 0 then item_end_[i-1] = 1 end
 
-      Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_clean..' ('..author_clean..')"'
+    Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_clean..' - '..author_clean..'"'
 
     if diff  > 7 then
        -- Broadcast_ID = item_end_[i-1]..',1,"'..pj_name_:upper()..' - '..author:upper()..'"'
@@ -355,7 +397,12 @@ while i < numMarkers-1 do
 end
 if item_start_[i] == nil then
   item_end_[i-1] = item_end_[i-1]-5 -- 5 seconds  before EOF returns the Broadcast ID
-  SideCar:write( item_end_[i-1]..',1,"'..pj_name_clean..' ('..author_clean..') >"'..LF )
+  if string.find(pj_name_, "-") then
+  podcast_part = ' | End '..string.match(pj_name_, "-(.*)")..' >'
+  else
+  podcast_part = ' | The End >'
+  end
+  SideCar:write( item_end_[i-1]..',1,"'..pj_name_clean..' - '..author_clean..podcast_part..'"'..LF )
 end
 
 SideCar:close()
