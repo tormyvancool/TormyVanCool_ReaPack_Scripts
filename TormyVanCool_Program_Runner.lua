@@ -1,7 +1,7 @@
 --[[
 @description It creates scripts that are supposed to fire-up an external program, after have selected it
 @author: Tormy Van Cool
-@version: 1.0.3
+@version: 1.0.3.a
 @about
 # First release made 28 feb 2021
 Versioning:
@@ -14,6 +14,8 @@ Versioning:
   + When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
 1.0.3
   + Chek for the presence of the UltraShall library
+1.0.3.a
+ # Correction minor bug
 ]]
 --local retval, folder = reaper.JS_Dialog_BrowseForFolder( caption, initialFolder )
 
@@ -26,6 +28,7 @@ local extension = ".lua"
 local script_File = nil
 local custom_Reaction = nil
 local sub_Folder = "/scripts/TormyVanCool_Program_Runner_Scripts/"
+local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 
 
 --------------------------------------------------------------------
