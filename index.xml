@@ -115,11 +115,12 @@
                     The created script is automatically loaded/imported into the Action List, and it will be always available to you.\par
                     You can assign it to a button on a toolbar, or to any menu (the Main one as well as a contextual one and so on).\par
                     It turns this operation from \i nerdy \i0 to \b user friendly one\b0\par
+                    UltraSchall ReaPack Library is manatory: https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/raw/master/ultraschall_api_index.xml\par
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0.3a" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/aecfc9d51a904ff71b3d9b4c77a11c49307858d0/TormyVanCool_Program_Runner.lua</source>
+            <version name="1.0.4" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/36c9db3aee01179cc2eb6ea928b2f8ea7250c4c6/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
     </category>
