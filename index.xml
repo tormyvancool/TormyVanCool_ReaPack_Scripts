@@ -118,8 +118,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0.3" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a5461b67e75757e1d8c2dd18e82e16ca7bb76f2a/TormyVanCool_Program_Runner.lua</source>
+            <version name="1.0.3a" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f313ac2d3c908fc4e5e493b093f311daba90a40e/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
     </category>
