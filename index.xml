@@ -73,8 +73,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.7" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c547dedc5b3c61db3a705114d9cd26edf2930736/TormyVanCool_ChapterRegion.lua</source>
+            <version name="2.7.1" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c83c678c6bfa38789026614fca1c783d449f4a5b/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
     </category>
