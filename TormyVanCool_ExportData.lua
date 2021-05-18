@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 1.0.1
+@version 1.0.3
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -13,6 +13,10 @@ v1.0.1 (18 may 2021)
   + Added pop-up when files are saved
 v1.0.2 (18 may 2021)
   + Pup up if project is not saved
+v1.0.3 (18 may 2021)
+  + Date to file names 
+  + Creation date into files 
+  + Version into files 
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -23,11 +27,14 @@ local PageHeaderCSV = 'TRACK IDX|TRACK NAME|TRACK TYPE|N. ITEMS|SOLO|MUTE|FX/INS
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
+local scriptVersion = "1.0.3"
 local pj_name_ = reaper.GetProjectName(0, "")
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
 local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
-local f_csv=io.open(pj_path .. '\\' .. pj_name_..CSV,"w")
-local f_html=io.open(pj_path .. '\\' .. pj_name_..HTML,"w")
+local date = os.date("%Y-%m-%d %H:%M:%S")
+local dateFile = '_' .. os.date("%Y-%m-%d_%H.%M.%S")
+local f_csv=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. CSV,"w")
+local f_html=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. HTML,"w")
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 local version = reaper.GetAppVersion()
 local PageHeaderHTML = [[
@@ -72,20 +79,21 @@ local PageHeaderHTML = [[
     </table>
     <table class="center">
       <thead>
-        <tr><th colspan="10" class="header">EFFECTED TRACKS DATA<sub>Exported with 'EXPORT DATA' script by Tormy Van Cool</sub></th></tr>
+        <tr><th colspan="10" class="header">EFFECTED TRACKS DATA<sub>Created: ]] .. date .. [[ - Exported with 'EXPORT DATA' v.]].. scriptVersion .. [[ by Tormy Van Cool</sub></th></tr>
       </thead>
       <tbody>
         <tr id="table_header"><th colspan="3">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
         <tr id="table_header"><th>IDX</th><th>NAME</th><th>TYPE</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><th>PLUGIN FILE</th></tr>
 ]]
 local PageFooterHTML = "  </tbody>\n</table>\n</html>"
-local PageFooterCSV = LF.."|||||||||Exported with 'EXPORT DATA' script by Tormy Van Cool"
+local PageFooterCSV = LF.."|||||||||Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
 if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) goto exit
 end
 
 f_csv:write( 'PROJECT:'..LF..pj_name_..LF..LF )
 f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
 f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
+f_csv:write( 'CREATED:'..LF .. date ..LF..LF )
 f_csv:write( 'AUTHOR:'..LF..author..LF..LF..PageHeaderCSV..LF )
 
 f_html:write( PageHeaderHTML..LF )
