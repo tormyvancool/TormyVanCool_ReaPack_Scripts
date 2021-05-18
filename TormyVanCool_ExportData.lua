@@ -9,6 +9,8 @@
 @changelog:
 v1.0 (18 may 2021)
   + Initial release
+v1.0.1 (18 may 2021)
+  + Added pop-up when files are saved
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -162,6 +164,7 @@ function main()
   f_html:write( PageFooterHTML..LF )
   f_html:close()
 
+  reaper.MB("FILES .CSV and HTML SAVED","DONE",0,0)
 end
 
 ----------------------------------------------
