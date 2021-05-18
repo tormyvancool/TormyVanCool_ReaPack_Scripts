@@ -11,6 +11,8 @@ v1.0 (18 may 2021)
   + Initial release
 v1.0.1 (18 may 2021)
   + Added pop-up when files are saved
+v1.0.2 (18 may 2021)
+  + Pup up if project is not saved
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -78,6 +80,9 @@ local PageHeaderHTML = [[
 ]]
 local PageFooterHTML = "  </tbody>\n</table>\n</html>"
 local PageFooterCSV = LF.."|||||||||Exported with 'EXPORT DATA' script by Tormy Van Cool"
+if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) goto exit
+end
+
 f_csv:write( 'PROJECT:'..LF..pj_name_..LF..LF )
 f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
 f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
@@ -164,10 +169,11 @@ function main()
   f_html:write( PageFooterHTML..LF )
   f_html:close()
 
-  reaper.MB("FILES .CSV and HTML SAVED","DONE",0,0)
-end
+  reaper.MB("Files .CSV and HTML saved\ninto the Project Folder","DONE",0,0)
 
+end
 ----------------------------------------------
 -- MAIN CALL FOR SCRIPT FIRE UP
 ----------------------------------------------
 main()
+::exit::
