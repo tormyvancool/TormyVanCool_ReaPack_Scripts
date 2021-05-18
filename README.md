@@ -31,14 +31,20 @@ ChapterMarkers in function:
 
 
 
-ChapterRegions in function:
+ChapterRegions in function (Video):
 -------
-![..](Regions.gif)
+Click on the image to watch the video Tutorial
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ZimOjRRKTzM
+" target="_blank"><img src="http://img.youtube.com/vi/ZimOjRRKTzM/maxresdefault.jpg" 
+alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
 
 Program_Runner in function (Video Tutorial. Click on the image here below):
 -------
+Click on the image to watch the video Tutorial
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=GzpWgQH7ZEs
 " target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
