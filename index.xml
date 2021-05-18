@@ -133,7 +133,7 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="1.0.1" author="Tormy Van Cool">             
+            <version name="1.0.1" author="Tormy Van Cool">
                 <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4334a76d89d1ad0ce5ee3ffd3f0b6cd62f05c222/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
