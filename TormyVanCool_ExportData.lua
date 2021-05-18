@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 1.0
+@version 1.0.1
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
