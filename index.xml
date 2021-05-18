@@ -134,7 +134,7 @@
                 </description>
             </metadata>
             <version name="1.0.1" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d36d5ed484bf7c7c5d415d4588aa85c5d6a2f368/TormyVanCool_ExportData.lua</source>
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/bf143d460e3c81c27a743e34457d67100ce222d5/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
     </category>
