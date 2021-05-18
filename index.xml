@@ -123,7 +123,7 @@
                 <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/36c9db3aee01179cc2eb6ea928b2f8ea7250c4c6/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project's data in CSV and HTML formats">
+        <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats">
             <metadata>
                 <description>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
