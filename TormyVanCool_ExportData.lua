@@ -21,6 +21,10 @@ v1.0.4
   + Project Notes
   + Track Notes
   + Project Sample Rate
+v2.0
+  + Expandable/Collapsible Tables
+  + Odd/Even on Mute flag
+  + Odd/Even on Solo flag
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -46,14 +50,17 @@ local version = reaper.GetAppVersion()
 local PageHeaderHTML = [[
 <html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <title>]] .. pj_name_ .. [[</title>
      <style>
      body {font-family: Helvetica, sans-serif;}
-     #table_header{background: #0057a1; color: white;}
+     span.info {position: absolute; left: 0; }
+     .table_header{background: #0057a1 !important; color: white;}
      table{margin-bottom: 120px; width:100%}
-     td.solo {background: #ffc107;text-align: center; }
-     td.mute {background: red;text-align: center; color: white; }
+     tr:nth-child(even) td.solo {background: #ffc107;text-align: center; }   
+     tr:nth-child(odd) td.solo {background: #ffd149;text-align: center; }
+     tr:nth-child(even) td.mute { background: red;text-align: center;color: white; }
+     tr:nth-child(odd) td.mute {background: #ef5656;text-align: center;color: white; }
      tr:nth-child(even) td.disabled { background: #018aff; color: white; text-align: center; }
      tr:nth-child(odd) td.disabled { background: #37a3ff; color: white; text-align: center; }
      tr:nth-child(even) td.enabled { background: #1ec600; color: white; text-align: center; }
@@ -72,6 +79,17 @@ local PageHeaderHTML = [[
      .centertext {text-align: center;}
      sub { font-size: 12px; float: right; position: absolute; bottom: 10px; right: 10px; }
      </style>
+     <script>
+      $(document).ready(function() {
+          $("tr.slave").hide()
+          $("span.collapse").hide()
+          $("tr.master").click(function() {
+              $("tr.slave").toggle(500);
+              $("span.collapse").toggle(500)
+              $("span.expand").toggle(500)
+          });
+      });
+    </script>
   </head>
   <body> 
     <table class="center">
@@ -79,17 +97,17 @@ local PageHeaderHTML = [[
         <tr><th colspan="5" class="header">PROJECT DATA</th></tr>
       </thead>
       <tbody>
-        <tr id="table_header"><th>PROJECT</th><th>TOTAL TRACKS</th><th>DAW</th><th>AUTHOR</th><th>NOTES</th></tr>
+        <tr class="table_header"><th>PROJECT</th><th>TOTAL TRACKS</th><th>DAW</th><th>AUTHOR</th><th>NOTES</th></tr>
         <tr><td class="centertext">Name: ]]..pj_name_..[[<br/>Sample Rate: ]]..pj_sampleRate..[[Hz</td><td class="centertext">]].. reaper.CountTracks() ..[[</td><td class="centertext">REAPER - v.]]..version..[[</td><td class="centertext">]]..author..[[</td><td>]]..pj_notes..[[</td></tr>
       </tbody>
     </table>
     <table class="center">
       <thead>
-        <tr><th colspan="11" class="header">EFFECTED TRACKS DATA<sub>Created: ]] .. date .. [[ - Exported with 'EXPORT DATA' v.]].. scriptVersion .. [[ by Tormy Van Cool</sub></th></tr>
+        <tr class="master"><th colspan="11" class="header"><span class="info expand">&#x25BC;</span><span class="info collapse">&#x25B2;</span>EFFECTED TRACKS DATA<sub>Created: ]] .. date .. [[ - Exported with 'EXPORT DATA' v.]].. scriptVersion .. [[ by Tormy Van Cool</sub></th></tr>
       </thead>
       <tbody>
-        <tr id="table_header"><th colspan="4">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
-        <tr id="table_header"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><td>PLUGIN FILE</td></tr>
+        <tr class="table_header slave"><th colspan="4">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
+        <tr class="table_header slave"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><td>PLUGIN FILE</td></tr>
 ]]
 local PageFooterHTML = "  </tbody>\n</table>\n</html>"
 local PageFooterCSV = LF.."||||||||||Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
@@ -116,7 +134,7 @@ function WriteHTML(list)
    f_html:write( list..LF )
 end
 
-function main()
+function tracks()
 
   local tr =''
   for i=1,reaper.CountTracks(),1 do
@@ -152,13 +170,13 @@ function main()
       if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
       if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
 
-local trackNotes = reaper.NF_GetSWSTrackNotes(tr)
-reaper.ShowConsoleMsg(trackNotes)
+      local trackNotes = reaper.NF_GetSWSTrackNotes(tr)
+
        ----------------------------------------------
        -- ASSEMBLING CSV and HTML RECORDS
        ----------------------------------------------
        local list = i  .. '|' .. TrackName  .. '|' .. isFolder .. '|'.. trackNotes .. '|' .. numItems .. '|' .. isSoloedCSV .. '|' .. isMutedCSV .. '|' .. FXname .. '|' .. isFXenabledCSV .. '|' .. isOfflineCSV ..'|'.. moduleName
-       local htmlList = '   <tr class=\"tracks\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td>'..trackNotes..'</td><td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
+       local htmlList = '   <tr class=\"tracks slave\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td>'..trackNotes..'</td><td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
        WriteCSV(list)
        WriteHTML(htmlList)
 
@@ -187,8 +205,12 @@ reaper.ShowConsoleMsg(trackNotes)
   reaper.MB("Files .CSV and HTML saved\ninto the Project Folder","DONE",0,0)
 
 end
+
+function items()
+  reaper.ShowConsoleMsg("test")
+end
 ----------------------------------------------
 -- MAIN CALL FOR SCRIPT FIRE UP
 ----------------------------------------------
-main()
+tracks()
 ::exit::
