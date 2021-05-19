@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 1.0.3
+@version 1.0.4
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -17,17 +17,23 @@ v1.0.3 (18 may 2021)
   + Date to file names 
   + Creation date into files 
   + Version into files 
+v1.0.4
+  + Project Notes
+  + Track Notes
+  + Project Sample Rate
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
-local PageHeaderCSV = 'TRACK IDX|TRACK NAME|TRACK TYPE|N. ITEMS|SOLO|MUTE|FX/INSTRUMENTS NAME (VST/VSTi)|FX En./Byp.|FX OnLine/OffLine|FX File'
+local PageHeaderCSV = 'TRACK IDX|TRACK NAME|TRACK TYPE|NOTES|N. ITEMS|SOLO|MUTE|FX/INSTRUMENTS NAME (VST/VSTi)|FX En./Byp.|FX OnLine/OffLine|FX File'
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
 local scriptVersion = "1.0.3"
+local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
+local pj_sampleRate = reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0)
 local pj_name_ = reaper.GetProjectName(0, "")
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
 local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
@@ -70,27 +76,27 @@ local PageHeaderHTML = [[
   <body> 
     <table class="center">
       <thead>
-        <tr><th colspan="4" class="header">PROJECT DATA</th></tr>
+        <tr><th colspan="5" class="header">PROJECT DATA</th></tr>
       </thead>
       <tbody>
-        <tr id="table_header"><th>PROJECT NAME</th><th>TOTAL TRACKS</th><th>DAW</th><th>AUTHOR</th></th></tr>
-        <tr><td class="centertext">]]..pj_name_..[[</td><td class="centertext">]].. reaper.CountTracks() ..[[</td><td class="centertext">REAPER - v.]]..version..[[</td><td class="centertext">]]..author..[[</td></tr>
+        <tr id="table_header"><th>PROJECT</th><th>TOTAL TRACKS</th><th>DAW</th><th>AUTHOR</th><th>NOTES</th></tr>
+        <tr><td class="centertext">Name: ]]..pj_name_..[[<br/>Sample Rate: ]]..pj_sampleRate..[[Hz</td><td class="centertext">]].. reaper.CountTracks() ..[[</td><td class="centertext">REAPER - v.]]..version..[[</td><td class="centertext">]]..author..[[</td><td>]]..pj_notes..[[</td></tr>
       </tbody>
     </table>
     <table class="center">
       <thead>
-        <tr><th colspan="10" class="header">EFFECTED TRACKS DATA<sub>Created: ]] .. date .. [[ - Exported with 'EXPORT DATA' v.]].. scriptVersion .. [[ by Tormy Van Cool</sub></th></tr>
+        <tr><th colspan="11" class="header">EFFECTED TRACKS DATA<sub>Created: ]] .. date .. [[ - Exported with 'EXPORT DATA' v.]].. scriptVersion .. [[ by Tormy Van Cool</sub></th></tr>
       </thead>
       <tbody>
-        <tr id="table_header"><th colspan="3">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
-        <tr id="table_header"><th>IDX</th><th>NAME</th><th>TYPE</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><th>PLUGIN FILE</th></tr>
+        <tr id="table_header"><th colspan="4">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
+        <tr id="table_header"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><td>PLUGIN FILE</td></tr>
 ]]
 local PageFooterHTML = "  </tbody>\n</table>\n</html>"
-local PageFooterCSV = LF.."|||||||||Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
+local PageFooterCSV = LF.."||||||||||Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
 if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) goto exit
 end
 
-f_csv:write( 'PROJECT:'..LF..pj_name_..LF..LF )
+f_csv:write( 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..LF )
 f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
 f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
 f_csv:write( 'CREATED:'..LF .. date ..LF..LF )
@@ -146,12 +152,13 @@ function main()
       if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
       if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
 
- 
+local trackNotes = reaper.NF_GetSWSTrackNotes(tr)
+reaper.ShowConsoleMsg(trackNotes)
        ----------------------------------------------
        -- ASSEMBLING CSV and HTML RECORDS
        ----------------------------------------------
-       local list = i  .. '|' .. TrackName  .. '|' .. isFolder .. '|'.. numItems .. '|' .. isSoloedCSV .. '|' .. isMutedCSV .. '|' .. FXname .. '|' .. isFXenabledCSV .. '|' .. isOfflineCSV .. '|' .. moduleName
-       local htmlList = '   <tr class=\"tracks\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
+       local list = i  .. '|' .. TrackName  .. '|' .. isFolder .. '|'.. trackNotes .. '|' .. numItems .. '|' .. isSoloedCSV .. '|' .. isMutedCSV .. '|' .. FXname .. '|' .. isFXenabledCSV .. '|' .. isOfflineCSV ..'|'.. moduleName
+       local htmlList = '   <tr class=\"tracks\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td>'..trackNotes..'</td><td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
        WriteCSV(list)
        WriteHTML(htmlList)
 
