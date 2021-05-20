@@ -31,6 +31,13 @@ ChapterMarkers in function:
 
 
 
+
+EXPORT DATA in function
+-------
+![..](EXPORT_DATA.gif)
+
+
+
 ChapterRegions in function (Video):
 -------
 Click on the image to watch the video Tutorial
