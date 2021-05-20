@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.0.1
+@version 2.0.2
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -32,6 +32,8 @@ v2.0
   + Noted items 
 v2.0.1
   # Buf Fix: all FX where displayed as Disalbed
+v2.0.2
+  + FX Chain Status
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -41,7 +43,7 @@ v2.0.1
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.0.1"
+local scriptVersion = "2.0.2"
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0)
 local pj_name_ = reaper.GetProjectName(0, "")
@@ -143,15 +145,15 @@ local PageHeaderHTML = [[
 ----------------------------------------------
 -- SPECIALIZED HEADER
 ----------------------------------------------
-local PageHeaderCSV = 'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
+local PageHeaderCSV = 'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
 local tableFXTracksHeader = [[<table class="center">
       <div class="spacer">&nbsp;</div>
       <thead>
-        <tr><th colspan="11" class="header"><span class="info expand emboss pointer master">&#x25BC;</span><span class="info collapse engrave pointer master">&#x25B2;</span>EFFECTED TRACKS</th></tr>
+        <tr><th colspan="12" class="header"><span class="info expand emboss pointer master">&#x25BC;</span><span class="info collapse engrave pointer master">&#x25B2;</span>EFFECTED TRACKS</th></tr>
       </thead>
       <tbody>
-        <tr class="table_header slave"><th colspan="4">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
-        <tr class="table_header slave"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><th>PLUGIN FILE</th></tr>
+        <tr class="table_header slave"><th colspan="5">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
+        <tr class="table_header slave"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>FX Chain<br/>En./Dis.</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><th>PLUGIN FILE</th></tr>
 ]]
 local PageHeaderCSVNoted = LF..LF..'NOTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE'
 local tableNotedTracksHeader = [[<table class="center">
@@ -223,14 +225,14 @@ function FXedTracks()
     local _, TrackName = reaper.GetTrackName(tr, "")
     local numItems = reaper.GetTrackNumMediaItems(tr) -- Retreives the number of items on that track
     local retval, flags  = reaper.GetTrackState(tr)
-    
+
     
     ----------------------------------------------
     -- ASSIGN BINARY STATES TO VARIABLES
     ----------------------------------------------
     if flags &1 == 1 then isFolder = "FOLDER" else isFolder = 'Track' end
     if flags &2 == 2 then isSelected = "SELECTED" else isSelected = '' end
-    if flags &4 == 4 then isFXChainenabled_ = '<td class="enabled">E</td>' else isFXCHainenabled = '<td class="disabled">D</td>' end
+    if flags &4 == 4 then isFXChainenabled_ = '<td class="enabled">Enabled</td>' isFXChainenabledCSV_ = 'E' else isFXChainenabled_ = '<td class="disabled">Disabled</td>' isFXChainenabledCSV_ = 'D' end
     if flags &8 == 8 then isMuted = '<td class="mute">M</td>' isMutedCSV = "M" else isMuted = '<td>&nbsp;</td>' isMutedCSV = "" end 
     if flags &16 == 16 then isSoloed = '<td class="solo">S</td>' isSoloedCSV = "S" else isSoloed = '<td>&nbsp;</td>' isSoloedCSV = '' end
     if flags &32 == 32 then isSipd = "SIP'd" else isSipd = '' end
@@ -239,6 +241,7 @@ function FXedTracks()
     if flags &256 == 256 then isRecAuto = "REC Monitoring AUTO" else isRecAuto = ''end
     if flags &512 == 512 then isHideTCP = "HIDE from TCP" else isHideTCP = ''end
     if flags &1024 == 1024 then isHideMCP = "HIDE from MCP" else isHideMCP = ''end
+
 
     ----------------------------------------------
     -- PROCESS EFFECTED TRACKS
@@ -250,7 +253,7 @@ function FXedTracks()
       local isOffline_ = reaper.TrackFX_GetOffline(tr,ii-1) -- Checks if plugin is OffLine
       local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(tr,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
       if numItems == 0 then numItems = '-' end
-    
+      
       if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
       if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
       local trackNotes = reaper.NF_GetSWSTrackNotes(tr)
@@ -260,8 +263,8 @@ function FXedTracks()
        ----------------------------------------------
        -- ASSEMBLING CSV and HTML RECORDS
        ----------------------------------------------
-       local list = i  .. ',' .. ridCommas(TrackName)  .. ',' .. isFolder .. ','.. ridCommas(trackNotes) .. ',' .. numItems .. ',' .. isSoloedCSV .. ',' .. isMutedCSV .. ',' .. ridCommas(FXname) .. ',' .. isFXenabledCSV .. ',' .. isOfflineCSV ..','.. moduleName
-       local htmlList = '   <tr class=\"tracks slave\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td>'..trackNotes..'</td><td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
+       local list = i  .. ',' .. ridCommas(TrackName)  .. ',' .. isFolder .. ','.. ridCommas(trackNotes) ..','.. isFXChainenabledCSV_ .. ',' .. numItems .. ',' .. isSoloedCSV .. ',' .. isMutedCSV .. ',' .. ridCommas(FXname) .. ',' .. isFXenabledCSV .. ',' .. isOfflineCSV ..','.. moduleName
+       local htmlList = '   <tr class=\"tracks slave\"><td class="centertext">'..i.."</td><td>"..TrackName..'</td><td class="centertext">'..isFolder..'</td><td>'..trackNotes..'</td>'..isFXChainenabled_..'<td class="centertext">' .. numItems .. "</td>" ..isSoloed..isMuted.."<td>"..FXname..isFXenabled..isOffline.."</td><td>"..moduleName.."</td></tr>"
        WriteFILE(htmlList,list)
 
       --[[
