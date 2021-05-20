@@ -31,6 +31,17 @@ ChapterMarkers in function:
 
 
 
+
+EXPORT DATA in function (HTLM Output)
+-------
+![..](EXPORT_DATA.gif)
+
+EXPORT DATA in function (CSV Output)
+-------
+![..](EXPORT_DATA_CSV.gif)
+
+
+
 ChapterRegions in function (Video):
 -------
 Click on the image to watch the video Tutorial
