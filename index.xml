@@ -126,13 +126,11 @@
         <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats">
             <metadata>
                 <description>
-                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
-                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 EXPORT DATA \b0 collects  all tracks with FX and creates a  copule of files: CSV and HTML format, listing all tracks with FX, the FX list for each track, and their status.\par
-                }]]>
+                <![CDATA[]]>
                 </description>
             </metadata>
             <version name="1.0.4" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/7b083ba9adb57d513c8f261aa8a637500016137e/TormyVanCool_ExportData.lua</source>
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4e15e7f2218856a32b8e545124f59a60575a1e81/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
     </category>
