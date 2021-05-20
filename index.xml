@@ -127,7 +127,7 @@
             <metadata>
                 <description>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
-                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 EXPORT DATA \b0 collects  all tracks with FX and creates a  pair of files: CSV and HTML format, listing all tracks with FX, the FX list for each track, and their status.\par
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 EXPORT DATA 2.0.1\b0 collects  all tracks with FX and creates a  pair of files: CSV and HTML format, listing all tracks with FX, the FX list for each track, and their status.\par
                 NOTES are also exported: \i project notes\i0 , as well as \i track notes\i0  and \i item notes\i0 .\par
                 The content is dived in 5 mai tables, on HTML file:\par
                 \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b PROJECT DATA\b0\line It contains basic data of the project as:\line Project name and sample rate\line Total tracks\line DAW Employed\line Author\line Notes\par
