@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.0
+@version 2.0.1
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -30,6 +30,8 @@ v2.0
   + Comma Separated Values
   + Effected items 
   + Noted items 
+v2.0.1
+  # Buf Fix: all FX where displayed as Disalbed
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -39,7 +41,7 @@ v2.0
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.0"
+local scriptVersion = "2.0.1"
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0)
 local pj_name_ = reaper.GetProjectName(0, "")
@@ -228,7 +230,7 @@ function FXedTracks()
     ----------------------------------------------
     if flags &1 == 1 then isFolder = "FOLDER" else isFolder = 'Track' end
     if flags &2 == 2 then isSelected = "SELECTED" else isSelected = '' end
-    if flags &4 == 4 then isFXChainenabled = '<td class="enabled">E</td>' else isFXCHainenabled = '<td class="disabled">D</td>' end
+    if flags &4 == 4 then isFXChainenabled_ = '<td class="enabled">E</td>' else isFXCHainenabled = '<td class="disabled">D</td>' end
     if flags &8 == 8 then isMuted = '<td class="mute">M</td>' isMutedCSV = "M" else isMuted = '<td>&nbsp;</td>' isMutedCSV = "" end 
     if flags &16 == 16 then isSoloed = '<td class="solo">S</td>' isSoloedCSV = "S" else isSoloed = '<td>&nbsp;</td>' isSoloedCSV = '' end
     if flags &32 == 32 then isSipd = "SIP'd" else isSipd = '' end
@@ -237,9 +239,6 @@ function FXedTracks()
     if flags &256 == 256 then isRecAuto = "REC Monitoring AUTO" else isRecAuto = ''end
     if flags &512 == 512 then isHideTCP = "HIDE from TCP" else isHideTCP = ''end
     if flags &1024 == 1024 then isHideMCP = "HIDE from MCP" else isHideMCP = ''end
-    
-    if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
-    if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
 
     ----------------------------------------------
     -- PROCESS EFFECTED TRACKS
@@ -251,7 +250,9 @@ function FXedTracks()
       local isOffline_ = reaper.TrackFX_GetOffline(tr,ii-1) -- Checks if plugin is OffLine
       local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(tr,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
       if numItems == 0 then numItems = '-' end
-
+    
+      if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
+      if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
       local trackNotes = reaper.NF_GetSWSTrackNotes(tr)
       
 
@@ -305,9 +306,6 @@ function NotedTracks()
     if flags &256 == 256 then isRecAuto = "REC Monitoring AUTO" else isRecAuto = ''end
     if flags &512 == 512 then isHideTCP = "HIDE from TCP" else isHideTCP = ''end
     if flags &1024 == 1024 then isHideMCP = "HIDE from MCP" else isHideMCP = ''end
-    
-    if isFXenabled_ == true then isFXenabled = '<td class="enabled">Enabled</td>' isFXenabledCSV = "E" else isFXenabled = '<td class="disabled">Bypassed</td>'isFXenabledCSV = "BYPASSED" end
-    if isOffline_ == true then isOffline = '<td class="offline">OFF Line</td>' isOfflineCSV = "OFF" else isOffline = '<td class="online">On Line</td>'isOfflineCSV = "On" end
     
     ----------------------------------------------
     -- PROCESS UNEFFECTED TRACKS: RETRIEVES NOTES
