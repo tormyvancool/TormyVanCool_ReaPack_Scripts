@@ -38,7 +38,7 @@ EXPORT DATA in function (HTLM Output)
 
 EXPORT DATA in function (CSV Output)
 -------
-![..](EXPORT_DATA.gif)
+![..](EXPORT_DATA_CSV.gif)
 
 
 
