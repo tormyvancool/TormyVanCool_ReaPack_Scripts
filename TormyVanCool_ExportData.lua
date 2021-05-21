@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.1.1
+@version 2.1.2
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -41,7 +41,9 @@ v2.1 (19 may 2021)
   + Precision
   + Project Length HH:MM:SS
 v2.1.1 (19 may 2021)
-  # Minor bug fixed
+  # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil
+v2.1.2 (20 may 2021)
+  # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -74,7 +76,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.1.1"
+local scriptVersion = "2.1.2"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0)
@@ -318,14 +320,13 @@ function Master()
     if masterFlags &4 == 4 then isMasterFXChainenabled_ = '<td class="enabled centertext">Enabled</td>' isMasterFXChainenabledCSV_ = 'E' else isMasterFXChainenabled_ = '<td class="disabled">Disabled</td>' isMasterFXChainenabledCSV_ = 'D' end
     if masterFlags &512 == 512 then isHideTCP = '<td class="mute centertext">HIDDEN</td>' isHideTCPCSV = 'H' else isHideTCP = '<td class="centertext">VISIBLE</td>' isHideTCPCSV = 'V' end
     if masterFlags &1024 == 1024 then isHideMCP = '<td class="mute centertext">HIDDEN</td>'  isHideMCPCSV = 'H' else isHideMCP = '<td class="centertext">VISIBLE</td>'isHideMCPCSV = 'V' end
-  
+   
   for ii=1,reaper.TrackFX_GetCount(masterChannel),1 do
     --if reaper.TrackFX_GetCount(masterChannel) > 0 then FXed = "Yes" else FXed = "No" end
     local ok,FXname=reaper.TrackFX_GetFXName(masterChannel,ii-1,"")
     local isMasterFXenabled_ = reaper.TrackFX_GetEnabled(masterChannel,ii-1) -- Checks if plugin BLOCKS is Enabled
     local isMasterOffline_ = reaper.TrackFX_GetOffline(masterChannel,ii-1) -- Checks if plugin is OffLine
     local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(masterChannel,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
-
     if isMasterFXenabled_ == true then isMasterFXenabled = '<td class="enabled centertext">Enabled</td>' isMasterFXenabledCSV = "E" else isMasterFXenabled = '<td class="disabled cenertext">Bypassed</td>'isMasterFXenabledCSV = "BYPASSED" end
     if isMasterOffline_ == true then isMasterOffline = '<td class="offline centertext">OFF Line</td>' isMasterOfflineCSV = "OFF Line" else isMasterOffline = '<td class="online centertext">On Line</td>'isMasterOfflineCSV = "On Line" end
   
@@ -335,7 +336,7 @@ function Master()
   WriteFILE(lineHTML,lineCSV)
 
   end
-
+   if reaper.TrackFX_GetCount(masterChannel) == 0 then isMasterFXChainenabled_ = '<td></td>' isMasterFXChainenabledCSV_ = '' end
    masterNotes = reaper.NF_GetSWSTrackNotes(masterChannel)
    local MasterNotesCSV = ridCommas(masterNotes)
    local line_1 = '<tr class="tracks slaveMaster"><td><b>MUTE</b></td>'..isMasterMuted..'<td colspan="4" class="centertext"><b>NOTES</b></td></tr>'
@@ -374,7 +375,7 @@ function Hierarchical()
     ----------------------------------------------
     if flags &1 == 1 then isFolder = "FOLDER" else isFolder = 'Track' end
     if flags &2 == 2 then isSelected = "SELECTED" else isSelected = '' end
-    if flags &4 == 4 then isFXChainenabled_ = '<td class="disabled">Disabled</td>' isFXChainenabledCSV_ = 'D' else isFXChainenabled_ = '<td class="enabled">Enabled</td>' isFXChainenabledCSV_ = 'E' end
+    if flags &4 == 4 then isFXChainenabled_ = '<td class="enabled">Enabled</td>' isFXChainenabledCSV_ = 'E' else isFXChainenabled_ = '<td class="disabled">Disabled</td>' isFXChainenabledCSV_ = 'D' end
     if flags &8 == 8 then isMuted = '<td class="mute">M</td>' isMutedCSV = "M" else isMuted = '<td>&nbsp;</td>' isMutedCSV = "" end 
     if flags &16 == 16 then isSoloed = '<td class="solo">S</td>' isSoloedCSV = "S" else isSoloed = '<td>&nbsp;</td>' isSoloedCSV = '' end
     if flags &32 == 32 then isSipd = "SIP'd" else isSipd = '' end
@@ -386,7 +387,7 @@ function Hierarchical()
     
     ii = folderDepth / 10
     a = recursiveAppend('    ',ii)
-    
+    if hasFX == 0 then isFXChainenabled_ = '<td></td>' isFXChainenabledCSV_ = '' end
     if isFolder == 'FOLDER' then TrackNameHTML = '<b>'..TrackName..'</b>' else TrackNameHTML = TrackName end
     if ii > 1 and isFolder == 'FOLDER' then isFolder = "SUBFOLDER" end
     lineCSV = a..TrackName..','..isFolder..','..numItems..','..isHideTCPCSV..','..isHideMCPCSV..','..FXedCSV
