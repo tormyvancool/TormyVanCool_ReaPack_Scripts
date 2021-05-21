@@ -140,7 +140,7 @@
                 </description>
             </metadata>
             <version name="2.1.2" author="Tormy Van Cool" time="2021-05-22T01:38:35Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/dbbcc51045ed66970f0876e11853c667b78ef63e/TormyVanCool_ExportData.lua</source>
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/12a14565806c631e1e3949d539425f4ba3a1a282/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
     </category>
