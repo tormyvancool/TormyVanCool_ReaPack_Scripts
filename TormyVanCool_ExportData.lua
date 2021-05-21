@@ -34,12 +34,14 @@ v2.0.1 (18 may 2021)
   # Buf Fix: all FX where displayed as Disalbed
 v2.0.2 (18 may 2021)
   + FX Chain Status
-v2.1
+v2.1 (19 may 2021)
   + All Tracks Hierarchy
   + All tracks Statuses
   + Master Channel FX and Notes
   + Precision
   + Project Length HH:MM:SS
+v2.1.1 (19 may 2021)
+  # Minor bug fixed
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
 
@@ -341,6 +343,7 @@ function Master()
    local line_3 = '<tr class="tracks slaveMaster"><td><b>FX CHAIN</b></td>'..isMasterFXChainenabled_..'</tr>'
    local line_4 = '<tr class="tracks slaveMaster"><td><b>TCP</b></td>'..isHideTCP..'</tr>'
    local line_5 = '<tr class="tracks slaveMaster"><td><b>MCP</b></td>'..isHideMCP..'</tr>'
+   if lineCSV == nil then lineCSV ='' end
    local csv_1 = '\nMASTER TRACK SETTINGS:\nMUTE,SOLO,FX CHAIN,TCP,MCP,NOTES\n'
    local csv_2 = isMasterMutedCSV..','..isMasterSoloedCSV..','..isMasterFXChainenabledCSV_..','..isHideTCPCSV..','..isHideMCPCSV..','..MasterNotesCSV
    WriteFILE(line_1..line_2..line_3..line_4..line_5,lineCSV..','..csv_1..csv_2)
