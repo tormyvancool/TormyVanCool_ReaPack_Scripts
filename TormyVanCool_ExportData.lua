@@ -205,7 +205,7 @@ local PageHeaderHTML = [[
 ----------------------------------------------
 -- SPECIALIZED HEADER
 ----------------------------------------------
-local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nNAME,TYPE,N.ITEMS,TCP,MCP,FX\n'
+local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nFX NAME,FX En./Byp.,FX On Line/Off Line,FILE NAME'
 local PageHeaderMasterHTML = [[
      <table class="center">
       <thead>
@@ -276,7 +276,7 @@ end
 ----------------------------------------------
 -- FILES INITIALIZATION
 ----------------------------------------------
-f_csv:write( 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..LF )
+f_csv:write( 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..'Duration: '..SecondsToHMS(pj_length)..LF..LF )
 f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
 f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
 f_csv:write( 'CREATED:'..LF .. date ..LF..LF )
@@ -307,7 +307,7 @@ end
 
 function Master()
 
-  WriteFILE(PageHeaderMasterHTML,'')
+  WriteFILE(PageHeaderMasterHTML,PageHeaderMasterCSV)
   local masterChannel = reaper.GetMasterTrack(0)
   local retval, masterFlags  = reaper.GetTrackState(masterChannel)
     if masterFlags &8 == 8 then isMasterMuted = '<td class="mute centertext">M</td>' isMasterMutedCSV = "M" else isMasterMuted = '<td>&nbsp;</td>' isMasterMutedCSV = "" end 
@@ -325,10 +325,10 @@ function Master()
     local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(masterChannel,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
 
     if isMasterFXenabled_ == true then isMasterFXenabled = '<td class="enabled centertext">Enabled</td>' isMasterFXenabledCSV = "E" else isMasterFXenabled = '<td class="disabled cenertext">Bypassed</td>'isMasterFXenabledCSV = "BYPASSED" end
-    if isMasterOffline_ == true then isMasterOffline = '<td class="offline centertext">OFF Line</td>' isMasterOfflineCSV = "OFF" else isMasterOffline = '<td class="online centertext">On Line</td>'isMasterOfflineCSV = "On" end
+    if isMasterOffline_ == true then isMasterOffline = '<td class="offline centertext">OFF Line</td>' isMasterOfflineCSV = "OFF Line" else isMasterOffline = '<td class="online centertext">On Line</td>'isMasterOfflineCSV = "On Line" end
   
   
-  lineCSV = isMasterMutedCSV..','..isMasterSoloedCSV..','..isMasterFXChainenabledCSV_..','..isHideTCPCSV..','..isHideMCPCSV..','..FXname..','..isMasterFXenabledCSV..','..isMasterOfflineCSV..','..moduleName
+  lineCSV = FXname..','..isMasterFXenabledCSV..','..isMasterOfflineCSV..','..moduleName
   lineHTML = '   <tr class="tracks slaveMaster status"><td colspan="2"></td><td>'..FXname..'</td>'..isMasterFXenabled..isMasterOffline..'<td>'..moduleName..'</tr>'
   WriteFILE(lineHTML,lineCSV)
 
@@ -341,7 +341,9 @@ function Master()
    local line_3 = '<tr class="tracks slaveMaster"><td><b>FX CHAIN</b></td>'..isMasterFXChainenabled_..'</tr>'
    local line_4 = '<tr class="tracks slaveMaster"><td><b>TCP</b></td>'..isHideTCP..'</tr>'
    local line_5 = '<tr class="tracks slaveMaster"><td><b>MCP</b></td>'..isHideMCP..'</tr>'
-   WriteFILE(line_1..line_2..line_3..line_4..line_5,lineCSV..','..MasterNotesCSV)
+   local csv_1 = '\nMASTER TRACK SETTINGS:\nMUTE,SOLO,FX CHAIN,TCP,MCP,NOTES\n'
+   local csv_2 = isMasterMutedCSV..','..isMasterSoloedCSV..','..isMasterFXChainenabledCSV_..','..isHideTCPCSV..','..isHideMCPCSV..','..MasterNotesCSV
+   WriteFILE(line_1..line_2..line_3..line_4..line_5,lineCSV..','..csv_1..csv_2)
     -- ridCommas(MasterNotes)  
    WriteFILE("  </tbody>\n</table>","")
 end
