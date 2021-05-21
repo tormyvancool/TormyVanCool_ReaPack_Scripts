@@ -11,11 +11,11 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.0.1" author="Tormy Van Cool">
+            <version name="2.0.1" author="Tormy Van Cool" time="2021-02-14T01:38:35Z">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
                 <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
             </version>
-            <version name="2.1" author="Tormy Van Cool">
+            <version name="2.1" author="Tormy Van Cool" time="2021-02-15T01:38:35Z">
                 <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3eca394256df9e752d86698b749c5f49e368ab2d/TormyVanCool_ChapterMarker.lua</source>
                 <changelog>
                 <![CDATA[
@@ -32,7 +32,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.1.1" author="Tormy Van Cool">
+            <version name="1.1.1" author="Tormy Van Cool" time="2021-02-14T01:38:35Z">
                 <source main="main" file="TormyVanCool_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
@@ -73,7 +73,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.7.1" author="Tormy Van Cool">
+            <version name="2.7.1" author="Tormy Van Cool" time="2021-03-18T01:38:35Z">
                 <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c83c678c6bfa38789026614fca1c783d449f4a5b/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
@@ -99,7 +99,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool">
+            <version name="1.0" author="Tormy Van Cool" time="2021-02-19T01:38:35Z">
                 <source main="main" file="TormyVanCool_ExportStems.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8524d4502738d92a29505488d195b04f6eef2452/TormyVanCool_ExportStems.lua</source>
             </version>
         </reapack>
@@ -119,7 +119,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0.4" author="Tormy Van Cool">
+            <version name="1.0.4" author="Tormy Van Cool" time="2021-03-17T01:38:35Z">
                 <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/36c9db3aee01179cc2eb6ea928b2f8ea7250c4c6/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
@@ -139,7 +139,7 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.1.1" author="Tormy Van Cool">
+            <version name="2.1.2" author="Tormy Van Cool" time="2021-05-22T01:38:35Z">
                 <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/dbbcc51045ed66970f0876e11853c667b78ef63e/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
