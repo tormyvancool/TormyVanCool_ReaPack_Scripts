@@ -1,4 +1,4 @@
-<?xml version="1.0" econding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Markers">
         <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
