@@ -4,7 +4,7 @@
 --[[
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.0.2
+@version 2.1
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -17,11 +17,11 @@ v1.0.3 (18 may 2021)
   + Date to file names 
   + Creation date into files 
   + Version into files 
-v1.0.4
+v1.0.4 (18 may 2021)
   + Project Notes
   + Track Notes
   + Project Sample Rate
-v2.0
+v2.0 (18 may 2021)
   + Expandable/Collapsible Tables
   + Odd/Even on Mute flag
   + Odd/Even on Solo flag
@@ -30,12 +30,41 @@ v2.0
   + Comma Separated Values
   + Effected items 
   + Noted items 
-v2.0.1
+v2.0.1 (18 may 2021)
   # Buf Fix: all FX where displayed as Disalbed
-v2.0.2
+v2.0.2 (18 may 2021)
   + FX Chain Status
+v2.1
+  + All Tracks Hierarchy
+  + All tracks Statuses
+  + Master Channel FX and Notes
+  + Precision
+  + Project Length HH:MM:SS
 @credits Mario Bianchi for his contribution to expedite the process
 ]]--
+
+----------------------------------------------
+-- NUMERICAL FUNCTIONS
+----------------------------------------------
+function round(val, decimal)
+  if (decimal) then
+    return math.floor( (val * 10^decimal) + 0.5) / (10^decimal)
+  else
+    return math.floor(val+0.5)
+  end
+end
+
+function SecondsToHMS(seconds)
+  local seconds = tonumber(seconds)
+  if seconds <= 0 then
+    return "00:00:00";
+  else
+    hours = string.format("%02.f", math.floor(seconds/3600));
+    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    return hours..":"..mins..":"..secs
+  end
+end
 
 --------------------------------------------------------------------
 -- Script Initialization
@@ -43,7 +72,8 @@ v2.0.2
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.0.2"
+local scriptVersion = "2.1"
+local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0)
 local pj_name_ = reaper.GetProjectName(0, "")
@@ -55,19 +85,29 @@ local f_csv=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. CSV,"w")
 local f_html=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. HTML,"w")
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 local version = reaper.GetAppVersion()
+local pj_length=round(reaper.GetProjectLength(),precision)
+
+
+----------------------------------------------
+-- MAIN HEADERS
+----------------------------------------------
 local PageHeaderHTML = [[
 <html>
   <head>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <title>]] .. pj_name_ .. [[</title>
      <style>
-     body {font-family: Helvetica, sans-serif;}
+     body {font-family: Helvetica, sans-serif; background: blanchedalmond;}
+     td.masterrnotes { width: 87%; }
      span.info {position: absolute; left: 0; }
      .emboss {text-shadow: -2px 2px 4px rgb(0 0 0 / 50%), 2px -2px 0 rgb(255 255 255 / 90%);}
      .engrave {color: transparent; background: #8e8e8e; -webkit-background-clip: text; text-shadow: 2px 5px 5px rgb(255 255 255 / 30%);}
      .pointer {cursor: pointer;}
      .table_header{background: #0057a1 !important; color: white;}
-     table{margin-bottom: 12px; width:100%}
+     .statuswidth{width: 13%;}
+     .MasterEnabledOnline, .TracksEnabledOnline, .TracksNoted, .EffectedItems { width: 6%; }
+     
+     table{margin-bottom: 12px; width:90%}
      tr:nth-child(even) td.solo {background: #ffc107;text-align: center; }   
      tr:nth-child(odd) td.solo {background: #ffd149;text-align: center; }
      tr:nth-child(even) td.mute { background: red;text-align: center;color: white; }
@@ -88,9 +128,11 @@ local PageHeaderHTML = [[
      tr:last-child td:last-child { border-bottom-right-radius: 10px; }
      .center { margin-left: auto; margin-right: auto; }
      .centertext {text-align: center;}
+     .left{text-align: left;}
      sub { font-size: 12px; float: right; position: absolute; bottom: 10px; right: 10px; }
      .spacer{width: 100%;height:50px}
      .right{text-align: right;}
+     .yes { background-color: yellow; }
      </style>
      <script>
       $(document).ready(function() {
@@ -102,6 +144,10 @@ local PageHeaderHTML = [[
           $("span.collapseFXedItems").hide()
           $("tr.slaveNotedItems").hide()
           $("span.collapseNotedItems").hide()
+          $("tr.slaveHier").hide()
+          $("span.collapseHier").hide()
+          $("tr.slaveMaster").hide()
+          $("span.collapseMaster").hide()
           
           $(".master").click(function() {
               $("tr.slave").toggle(500);
@@ -125,6 +171,18 @@ local PageHeaderHTML = [[
               $("tr.slaveNotedItems").toggle(500);
               $("span.collapseNotedItems").toggle(500)
               $("span.expandNotedItems").toggle(500)
+          });          
+          
+          $(".masterHier").click(function() {
+              $("tr.slaveHier").toggle(500);
+              $("span.collapseHier").toggle(500)
+              $("span.expandHier").toggle(500)
+          });
+          
+          $(".masterMaster").click(function() {
+              $("tr.slaveMaster").toggle(500);
+              $("span.collapseMaster").toggle(500)
+              $("span.expandMaster").toggle(500)
           });
       });
     </script>
@@ -136,74 +194,97 @@ local PageHeaderHTML = [[
       </thead>
       <tbody>
         <tr class="table_header"><th>PROJECT</th><th>TOTAL TRACKS</th><th>DAW</th><th>AUTHOR</th><th>NOTES</th></tr>
-        <tr><td class="centertext">Name: ]]..pj_name_..[[<br/>Sample Rate: ]]..pj_sampleRate..[[Hz</td><td class="centertext">]].. reaper.CountTracks() ..[[</td><td class="centertext">REAPER - v.]]..version..[[</td><td class="centertext">]]..author..[[</td><td>]]..pj_notes..[[</td></tr>
+        <tr><td class="left">Name: ]]..pj_name_..[[<br/>Sample Rate: ]]..round(pj_sampleRate,1)..[[Hz<br/>Project Length: ]]..SecondsToHMS(pj_length)..[[</td><td class="centertext">]].. reaper.CountTracks() ..[[</td><td class="centertext">REAPER - v.]]..version..[[</td><td class="centertext">]]..author..[[</td><td>]]..pj_notes..[[</td></tr>
       </tbody>
-    </table> ]]
+    </table>
+    <div class="spacer">&nbsp;</div>
+    ]]
 
   
   
 ----------------------------------------------
 -- SPECIALIZED HEADER
 ----------------------------------------------
-local PageHeaderCSV = 'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
-local tableFXTracksHeader = [[<table class="center">
-      <div class="spacer">&nbsp;</div>
+local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nNAME,TYPE,N.ITEMS,TCP,MCP,FX\n'
+local PageHeaderMasterHTML = [[
+     <table class="center">
+      <thead>
+        <tr class="masterMaster"><th colspan="6" class="header"><span class="info emboss pointer expandMaster">&#x25BC;</span><span class="info engrave pointer collapseMaster">&#x25B2;</span>MASTER CHANNEL</th></tr>
+      </thead>
+      <tbody>
+        <tr class="table_header slaveMaster"><th colspan="2" class="statuswidth">TRACK SETTINGS</th><th colspan="4">FX (VSTs)</th></tr>
+        <tr class="table_header slaveMaster"><th>CONTROLS</th><th>STATUS</th><th>NAME</th><th class="MasterEnabledOnline">Enabled<br/>Bypassed</th><th class="MasterEnabledOnline">On Line<br/>Off Line</th><th>FILE</th></tr>
+]]
+local PageHeaderHierarchyCSV = LF..LF..'HIERARCHY:\nNAME,TYPE,N.ITEMS,TCP,MCP,FX'
+local PageHeaderHierarchyHTML = [[
+      <table class="center">
+      <thead>
+        <tr class="masterHier"><th colspan="7" class="header"><span class="info emboss pointer expandHier">&#x25BC;</span><span class="info engrave pointer collapseHier">&#x25B2;</span>TRACKS HIERARCHY</th></tr>
+      </thead>
+      <tbody>
+        <tr class="table_header slaveHier"><th>NAME</th><th class="TracksEnabledOnline">TYPE</th><th class="TracksEnabledOnline">N. ITEMS</th><th class="TracksEnabledOnline">TCP</th><th class="TracksEnabledOnline">MCP</th><th class="TracksEnabledOnline">FXed</th><th class="TracksEnabledOnline">FX CHAIN<br/>Enable/Disabled</tr>
+]]
+local PageHeaderCSV = LF..LF..'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
+local tableFXTracksHeader = [[
+    <div class="spacer">&nbsp;</div>
+    <table class="center">
       <thead>
         <tr><th colspan="12" class="header"><span class="info expand emboss pointer master">&#x25BC;</span><span class="info collapse engrave pointer master">&#x25B2;</span>EFFECTED TRACKS</th></tr>
       </thead>
       <tbody>
         <tr class="table_header slave"><th colspan="5">TRACK</th><th colspan="3">STATUS</th><th colspan="4">FX and/or INSTRUMENTS(VST/VSTi)</th></tr>
-        <tr class="table_header slave"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>FX Chain<br/>En./Dis.</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">Online<br/>Offline</th><th>PLUGIN FILE</th></tr>
+        <tr class="table_header slave"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>FX Chain<br/>En./Dis.</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th><th>NAME</th><th id="EnDis">Enabled<br/>Bypassed</th><th id="OnOff">On Line<br/>Off Line</th><th>PLUGIN FILE</th></tr>
 ]]
 local PageHeaderCSVNoted = LF..LF..'NOTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE'
-local tableNotedTracksHeader = [[<table class="center">
+local tableNotedTracksHeader = [[
+   <table class="center">
       <thead>
         <tr><th colspan="7" class="header"><span class="info expandNoted emboss pointer masterNoted">&#x25BC;</span><span class="info collapseNoted engrave pointer masterNoted">&#x25B2;</span>NOTED TRACKS</th></tr>
       </thead>
       <tbody>
         <tr class="table_header slaveNoted"><th colspan="4">TRACK</th><th colspan="3">STATUS</th></tr>
-        <tr class="table_header slaveNoted"><th>IDX</th><th>NAME</th><th>TYPE</th><th>NOTES</th><th>N. ITEMS</th><th>SOLO</th><th>MUTE</th></tr>
+        <tr class="table_header slaveNoted"><th class="TracksNoted">IDX</th><th>NAME</th><th class="TracksNoted">TYPE</th><th>NOTES</th><th class="TracksNoted">N. ITEMS</th><th class="TracksNoted">SOLO</th><th class="TracksNoted">MUTE</th></tr>
 ]]
 local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:\nTRACK NAME,FX,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
-local PageHeaderItemsFXedHTML = [[
+local PageHeaderItemsFXedHTML = [[ 
     <div class="spacer">&nbsp;</div>
     <table class="center">
       <thead>
-        <tr><th colspan="11" class="header"><span class="info expandFXedItems emboss pointer masterFXeditems">&#x25BC;</span><span class="info collapseFXedItems engrave pointer masterFXedItems">&#x25B2;</span>EFFECTED ITEMS DATA</th></tr>
+        <tr><th colspan="10" class="header"><span class="info expandFXedItems emboss pointer masterFXeditems">&#x25BC;</span><span class="info collapseFXedItems engrave pointer masterFXedItems">&#x25B2;</span>EFFECTED ITEMS DATA</th></tr>
       </thead>
       <tbody>
         <tr class="table_header slaveFXedItems"><th colspan="5">MAIN DATA</th><th colspan="2">STATUS</th><th colspan="3">SOURCE</th></tr>
-        <tr class="table_header slaveFXedItems"><th>BELONGIN TO</th><th>FX</th><th>POSITION</th><th>LENGTH</th><th>NOTES</th><th>MUTE</th><th>LOCKED</th><th>SOURCE NAME</th><th>SAMPLE RATE</th><th>BIT DEPTH</th></tr>
+        <tr class="table_header slaveFXedItems"><th>BELONGIN TO</th><th>FX</th><th class="EffectedItems">POSITION</th><th class="EffectedItems">LENGTH</th><th>NOTES</th><th class="EffectedItems">MUTE</th><th class="EffectedItems">LOCKED</th><th>SOURCE NAME</th><th class="EffectedItems">SAMPLE RATE</th><th class="EffectedItems">BIT DEPTH</th></tr>
 ]]
 local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:\nTRACK NAME,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderNotedItemsHTML = [[
     <table class="center">
       <thead>
-        <tr><th colspan="10" class="header"><span class="info expandNotedItems emboss pointer masterNotedItems">&#x25BC;</span><span class="info collapseNotedItems engrave pointer masterNotedItems">&#x25B2;</span>NOTED ITEMS DATA</th></tr>
+        <tr><th colspan="9" class="header"><span class="info expandNotedItems emboss pointer masterNotedItems">&#x25BC;</span><span class="info collapseNotedItems engrave pointer masterNotedItems">&#x25B2;</span>NOTED ITEMS DATA</th></tr>
       </thead>
       <tbody>
         <tr class="table_header slaveNotedItems"><th colspan="4">MAIN DATA</th><th colspan="2">STATUS</th><th colspan="3">SOURCE</th></tr>
-        <tr class="table_header slaveNotedItems"><th>BELONGIN TO</th><th>POSITION</th><th>LENGTH</th><th>NOTES</th><th>MUTE</th><th>LOCKED</th><th>SOURCE NAME</th><th>SAMPLE RATE</th><th>BIT DEPTH</th></tr>
+        <tr class="table_header slaveNotedItems"><th>BELONGIN TO</th><th>POSITION</th><th>LENGTH</th><th>NOTES</th><th class="EffectedItems">MUTE</th><th class="EffectedItems">LOCKED</th><th>SOURCE NAME</th><th class="EffectedItems">SAMPLE RATE</th><th class="EffectedItems">BIT DEPTH</th></tr>
 ]]
 
-
-
 local PageFooterHTML = "  \n</body>\n</html>"
-local PageFooterCSV = LF..",,,,,,,,,,Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
-if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) goto exit
+local PageFooterCSV = LF..",,,,,,,,,,,Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
+if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) return --goto exit
 end
 
+
+----------------------------------------------
+-- FILES INITIALIZATION
+----------------------------------------------
 f_csv:write( 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..LF )
 f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
 f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
 f_csv:write( 'CREATED:'..LF .. date ..LF..LF )
 f_csv:write( 'AUTHOR:'..LF..author..LF..LF )
-
 f_html:write( PageHeaderHTML..LF )
 
-
 ----------------------------------------------
--- FUNCTIONS
+-- MAIN FUNCTIONS
 ----------------------------------------------
 function WriteFILE(listHTML,listCSV)
    f_csv:write( listCSV..LF )
@@ -214,6 +295,103 @@ function ridCommas(a)
    a_ = a:gsub(","," - ")
    return a_
 end
+
+function recursiveAppend(var,ii)
+local t = {}
+    for i = 1, ii do
+        table.insert(t, tostring(var))
+    end
+    local a = table.concat(t)
+    return a
+end
+
+function Master()
+
+  WriteFILE(PageHeaderMasterHTML,'')
+  local masterChannel = reaper.GetMasterTrack(0)
+  local retval, masterFlags  = reaper.GetTrackState(masterChannel)
+    if masterFlags &8 == 8 then isMasterMuted = '<td class="mute centertext">M</td>' isMasterMutedCSV = "M" else isMasterMuted = '<td>&nbsp;</td>' isMasterMutedCSV = "" end 
+    if masterFlags &16 == 16 then isMasterSoloed = '<td class="solo centertext">S</td>' isMasterSoloedCSV = "S" else isMasterSoloed = '<td>&nbsp;</td>' isMasterSoloedCSV = '' end
+    if masterFlags &32 == 32 then isMastreSipd = "SIP'd" else isMastreSipd = '' end
+    if masterFlags &4 == 4 then isMasterFXChainenabled_ = '<td class="enabled centertext">Enabled</td>' isMasterFXChainenabledCSV_ = 'E' else isMasterFXChainenabled_ = '<td class="disabled">Disabled</td>' isMasterFXChainenabledCSV_ = 'D' end
+    if masterFlags &512 == 512 then isHideTCP = '<td class="mute centertext">HIDDEN</td>' isHideTCPCSV = 'H' else isHideTCP = '<td class="centertext">VISIBLE</td>' isHideTCPCSV = 'V' end
+    if masterFlags &1024 == 1024 then isHideMCP = '<td class="mute centertext">HIDDEN</td>'  isHideMCPCSV = 'H' else isHideMCP = '<td class="centertext">VISIBLE</td>'isHideMCPCSV = 'V' end
+  
+  for ii=1,reaper.TrackFX_GetCount(masterChannel),1 do
+    --if reaper.TrackFX_GetCount(masterChannel) > 0 then FXed = "Yes" else FXed = "No" end
+    local ok,FXname=reaper.TrackFX_GetFXName(masterChannel,ii-1,"")
+    local isMasterFXenabled_ = reaper.TrackFX_GetEnabled(masterChannel,ii-1) -- Checks if plugin BLOCKS is Enabled
+    local isMasterOffline_ = reaper.TrackFX_GetOffline(masterChannel,ii-1) -- Checks if plugin is OffLine
+    local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(masterChannel,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
+
+    if isMasterFXenabled_ == true then isMasterFXenabled = '<td class="enabled centertext">Enabled</td>' isMasterFXenabledCSV = "E" else isMasterFXenabled = '<td class="disabled cenertext">Bypassed</td>'isMasterFXenabledCSV = "BYPASSED" end
+    if isMasterOffline_ == true then isMasterOffline = '<td class="offline centertext">OFF Line</td>' isMasterOfflineCSV = "OFF" else isMasterOffline = '<td class="online centertext">On Line</td>'isMasterOfflineCSV = "On" end
+  
+  
+  lineCSV = isMasterMutedCSV..','..isMasterSoloedCSV..','..isMasterFXChainenabledCSV_..','..isHideTCPCSV..','..isHideMCPCSV..','..FXname..','..isMasterFXenabledCSV..','..isMasterOfflineCSV..','..moduleName
+  lineHTML = '   <tr class="tracks slaveMaster status"><td colspan="2"></td><td>'..FXname..'</td>'..isMasterFXenabled..isMasterOffline..'<td>'..moduleName..'</tr>'
+  WriteFILE(lineHTML,lineCSV)
+
+  end
+
+   masterNotes = reaper.NF_GetSWSTrackNotes(masterChannel)
+   local MasterNotesCSV = ridCommas(masterNotes)
+   local line_1 = '<tr class="tracks slaveMaster"><td><b>MUTE</b></td>'..isMasterMuted..'<td colspan="4" class="centertext"><b>NOTES</b></td></tr>'
+   local line_2 = '<tr class="tracks slaveMaster"><td><b>SOLO</b></td>'..isMasterSoloed..'<td rowspan="4" colspan="4" class="masterNotes">'..masterNotes..'</td></tr>'
+   local line_3 = '<tr class="tracks slaveMaster"><td><b>FX CHAIN</b></td>'..isMasterFXChainenabled_..'</tr>'
+   local line_4 = '<tr class="tracks slaveMaster"><td><b>TCP</b></td>'..isHideTCP..'</tr>'
+   local line_5 = '<tr class="tracks slaveMaster"><td><b>MCP</b></td>'..isHideMCP..'</tr>'
+   WriteFILE(line_1..line_2..line_3..line_4..line_5,lineCSV..','..MasterNotesCSV)
+    -- ridCommas(MasterNotes)  
+   WriteFILE("  </tbody>\n</table>","")
+end
+
+
+
+function Hierarchical()
+  WriteFILE(PageHeaderHierarchyHTML,PageHeaderHierarchyCSV)
+  for i= 1, reaper.CountTracks() do 
+  
+    tr=reaper.GetTrack(0,i-1)
+ 
+    local _, TrackName = reaper.GetTrackName(tr, "")
+    local numItems = reaper.GetTrackNumMediaItems(tr) -- Retreives the number of items on that track
+    if numItems == 0 then numItems = '-' end
+    local retval, flags  = reaper.GetTrackState(tr)
+    local hasFX = reaper.TrackFX_GetCount(tr)
+    if hasFX ~= 0 then FXed = '<td class="yes centertext">Yes</td>' FXedCSV = 'Yes' else FXed = '<td class="no centertext">No</td>' FXedCSV = 'No' end
+    --local folderDepth = reaper.GetMediaTrackInfo_Value(tr, "I_FOLDERDEPTH")
+    local folderDepth =  15*reaper.GetTrackDepth(tr)
+    
+    
+    ----------------------------------------------
+    -- ASSIGN BINARY STATES TO VARIABLES
+    ----------------------------------------------
+    if flags &1 == 1 then isFolder = "FOLDER" else isFolder = 'Track' end
+    if flags &2 == 2 then isSelected = "SELECTED" else isSelected = '' end
+    if flags &4 == 4 then isFXChainenabled_ = '<td class="disabled">Disabled</td>' isFXChainenabledCSV_ = 'D' else isFXChainenabled_ = '<td class="enabled">Enabled</td>' isFXChainenabledCSV_ = 'E' end
+    if flags &8 == 8 then isMuted = '<td class="mute">M</td>' isMutedCSV = "M" else isMuted = '<td>&nbsp;</td>' isMutedCSV = "" end 
+    if flags &16 == 16 then isSoloed = '<td class="solo">S</td>' isSoloedCSV = "S" else isSoloed = '<td>&nbsp;</td>' isSoloedCSV = '' end
+    if flags &32 == 32 then isSipd = "SIP'd" else isSipd = '' end
+    if flags &64 == 64 then isRecArmed = "REC ARMED" else isRecArmed = ''end
+    if flags &128 == 128 then isRecMonitoring = "REC Monitoring ON" else isRecMonitoring = ''end
+    if flags &256 == 256 then isRecAuto = "REC Monitoring AUTO" else isRecAuto = ''end
+    if flags &512 == 512 then isHideTCP = '<td class="mute centertext">HIDDEN</td>' isHideTCPCSV = 'H' else isHideTCP = '<td class="centertext">VISIBLE</td>' isHideTCPCSV = 'V' end
+    if flags &1024 == 1024 then isHideMCP = '<td class="mute centertext">HIDDEN</td>'  isHideMCPCSV = 'H' else isHideMCP = '<td class="centertext">VISIBLE</td>'isHideMCPCSV = 'V' end
+    
+    ii = folderDepth / 10
+    a = recursiveAppend('    ',ii)
+    
+    if isFolder == 'FOLDER' then TrackNameHTML = '<b>'..TrackName..'</b>' else TrackNameHTML = TrackName end
+    if ii > 1 and isFolder == 'FOLDER' then isFolder = "SUBFOLDER" end
+    lineCSV = a..TrackName..','..isFolder..','..numItems..','..isHideTCPCSV..','..isHideMCPCSV..','..FXedCSV
+    lineHTML = '   <tr class=\"tracks slaveHier\"><td><span  style="padding-left:'..folderDepth..'px;">' .. TrackNameHTML ..'</span></td><td>'.. isFolder ..'</td><td class="centertext">'.. numItems ..'</td>'.. isHideTCP .. isHideMCP .. FXed ..isFXChainenabled_..'</tr>'
+    WriteFILE(lineHTML,lineCSV)
+
+  end
+  WriteFILE("  </tbody>\n</table>","")
+end
+
 
 function FXedTracks()
   WriteFILE(tableFXTracksHeader,PageHeaderCSV)
@@ -395,8 +573,8 @@ function FXedItems()
               ----------------------------------------------
               -- ASSEMBLING CSV and HTML RECORDS
               ----------------------------------------------
-              lineCSV = ridCommas(itemTrackName) ..','.. ridCommas(fx_name) ..','.. itemPosition ..','.. itemLength ..','.. ridCommas(itemNotes) ..',' .. isMutedCSV ..','.. isLockedCSV ..','.. itemFilename ..','.. sourceSampleRate ..','.. bitDepth
-              lineHTML = '   <tr class=\"tracks slaveFXedItems\"><td>' .. itemTrackName ..'</td><td>'.. fx_name ..'</td><td class="right">'.. itemPosition ..'</td><td class="right">'.. itemLength ..'</td><td>' .. itemNotes .. '</td>' .. isMutedHTML .. isLockedHTML ..'<td>'.. itemFilename ..'</td><td class="centertext">'.. sourceSampleRate ..'</td><td class="centertext">'.. bitDepth ..'</td></tr>'
+              lineCSV = ridCommas(itemTrackName) ..','.. ridCommas(fx_name) ..','.. round(itemPosition,precision) ..','.. round(itemLength,precision) ..','.. ridCommas(itemNotes) ..',' .. isMutedCSV ..','.. isLockedCSV ..','.. itemFilename ..','.. sourceSampleRate ..','.. bitDepth
+              lineHTML = '   <tr class=\"tracks slaveFXedItems\"><td>' .. itemTrackName ..'</td><td>'.. fx_name ..'</td><td class="right">'.. round(itemPosition,precision) ..'</td><td class="right">'.. round(itemLength,precision) ..'</td><td>' .. itemNotes .. '</td>' .. isMutedHTML .. isLockedHTML ..'<td>'.. itemFilename ..'</td><td class="centertext">'.. sourceSampleRate ..'</td><td class="centertext">'.. bitDepth ..'</td></tr>'
   
               WriteFILE(lineHTML,lineCSV)
   
@@ -478,8 +656,8 @@ function NotedItems()
               ----------------------------------------------
               -- ASSEMBLING CSV and HTML RECORDS
               ----------------------------------------------
-              lineCSV = ridCommas(itemTrackName) ..','.. itemPosition ..','.. itemLength ..','.. ridCommas(itemNotes) ..',' .. isMutedCSV ..','.. isLockedCSV ..','.. itemFilename ..','.. sourceSampleRate ..','.. bitDepth
-              lineHTML = '   <tr class=\"tracks slaveNotedItems\"><td>' .. itemTrackName ..'</td><td class="right">'.. itemPosition ..'</td><td class="right">'.. itemLength ..'</td><td>' .. itemNotes .. '</td>' .. isMutedHTML .. isLockedHTML ..'<td>'.. itemFilename ..'</td><td class="centertext">'.. sourceSampleRate ..'</td><td class="centertext">'.. bitDepth ..'</td></tr>'
+              lineCSV = ridCommas(itemTrackName) ..','.. round(itemPosition,precision) ..','.. round(itemLength,precision) ..','.. ridCommas(itemNotes) ..',' .. isMutedCSV ..','.. isLockedCSV ..','.. itemFilename ..','.. sourceSampleRate ..','.. bitDepth
+              lineHTML = '   <tr class=\"tracks slaveNotedItems\"><td>' .. itemTrackName ..'</td><td class="right">'.. round(itemPosition,precision) ..'</td><td class="right">'.. round(itemLength,precision) ..'</td><td>' .. itemNotes .. '</td>' .. isMutedHTML .. isLockedHTML ..'<td>'.. itemFilename ..'</td><td class="centertext">'.. sourceSampleRate ..'</td><td class="centertext">'.. bitDepth ..'</td></tr>'
               
               WriteFILE(lineHTML,lineCSV)
           end 
@@ -491,6 +669,7 @@ function NotedItems()
   reaper.UpdateArrange()
 end
 
+
 function closeFiles()
   f_csv:write( PageFooterCSV..LF )
   f_csv:close()
@@ -500,6 +679,8 @@ end
 ----------------------------------------------
 -- MAIN CALL FOR SCRIPT FIRE UP
 ----------------------------------------------
+Master()
+Hierarchical()
 FXedTracks()
 NotedTracks()
 FXedItems()
