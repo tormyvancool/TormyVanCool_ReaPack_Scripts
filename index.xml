@@ -139,8 +139,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.1" author="Tormy Van Cool">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2cbdf8ddec52cf706a8a713e03f1746299156b94/TormyVanCool_ExportData.lua</source>
+            <version name="2.1.1" author="Tormy Van Cool">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/dbbcc51045ed66970f0876e11853c667b78ef63e/TormyVanCool_ExportData.lua</source>
             </version>
         </reapack>
     </category>
