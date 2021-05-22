@@ -32,13 +32,10 @@ ChapterMarkers in function:
 
 
 
-EXPORT DATA in function (HTML Output)
+EXPORT DATA in function
 -------
 ![..](EXPORT_DATA.gif)
 
-EXPORT DATA in function (CSV Output)
--------
-![..](EXPORT_DATA_CSV.gif)
 
 
 
