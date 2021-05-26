@@ -279,7 +279,7 @@ local PageHeaderHTML = [[
         [[ by Tormy Van Cool</sub></th></tr>
       </thead>
       <tbody>
-        <tr><td id="markersregions" colspan="8" class="centertext">MAIN DATA</td></tr>
+        <tr><td colspan="8" class="centertext markersregions">MAIN DATA</td></tr>
         <tr class="table_header">
           <th>PROJECT</th>
           <th>TOTAL TRACKS</th>
