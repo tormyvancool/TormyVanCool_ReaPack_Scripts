@@ -139,24 +139,67 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.3" author="Tormy Van Cool" time="2021-05-24T20:27:28Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/76900bdaa29a850d306babfff27d01617c8af2fa/TormyVanCool_ExportData.lua</source>
+            <version name="2.3" author="Tormy Van Cool" time="2021-05-24T21:12:55Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/5519f148a8ca1fcbef6dc50d537fb15ac1f24553/TormyVanCool_ExportData.lua</source>
                 <changelog>
-                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
-                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 v1.0 (18 may 2021)\line\b0   + Initial release\par
-                \b v1.0.1 (18 may 2021)\line\b0   + Added pop-up when files are saved\par
-                \b v1.0.2 (18 may 2021)\line\b0   + Pup up if project is not saved\par
-                \b v1.0.3 (18 may 2021)\line\b0   + Date to file names \line   + Creation date into files \line   + Version into files \par
-                \b v1.0.4 (18 may 2021)\line\b0   + Project Notes\line   + Track Notes\line   + Project Sample Rate\par
-                \b v2.0 (18 may 2021)\line\b0   + Expandable/Collapsible Tables\line   + Odd/Even on Mute flag\line   + Odd/Even on Solo flag\line   + Only noted tracks\line   - Pipe separated Values\line   + Comma Separated Values\line   + Effected items \line   + Noted items \par
-                \b v2.0.1 (18 may 2021)\line\b0   # Buf Fix: all FX where displayed as Disalbed\par
-                \b v2.0.2 (18 may 2021)\line\b0   + FX Chain Status\par
-                \b v2.1 (19 may 2021)\line\b0   + All Tracks Hierarchy\line   + All tracks Statuses\line   + Master Channel FX and Notes\line   + Precision\line   + Project Length HH:MM:SS\par
-                \b v2.1.1 (19 may 2021)\line\b0   # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil\par
-                \b v2.1.2 (20 may 2021)\line\b0   # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication\par
-                \b v2.2 (24 may 2021)\line\b0   # Optimized Code\line   + VSTS' Path Detection\line   + SUbfolder indication into FFEXed Tracks\line   - Table width 90%\line   + Table width 100%\line   + Num. Items, Num. Markers, Num. Region in Project Data\line   # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. \line   # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS. \line @credits  Mario Bianchi for his contribution to expedite the process;\line           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];\line           Solger for his help on the color decode [t=253981]\par
-                \b v2.3 (26 may 2021)\line\b0   + Project Markers\line   + Project Regions\line   + Solo in Tracks Hierarchy\line   + Mute in Tracks Hierarchy\line   # Cosmetic changes on Project Data and Master Channel table\line   # Minor issues on CSV format\par
-                }]]>
+                <![CDATA[
+                v1.0 (18 may 2021)
+                    + Initial release
+                v1.0.1 (18 may 2021)
+                    + Added pop-up when files are saved
+                v1.0.2 (18 may 2021)
+                    + Pup up if project is not saved
+                v1.0.3 (18 may 2021)
+                    + Date to file names 
+                    + Creation date into files 
+                    + Version into files 
+                v1.0.4 (18 may 2021)
+                    + Project Notes
+                    + Track Notes
+                    + Project Sample Rate
+                v2.0 (18 may 2021)
+                    + Expandable/Collapsible Tables
+                    + Odd/Even on Mute flag
+                    + Odd/Even on Solo flag
+                    + Only noted tracks
+                    - Pipe separated Values
+                    + Comma Separated Values
+                    + Effected items 
+                    + Noted items 
+                v2.0.1 (18 may 2021)
+                    # Buf Fix: all FX where displayed as Disalbed
+                v2.0.2 (18 may 2021)
+                    + FX Chain Status
+                v2.1 (19 may 2021)
+                    + All Tracks Hierarchy
+                    + All tracks Statuses
+                    + Master Channel FX and Notes
+                    + Precision
+                    + Project Length HH:MM:SS
+                v2.1.1 (19 may 2021)
+                    # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil
+                v2.1.2 (20 may 2021)
+                    # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication
+                v2.2 (24 may 2021)
+                    # Optimized Code
+                    + VSTS' Path Detection
+                    + SUbfolder indication into FFEXed Tracks
+                    - Table width 90%
+                    + Table width 100%
+                    + Num. Items, Num. Markers, Num. Region in Project Data
+                    # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
+                    # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS. 
+                @credits    Mario Bianchi for his contribution to expedite the process;
+                            Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+                            Solger for his help on the color decode [t=253981]
+                v2.3 (26 may 2021)
+                    + Project Markers
+                    + Project Regions
+                    + Solo in Tracks Hierarchy
+                    + Mute in Tracks Hierarchy
+                    # Cosmetic changes on Project Data and Master Channel table
+                    # Minor issues on CSV format
+                ]]>
                 </changelog>
             </version>
         </reapack>
