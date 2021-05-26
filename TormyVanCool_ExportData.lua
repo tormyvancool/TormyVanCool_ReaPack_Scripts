@@ -54,7 +54,16 @@ v2.2 (24 may 2021)
   + Num. Items, Num. Markers, Num. Region in Project Data
   # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
   # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-@credits Mario Bianchi for his contribution to expedite the process; Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830]
+@credits  Mario Bianchi for his contribution to expedite the process;
+          Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+          Solger for his help on the color decode [t=253981]
+v2.3 (26 may 2021)
+  + Project Markers
+  + Project Regions
+  + Solo in Tracks Hierarchy
+  + Mute in Tracks Hierarchy
+  # Cosmetic changes on Project Data and Master Channel table
+  # Minor issues on CSV format
 ]]--
 
 
@@ -81,13 +90,51 @@ function SecondsToHMS(seconds)
   end
 end
 
+function pj_MarkersRegions(idx)
+    
+    local a = {}
+    a.MR_Number, isrgn, a.MR_Pos, rgnend, MR_Name, a.MR_Markrgnindexnumber, color  = reaper.EnumProjectMarkers3(0, idx)
+
+    if isrgn == true then
+        a.MR_Isrgn = "REGION"
+      else
+        a.MR_Isrgn = "MARKER"
+    end
+
+    if MR_Name == '' then
+        a.MR_Name = '[No Name]'
+      else
+        a.MR_Name = MR_Name
+    end
+    
+    if color == 0 then
+        a.MR_Color = "-"
+        a.MR_ColorR = ''
+        a.MR_ColorG = ''
+        a.MR_ColorB = ''
+      else
+        a.MR_Color = color
+        a.MR_ColorR, a.MR_ColorG, a.MR_ColorB = reaper.ColorFromNative(color)
+    end
+    
+    if rgnend == 0.0 or (rgnend-a.MR_Pos) < 0.0 then
+        a.MR_Rgnend = "-" 
+        a.MR_Duration = "-"
+      else
+        a.MR_Rgnend = rgnend
+        a.MR_Duration = rgnend-a.MR_Pos
+    end
+    
+  return a
+end
+
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.2"
+local scriptVersion = "2.3"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -96,18 +143,34 @@ local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
 local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
 local date = os.date("%Y-%m-%d %H:%M:%S")
 local dateFile = '_' .. os.date("%Y-%m-%d_%H.%M.%S")
-local f_csv=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. CSV,"w")
-local f_html=io.open(pj_path .. '\\' .. pj_name_ .. dateFile .. HTML,"w")
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 local version = reaper.GetAppVersion()
 local pj_length=round(reaper.GetProjectLength(),precision)
 local totalMediaItems = reaper.CountMediaItems()
 local _, totalMarkers, totalRegions = reaper.CountProjectMarkers()
+local totalMarkersRegions = totalMarkers+totalRegions
 
+----------------------------------------------
+-- FILE OPERATIONS
+----------------------------------------------
+if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) return --goto exit
+end
+local f_csv=io.open(pj_path .. '/' .. pj_name_ .. dateFile .. CSV,"w")
+local f_html=io.open(pj_path .. '/' .. pj_name_ .. dateFile .. HTML,"w")
+function WriteFILE(listHTML,listCSV)
+   f_csv:write( listCSV..LF )
+   f_html:write( listHTML..LF )
+end
 
 ----------------------------------------------
 -- MAIN HEADERS
 ----------------------------------------------
+local PageHeaderCSV = 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..'Duration: '..SecondsToHMS(pj_length)..LF..LF..
+                      'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF..
+                      'DAW:'..LF ..'REAPER v.' .. version ..LF..LF..
+                      'CREATED:'..LF .. date ..LF..LF..
+                      'AUTHOR:'..LF..author..LF..LF..
+                      "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"..LF..LF
 local PageHeaderHTML = [[
 <html>
   <head>
@@ -151,6 +214,9 @@ local PageHeaderHTML = [[
      .right{text-align: right;}
      .yes { background-color: yellow; }
      .lv {color: red}
+     .label { font-weight: bold; margin-right: 20px;}
+     .colorMarkerRegion { width: 1%; }
+     .markersregions { margin-top: 10px; background: linear-gradient( 48deg , #2dbbff, transparent); font-weight: bolder; color: #ca5603; font-size: 22px; }
      </style>
      <script>
       $(document).ready(function() {
@@ -213,6 +279,7 @@ local PageHeaderHTML = [[
         [[ by Tormy Van Cool</sub></th></tr>
       </thead>
       <tbody>
+        <tr><td id="markersregions" colspan="8" class="centertext">MAIN DATA</td></tr>
         <tr class="table_header">
           <th>PROJECT</th>
           <th>TOTAL TRACKS</th>
@@ -223,9 +290,9 @@ local PageHeaderHTML = [[
           <th>AUTHOR</th>
           <th>NOTES</th>
         </tr>
-        <tr><td class="left">Name: ]]..pj_name_..
-          '<br/>Sample Rate: '..round(pj_sampleRate,0)..
-          ' Hz<br/>Project Length: '..SecondsToHMS(pj_length)..
+        <tr><td class="left"><span class="label">Name:</span> ]]..pj_name_..
+          '<br/><span class="label">Sample Rate:</span> '..round(pj_sampleRate,0)..
+          ' Hz<br/><span class="label">Project Length:</span> '..SecondsToHMS(pj_length)..
           '</td><td class="centertext">'.. reaper.CountTracks() ..
           '</td><td class="centertext">'..totalMediaItems..
           '</td><td class="centertext">'..totalMarkers..
@@ -233,13 +300,81 @@ local PageHeaderHTML = [[
           '</td><td class="centertext">REAPER - v.'..version..
           '</td><td class="centertext">'..author..
           '</td><td>'..pj_notes..
-        [[</td></tr>
-      </tbody>
+      '</td></tr>'
+      
+local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION, END POSITION (if Region),DURATION (if Region)\nMARKERS' 
+local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersregions">MARKERS</td></tr>'..
+      '<tr class="table_header"><th class="centertext">NAME</th>'..
+      '<th class="colorMarkerRegion">COLOR</th>'..
+      '<th class="centertext">TYPE</th>'..
+      '<th class="centertext">NUMBER</th>'..
+      '<th class="centertext">IDX</th>'..
+      '<th class="centertext">START POSITION</th>'..
+      '<th class="centertext">END POSITION (if Region)</th>'..
+      '<th class="centertext">DURATION (if Region)</th></tr>'
+
+      WriteFILE(PageHeaderHTML,PageHeaderCSV)
+      
+      local idx
+      if totalMarkersRegions ~= 0 then
+
+        WriteFILE(MarkersRegionsHeaderHTML,MarkersRegionsHeaderCSV)
+        for idx = 0,totalMarkersRegions do
+          if pj_MarkersRegions(idx).MR_Isrgn == "MARKER" and pj_MarkersRegions(idx).MR_Markrgnindexnumber ~= 0 then
+            local lineCSV = pj_MarkersRegions(idx).MR_Name..
+                            ',R='..pj_MarkersRegions(idx).MR_ColorR..' G='..pj_MarkersRegions(idx).MR_ColorG..' B='..pj_MarkersRegions(idx).MR_ColorB..
+                            ','..pj_MarkersRegions(idx).MR_Isrgn..
+                            ','..pj_MarkersRegions(idx).MR_Number..
+                            ','..pj_MarkersRegions(idx).MR_Markrgnindexnumber..
+                            ','..pj_MarkersRegions(idx).MR_Pos..
+                            ','..pj_MarkersRegions(idx).MR_Rgnend..
+                            ','..pj_MarkersRegions(idx).MR_Duration
+                            
+            local lineHTML =  '<tr><td>'..pj_MarkersRegions(idx).MR_Name..'</td>'..
+                              '<td style="background-color: rgb('..pj_MarkersRegions(idx).MR_ColorR..
+                                    ','..pj_MarkersRegions(idx).MR_ColorG..
+                                    ','..pj_MarkersRegions(idx).MR_ColorB..');"></td>'..            
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Isrgn..'</td>'..
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Number..'</td>'..
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Markrgnindexnumber..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Pos..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Rgnend..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Duration..'</td></tr>'
+            WriteFILE(lineHTML,lineCSV) 
+          end
+        end
+        WriteFILE('<tr><td colspan="8" class="centertext markersregions">REGIONS</td></tr>','REGIONS')
+        for idx = 0,totalMarkersRegions do
+          if pj_MarkersRegions(idx).MR_Isrgn == "REGION" then
+            local lineCSV = pj_MarkersRegions(idx).MR_Name..
+                            ',R='..pj_MarkersRegions(idx).MR_ColorR..' G='..pj_MarkersRegions(idx).MR_ColorG..' B='..pj_MarkersRegions(idx).MR_ColorB..
+                            ','..pj_MarkersRegions(idx).MR_Isrgn..
+                            ','..pj_MarkersRegions(idx).MR_Number..
+                            ','..pj_MarkersRegions(idx).MR_Markrgnindexnumber..
+                            ','..pj_MarkersRegions(idx).MR_Pos..
+                            ','..pj_MarkersRegions(idx).MR_Rgnend..
+                            ','..pj_MarkersRegions(idx).MR_Duration
+                            
+            local lineHTML =  '<tr><td>'..pj_MarkersRegions(idx).MR_Name..'</td>'..
+                              '<td style="background-color: rgb('..pj_MarkersRegions(idx).MR_ColorR..
+                                    ','..pj_MarkersRegions(idx).MR_ColorG..
+                                    ','..pj_MarkersRegions(idx).MR_ColorB..');"></td>'..
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Isrgn..'</td>'..
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Number..'</td>'..
+                              '<td class="centertext">'..pj_MarkersRegions(idx).MR_Markrgnindexnumber..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Pos..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Rgnend..'</td>'..
+                              '<td class="right">'..pj_MarkersRegions(idx).MR_Duration..'</td></tr>'
+            WriteFILE(lineHTML,lineCSV) 
+          end
+        end
+      end
+local tableftr =       [[</tbody>
     </table>
     <div class="spacer">&nbsp;</div>
 ]]
 
-  
+  WriteFILE(tableftr,'')
   
 ----------------------------------------------
 -- SPECIALIZED HEADER
@@ -265,12 +400,12 @@ local PageHeaderMasterHTML = [[
         '<th class="MasterEnabledOnline">On Line<br/>Off Line</th>'..
         '<th>FILE</th></tr>'
         
-local PageHeaderHierarchyCSV = LF..LF..'HIERARCHY:\nNAME,TYPE,N.ITEMS,TCP,MCP,FX'
+local PageHeaderHierarchyCSV = LF..LF..'HIERARCHY:\nNAME,TYPE,SOLO,MUTE,N.ITEMS,TCP,MCP,FX'
 local PageHeaderHierarchyHTML = [[
       <table class="center">
       <thead>
         <tr>
-          <th colspan="7" class="header">
+          <th colspan="9" class="header">
             <span class="info expandHier emboss pointer masterHier">&#x25BC;</span>
             <span class="info collapseHier engrave pointer masterHier">&#x25B2;</span>TRACKS HIERARCHY
           </th>
@@ -280,6 +415,8 @@ local PageHeaderHierarchyHTML = [[
         <tr class="table_header slaveHier">
           <th>NAME</th>
           <th class="TracksEnabledOnline">TYPE</th>
+          <th class="TracksEnabledOnline">SOLO</th>
+          <th class="TracksEnabledOnline">MUTE</th>          
           <th class="TracksEnabledOnline">N. ITEMS</th>
           <th class="TracksEnabledOnline">TCP</th>
           <th class="TracksEnabledOnline">MCP</th>
@@ -287,7 +424,7 @@ local PageHeaderHierarchyHTML = [[
           <th class="TracksEnabledOnline">FX CHAIN<br/>Enable/Disabled</th>
         </tr>]]
         
-local PageHeaderCSV = LF..LF..'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
+local tableFXTracksHeaderCSV = LF..LF..'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
 local tableFXTracksHeader = [[
     <div class="spacer">&nbsp;</div>
     <table class="center">
@@ -398,29 +535,14 @@ local PageHeaderNotedItemsHTML = [[
           <th class="EffectedItems">BIT DEPTH</th>
         </tr>]]
 
+
 local PageFooterHTML = "  \n</body>\n</html>"
-local PageFooterCSV = LF..",,,,,,,,,,,Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"
-if pj_name_ == "" then reaper.MB("The project MUST BE SAVED!!","WARNING",0,0) return --goto exit
-end
 
 
-----------------------------------------------
--- FILES INITIALIZATION
-----------------------------------------------
-f_csv:write( 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..'Duration: '..SecondsToHMS(pj_length)..LF..LF )
-f_csv:write( 'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF )
-f_csv:write( 'DAW:'..LF ..'REAPER v.' .. version ..LF..LF )
-f_csv:write( 'CREATED:'..LF .. date ..LF..LF )
-f_csv:write( 'AUTHOR:'..LF..author..LF..LF )
-f_html:write( PageHeaderHTML..LF )
 
 ----------------------------------------------
 -- AUXILIARY FUNCTIONS
 ----------------------------------------------
-function WriteFILE(listHTML,listCSV)
-   f_csv:write( listCSV..LF )
-   f_html:write( listHTML..LF )
-end
 
 function ridCommas(a)
    a_ = a:gsub(","," - ")
@@ -556,22 +678,28 @@ function RetrieveVSTPath(track,ii)
           local native = string.find(FXname, "(Cockos)")    
           if native ~= nil  then 
               a.fullPath = reaper.GetExePath()..'\\Plugins\\FX\\'.. ScanTracks(track,ii).moduleName
+              a.fullPathCSV = a.fullPath
             elseif isJS then
               a.fullPath = reaper.GetExePath()..'\\Effects\\'.. ScanTracks(track,ii).moduleName
+              a.fullPathCSV = a.fullPath
             else
               a.fullPath = a.path..'\\'..a.name
+              a.fullPathCSV = a.fullPath
           end
           
           if isLV2 then
               --a.fullPath = a.path..'\\'.. ScanTracks(track,ii).moduleName
               a.fullPath = a.path..getOS().lv2..'\\'..ScanTracks(track,ii).moduleName
+              a.fullPathCSV = a.fullPath
           end
           
           if a.path == nil then
             a.fullPath = 'UNKNOWN'
+            a.fullPathCSV = 'UNKNOWN'
           end 
         else 
           a.fullPath = '<span class="lv">[PATH NOT AVAILABLE]</span><br/>'..ScanTracks(track,ii).moduleName
+          a.fullPathCSV = '[PATH NOT AVAILABLE]'
       end
       -----------------------------
       return a
@@ -616,7 +744,7 @@ function Master()
 
     masterNotes = reaper.NF_GetSWSTrackNotes(tr)
     local MasterNotesCSV = ridCommas(masterNotes)
-    local line_1 = '<tr class="tracks slaveMaster"><td><b>MUTE</b></td>'..ScanTracks(tr).isMuted..'<td colspan="4" class="centertext"><b>NOTES</b></td></tr>'
+    local line_1 = '<tr class="tracks slaveMaster"><td><b>MUTE</b></td>'..ScanTracks(tr).isMuted..'<td colspan="4" class="centertext markersregions"><b>NOTES</b></td></tr>'
     local line_2 = '<tr class="tracks slaveMaster"><td><b>SOLO</b></td>'..ScanTracks(tr).isSoloed..'<td rowspan="4" colspan="4" class="masterNotes">'..masterNotes..'</td></tr>'
     local line_3 = '<tr class="tracks slaveMaster"><td><b>FX CHAIN</b></td>'..FX_ChainEnabled..'</tr>'
     local line_4 = '<tr class="tracks slaveMaster"><td><b>TCP</b></td>'..ScanTracks(tr).isHideTCP..'</tr>'
@@ -679,6 +807,7 @@ function Hierarchical()
   
     lineCSV = a..TrackName..
               ','..is_Folder..
+              ','..ScanTracks(tr).isSoloedCSV..ScanTracks(tr).isMutedCSV..
               ','..numItems..
               ','..ScanTracks(tr).isHideTCPCSV..
               ','..ScanTracks(tr).isHideMCPCSV..
@@ -688,6 +817,7 @@ function Hierarchical()
     lineHTML =  '   <tr class="tracks slaveHier"><td><span  style="padding-left:'..folderDepth..
                 'px;">'..TrackNameHTML..
                 '</span></td><td>'..is_Folder..
+                ''..ScanTracks(tr).isSoloed..ScanTracks(tr).isMuted..
                 '</td><td class="centertext">'..numItems..
                 '</td>'.. ScanTracks(tr).isHideTCP .. ScanTracks(tr).isHideMCP .. FXed ..FX_ChainEnabled..
                 '</tr>'
@@ -700,7 +830,7 @@ end
 
 
 function FXedTracks()
-  WriteFILE(tableFXTracksHeader,PageHeaderCSV)
+  WriteFILE(tableFXTracksHeader,tableFXTracksHeaderCSV)
   local tr =''
   for i=1,reaper.CountTracks(),1 do
   
@@ -739,7 +869,7 @@ function FXedTracks()
                   ','.. ridCommas(pathName.FXname)..
                   ','.. ScanTracks(tr,ii).isFXenabledCSV..
                   ','.. ScanTracks(tr,ii).isOfflineCSV..
-                  ','.. pathName.fullPath
+                  ','.. pathName.fullPathCSV
                   
       local htmlList = '   <tr class="tracks slave"><td class="centertext">'..i..
                        '</td><td>'..TrackName..
@@ -1006,7 +1136,6 @@ end
 
 
 function closeFiles()
-  f_csv:write( PageFooterCSV..LF )
   f_csv:close()
   f_html:write( PageFooterHTML..LF )
   f_html:close()
@@ -1024,4 +1153,3 @@ NotedItems()
 closeFiles()
 
   reaper.MB("Files .CSV and HTML saved\ninto the Project Folder","DONE",0,0)
-
