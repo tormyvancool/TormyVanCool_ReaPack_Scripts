@@ -5,7 +5,7 @@
 IF YU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.2
+@version 2.3
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
