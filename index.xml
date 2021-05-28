@@ -139,8 +139,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.3" author="Tormy Van Cool" time="2021-05-24T21:12:55Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/5519f148a8ca1fcbef6dc50d537fb15ac1f24553/TormyVanCool_ExportData.lua</source>
+            <version name="2.3" author="Tormy Van Cool" time="2021-05-28T22:06:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/beee91774249f97709aa9d5108420308fd618135/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
