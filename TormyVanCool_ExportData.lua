@@ -2,7 +2,7 @@
 -- https://forum.cockos.com/showthread.php?t=238421
 -- https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k
 --[[
-IF YU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
+IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
 @version 2.3
