@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.3
+@version 2.3b
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -64,6 +64,10 @@ v2.3 (26 may 2021)
   + Mute in Tracks Hierarchy
   # Cosmetic changes on Project Data and Master Channel table
   # Minor issues on CSV format
+v2.3a
+  # Corrections into description
+v2.3b
+  # Mistyping correction
 ]]--
 
 
