@@ -37,6 +37,7 @@ VSTs-VSTis-Extractor in function:
 
 EXPORT DATA in function
 -------
+(Internet connection is mandatory with)
 ![..](EXPORT_DATA_DEMO_2.3.gif)
 
 
