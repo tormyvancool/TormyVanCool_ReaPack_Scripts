@@ -30,6 +30,9 @@ ChapterMarkers in function:
 ![..](Chapters.gif)
 
 
+VSTs-VSTis-Extractor in fucntion:
+-------
+![..](VSTs-VSTis-INSTALLED_EXTRACTOR.gif)
 
 
 EXPORT DATA in function
