@@ -203,6 +203,25 @@
                 </changelog>
             </version>
         </reapack>
+        <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="UTILITY: EXPORTS VSTs/VSTis data in CSV and HTML formats in a Project Folder">
+            <metadata>
+                <description>
+                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 GOAL\b0 :\line\pard\li720\sa200\sl276\slmult1 Platform migration.\line It faciitate the reinstallatio of the plugins on a new machine\par
+                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs and VSTis isntaled on Reaper, saving the list in HTML and CSV file.\par
+                }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-05-30T09:31:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f99e6d7877da8c4ff41b66f66fb2273da562fab3/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <changelog>
+                <![CDATA[
+                v1.0 (30 may 2021)
+                    + Initial release
+                ]]>
+                </changelog>
+            </version>
+        </reapack>
     </category>
     <metadata>
         <description>
