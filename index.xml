@@ -212,12 +212,15 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2021-05-30T09:31:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f99e6d7877da8c4ff41b66f66fb2273da562fab3/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="1.1" author="Tormy Van Cool" time="2021-05-31T01:57:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e702e2917477125b7fbcfb2ec4d3341a05ff7233/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
                     + Initial release
+                v1.1 (31 may 2021)
+                    + Save status of HTML File
+                    + Retrieve status of HTML file
                 ]]>
                 </changelog>
             </version>
