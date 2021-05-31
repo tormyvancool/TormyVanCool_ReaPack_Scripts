@@ -139,8 +139,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.3b" author="Tormy Van Cool" time="2021-05-28T22:06:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/87a1837a8ca0e04cafcc742df3cc0f522c728061/TormyVanCool_ExportData.lua</source>
+            <version name="2.4" author="Tormy Van Cool" time="2021-05-31T19:46:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/688ad0264ce160418ba84efee969207a58c3c6fc/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -199,6 +199,10 @@
                     + Mute in Tracks Hierarchy
                     # Cosmetic changes on Project Data and Master Channel table
                     # Minor issues on CSV format
+                v2.3b
+                    # Mistyping correction
+                v2.4
+                    + Included jQuery base64
                 ]]>
                 </changelog>
             </version>
