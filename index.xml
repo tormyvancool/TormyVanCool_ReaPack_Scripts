@@ -207,13 +207,13 @@
             <metadata>
                 <description>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
-                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 GOAL\b0 :\line\pard\li720\sa200\sl276\slmult1 Platform migration.\line It faciitate the reinstallatio of the plugins on a new machine\par
-                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs and VSTis isntaled on Reaper, saving the list in HTML and CSV file.\par
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 GOAL\b0 :\line\pard\li720\sa200\sl276\slmult1 Platform migration.\line It faciitate the reinstallation of the plugins on a new machine\par
+                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs and VSTis installed on Reaper, saving the list in HTML and CSV file.\par
                 }]]>
                 </description>
             </metadata>
-            <version name="1.1" author="Tormy Van Cool" time="2021-05-31T01:57:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e702e2917477125b7fbcfb2ec4d3341a05ff7233/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="1.2" author="Tormy Van Cool" time="2021-05-31T17:08:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8557f05d0f6fc431e4dbc4becfdc62b6aa3b9787/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -221,6 +221,9 @@
                 v1.1 (31 may 2021)
                     + Save status of HTML File
                     + Retrieve status of HTML file
+                v1.2 (31 may 2021)
+                    + Saves files into tReaper's Folder
+                    + No more need internet connection
                 ]]>
                 </changelog>
             </version>
