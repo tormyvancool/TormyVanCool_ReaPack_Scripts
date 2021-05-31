@@ -216,8 +216,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="1.3" author="Tormy Van Cool" time="2021-05-31T17:20:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2e5d80444959e29cfd2df93488fae21be6aaa469/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="1.3.1" author="Tormy Van Cool" time="2021-05-31T20:15:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8442de6841456fb725f51ef85f87d43f99896743/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -229,7 +229,9 @@
                     + Saves files into tReaper's Folder
                     + No more need internet connection
                 v1.3 (31 may 2021)
-                    # Minor adjustments           
+                    # Minor adjustments 
+                v1.3.1 (31 may 2021)
+                # Solved a bug occurred with mac (what else!)
                 ]]>
                 </changelog>
             </version>
