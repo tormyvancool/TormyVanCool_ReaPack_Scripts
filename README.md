@@ -32,7 +32,7 @@ ChapterMarkers in function:
 
 VSTs-VSTis-Extractor in function:
 -------
-![..](VSTs-VSTis-INSTALLED_EXTRACTOR_1.3.gif)
+![..](VSTs-VSTis-INSTALLED_EXTRACTOR_2.0.gif)
 
 
 EXPORT DATA in function
