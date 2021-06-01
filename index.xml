@@ -207,17 +207,17 @@
                 </changelog>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="UTILITY: EXPORTS VSTs/VSTis data in CSV and HTML formats in the main REAPER's Folder">
+        <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="UTILITY: EXPORTS VSTs/VSTis/AUs data in CSV and HTML formats in the main REAPER's Folder">
             <metadata>
                 <description>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
                 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 GOAL\b0 :\line\pard\li720\sa200\sl276\slmult1 Platform migration.\line It faciitate the reinstallation of the plugins on a new machine\par
-                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs and VSTis installed on Reaper, saving the list in HTML and CSV file.\par
+                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs, VSTis and AUs installed on Reaper, saving the list in HTML and CSV file.\par
                 }]]>
                 </description>
             </metadata>
-            <version name="1.3.2" author="Tormy Van Cool" time="2021-05-31T22:02:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6097b04e14bf06acbb4d6d78116e41819503fbb0/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.0" author="Tormy Van Cool" time="2021-06-01T12:48:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6853094b42bf3d2a3d5b388c22f4f71b40c6063d/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -234,6 +234,8 @@
                     # Solved a bug occurred with mac (what else!)
                 v1.3.2 (31 may 2021)
                     + Added info block at the end of the process
+                v2.0
+                    + AU detection on MAC
                 ]]>
                 </changelog>
             </version>
