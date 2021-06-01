@@ -38,7 +38,7 @@ ChapterMarkers in function:
 ![..](Chapters.gif)
 
 
-VSTs-VSTis-Extractor in function:
+VSTs-VSTis-Extractor (and AU/LV2) in function:
 -------
 ![..](VSTs-VSTis-INSTALLED_EXTRACTOR_2.1.gif)
 
