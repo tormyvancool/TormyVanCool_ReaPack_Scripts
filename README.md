@@ -23,6 +23,14 @@ To activate it:
 
 _Actions > Script: ultraschall_Add_Developertools_To_Reaper.lua > Run/Close_
 
+Export Stems
+-------
+It exports the stems to the max lenght of the track or to the max duration of the applied FX whichever occurs first.
+This saves space on the HD.
+Suppose indeed that in a 4 minute long song, a couple of instruments, are present only in the first 30 seconds.
+From that moment on, if exported as usual, you will have a bunch of silence saved on files.
+With this script, you save that space.
+The instruments are exported from the beginning of the project, till the very end of their track or FX tail.
 
 
 ChapterMarkers in function:
