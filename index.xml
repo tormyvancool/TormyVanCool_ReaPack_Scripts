@@ -216,8 +216,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.0" author="Tormy Van Cool" time="2021-06-01T12:48:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6853094b42bf3d2a3d5b388c22f4f71b40c6063d/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.0" author="Tormy Van Cool" time="2021-06-01T13:13:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8a116c4366f19bb20c566e6059b06bb49fab454d/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -234,7 +234,7 @@
                     # Solved a bug occurred with mac (what else!)
                 v1.3.2 (31 may 2021)
                     + Added info block at the end of the process
-                v2.0
+                v2.0 (1 june 2021)
                     + AU detection on MAC
                 ]]>
                 </changelog>
