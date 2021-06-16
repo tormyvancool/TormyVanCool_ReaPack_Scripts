@@ -238,6 +238,23 @@
                     + AU detection on MAC
                 v2.1 (1 june2021)
                     + Helper with modal pop-up
+                v2.2 (13 june 2021)
+                - Import button
+                + Automatic import JSON file if present
+                + Hide checked button
+                + Show checked button
+                ]]>
+                </changelog>
+            </version>
+            <version name="2.2" author="Tormy Van Cool" time="2021-06-13T19:08:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ad5912d2cf303eb94bdd607fed52462877ee47c2/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <changelog>
+                <![CDATA[
+                v2.2 (13 june 2021)
+                - Import button
+                + Automatic import JSON file if present
+                + Hide checked button
+                + Show checked button
                 ]]>
                 </changelog>
             </version>
