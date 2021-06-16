@@ -337,12 +337,12 @@ local HeaderHTML = [[
       });
 
       $('.hide-checked').on('click', function(){
-        $("table tr").has(".checkbox:checked").hide(1000);
+        $("table tr").has(".checkbox:checked").hide();
         $(".show-checked").show();
       });
 
       $('.show-checked').on('click', function(){
-        $("table tr").has(".checkbox:checked").show(1000);
+        $("table tr").has(".checkbox:checked").show();
         $(".show-checked").hide();
       });
       
