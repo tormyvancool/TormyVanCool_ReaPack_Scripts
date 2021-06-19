@@ -40,7 +40,7 @@ ChapterMarkers in function:
 
 VSTs-VSTis-Extractor (and AU/LV2) in function:
 -------
-![..](VSTs-VSTis-INSTALLED_EXTRACTOR_2.1.gif)
+![..](VSTs-VSTis-INSTALLED_EXTRACTOR_2.2.gif)
 
 
 EXPORT DATA in function
