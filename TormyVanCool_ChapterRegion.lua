@@ -1,7 +1,7 @@
 --[[
 @description Chapter region for podcasts and recorded broadcasts
 @author Tormy Van Cool
-@version 2.7.1
+@version 2.7.2
 @screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 @changelog:
 v1.0 (01 feb 2021)
@@ -70,6 +70,8 @@ v2.7
     999,1,"PODCAST_TITLE > TORMY VAN COOL | The  End >"
 v2.7.1
   + Added Instructions table
+v2.7.2
+  + Added Forbidden character ";" used in the compilation of the CSV file in MB STUDIO from version 8.68.5 on
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
@@ -281,7 +283,7 @@ reaper.ShowConsoleMsg("")
 reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nSONG TITLE and PERFORMER are mandatory fields.\n\nPRODUCTION YEAR and LABEL(s) [Optional fields] check on:\nhttps://www.discogs.com or\nhttps://www.musicbrainz.org\n\nYou can select the links above, copy them and paste into the browser\n\nPRODUCTION LABELS(s):\nin case of multiple labels, separate them by commas")
 repeat
 retval, InputString=reaper.GetUserInputs("PODCAST/BROADCAST: SONG DATA", 4, "Song Title (Mandatory),separator=\n,extrawidth=400,Performer (Mandatory),Production Year,Label(s) (separated by commas)", SongTitle..LF..SongPerformer..LF..SongYear..LF..SongLabel)
-InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|') -- No reserved characters can be written
+InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|'), ';') -- No reserved characters can be written
 if retval==false then return end
 if retval then
   t = {}
