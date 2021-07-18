@@ -2,7 +2,7 @@
 @description Chapter region for podcasts and recorded broadcasts
 @author Tormy Van Cool
 @version 2.7.2
-@screenshot Example: ChapterRegion.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
+@screenshot Example: Podcasts_songs.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 @changelog:
 v1.0 (01 feb 2021)
   + Initial release
@@ -72,6 +72,8 @@ v2.7.1
   + Added Instructions table
 v2.7.2
   + Added Forbidden character ";" used in the compilation of the CSV file in MB STUDIO from version 8.68.5 on
+  - ChapterRegion.lua
+  + Podcasts_Songs.lua
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
