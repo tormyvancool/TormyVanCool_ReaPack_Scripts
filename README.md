@@ -56,7 +56,7 @@ EXPORT DATA in function
 
 
 
-ChapterRegions in function (Video):
+Podcasts_Songs (former ChapterRegions) in function (Video):
 -------
 Click on the image to watch the video Tutorial
 
