@@ -36,6 +36,32 @@
                 <source main="main" file="TormyVanCool_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
+        <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+                    {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+                    \pard\sl240\slmult1\f0\fs22\lang9 PODCATS SEGMENTATION FINAL MARKER script, enables you to split your podcast in several parts.\par
+                    \par
+                    Some seconds before the end of each part, at your taste, you enter the marker with a write like\par
+
+                    \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 "Continues" or\par
+                    {\pntext\f1\'B7\tab}"See you" or\par
+                    {\pntext\f1\'B7\tab}"And Part-x", wher "x" can be 1 or 2 or 3 etc, or\par
+                    {\pntext\f1\'B7\tab}"Stay tuned" etc\par
+
+                    \pard\sl240\slmult1\par
+
+                    \pard\sl240\slmult1 The total length of the phrase shoudn't be more than 20 characters.\par
+
+                    \pard\sa200\sl276\slmult1\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-07-18T17:01:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ba13f4526c90068aafe20bfd14a1ef91a7b8f57/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
+            </version>
+        </reapack>
     </category>
     <category name="Regions">
         <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="PODCASTS: PODCASTS SONGS. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
@@ -78,34 +104,6 @@
             </version>
         </reapack>
     </category>
-    <category name="Markers">
-        <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
-            <metadata>
-                <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
-                    {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
-                    \pard\sl240\slmult1\f0\fs22\lang9 PODCATS SEGMENTATION FINAL MARKER script, enables you to split your podcast in several parts.\par
-                    \par
-                    Some seconds before the end of each part, at your taste, you enter the marker with a write like\par
-
-                    \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 "Continues" or\par
-                    {\pntext\f1\'B7\tab}"See you" or\par
-                    {\pntext\f1\'B7\tab}"And Part-x", wher "x" can be 1 or 2 or 3 etc, or\par
-                    {\pntext\f1\'B7\tab}"Stay tuned" etc\par
-
-                    \pard\sl240\slmult1\par
-
-                    \pard\sl240\slmult1 The total length of the phrase shoudn't be more than 20 characters.\par
-
-                    \pard\sa200\sl276\slmult1\par
-                    }]]>
-                </description>
-            </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2021-07-18T17:01:09Z">
-                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ba13f4526c90068aafe20bfd14a1ef91a7b8f57/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
-            </version>
-        </reapack>
-    </category>  
     <category name="Rendering">
         <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: EXPORT STEMS. Prepares stems to be exported for the real length of each track.">
             <metadata>
