@@ -58,12 +58,12 @@
                     \pard\sl276\slmult1\qc\i Offset\i0 ,\i MidStream_Tag\i0 ,"\i Song_Performer\i0  - \i Song_Title\i0 - \i Production_Year\i0 - \i Label\i0 - \i Duration mm:ss\i0"\par
                     \par
                     \pard\sl276\slmult1\i Offset \i0 = AUTOMATIC by SYSTEM: Seconds from the begining of the file, where the song starts\par
-                    \i MisStream_Tag \i0 = AUTOMATIC by SYSTEM: 1 (in signifies: text string)\par
+                    \i MidStream_Tag \i0 = AUTOMATIC by SYSTEM: 1 (in signifies: text string)\par
                     \i Song_Performer \i0 = MANDATORY: the given song performer\par
                     \i Song_Title \i0 = MANDATORY: the given song title\par
                     \i Production_Year \i0 = OPTIONAL: The productionyear in 4 digits taken from Discogs or MusicBrainz if possible, or just NULL\par
                     \i Label \i0 = OPTIONAL: The label for that specific release taken from Discogs or MusicBrainz if possible, or just NULL\par
-                    \i Duration mm:ss \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted
+                    \i Duration seconds \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted
                     \par
                     \par
                     \b Versioning:\b0\par
@@ -73,8 +73,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.7.2" author="Tormy Van Cool" time="2021-07-17T21:58:09Z">
-                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/eb5240e688e81940e0ea44dc87babd84ced1a8ba/TormyVanCool_ChapterRegion.lua</source>
+            <version name="2.7.2" author="Tormy Van Cool" time="2021-07-18T13:48:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ae8e4cb7efa0adad35de62d3e0298bfe63695c48/TormyVanCool_Podcasts_Songs.lua</source>
             </version>
         </reapack>
     </category>
