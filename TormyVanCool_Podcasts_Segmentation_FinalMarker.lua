@@ -142,7 +142,7 @@ local color = reaper.ColorToNative(180,60,50)|0x1000000
 local _, num_markers, _ = reaper.CountProjectMarkers(0)
 local cursor_pos = reaper.GetCursorPosition()
 local roundup = math.floor(math.abs(cursor_pos))
-local name = chap..ProjectName..' by ' .. ChapRid(author:upper(), "-", "&") .. ' - '..InputString..' '..EndTail
+local name = chap..ChapRid(ProjectName, ".RPP", "")..' by ' .. ChapRid(author:upper(), "-", "&") .. ' - '..InputString..' '..EndTail
 if flag == false then
   reaper.AddProjectMarker2(0, 0, cursor_pos, 0, name, num_markers+1, color)
   else
