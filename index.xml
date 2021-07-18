@@ -38,7 +38,7 @@
         </reapack>
     </category>
     <category name="Regions">
-        <reapack name="TormyVanCool_ChapterRegion.lua" type="script" desc="PODCASTS: CHAPTER REGION. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+        <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="PODCASTS: PODCASTS SONGS. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
@@ -74,7 +74,7 @@
                 </description>
             </metadata>
             <version name="2.7.2" author="Tormy Van Cool" time="2021-07-17T21:58:09Z">
-                <source main="main" file="TormyVanCool_ChapterRegion.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/eb5240e688e81940e0ea44dc87babd84ced1a8ba/TormyVanCool_ChapterRegion.lua</source>
+                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/eb5240e688e81940e0ea44dc87babd84ced1a8ba/TormyVanCool_ChapterRegion.lua</source>
             </version>
         </reapack>
     </category>
