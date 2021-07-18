@@ -102,7 +102,7 @@
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool" time="2021-07-18T17:01:09Z">
-                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4050a36d00962c5df2471053ac34f6d18815de01/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
+                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ba13f4526c90068aafe20bfd14a1ef91a7b8f57/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
             </version>
         </reapack>
     </category>  
