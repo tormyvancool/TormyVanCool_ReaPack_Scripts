@@ -101,8 +101,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2021-07-18T16:44:44Z">
-                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/34fb9eea8334ace11f66fca945f740890a29d411/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
+            <version name="1.0" author="Tormy Van Cool" time="2021-07-18T17:01:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4050a36d00962c5df2471053ac34f6d18815de01/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
             </version>
         </reapack>
     </category>  
