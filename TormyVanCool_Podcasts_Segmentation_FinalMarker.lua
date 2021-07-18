@@ -13,6 +13,7 @@ local pipe = "|"
 local EndTail = '>>>'
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
+local WordLen = 20
 
 --------------------------------------------------------------------
 -- Functions declaration
@@ -118,17 +119,17 @@ else
   InputVariable = string.match(ChapRid( markerNAME, chap), pipe..'(.*)') 
 end
 
-reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nENTER TEXT is a mandatory field.\n\nIt should contain not more than 10 characters\n\n\nEXAMPLES\n\n* If you flag the ned of Part x of your brodacast, you can enter 'End Part-1' (without commas)\n* If yuo just want to inform the broadcast continues after a small interval, you can also enter 'Continues'\n* If you want to set the tag at the end of the Podcast, you can write: The End or 'See You Next'\nEtc, etc, etc..")
+reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nENTER TEXT is a mandatory field.\n\nIt should contain not more than "..WordLen.." characters\n\n\nEXAMPLES\n\n* If you flag the ned of Part x of your brodacast, you can enter 'End Part-1' (without commas)\n* If yuo just want to inform the broadcast continues after a small interval, you can also enter 'Continues'\n* If you want to set the tag at the end of the Podcast, you can write: The End or 'See You Next'\nEtc, etc, etc..")
 
 repeat
   retval, InputString=reaper.GetUserInputs("PODCAST: SEGMENTATION or FINAL GREETINGS", 1, "ENTER TEXT (read instructions),extrawidth=200", InputVariable)
   if InputString == "" then
    if reaper.MB("The field is empty!", "WARNING",5) == 2 then return end
   end
-  if string.len(InputString) > 10 then
-    reaper.MB("String too long.\nIt must be less than 10 characters.","ERROR",0,0)
+  if string.len(InputString) > WordLen then
+    reaper.MB("String too long.\nIt must be less than ".. WordLen .." characters.","ERROR",0,0)
   end
-until InputString ~= "" and string.len(InputString) <= 10
+until InputString ~= "" and string.len(InputString) <= WordLen
 
 if retval==false then return end
 InputString = ChapRid(ChapRid(ChapRid(InputString, chap), pipe), ':') -- No reserved characters can be written
