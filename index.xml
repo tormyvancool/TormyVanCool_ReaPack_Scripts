@@ -99,8 +99,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.7.2" author="Tormy Van Cool" time="2021-07-18T13:48:09Z">
-                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ae8e4cb7efa0adad35de62d3e0298bfe63695c48/TormyVanCool_Podcasts_Songs.lua</source>
+            <version name="2.7.3" author="Tormy Van Cool" time="2021-07-21T18:42:33Z">
+                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/420caf38fe36d86efd5e4fa54a20e036e3c952bd/TormyVanCool_Podcasts_Songs.lua</source>
             </version>
         </reapack>
     </category>
