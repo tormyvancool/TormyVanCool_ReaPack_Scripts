@@ -1,7 +1,7 @@
 --[[
 @description Chapter region for podcasts and recorded broadcasts
 @author Tormy Van Cool
-@version 2.7.2
+@version 2.7.3
 @screenshot Example: Podcasts_songs.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
 @changelog:
 v1.0 (01 feb 2021)
@@ -74,6 +74,9 @@ v2.7.2
   + Added Forbidden character ";" used in the compilation of the CSV file in MB STUDIO from version 8.68.5 on
   - ChapterRegion.lua
   + Podcasts_Songs.lua
+v2.7.3
+  + Editing an imported CHAP= ID3V2, is able to modify it 
+  # Solved a "nil arithmetic operation"
 @about
 # Chapter Region for Podcasts and Recorded Broadcasts
   It's an ideal feature for Podcasts and Recorded Broadcasts
@@ -221,18 +224,20 @@ if regionNAME == nil then -- Converts a "nil" to an empty string
    regionNAME = ""
 end
 
-
 --------------------------------------------------------------------
 -- Checks weheather the region belongs to a song
 -- TRUE: it belongs to an existent song region
 -- FALSE: it doesn't belong to an existent song region
 --------------------------------------------------------------------
-if string.match(region_, chap) == chap then
+local count = 0
+for i in region_:gmatch("|") do
+    count = count + 1
+end
+if count == 5 then
     flag = true
   else
     flag = false
 end
-
 
 regionNAME = ChapRid(regionNAME, chap)
 regionNAME = Split(regionNAME, pipe)
@@ -402,7 +407,7 @@ while i < numMarkers-1 do
   end
   i = i+1
 end
-if item_start_[i] == nil then
+if item_start_[i] == nil and item_end_[i] ~= nil then
   item_end_[i-1] = item_end_[i-1]-5 -- 5 seconds  before EOF returns the Broadcast ID
   if string.find(pj_name_, "-") then
   podcast_part = ' | End '..string.match(pj_name_, "-(.*)")..' >'
