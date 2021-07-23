@@ -1,6 +1,6 @@
 -- @description Chapter Marker Updater for Audiobooks
 -- @author Tormy Van Cool
--- @version 1.1.1
+-- @version 2.0
 -- @about
 --   # Chapter Marker Updater for Audiobooks
 --
@@ -12,7 +12,7 @@
 -- Gets the project's name and open the SideCr file to be ovewritten
 --------------------------------------------------------------------
 chap = "CHAP="
-extension = ".AudioBookSideCar.txt"
+extension = ".txt"
 pipe = "|"
 LF = "\n"
 
@@ -41,14 +41,18 @@ end
 --------------------------------------------------------------------
 -- Get rid of the "CHAP=" ID3 Tag
 --------------------------------------------------------------------
-function ChapRid(chappy)
+function ChapRid(chappy, seed, subs) -- Get rid of the "CHAP=" ID3 Tag or other stuff to prevent any error by user
   local ridchap
-  local r = string.len(chappy)
-  ridchap = string.sub (chappy, 6, r)
+  if subs == nil then subs = "" end
+  if chappy == nil then return end
+  ridchap = string.gsub (chappy, seed,  subs)
   return ridchap
 end
 
-
+function Round(seed, precision)
+  local roundup = math.floor(seed * precision) / precision
+  return roundup
+end
 --------------------------------------------------------------------
 -- Estabilshes how many markers/regions are located into the project
 --------------------------------------------------------------------
@@ -64,7 +68,8 @@ i = 0
 while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   if string.match(name, chap) then
-    local SideCar_ = SecondsToClock(pos)..pipe..ChapRid(name)..LF
+    local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
+    reaper.ShowConsoleMsg(SideCar_)
     SideCar:write( SideCar_ )
   end
   i = i+1

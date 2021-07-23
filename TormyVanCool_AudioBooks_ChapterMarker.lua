@@ -2,7 +2,7 @@
 
 -- @description Chapter marker for audiobooks (ID3 Metatag "CHAP=Chapter_Title")
 -- @author Tormy Van Cool
--- @version 2.1
+-- @version 2.2
 -- @screenshot Example: ChapterMarker.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif
 -- @about
 --   # Chapter Marker for Audiobooks
@@ -23,7 +23,7 @@ reaper.Undo_BeginBlock()
 chap = "CHAP="
 pipe = "|"
 LF = "\n"
-extension = ".AudioBookSideCar.txt"
+extension = ".txt"
 UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 
 --------------------------------------------------------------------
@@ -54,6 +54,10 @@ function SecondsToClock(seconds) -- Turns seconds into the format: "hh:mm:ss"
   end
 end
 
+function Round(seed, precision)
+  local roundup = math.floor(seed * precision) / precision
+  return roundup
+end
 
 --------------------------------------------------------------------
 -- Loads the mandatory library
@@ -139,7 +143,7 @@ repeat
 until InputString ~= ""
 
 if retval==false then return end
-InputString = ChapRid(ChapRid(ChapRid(InputString, chap), pipe), ':') -- No reserved characters can be written
+InputString = ChapRid(ChapRid(ChapRid(InputString, chap), pipe), '-', ' ') -- No reserved characters can be written
 InputString=InputString:upper() -- all letters turned in capitals
 
 
@@ -149,7 +153,7 @@ InputString=InputString:upper() -- all letters turned in capitals
 local color = reaper.ColorToNative(180,60,50)|0x1000000
 local _, num_markers, _ = reaper.CountProjectMarkers(0)
 local cursor_pos = reaper.GetCursorPosition()
-local roundup = math.floor(math.abs(cursor_pos))
+local roundup = Round(cursor_pos,100)
 local name = chap..roundup..pipe..InputString
 if flag == false then
   reaper.AddProjectMarker2(0, 0, cursor_pos, 0, name, num_markers+1, color)
