@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Markers">
-        <reapack name="TormyVanCool_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
+        <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
@@ -11,12 +11,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.0.1" author="Tormy Van Cool" time="2021-02-14T01:38:35Z">
-                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarker.lua</source>
-                <changelog><![CDATA[Created a SideCar.TXT file, Clicking on a preexistent Marker, it's possibile to edit it. The SideCar will be also updated.]]></changelog>
-            </version>
-            <version name="2.1" author="Tormy Van Cool" time="2021-02-15T01:38:35Z">
-                <source main="main" file="TormyVanCool_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3eca394256df9e752d86698b749c5f49e368ab2d/TormyVanCool_ChapterMarker.lua</source>
+            <version name="2.1" author="Tormy Van Cool" time="2021-07-23T14:14:14Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/5c28bb0c7b69fd2cdb9aa209cd547a6739bcad29/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
                 <changelog>
                 <![CDATA[
                 Changed marker format into: CHAP=seconds_from_the_beginning_of_the_file|chapter_title. The SideCar.txt file, reports now in this way: seconds_from_the_beginning_of_the_file,1,"chapter_title" The ',1,' is added for compatibility with certain radio automation softwares, not capable to fully read MP3s
@@ -24,7 +20,7 @@
                 </changelog>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_ChapterMarkersUpdater.lua" type="script" desc="AUDIOBOOKS Chapter Marker Updater: Updates markers' position when moved on the time line, on the SideCar.txt file">
+        <reapack name="TormyVanCool_AudioBooks_ChapterMarkersUpdater.lua" type="script" desc="AUDIOBOOKS Chapter Marker Updater: Updates markers' position when moved on the time line, on the SideCar.txt file">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
@@ -32,8 +28,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.1.1" author="Tormy Van Cool" time="2021-02-14T01:38:35Z">
-                <source main="main" file="TormyVanCool_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/49987fed3e2acf153b54048db08339cca599d8e1/TormyVanCool_ChapterMarkerUpdater.lua</source>
+            <version name="1.1.1" author="Tormy Van Cool" time="2021-07-23T14:14:15Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkersUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/5c28bb0c7b69fd2cdb9aa209cd547a6739bcad29/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
