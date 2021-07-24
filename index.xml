@@ -99,6 +99,16 @@
                 <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ba13f4526c90068aafe20bfd14a1ef91a7b8f57/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
             </version>
         </reapack>
+        <reapack name="TormyVanCool_Podcasts_Updater.lua" type="script" desc="PODCASTS: UPDATER. It updates imported songs from library with only 1 click. Wathc tutorial on YT to understand how to use  it">
+            <metadata>
+                <description>
+                    <![CDATA[]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-07-24T16:09:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Updater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/695358ba22e6b0212d3fc21155cb944994841730/TormyVanCool_Podcasts_Updater.lua</source>
+            </version>
+        </reapack>
     </category>
     <category name="Rendering">
         <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: EXPORT STEMS. Prepares stems to be exported for the real length of each track.">
