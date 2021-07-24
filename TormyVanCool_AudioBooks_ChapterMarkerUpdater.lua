@@ -1,6 +1,6 @@
 -- @description Chapter Marker Updater for Audiobooks
 -- @author Tormy Van Cool
--- @version 2.0
+-- @version 2.1
 -- @about
 --   # Chapter Marker Updater for Audiobooks
 --
@@ -8,6 +8,12 @@
 --   Just calling the script, it remove the old file, with a new updated one.
 --
 --   Once done, it returns a popup window that informs the users, that everything is perfectly done.
+-- versions
+--[[
+  1.0 Initial release
+  2.0 + Code rewritten from scratch
+  2.1 - removed reaper.ShowConsoleMsg()
+]]
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
 --------------------------------------------------------------------
@@ -69,7 +75,6 @@ while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   if string.match(name, chap) then
     local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
-    reaper.ShowConsoleMsg(SideCar_)
     SideCar:write( SideCar_ )
   end
   i = i+1
