@@ -84,6 +84,6 @@ end
 -- Closes file and returns feedback to user
 --------------------------------------------------------------------
 SideCar:close()
-reaper.MB(pj_name..LF..LF.."SUCCESSFULLY UPDATED", "Audiobook's SIDECAR Update", 0)
+reaper.MB(pj_name..LF..LF.."SUCCESSFULLY UPDATED", "Audiobook's SIDECAR and MIDSTREAM TAGS Updated", 0)
 
 
