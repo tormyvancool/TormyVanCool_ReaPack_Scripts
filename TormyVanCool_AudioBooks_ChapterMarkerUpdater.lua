@@ -1,6 +1,6 @@
 -- @description Chapter Marker Updater for Audiobooks
 -- @author Tormy Van Cool
--- @version 2.2
+-- @version 2.2.2
 -- @about
 --   # Chapter Marker Updater for Audiobooks
 --
@@ -19,6 +19,8 @@
     # Solved failed update of the marker pointer
   2.2.1
     - Debug window still opening
+  2.2.2
+    + Recovering audiobooks: Conversion from imporeted regions to markers
 ]]
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
@@ -77,8 +79,11 @@ function IsBook(region_) -- Chek if the region is a song: has 5 | ? If yes: it's
 end
 
 function create_marker(ts_start, ts_end, name, marker_ID, flag) -- Parameters: string region_name, integer region_ID, boolean flag
- if region_ID ~= "" and flag == true then
+ if region_ID ~= "" and flag then
     reaper.DeleteProjectMarker(0, marker_ID, false)
+ end
+ if region_ID ~= "" and not(flag) then
+    reaper.DeleteProjectMarker(0, marker_ID, true)
  end
 
  local item_start = math.floor(ts_start*100) /100
@@ -101,12 +106,16 @@ i = 0
 
 while i < numMarkers do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
-  
+  if isrgn then
+    IsMarker = false
+  else
+    IsMarker = true
+  end
   if IsBook(name) then
     local NewName = string.match(name, "|(.*)")
     NewName_Marker =  chap..Round(pos, 100)..pipe..NewName
     i = i+1
-    create_marker(pos,pos, NewName_Marker, i, true)
+    create_marker(pos,pos, NewName_Marker, i, IsMarker)
     local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
     SideCar:write( SideCar_ )
   else
