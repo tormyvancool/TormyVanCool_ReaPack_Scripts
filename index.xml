@@ -28,8 +28,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.2" author="Tormy Van Cool" time="2021-07-25T15:07:58Z">
-                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a6f6670a9536842ff4e71024f82855f9fe1abe0f/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+            <version name="2.2.1" author="Tormy Van Cool" time="2021-07-25T15:14:58Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ad363c0499d3eca19e299dfc2bff667fbdf0b5d8/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
     </category>
