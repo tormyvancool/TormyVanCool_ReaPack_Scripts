@@ -1,6 +1,6 @@
 -- @description Chapter Marker Updater for Audiobooks
 -- @author Tormy Van Cool
--- @version 2.1
+-- @version 2.2
 -- @about
 --   # Chapter Marker Updater for Audiobooks
 --
@@ -13,6 +13,7 @@
   1.0 Initial release
   2.0 + Code rewritten from scratch
   2.1 - removed reaper.ShowConsoleMsg()
+  2.2 # Solved failed update of the marker pointer
 ]]
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
@@ -29,9 +30,9 @@ SideCar = io.open(pj_path..'\\'..pj_name, "w")
 
 
 --------------------------------------------------------------------
--- Turns the seconds into the format: hh:mm:ss
+-- FUNCTIONS
 --------------------------------------------------------------------
-function SecondsToClock(seconds)
+function SecondsToClock(seconds) -- Turns the seconds into the format: hh:mm:ss
   local seconds = tonumber(seconds)
 
   if seconds <= 0 then
@@ -44,9 +45,6 @@ function SecondsToClock(seconds)
   end
 end
 
---------------------------------------------------------------------
--- Get rid of the "CHAP=" ID3 Tag
---------------------------------------------------------------------
 function ChapRid(chappy, seed, subs) -- Get rid of the "CHAP=" ID3 Tag or other stuff to prevent any error by user
   local ridchap
   if subs == nil then subs = "" end
@@ -59,6 +57,30 @@ function Round(seed, precision)
   local roundup = math.floor(seed * precision) / precision
   return roundup
 end
+
+function IsBook(region_) -- Chek if the region is a song: has 5 | ? If yes: it's a song. Parameters: string region_
+  local count = 0
+  for i in region_:gmatch("|") do
+      count = count + 1
+  end
+  if count == 1 then
+      flag = true
+    else
+      flag = false
+  end
+  return flag
+end
+
+function create_marker(ts_start, ts_end, name, marker_ID, flag) -- Parameters: string region_name, integer region_ID, boolean flag
+ if region_ID ~= "" and flag == true then
+    reaper.DeleteProjectMarker(0, marker_ID, false)
+ end
+
+ local item_start = math.floor(ts_start*100) /100
+ --marker_ID = marker_ID+1
+ reaper.AddProjectMarker(0, false, ts_start, ts_end, name, marker_ID)
+end
+
 --------------------------------------------------------------------
 -- Estabilshes how many markers/regions are located into the project
 --------------------------------------------------------------------
@@ -69,21 +91,30 @@ repeat
   numMarkers = numMarkers+1
 until mkr == 0
 
+
 i = 0
 
-while i < numMarkers-1 do
+while i < numMarkers do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
-  if string.match(name, chap) then
+  
+  if IsBook(name) then
+    local NewName = string.match(name, "|(.*)")
+    NewName_Marker =  chap..Round(pos, 100)..pipe..NewName
+    i = i+1
+    reaper.ShowConsoleMsg(name..'\n')
+    create_marker(pos,pos, NewName_Marker, i, true)
     local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
     SideCar:write( SideCar_ )
+  else
+    i = i+1
   end
-  i = i+1
 end
 
 --------------------------------------------------------------------
 -- Closes file and returns feedback to user
 --------------------------------------------------------------------
 SideCar:close()
+reaper.Undo_OnStateChangeEx("AUDIOBOOKS UPDATER", -1, -1)
 reaper.MB(pj_name..LF..LF.."SUCCESSFULLY UPDATED", "Audiobook's SIDECAR and MIDSTREAM TAGS Updated", 0)
 
 
