@@ -20,7 +20,7 @@
                 </changelog>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua" type="script" desc="AUDIOBOOKS Chapter Marker Updater: Updates markers' position when moved on the time line, on the SideCar.txt file">
+        <reapack name="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua" type="script" desc="AUDIOBOOKS: UPDATER' position when moved on the time line, on the SideCar.txt file">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
@@ -28,8 +28,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.2.1" author="Tormy Van Cool" time="2021-07-25T15:14:58Z">
-                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ad363c0499d3eca19e299dfc2bff667fbdf0b5d8/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+            <version name="2.2.2" author="Tormy Van Cool" time="2021-07-25T18:38:09Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/058de81dcf5089122d6d33a71e35727d374d8e9b/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
     </category>
