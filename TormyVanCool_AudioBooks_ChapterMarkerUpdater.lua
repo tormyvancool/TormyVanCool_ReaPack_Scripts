@@ -11,9 +11,14 @@
 -- versions
 --[[
   1.0 Initial release
-  2.0 + Code rewritten from scratch
-  2.1 - removed reaper.ShowConsoleMsg()
-  2.2 # Solved failed update of the marker pointer
+  2.0 
+    + Code rewritten from scratch
+  2.1 
+    - removed reaper.ShowConsoleMsg()
+  2.2 
+    # Solved failed update of the marker pointer
+  2.2.1
+    - Debug window still opening
 ]]
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
@@ -101,7 +106,6 @@ while i < numMarkers do
     local NewName = string.match(name, "|(.*)")
     NewName_Marker =  chap..Round(pos, 100)..pipe..NewName
     i = i+1
-    reaper.ShowConsoleMsg(name..'\n')
     create_marker(pos,pos, NewName_Marker, i, true)
     local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
     SideCar:write( SideCar_ )
