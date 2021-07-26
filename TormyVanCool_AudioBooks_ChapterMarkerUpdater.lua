@@ -21,6 +21,8 @@
     - Debug window still opening
   2.2.2
     + Recovering audiobooks: Conversion from imporeted regions to markers
+  2.2.3
+    - Removed Pipe and Pointer from the marker
 ]]
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
@@ -65,18 +67,6 @@ function Round(seed, precision)
   return roundup
 end
 
-function IsBook(region_) -- Chek if the region is a song: has 5 | ? If yes: it's a song. Parameters: string region_
-  local count = 0
-  for i in region_:gmatch("|") do
-      count = count + 1
-  end
-  if count == 1 then
-      flag = true
-    else
-      flag = false
-  end
-  return flag
-end
 
 function create_marker(ts_start, ts_end, name, marker_ID, flag) -- Parameters: string region_name, integer region_ID, boolean flag
  if region_ID ~= "" and flag then
@@ -104,23 +94,21 @@ until mkr == 0
 
 i = 0
 
-while i < numMarkers do
+while i < numMarkers-1 do
   local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
   if isrgn then
     IsMarker = false
   else
     IsMarker = true
   end
-  if IsBook(name) then
-    local NewName = string.match(name, "|(.*)")
-    NewName_Marker =  chap..Round(pos, 100)..pipe..NewName
+    if not(string.match(name, chap)) then
+      name = chap..name
+    end
     i = i+1
-    create_marker(pos,pos, NewName_Marker, i, IsMarker)
-    local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, "|(.*)")..'"'..LF
+    create_marker(pos,pos, name, i, IsMarker)
+    local SideCar_ = Round(pos,100)..',1,'..'"'..string.match(name, chap.."(.*)")..'"'..LF
     SideCar:write( SideCar_ )
-  else
-    i = i+1
-  end
+    
 end
 
 --------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 -- @description Chapter marker for audiobooks (ID3 Metatag "CHAP=Chapter_Title")
 -- @author Tormy Van Cool
--- @version 2.2
+-- @version 2.3
 -- @screenshot Example: ChapterMarker.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif
 -- @about
 --   # Chapter Marker for Audiobooks
@@ -155,11 +155,12 @@ local _, num_markers, _ = reaper.CountProjectMarkers(0)
 local cursor_pos = reaper.GetCursorPosition()
 local roundup = Round(cursor_pos,100)
 local name = chap..roundup..pipe..InputString
+local tagName = chap..InputString
 if flag == false then
-  reaper.AddProjectMarker2(0, 0, cursor_pos, 0, name, num_markers+1, color)
+  reaper.AddProjectMarker2(0, 0, cursor_pos, 0, tagName, num_markers+1, color)
   else
   reaper.DeleteProjectMarker(0, markerID, 0)
-  reaper.AddProjectMarker2(0, 0, cursor_pos, 0, name, markerID, color)
+  reaper.AddProjectMarker2(0, 0, cursor_pos, 0, tagName, markerID, color)
 end
 
 local pj_name=reaper.GetProjectName(0, "")
@@ -184,11 +185,11 @@ until mkr == 0
 i = 0
 
 while i < numMarkers-1 do
-  local ret, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(i)
-  if string.match(name, chap) then
+  local ret, isrgn, pos, rgnend, OldName, markrgnindexnumber = reaper.EnumProjectMarkers(i)
+  if string.match(OldName, chap) then
    --local SideCar_ = SecondsToClock(pos)..pipe..ChapRid(name, chap)..LF
-   local SideCar_ = ChapRid(name, chap)
-   SideCar_ = ChapRid(SideCar_, pipe, ',1,"')..'"'..LF
+   local SideCar_ = ChapRid(OldName, chap)
+   SideCar_ = ChapRid(Round(pos,10)..pipe..SideCar_, pipe, ',1,"')..'"'..LF
    SideCar:write( SideCar_ )
   end
   i = i+1
