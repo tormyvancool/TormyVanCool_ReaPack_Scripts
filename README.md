@@ -38,7 +38,7 @@ With this script, you save that space.
 The instruments are exported from the beginning of the project, till the very end of their track or FX tail whichever occurs first.
 
 
-Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkers_Updater in function:
+Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkersUpdater in function:
 -------
 Click on the image to watch the video Tutorial
 
