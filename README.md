@@ -38,9 +38,13 @@ With this script, you save that space.
 The instruments are exported from the beginning of the project, till the very end of their track or FX tail whichever occurs first.
 
 
-ChapterMarkers in function:
+Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkers_Updater in function:
 -------
-![..](Chapters.gif)
+Click on the image to watch the video Tutorial
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=eqNVImO4b2U
+" target="_blank"><img src="http://img.youtube.com/vi/eqNVImO4b2U/maxresdefault.jpg" 
+alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
 VSTs-VSTis-Extractor (and AU/LV2) in function:
