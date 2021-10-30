@@ -393,6 +393,7 @@ local HeaderHTML = [[
       </div>
     
     </div>
+<div id="mainCointainer">
  <form  class="center" action="#" method="get" id="TableForm">
   <div id="buttons">
     <button class="file-save">EXPORT</button>
@@ -411,6 +412,7 @@ local FooterHTML = [[
       </tbody> 
     </table>
     </form>
+    </div>
     <span id="info" class="centertext">IMPORTANT</br>These HTML &amp; CSV files, are into the Reaper's main folder</br>
     <form id="openFolder" method="get" action="file:///]]..REAPER_path..[[">
         <input id="openFolderButton" type="submit" value="Open REAPER folder" />
