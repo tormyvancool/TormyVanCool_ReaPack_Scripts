@@ -290,12 +290,13 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.2a" author="Tormy Van Cool" time="2021-10-29T09:09:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/aa2b6aa4c01fbd1118007d8f86bee71ca47ace2d/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.2b" author="Tormy Van Cool" time="2021-10-29T149:09:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/03a65254b45b3595ef51624889235264f02b549a/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
-                v2.2a (29 oct 2021)
+                v2.2b (29 oct 2021)
                 # ameliorated columns
+                # CSS glitch
                 ]]>
                 </changelog>
             </version>
