@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.2a
+@version 2.2c
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
@@ -29,11 +29,11 @@ v2.2 (13 june 2021) PIXY
   + Show checked button
 v2.2a (30 october 2021)
   # ameliorated columns
-v2.2b (30 october 2021)
+v2.2c (30 october 2021)
   # CSS glitch
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.2a"
+local version = "2.2c"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
 local path_MAC = reaper.GetResourcePath()..'/reaper-auplugins64.ini'
