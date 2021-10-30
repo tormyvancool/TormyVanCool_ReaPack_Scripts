@@ -278,7 +278,7 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.2" author="Tormy Van Cool" time="2021-06-13T09:09:09Z">
+            <version name="2.2 PIXY" author="Tormy Van Cool" time="2021-06-13T09:09:09Z">
                 <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/b2842fcc1537b955767e3eb71400f6cdd5c8f209/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
@@ -290,13 +290,13 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.3" author="Tormy Van Cool" time="2021-10-30T14:59:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2da0fc4a3e4c4cd5255b0278c651168bfdddf036/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.4" author="Tormy Van Cool" time="2021-10-30T22:49:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d9d69df93ce78fb9bf3e38e0a93f2ec1a55caafd/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
-                v2.2c (29 oct 2021)
-                # ameliorated columns
-                # CSS glitch
+                v2.4 (30 oct 2021)
+                + Instr Column
+                + Links
                 ]]>
                 </changelog>
             </version>
