@@ -278,15 +278,12 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.2" author="Tormy Van Cool" time="2021-06-13T09:09:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/b2842fcc1537b955767e3eb71400f6cdd5c8f209/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.2a" author="Tormy Van Cool" time="2021-10-29T09:09:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/aa2b6aa4c01fbd1118007d8f86bee71ca47ace2d/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
-                v2.2 (13 june 2021)
-                - Import button
-                + Automatic import JSON file if present
-                + Hide checked button
-                + Show checked button
+                v2.2a (29 oct 2021)
+                # ameliorated columns
                 ]]>
                 </changelog>
             </version>
