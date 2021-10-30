@@ -29,6 +29,8 @@ v2.2 (13 june 2021) PIXY
   + Show checked button
 v2.2a (30 october 2021)
   # ameliorated columns
+v2.2b (30 october 2021)
+  # CSS glitch
 ]]
 reaper.ShowConsoleMsg('')
 local version = "2.2a"
@@ -282,6 +284,7 @@ local HeaderHTML = [[
       span#info { background: red; position: fixed; left: 60px; top: 209px; width: 180px; border-radius: 10px 10px 0 0; height: 119px; padding: 10px; text-align: center; color: white; font-weight: bold; word-wrap: break-word;}
       table#rows { position: relative; top: 153px; }
       table#title { position: fixed; top: 0px; left: 291px; z-index: 1; }
+      #mainContainer { position: absolute; left 98px; }
  
       /* The Modal (background) */
       .modal {
@@ -395,7 +398,7 @@ local HeaderHTML = [[
       </div>
     
     </div>
-<div id="mainCointainer">
+<div id="mainContainer">
  <form  class="center" action="#" method="get" id="TableForm">
   <div id="buttons">
     <button class="file-save">EXPORT</button>
