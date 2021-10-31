@@ -291,7 +291,7 @@
                 </changelog>
             </version>
             <version name="2.5" author="Tormy Van Cool" time="2021-11-01T13:09:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a1cac0cdfb590a620d00504fb1960638c0a69362/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/14f2f8ce05a9d611169bd8de9b9461ee088b9726/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v2.5 FERRETS (01 nov 2021)
