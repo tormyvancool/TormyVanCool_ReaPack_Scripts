@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.5 FERRETS
+@version 2.6 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
@@ -35,9 +35,11 @@ v2.4 (30 october 2021)
   + Links
 v2.5 FERRETS (1 november 2021)
   + instr Column CSV
+v2.6 FERRETS (1 november 2021)
+  # glitch on jQuery: Hide/Show button was not working any longer
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.5 FERRETS"
+local version = "2.6 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
 local path_MAC = reaper.GetResourcePath()..'/reaper-auplugins64.ini'
@@ -383,12 +385,12 @@ local HeaderHTML = [[
       });
 
       $('.hide-checked').on('click', function(){
-        $("table tr").has(".checkbox:checked").hide();
+        $("table tr").has(".hideshow:checked").hide();
         $(".show-checked").show();
       });
 
       $('.show-checked').on('click', function(){
-        $("table tr").has(".checkbox:checked").show();
+        $("table tr").has(".hideshow:checked").show();
         $(".show-checked").hide();
       });
       
@@ -514,7 +516,7 @@ function main()
               else
                 instr= ""
               end
-              lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..VST_Name..'</td><td class="file">'..VST_dll..'</td></tr>\n'
+              lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..VST_Name..'</td><td class="file">'..VST_dll..'</td></tr>\n'
               lineCSV = lineCSV..','..n..','..instr..','..VST_Name..','..VST_dll..'\n' 
               n=n+1
             end
