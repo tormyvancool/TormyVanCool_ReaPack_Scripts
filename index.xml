@@ -161,7 +161,7 @@
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
                 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 EXPORT DATA \b0 collects  all tracks with FX and creates a  pair of files: CSV and HTML format, listing all tracks with FX, the FX list for each track, and their status.\par
                 NOTES are also exported: \i project notes\i0 , as well as \i track notes\i0  and \i item notes\i0 .\par
-                The content is dived in 5 mai tables, on HTML file:\par
+                The content is dived in 5 main tables, on HTML file:\par
                 \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b PROJECT DATA\b0\line It contains basic data of the project as:\line Project name and sample rate\line Total tracks\line DAW Employed\line Author\line Notes\par
                 \b{\pntext\f1\'B7\tab}EFFECTED TRACKS\b0\line TRACK\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Track IDX\line Name\line Type (Folder or Track)\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 N.Item on that track\line Solo\line Mute\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 FX\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 FX Name\line Enabled/Bypassed\line OnLine/OffLine\line Plugin File\par
                 \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b NOTED TRACKS\b0\line TRACK\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 IDX\line Name\line Type (Folder or Track)\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 N.Item on that track\line Solo\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Mute\par
@@ -171,7 +171,7 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.4" author="Tormy Van Cool" time="2021-05-31T19:46:09Z">
+            <version name="2.5" author="Tormy Van Cool" time="2021-11-06T17:2/:09Z">
                 <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/688ad0264ce160418ba84efee969207a58c3c6fc/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
@@ -235,6 +235,8 @@
                     # Mistyping correction
                 v2.4
                     + Included jQuery base64
+                v2.5
+                    + Project MetaData
                 ]]>
                 </changelog>
             </version>
