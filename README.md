@@ -49,7 +49,11 @@ alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 VSTs-VSTis-Extractor (and AU/LV2) in function:
 -------
-![..](2.2.gif)
+Click on the image to watch the video Tutorial
+
+<a href="https://www.youtube.com/embed/J5Ko4uIya9w" target="_blank"><img src="http://img.youtube.com/vi/J5Ko4uIya9w/maxresdefault.jpg" 
+alt="VST/VSTi/AU/LV2 Extractor" width="560" height="315" border="10" /></a>
+
 
 
 EXPORT DATA in function
