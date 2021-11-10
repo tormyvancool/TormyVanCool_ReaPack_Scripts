@@ -171,8 +171,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.5" author="Tormy Van Cool" time="2021-11-06T17:28:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/68546a320b0e11d7493faac4011d5353b77eddd7/TormyVanCool_ExportData.lua</source>
+            <version name="2.6" author="Tormy Van Cool" time="2021-11-10T21:42:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2dcd2f1378b092eebc290aa4978e98246bfe98ad/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -220,10 +220,7 @@
                     + Table width 100%
                     + Num. Items, Num. Markers, Num. Region in Project Data
                     # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-                    # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-                @credits    Mario Bianchi for his contribution to expedite the process;
-                            Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
-                            Solger for his help on the color decode [t=253981]
+                    # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS.
                 v2.3 (26 may 2021)
                     + Project Markers
                     + Project Regions
@@ -237,6 +234,15 @@
                     + Included jQuery base64
                 v2.5
                     + Project MetaData
+                v2.6
+                    + Song Title (due new fiels on ALT+ENTER)
+
+                @credits  Mario Bianchi for his contribution to expedite the process;
+                        Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+                        Solger for his help on the color decode [t=253981]
+                        Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+                        Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+                        MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
                 ]]>
                 </changelog>
             </version>
