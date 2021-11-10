@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.5
+@version 2.6
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -53,10 +53,7 @@ v2.2 (24 may 2021)
   + Table width 100%
   + Num. Items, Num. Markers, Num. Region in Project Data
   # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-  # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-@credits  Mario Bianchi for his contribution to expedite the process;
-          Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
-          Solger for his help on the color decode [t=253981]
+  # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS.
 v2.3 (26 may 2021)
   + Project Markers
   + Project Regions
@@ -72,6 +69,15 @@ v2.4
   + Included jQuery base64
 v2.5
   + Project MetaData
+v2.6
+  + Song Title (due new fiels on ALT+ENTER)
+
+@credits  Mario Bianchi for his contribution to expedite the process;
+          Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+          Solger for his help on the color decode [t=253981]
+          Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+          Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+          MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
 ]]--
 
 
@@ -161,13 +167,14 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.5 FERRETS"
+local scriptVersion = "2.6 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
 local pj_name_ = reaper.GetProjectName(0, "")
+local _, pj_title = reaper.GetSetProjectInfo_String(0, "PROJECT_TITLE", '', 0)
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
-local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
+--local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
 local date = os.date("%Y-%m-%d %H:%M:%S")
 local dateFile = '_' .. os.date("%Y-%m-%d_%H.%M.%S")
 local author = reaper.GetSetProjectAuthor(0, 0, '')
@@ -179,6 +186,9 @@ local totalMarkersRegions = totalMarkers+totalRegions
 local reaperURL = "https://www.reaper.fm"
 local TormyURL = "https://www.facebook.com/TormyVanCool.MediaProductions"
 local TVCEURL = "https://www.facebook.com/vancoolelektroakustik"
+local _, RenderDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrenderpath', '', reaper.get_ini_file())
+local _, RencordingDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrecpath', '', reaper.get_ini_file())
+local renderPath = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'..RenderDir
 
 ----------------------------------------------
 -- FILE OPERATIONS
@@ -192,6 +202,22 @@ function WriteFILE(listHTML,listCSV)
    f_csv:write( listCSV..LF )
    f_html:write( listHTML..LF )
 end
+
+
+----------------------------------------------
+-- SCAN RENDERED AUDIO
+----------------------------------------------
+function scandir(directory)
+  local i, t, popen = 0, {}, io.popen
+  t = ''
+  local f=io.popen('dir '..renderPath)
+ for filename in popen('dir "'..renderPath..'" /b'):lines() do
+          t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(filename)..'"/></td></tr>'
+          i = i + 1 
+      end
+  return t
+end
+
 
 ----------------------------------------------
 -- PROJECT METADATA
@@ -796,10 +822,13 @@ local PageHeaderHTML = [[
      img#TormyLOGO { position: absolute; left: 20px; top: 19px; width: 100px;}
      img#TVCELogo { width: 120px; position: absolute; left: 139px; top: 15px;}
      img#REAPERLogo {position: absolute; top: 12px; right: 20px; }
+     th#PlayerAudio { width: 200; }
      </style>
      <script>
       $(document).ready(function() {
           $("tr.slave").hide()
+          $("span.collapseRendered").hide()
+          $("tr.Rendered").hide()
           $("tr.slaveNoted").hide()
           $("tr.slaveFXedItems").hide()
           $("span.collapse").hide()
@@ -837,6 +866,13 @@ local PageHeaderHTML = [[
           $("span.collapseAPE").hide()
           $("tr.childVORBIS").hide()
           $("span.collapseVORBIS").hide()
+          
+          
+          $(".masterRendered").click(function() {
+              $("tr.Rendered").toggle(500);
+              $("span.collapseRendered").toggle(500)
+              $("span.expandRendered").toggle(500)
+          });
           
           $(".master").click(function() {
               $("tr.slave").toggle(500);
@@ -965,25 +1001,24 @@ local PageHeaderHTML = [[
       <tbody>
         <tr><td colspan="8" class="centertext markersregions">MAIN DATA</td></tr>
         <tr class="table_header">
-          <th>PROJECT</th>
-          <th>TOTAL TRACKS</th>
-          <th>ITEMS</th>
-          <th>MARKERS</th>
-          <th>REGIONS</th>
-          <th>DAW</th>
-          <th>AUTHOR</th>
-          <th>NOTES</th>
+          <th id="hd_project">PROJECT</th>
+          <th id="hd_total">TOTAL TRACKS</th>
+          <th id="hd_items">ITEMS</th>
+          <th id="hd_markers">MARKERS</th>
+          <th id="hd_regions">REGIONS</th>
+          <th id="hd_notes"colspan="3">NOTES</th>
         </tr>
-        <tr><td class="left"><span class="label">Name:</span> ]]..pj_name_..
+        '<tr><td class="left"><span class="label">Name:</span> ]]..pj_name_..
+          '<br/><span class="label">Song Title:</span> '..pj_title..
+          '<br/><span class="label">Song Author:</span> '..author..
+          '<br/><span class="label">DAW Version:</span> '..version..
           '<br/><span class="label">Sample Rate:</span> '..round(pj_sampleRate,0)..
           ' Hz<br/><span class="label">Project Length:</span> '..SecondsToHMS(pj_length)..
           '</td><td class="centertext">'.. reaper.CountTracks() ..
           '</td><td class="centertext">'..totalMediaItems..
           '</td><td class="centertext">'..totalMarkers..
           '</td><td class="centertext">'..totalRegions..
-          '</td><td class="centertext">REAPER - v.'..version..
-          '</td><td class="centertext">'..author..
-          '</td><td>'..pj_notes..[[
+          '</td><td colspan="3">'..pj_notes..[[
       </td></tr>
       <tr><td colspan="8" class="centertext markersregions">
       <span class="info expandID3 emboss pointer catID3">&#x25BC;</span>
@@ -1196,6 +1231,27 @@ local tableftr =       [[</tbody>
 ----------------------------------------------
 -- SPECIALIZED HEADER
 ----------------------------------------------
+
+local PageHeaderAudioCSV = ''
+local PageHeaderAudioHTML =[[
+     <table class="center">
+      <thead>
+        <tr>
+          <th colspan="6" class="header">
+          <span class="info expandRendered emboss pointer masterRendered">&#x25BC;</span>
+          <span class="info collapseRendered engrave pointer masterRendered">&#x25B2;</span>
+          RENDERED AUDIO
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table_header Rendered">]]..
+        '<th id="PathAudio">FILE PATH</th>'..
+        '<th id="NameAudio">FILE NAME</th>'..
+        '<th id="PlayerAudio">PLAYER</th></tr>'..
+        scandir(renderPath)..'</tbody></table>'
+
+
 local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nFX NAME,FX En./Byp.,FX On Line/Off Line,FILE NAME'
 local PageHeaderMasterHTML = [[
      <table class="center">
@@ -1529,7 +1585,7 @@ end
 -- MAIN FUNCTIONS
 ----------------------------------------------
 function Master()
-
+    WriteFILE(PageHeaderAudioHTML,'')
     WriteFILE(PageHeaderMasterHTML,PageHeaderMasterCSV)
     local tr = reaper.GetMasterTrack(0)
 
