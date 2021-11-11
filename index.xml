@@ -171,8 +171,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.6" author="Tormy Van Cool" time="2021-11-10T21:42:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2dcd2f1378b092eebc290aa4978e98246bfe98ad/TormyVanCool_ExportData.lua</source>
+            <version name="2.7" author="Tormy Van Cool" time="2021-11-11T10:55:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9fff2958f7460368ad0a326939d8dc4bf6415cf6/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -239,12 +239,12 @@
                 v2.7
                     + Collapsible MetaData Table
 
-                @credits  Mario Bianchi for his contribution to expedite the process;
-                        Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
-                        Solger for his help on the color decode [t=253981]
-                        Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
-                        Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
-                        MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
+                @credits    Mario Bianchi for his contribution to expedite the process;
+                            Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+                            Solger for his help on the color decode [t=253981]
+                            Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+                            Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+                            MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
                 ]]>
                 </changelog>
             </version>
