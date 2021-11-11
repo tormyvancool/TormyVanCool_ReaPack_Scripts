@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.6
+@version 2.7
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -71,6 +71,8 @@ v2.5
   + Project MetaData
 v2.6
   + Song Title (due new fiels on ALT+ENTER)
+v2.7
+  + Collapsible MetaData Table
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -167,7 +169,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.6 FERRETS"
+local scriptVersion = "2.7 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -207,14 +209,18 @@ end
 ----------------------------------------------
 -- SCAN RENDERED AUDIO
 ----------------------------------------------
-function scandir(directory)
+function scandir(directory,format)
   local i, t, popen = 0, {}, io.popen
   t = ''
   local f=io.popen('dir '..renderPath)
- for filename in popen('dir "'..renderPath..'" /b'):lines() do
-          t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(filename)..'"/></td></tr>'
-          i = i + 1 
+    for filename in popen('dir "'..renderPath..'" /b'):lines() do
+      if format == 1 then
+        t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(filename)..'"/></td></tr>'
+      elseif format == 2 then
+        t = t..renderPath..','..tostring(filename)..','..renderPath..tostring(filename)..LF
       end
+      i = i + 1 
+    end
   return t
 end
 
@@ -238,48 +244,48 @@ end
 
 function MetaMP3(i)
   local meta
-     meta = MetaData('ID3',"Title","Title","TIT2")[i]..
-      MetaData('ID3',"Title","Description","TIT3")[i]..
-      MetaData('ID3',"Artist","Artist","TPE1")[i]..
-      MetaData('ID3',"Artist","Album Artist","TPE2")[i]..
-      MetaData('ID3',"Musical","Genre","TCON")[i]..
-      MetaData('ID3',"Musical","Key","TKEY")[i]..
-      MetaData('ID3',"Musical","Tempo","TBPM")[i]..
-      MetaData('ID3',"Date","Date YYYY-MM-DD","TDRC")[i]..
-      MetaData('ID3',"Date","Date YYYY-MM-DD","TYER")[i]..
-      MetaData('ID3',"Date","Recording Time MM:SS","TIME")[i]..
-      MetaData('ID3',"Project","Album","TALB")[i]..
-      MetaData('ID3',"Comment","Comment","COMM")[i]..
-      MetaData('ID3',"","","TXXX")[i]..
-      MetaData('ID3',"REAPER","Media Explorer","TXXX:REAPER")[i]..
-      MetaData('ID3',"Personnel","Composer","TCOM")[i]..
-      MetaData('ID3',"Personnel","Involved People","TIPL")[i]..
-      MetaData('ID3',"Personnel","Lyricist","TEXT")[i]..
-      MetaData('ID3',"Personnel","Musician Credits","TMCL")[i]..
-      MetaData('ID3',"Parts","Track Number","TRCK")[i]..
-      MetaData('ID3',"Parts","Chapter<br>[automatic from CHAP= marker region]","CHAP")[i]..
-      MetaData('ID3',"Parts","Content Group","TIT1")[i]..
-      MetaData('ID3',"Parts","Part Number","TPOS")[i]..
-      MetaData('ID3',"Spot","Start Offset [Automatic]","TXXX/TIME-REFERENCE")[i]..
-      MetaData('ID3',"Code","ISRC","TSRC")[i]..
-      MetaData('ID3',"License","Copyright Mess","TCOP")[i]..
-      MetaData('ID3',"Technical","Language","COMM_LANG")[i]..
-      MetaData('ID3',"Binary","Image Type","APIC_TYPE")[i]..
-      MetaData('ID3',"Binary","Image Dsescription","APIC_DESC")[i]..
-      MetaData('ID3',"Binary","Image File","APIC_FILE")[i]
-    return tostring(meta)
+   meta = MetaData('ID3',"Title","Title","TIT2")[i]..
+    MetaData('ID3',"Title","Description","TIT3")[i]..
+    MetaData('ID3',"Artist","Artist","TPE1")[i]..
+    MetaData('ID3',"Artist","Album Artist","TPE2")[i]..
+    MetaData('ID3',"Musical","Genre","TCON")[i]..
+    MetaData('ID3',"Musical","Key","TKEY")[i]..
+    MetaData('ID3',"Musical","Tempo","TBPM")[i]..
+    MetaData('ID3',"Date","Date YYYY-MM-DD","TDRC")[i]..
+    MetaData('ID3',"Date","Date YYYY-MM-DD","TYER")[i]..
+    MetaData('ID3',"Date","Recording Time MM:SS","TIME")[i]..
+    MetaData('ID3',"Project","Album","TALB")[i]..
+    MetaData('ID3',"Comment","Comment","COMM")[i]..
+    MetaData('ID3',"","","TXXX")[i]..
+    MetaData('ID3',"REAPER","Media Explorer","TXXX:REAPER")[i]..
+    MetaData('ID3',"Personnel","Composer","TCOM")[i]..
+    MetaData('ID3',"Personnel","Involved People","TIPL")[i]..
+    MetaData('ID3',"Personnel","Lyricist","TEXT")[i]..
+    MetaData('ID3',"Personnel","Musician Credits","TMCL")[i]..
+    MetaData('ID3',"Parts","Track Number","TRCK")[i]..
+    MetaData('ID3',"Parts","Chapter<br>[automatic from CHAP= marker region]","CHAP")[i]..
+    MetaData('ID3',"Parts","Content Group","TIT1")[i]..
+    MetaData('ID3',"Parts","Part Number","TPOS")[i]..
+    MetaData('ID3',"Spot","Start Offset [Automatic]","TXXX/TIME-REFERENCE")[i]..
+    MetaData('ID3',"Code","ISRC","TSRC")[i]..
+    MetaData('ID3',"License","Copyright Mess","TCOP")[i]..
+    MetaData('ID3',"Technical","Language","COMM_LANG")[i]..
+    MetaData('ID3',"Binary","Image Type","APIC_TYPE")[i]..
+    MetaData('ID3',"Binary","Image Dsescription","APIC_DESC")[i]..
+    MetaData('ID3',"Binary","Image File","APIC_FILE")[i]
+  return tostring(meta)
 end
 
 
 function MetaBWF(i)
   local meta
-      meta = MetaData('BWF',"Title","Title","Description")[i]..
-      MetaData('BWF',"Date","Date YYYY-MM-DD","OriginationDate")[i]..
-      MetaData('BWF',"Date","Recording Time MM:SS","OriginationTime")[i]..
-      MetaData('BWF',"Project","Originator","Originator")[i]..
-      MetaData('BWF',"Project","Originator Refer","Originator Reference")[i]..
-      MetaData('BWF',"Spot","Start Offset [Automatic]","TimeReference")[i]
-    return tostring(meta)
+    meta = MetaData('BWF',"Title","Title","Description")[i]..
+    MetaData('BWF',"Date","Date YYYY-MM-DD","OriginationDate")[i]..
+    MetaData('BWF',"Date","Recording Time MM:SS","OriginationTime")[i]..
+    MetaData('BWF',"Project","Originator","Originator")[i]..
+    MetaData('BWF',"Project","Originator Refer","Originator Reference")[i]..
+    MetaData('BWF',"Spot","Start Offset [Automatic]","TimeReference")[i]
+  return tostring(meta)
 end
 
 
@@ -321,15 +327,15 @@ end
 function MetaCUE(i)
   local meta
     meta= MetaData('CUE','Title','Title','DISC_TITLE')[i]..
-      MetaData('CUE','Title','Track Title [Automatic as per render settings]','TRACK_TITLE')[i]..
-      MetaData('CUE','Artist','Performer','DISC_PERFORMER')[i]..
-      MetaData('CUE','Artist','Track Performer [Automatic from PERF= marker]','TRACK_PERFORMER')[i]..
-      MetaData('CUE','Comment','Comment','DISC_REM')[i]..
-      MetaData('CUE','Personnel','Songwriter','DISC_SONGWRITER')[i]..
-      MetaData('CUE','Personnel','Track Songwriter [Automatic from WRIT= marker]','TRACK_SONGWRITER')[i]..
-      MetaData('CUE','Part','Track Numnber','INDEX')[i]..
-      MetaData('CUE','Code','Code ISRC [Automatic from ISRC= marker]','TRACK_ISRC')[i]..
-      MetaData('CUE','Code','Barcode','DISC_CATALOG')[i]
+    MetaData('CUE','Title','Track Title [Automatic as per render settings]','TRACK_TITLE')[i]..
+    MetaData('CUE','Artist','Performer','DISC_PERFORMER')[i]..
+    MetaData('CUE','Artist','Track Performer [Automatic from PERF= marker]','TRACK_PERFORMER')[i]..
+    MetaData('CUE','Comment','Comment','DISC_REM')[i]..
+    MetaData('CUE','Personnel','Songwriter','DISC_SONGWRITER')[i]..
+    MetaData('CUE','Personnel','Track Songwriter [Automatic from WRIT= marker]','TRACK_SONGWRITER')[i]..
+    MetaData('CUE','Part','Track Numnber','INDEX')[i]..
+    MetaData('CUE','Code','Code ISRC [Automatic from ISRC= marker]','TRACK_ISRC')[i]..
+    MetaData('CUE','Code','Barcode','DISC_CATALOG')[i]
   return tostring(meta)
 end
 
@@ -772,7 +778,8 @@ local PageHeaderCSV = 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..p
                       'DAW:'..LF ..'REAPER v.' .. version ..LF..LF..
                       'CREATED:'..LF .. date ..LF..LF..
                       'AUTHOR:'..LF..author..LF..LF..
-                      "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"..LF..LF..'CATEGORY,DESCRIPTION,META [FORMAT],TAG CODE,VALUE'..LF..metaDataCSV
+                      "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"..LF..LF..'CATEGORY,DESCRIPTION,META [FORMAT],TAG CODE,VALUE'..LF..metaDataCSV..LF..LF..
+                      'RENDERED AUDIO'..LF..'PATH,FILE NAME,FULL PATH'..LF..scandir(renderPath,2)
 local PageHeaderHTML = [[
 <html>
   <head>
@@ -827,6 +834,8 @@ local PageHeaderHTML = [[
      <script>
       $(document).ready(function() {
           $("tr.slave").hide()
+          $("span.collapseMetaData").hide()
+          $("tr.MetaData").hide()
           $("span.collapseRendered").hide()
           $("tr.Rendered").hide()
           $("tr.slaveNoted").hide()
@@ -869,45 +878,51 @@ local PageHeaderHTML = [[
           
           
           $(".masterRendered").click(function() {
-              $("tr.Rendered").toggle(500);
-              $("span.collapseRendered").toggle(500)
-              $("span.expandRendered").toggle(500)
+             $("tr.Rendered").toggle(500);
+             $("span.collapseRendered").toggle(500)
+             $("span.expandRendered").toggle(500)
+          });
+          
+          $(".masterMetaData").click(function() {
+             $("tr.metaData").toggle(500);
+             $("span.collapseMetaData").toggle(500)
+             $("span.expandmetaData").toggle(500)
           });
           
           $(".master").click(function() {
-              $("tr.slave").toggle(500);
-              $("span.collapse").toggle(500)
-              $("span.expand").toggle(500)
+             $("tr.slave").toggle(500);
+             $("span.collapse").toggle(500)
+             $("span.expand").toggle(500)
           });
           
           $(".masterNoted").click(function() {
-              $("tr.slaveNoted").toggle(500);
-              $("span.collapseNoted").toggle(500)
-              $("span.expandNoted").toggle(500)
+             $("tr.slaveNoted").toggle(500);
+             $("span.collapseNoted").toggle(500)
+             $("span.expandNoted").toggle(500)
           });
           
           $(".masterFXedItems").click(function() {
-              $("tr.slaveFXedItems").toggle(500);
-              $("span.collapseFXedItems").toggle(500)
-              $("span.expandFXedItems").toggle(500)
+             $("tr.slaveFXedItems").toggle(500);
+             $("span.collapseFXedItems").toggle(500)
+             $("span.expandFXedItems").toggle(500)
           });
           
           $(".masterNotedItems").click(function() {
-              $("tr.slaveNotedItems").toggle(500);
-              $("span.collapseNotedItems").toggle(500)
-              $("span.expandNotedItems").toggle(500)
+             $("tr.slaveNotedItems").toggle(500);
+             $("span.collapseNotedItems").toggle(500)
+             $("span.expandNotedItems").toggle(500)
           });          
           
           $(".masterHier").click(function() {
-              $("tr.slaveHier").toggle(500);
-              $("span.collapseHier").toggle(500)
-              $("span.expandHier").toggle(500)
+             $("tr.slaveHier").toggle(500);
+             $("span.collapseHier").toggle(500)
+             $("span.expandHier").toggle(500)
           });
           
           $(".masterMaster").click(function() {
-              $("tr.slaveMaster").toggle(500);
-              $("span.collapseMaster").toggle(500)
-              $("span.expandMaster").toggle(500)
+             $("tr.slaveMaster").toggle(500);
+             $("span.collapseMaster").toggle(500)
+             $("span.expandMaster").toggle(500)
           });
                                         
           $(".catID3").click(function () { 
@@ -1019,8 +1034,21 @@ local PageHeaderHTML = [[
           '</td><td class="centertext">'..totalMarkers..
           '</td><td class="centertext">'..totalRegions..
           '</td><td colspan="3">'..pj_notes..[[
-      </td></tr>
-      <tr><td colspan="8" class="centertext markersregions">
+      </td></tr>]]
+      
+local PageHeaderMetaDataHTML =[[
+     <table class="center">
+      <thead>
+        <tr>
+          <th colspan="6" class="header">
+          <span class="info expandMetaData emboss pointer masterMetaData">&#x25BC;</span>
+          <span class="info collapsemetaData engrave pointer masterMetaData">&#x25B2;</span>
+          METADATA
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandID3 emboss pointer catID3">&#x25BC;</span>
       <span class="info collapseID3 engrave pointer catID3">&#x25B2;</span>
       ID3 (IDentify an MP3) META DATA (No User Defined)</td></tr>
@@ -1031,7 +1059,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaMP3(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandBWF emboss pointer catBWF">&#x25BC;</span>
       <span class="info collapseBWF engrave pointer catBWF">&#x25B2;</span>
       BWF (Broadcast Wave Format) META DATA</td></tr>
@@ -1042,7 +1070,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaBWF(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandAXML emboss pointer catAXML">&#x25BC;</span>
       <span class="info collapseAXML engrave pointer catAXML">&#x25B2;</span>
       AXML (Audio eXtended Markup Language) META DATA</td></tr>
@@ -1053,7 +1081,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaAXML(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandCART emboss pointer catCART">&#x25BC;</span>
       <span class="info collapseCART engrave pointer catCART">&#x25B2;</span>
       CART (AES46-2002) META DATA</td></tr>
@@ -1064,7 +1092,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaCART(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandIFF emboss pointer catIFF">&#x25BC;</span>
       <span class="info collapseIFF engrave pointer catIFF">&#x25B2;</span>
       IFF (Interchange File Format) META DATA</td></tr>
@@ -1075,7 +1103,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaIFF(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandCUE emboss pointer catCUE">&#x25BC;</span>
       <span class="info collapseCUE engrave pointer catCUE">&#x25B2;</span>
       CUE (Cue Sheet) META DATA</td></tr>
@@ -1086,7 +1114,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaCUE(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandINFO emboss pointer catINFO">&#x25BC;</span>
       <span class="info collapseINFO engrave pointer catINFO">&#x25B2;</span>
       INFO META DATA</td></tr>
@@ -1097,7 +1125,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaINFO(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandIXML emboss pointer catIXML">&#x25BC;</span>
       <span class="info collapseIXML engrave pointer catIXML">&#x25B2;</span>
       IXML META DATA (No User Defined)</td></tr>
@@ -1108,7 +1136,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaIXML(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandFLACPIC emboss pointer catFLACPIC">&#x25BC;</span>
       <span class="info collapseFLACPIC engrave pointer catFLACPIC">&#x25B2;</span>
       FLACPIC (FLAC Picture) META DATA</td></tr>
@@ -1119,7 +1147,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaFLACPIC(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandXMP emboss pointer catXMP">&#x25BC;</span>
       <span class="info collapseXMP engrave pointer catXMP">&#x25B2;</span>
       XMP (eXtensible Meta Platform) META DATA</td></tr>
@@ -1130,7 +1158,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaXMP(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandAPE emboss pointer catAPE">&#x25BC;</span>
       <span class="info collapseAPE engrave pointer catAPE">&#x25B2;</span>
       APE META DATA (No User Defined)</td></tr>
@@ -1141,7 +1169,7 @@ local PageHeaderHTML = [[
         <th colspan="5">VALUE</th>
       </tr>
       ]]..MetaAPE(1)..[[
-      <tr><td colspan="8" class="centertext markersregions">
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandVORBIS emboss pointer catVORBIS">&#x25BC;</span>
       <span class="info collapseVORBIS engrave pointer catVORBIS">&#x25B2;</span>
       VORBIS META DATA (No User Defined)</td></tr>
@@ -1249,7 +1277,7 @@ local PageHeaderAudioHTML =[[
         '<th id="PathAudio">FILE PATH</th>'..
         '<th id="NameAudio">FILE NAME</th>'..
         '<th id="PlayerAudio">PLAYER</th></tr>'..
-        scandir(renderPath)..'</tbody></table>'
+        scandir(renderPath,1)..'</tbody></table><div class="spacer">&nbsp;</div>'
 
 
 local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nFX NAME,FX En./Byp.,FX On Line/Off Line,FILE NAME'
@@ -1585,6 +1613,7 @@ end
 -- MAIN FUNCTIONS
 ----------------------------------------------
 function Master()
+    WriteFILE(PageHeaderMetaDataHTML,'')
     WriteFILE(PageHeaderAudioHTML,'')
     WriteFILE(PageHeaderMasterHTML,PageHeaderMasterCSV)
     local tr = reaper.GetMasterTrack(0)
