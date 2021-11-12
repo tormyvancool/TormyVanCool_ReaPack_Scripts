@@ -171,8 +171,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.7" author="Tormy Van Cool" time="2021-11-11T10:55:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9fff2958f7460368ad0a326939d8dc4bf6415cf6/TormyVanCool_ExportData.lua</source>
+            <version name="2.8" author="Tormy Van Cool" time="2021-11-12T14:07:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/24d11b356ba3f11f7fbc081b2764954e729d7f77/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -238,6 +238,12 @@
                     + Song Title (due new fiels on ALT+ENTER)
                 v2.7
                     + Collapsible MetaData Table
+                v2.8
+                    + Check if SWS is installed
+                    + Check the Reaper version
+                    + Path into the export box
+                    # Specified Noted Tracks only
+                    # Specified Noted Items only
 
                 @credits    Mario Bianchi for his contribution to expedite the process;
                             Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
