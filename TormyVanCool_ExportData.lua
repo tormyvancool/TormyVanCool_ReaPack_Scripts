@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.7
+@version 2.8
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -73,6 +73,12 @@ v2.6
   + Song Title (due new fiels on ALT+ENTER)
 v2.7
   + Collapsible MetaData Table
+v2.8
+  + Check if SWS is installed
+  + Check the Reaper version
+  + Path into the export box
+  # Specified Noted Tracks only
+  # Specified Noted Items only
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -80,8 +86,8 @@ v2.7
           Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
           Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
           MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
+          Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
 ]]--
-
 
 ----------------------------------------------
 -- NUMERICAL FUNCTIONS
@@ -169,7 +175,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.7 FERRETS"
+local scriptVersion = "2.8 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -191,6 +197,22 @@ local TVCEURL = "https://www.facebook.com/vancoolelektroakustik"
 local _, RenderDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrenderpath', '', reaper.get_ini_file())
 local _, RencordingDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrecpath', '', reaper.get_ini_file())
 local renderPath = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'..RenderDir
+
+
+------------------------------------------------
+-- CHECK if SWS is INSTALLED and Reaper Version
+------------------------------------------------
+local test_SWS = reaper.CF_EnumerateActions
+if not test_SWS then
+  reaper.MB('Please install or update SWS extension', 'ERROR: SWS IS MISSING', 0)
+  exit()
+end
+
+local minVersion = '6.41'
+if minVersion > version then
+  reaper.MB('Please update REAPER to the last version!', 'ERROR: REAPER OUTDATED', 0)
+  exit()
+end
 
 ----------------------------------------------
 -- FILE OPERATIONS
@@ -1182,7 +1204,7 @@ local PageHeaderMetaDataHTML =[[
       ]]..MetaVORBIS(1)
                     
 
-local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION, END POSITION (if Region),DURATION (if Region)\nMARKERS' 
+local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION, END POSITION (if Region),DURATION (if Region)'..LF..'MARKERS' 
 local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersregions">MARKERS</td></tr>'..
       '<tr class="table_header"><th class="centertext">NAME</th>'..
       '<th class="colorMarkerRegion">COLOR</th>'..
@@ -1280,7 +1302,7 @@ local PageHeaderAudioHTML =[[
         scandir(renderPath,1)..'</tbody></table><div class="spacer">&nbsp;</div>'
 
 
-local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:\nFX NAME,FX En./Byp.,FX On Line/Off Line,FILE NAME'
+local PageHeaderMasterCSV = LF..LF..'MASTER CHANNEL:'..LF..'FX NAME,FX En./Byp.,FX On Line/Off Line,FILE NAME'
 local PageHeaderMasterHTML = [[
      <table class="center">
       <thead>
@@ -1301,7 +1323,7 @@ local PageHeaderMasterHTML = [[
         '<th class="MasterEnabledOnline">On Line<br/>Off Line</th>'..
         '<th>FILE</th></tr>'
         
-local PageHeaderHierarchyCSV = LF..LF..'HIERARCHY:\nNAME,TYPE,SOLO,MUTE,N.ITEMS,TCP,MCP,FX'
+local PageHeaderHierarchyCSV = LF..LF..'HIERARCHY:'..LF..'NAME,TYPE,SOLO,MUTE,N.ITEMS,TCP,MCP,FX'
 local PageHeaderHierarchyHTML = [[
       <table class="center">
       <thead>
@@ -1325,7 +1347,7 @@ local PageHeaderHierarchyHTML = [[
           <th class="TracksEnabledOnline">FX CHAIN<br/>Enable/Disabled</th>
         </tr>]]
         
-local tableFXTracksHeaderCSV = LF..LF..'EFFECTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
+local tableFXTracksHeaderCSV = LF..LF..'EFFECTED TRACKS:'..LF..'TRACK IDX,TRACK NAME,TRACK TYPE,NOTES,FX CHAIN En./Dis.,N. ITEMS,SOLO,MUTE,FX/INSTRUMENTS NAME (VST/VSTi),FX En./Byp.,FX OnLine/OffLine,FX File'
 local tableFXTracksHeader = [[
     <div class="spacer">&nbsp;</div>
     <table class="center">
@@ -1357,14 +1379,14 @@ local tableFXTracksHeader = [[
           <th>PLUGIN FILE</th>
         </tr>]]
         
-local PageHeaderCSVNoted = LF..LF..'NOTED TRACKS:\nTRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE'
+local PageHeaderCSVNoted = LF..LF..'NOTED TRACKS:'..LF..'TRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE'
 local tableNotedTracksHeader = [[
    <table class="center">
       <thead>
         <tr>
           <th colspan="7" class="header">
             <span class="info expandNoted emboss pointer masterNoted">&#x25BC;</span>
-            <span class="info collapseNoted engrave pointer masterNoted">&#x25B2;</span>NOTED TRACKS
+            <span class="info collapseNoted engrave pointer masterNoted">&#x25B2;</span>NOTED TRACKS (Only noted! No FX)
           </th>
         </tr>
       </thead>
@@ -1380,7 +1402,7 @@ local tableNotedTracksHeader = [[
           <th class="TracksNoted">MUTE</th>
         </tr>]]
         
-local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:\nTRACK NAME,FX,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:'..LF..'TRACK NAME,FX,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderItemsFXedHTML = [[ 
     <div class="spacer">&nbsp;</div>
     <table class="center">
@@ -1410,13 +1432,13 @@ local PageHeaderItemsFXedHTML = [[
           <th class="EffectedItems">BIT DEPTH</th>
         </tr>]]
         
-local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:\nTRACK NAME,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:'..LF..'TRACK NAME,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderNotedItemsHTML = [[
     <table class="center">
       <thead>
         <tr><th colspan="9" class="header">
               <span class="info expandNotedItems emboss pointer masterNotedItems">&#x25BC;</span>
-              <span class="info collapseNotedItems engrave pointer masterNotedItems">&#x25B2;</span>NOTED ITEMS DATA
+              <span class="info collapseNotedItems engrave pointer masterNotedItems">&#x25B2;</span>NOTED ITEMS DATA (Only noted! No FX)
             </th>
         </tr>
       </thead>
@@ -1437,7 +1459,7 @@ local PageHeaderNotedItemsHTML = [[
         </tr>]]
 
 
-local PageFooterHTML = "  \n</body>\n</html>"
+local PageFooterHTML = "  "..LF.."</body>"..LF.."</html>"
 
 
 
@@ -1654,10 +1676,10 @@ function Master()
     local line_5 = '<tr class="tracks slaveMaster"><td><b>MCP</b></td>'..ScanTracks(tr).isHideMCP..'</tr>'
    
     if lineCSV == nil then lineCSV ='' end
-    local csv_1 = '\nMASTER TRACK SETTINGS:\nMUTE,SOLO,FX CHAIN,TCP,MCP,NOTES\n'
+    local csv_1 = LF..'MASTER TRACK SETTINGS:'..LF..'MUTE,SOLO,FX CHAIN,TCP,MCP,NOTES'..LF
     local csv_2 = ScanTracks(tr).isMutedCSV..','..ScanTracks(tr).isSoloedCSV..','..FX_ChainEnabledCSV..','..ScanTracks(tr).isHideTCPCSV..','..ScanTracks(tr).isHideMCPCSV..','..MasterNotesCSV
     WriteFILE(line_1..line_2..line_3..line_4..line_5,lineCSV..','..csv_1..csv_2)
-    WriteFILE("  </tbody>\n</table>","")
+    WriteFILE("  </tbody>"..LF.."</table>","")
 end
 
 
@@ -1728,7 +1750,7 @@ function Hierarchical()
     WriteFILE(lineHTML,lineCSV)
 
   end
-  WriteFILE("  </tbody>\n</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>","")
 end
 
 
@@ -1800,7 +1822,7 @@ function FXedTracks()
       ]]--
     end
   end
-  WriteFILE("  </tbody>\n</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>","")
 end
 
 function NotedTracks()
@@ -1843,7 +1865,7 @@ function NotedTracks()
       WriteFILE(htmlList,csvlist)
      end
   end
-  WriteFILE("  </tbody>\n</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>","")
 end
 
 function FXedItems()
@@ -1942,7 +1964,7 @@ function FXedItems()
       end
     end -- for
   end
-  WriteFILE("  </tbody>\n</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>","")
   reaper.UpdateArrange()
 end
 
@@ -2033,7 +2055,7 @@ function NotedItems()
       end
     end --for
   end
-  WriteFILE("  </tbody>\n</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>","")
   reaper.UpdateArrange()
 end
 
@@ -2042,7 +2064,7 @@ function closeFiles()
   f_csv:close()
   f_html:write( PageFooterHTML..LF )
   f_html:close()
-  reaper.MB("Files .CSV and HTML saved\ninto the Project Folder","DONE",0,0)
+  reaper.MB("Files CSV and HTML saved into the Project Folder:"..LF..LF..pj_path,"FILES EXPORT: DONE",0,0)
 end
 ----------------------------------------------
 -- MAIN CALL FOR SCRIPT FIRE UP
