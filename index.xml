@@ -244,6 +244,8 @@
                     + Path into the export box
                     # Specified Noted Tracks only
                     # Specified Noted Items only
+                v2.9
+                    # CSS adaptation
 
                 @credits    Mario Bianchi for his contribution to expedite the process;
                             Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
