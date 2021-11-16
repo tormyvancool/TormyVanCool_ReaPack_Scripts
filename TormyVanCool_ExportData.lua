@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.8
+@version 2.9
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -79,6 +79,8 @@ v2.8
   + Path into the export box
   # Specified Noted Tracks only
   # Specified Noted Items only
+v2.9
+  # CSS adaptation
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -175,7 +177,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.8 FERRETS"
+local scriptVersion = "2.9 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -832,7 +834,9 @@ local PageHeaderHTML = [[
      tr:nth-child(even) {background: #dddddd}
      tr:nth-child(odd) {background: #f1f1f1}
      th, tr, td {padding: 10px 20px 10px 20px;}
-     th.header { background: #2db1ef; color: white; font-size: 51px; position: relative; height: 150px }
+     th.mainHeader, th.header { background: #2db1ef; color: white; font-size: 51px; position: relative;}
+     th.mainHeader{ height: 150px; }
+     th.header { height: 81px; }
      thead th:first-of-type{ border-top-left-radius: 10px; }
      thead th:last-of-type{ border-top-right-radius: 10px; }
      tr:last-child td:first-child { border-bottom-left-radius: 10px; }
@@ -1027,7 +1031,7 @@ local PageHeaderHTML = [[
   <body> 
     <table class="center">
       <thead>
-        <tr><th colspan="8" class="header">
+        <tr><th colspan="8" class="mainHeader">
         <a href="]]..TormyURL..[[" target="_blank"><img id="TormyLOGO" src="data:image/png;base64, ]]..TormyLOGO..[[" /></a>
         <a href="]]..TVCEURL..[[" target="_blank"><img id="TVCELogo" src="data:image/png;base64, ]]..TVCELogo..[[" /></a>
         <a href="]]..reaperURL..[[" target="_blank"><img id="REAPERLogo" src="data:image/png;base64, ]]..REAPERLogo..[[" /></a>
