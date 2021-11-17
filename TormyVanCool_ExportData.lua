@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.9
+@version 2.9.1
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -81,6 +81,8 @@ v2.8
   # Specified Noted Items only
 v2.9
   # CSS adaptation
+v2.9.1
+  # UTF-8 on HTML
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -177,7 +179,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.9 FERRETS"
+local scriptVersion = "2.9.1 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -805,8 +807,9 @@ local PageHeaderCSV = 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..p
                       "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"..LF..LF..'CATEGORY,DESCRIPTION,META [FORMAT],TAG CODE,VALUE'..LF..metaDataCSV..LF..LF..
                       'RENDERED AUDIO'..LF..'PATH,FILE NAME,FULL PATH'..LF..scandir(renderPath,2)
 local PageHeaderHTML = [[
-<html>
+<html lang="en">
   <head>
+  <meta charset="utf-8"/>
      <script>]].. dec(jQuery)..[[</script>
      <title>]] .. pj_name_ .. [[</title>
      <style>
