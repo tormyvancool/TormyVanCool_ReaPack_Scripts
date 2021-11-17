@@ -171,8 +171,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.9" author="Tormy Van Cool" time="2021-11-16T15:48:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1314cd4aa9a5fbb7b5c8011d76e159d3cd40da96/TormyVanCool_ExportData.lua</source>
+            <version name="2.9.1" author="Tormy Van Cool" time="2021-11-17T22:56:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a057372269502aad3fe2712186e447b474b49a44/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -246,6 +246,9 @@
                     # Specified Noted Items only
                 v2.9
                     # CSS adaptation
+                    
+                v2.9.1
+                    # UTF-8 on HTML
 
                 @credits    Mario Bianchi for his contribution to expedite the process;
                             Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
