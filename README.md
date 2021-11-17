@@ -58,8 +58,11 @@ alt="VST/VSTi/AU/LV2 Extractor" width="560" height="315" border="10" /></a>
 
 EXPORT DATA in function
 -------
-(Internet connection is mandatory with)
-![..](EXPORT_DATA_DEMO_2.3.gif)
+Click on the image to watch the video Tutorial
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=_VDGMuxJ5xc
+" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
+alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
 
