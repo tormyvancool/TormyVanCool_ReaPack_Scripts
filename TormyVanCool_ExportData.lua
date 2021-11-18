@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.9.2
+@version 2.9.3
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -86,6 +86,9 @@ v2.9.1
 v2.9.2
   # HH:MM:SS:FF
   + Project Tempo BPM
+v2.9.3
+  + URL Encode for spaces
+  + Rendered audio: Only Audio Formats
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -184,7 +187,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.9.2 FERRETS"
+local scriptVersion = "2.9.3 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -244,13 +247,26 @@ function scandir(directory,format)
   local i, t, popen = 0, {}, io.popen
   t = ''
   local f=io.popen('dir '..renderPath)
+  
     for filename in popen('dir "'..renderPath..'" /b'):lines() do
-      if format == 1 then
-        t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(filename)..'"/></td></tr>'
-      elseif format == 2 then
-        t = t..renderPath..','..tostring(filename)..','..renderPath..tostring(filename)..LF
+    
+      local extension = filename:match("^.+(%..+)$")
+      if extension == ".wav" or
+         extension == ".mp3" or
+         extension == ".flac" or
+         extension == ".mov" or
+         extension == ".ogg" or
+         extension == ".mp4" then
+          reaper.ShowConsoleMsg(extension)
+          uriFormat = filename:gsub(" ", "%%20")
+          if format == 1 then
+            t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(uriFormat)..'"/></td></tr>'
+          elseif format == 2 then
+            t = t..renderPath..','..tostring(filename)..','..renderPath..tostring(filename)..LF
+          end
+          i = i + 1
       end
-      i = i + 1 
+ 
     end
   return t
 end
