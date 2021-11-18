@@ -249,6 +249,9 @@
                     
                 v2.9.1
                     # UTF-8 on HTML
+                    
+                v2.9.2
+                    # HH:MM:SS:FF
 
                 @credits    Mario Bianchi for his contribution to expedite the process;
                             Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
