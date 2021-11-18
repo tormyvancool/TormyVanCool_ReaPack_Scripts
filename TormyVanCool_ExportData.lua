@@ -85,6 +85,7 @@ v2.9.1
   # UTF-8 on HTML
 v2.9.2
   # HH:MM:SS:FF
+  + Project Tempo BPM
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -1060,13 +1061,14 @@ local PageHeaderHTML = [[
           '<br/><span class="label">Song Title:</span> '..pj_title..
           '<br/><span class="label">Song Author:</span> '..author..
           '<br/><span class="label">DAW Version:</span> '..version..
-          '<br/><span class="label">Sample Rate:</span> '..round(pj_sampleRate,0)..
-          ' Hz<br/><span class="label">Project Length:</span> '..SecondsToHMS(pj_length)..
-          '</td><td class="centertext">'.. reaper.CountTracks() ..
-          '</td><td class="centertext">'..totalMediaItems..
-          '</td><td class="centertext">'..totalMarkers..
-          '</td><td class="centertext">'..totalRegions..
-          '</td><td colspan="3">'..pj_notes..[[
+          '<br/><span class="label">Sample Rate:</span> '..round(pj_sampleRate,0)..' Hz'..
+          '<br/><span class="label">Project Length:</span> '..SecondsToHMS(pj_length)..
+          '<br/><span class="label">Project BPM (Tempo):</span> '..reaper.Master_GetTempo(0)..'</td>'..
+          '<td class="centertext">'.. reaper.CountTracks() ..'</td>'..
+          '<td class="centertext">'..totalMediaItems..'</td>'..
+          '><td class="centertext">'..totalMarkers..'</td>'..
+          '<td class="centertext">'..totalRegions..'</td>'..
+          '<td colspan="3">'..pj_notes..[[
       </td></tr>]]
       
 local PageHeaderMetaDataHTML =[[
