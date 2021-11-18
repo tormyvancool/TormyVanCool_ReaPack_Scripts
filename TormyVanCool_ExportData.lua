@@ -257,7 +257,6 @@ function scandir(directory,format)
          extension == ".mov" or
          extension == ".ogg" or
          extension == ".mp4" then
-          reaper.ShowConsoleMsg(extension)
           uriFormat = filename:gsub(" ", "%%20")
           if format == 1 then
             t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(uriFormat)..'"/></td></tr>'
