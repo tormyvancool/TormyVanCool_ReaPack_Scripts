@@ -5,7 +5,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.9.1
+@version 2.9.2
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -83,6 +83,8 @@ v2.9
   # CSS adaptation
 v2.9.1
   # UTF-8 on HTML
+v2.9.2
+  # HH:MM:SS:FF
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -106,13 +108,15 @@ end
 
 function SecondsToHMS(seconds)
   local seconds = tonumber(seconds)
+  local currentFrameRate = reaper.TimeMap_curFrameRate(0)
   if seconds <= 0 then
-    return "00:00:00";
+    return "00:00:00:00";
   else
     hours = string.format("%02.f", math.floor(seconds/3600));
     mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
     secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
-    return hours..":"..mins..":"..secs
+    local fps = string.format("%02.f", math.floor(seconds * currentFrameRate % currentFrameRate));
+    return hours..":"..mins..":"..secs..":"..fps
   end
 end
 
@@ -179,7 +183,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.9.1 FERRETS"
+local scriptVersion = "2.9.2 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -1211,16 +1215,16 @@ local PageHeaderMetaDataHTML =[[
       ]]..MetaVORBIS(1)
                     
 
-local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION, END POSITION (if Region),DURATION (if Region)'..LF..'MARKERS' 
+local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION (hh:mm:ss:ff), END POSITION (if Region)  (hh:mm:ss:ff),DURATION (if Region)  (hh:mm:ss:ff)'..LF..'MARKERS' 
 local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersregions">MARKERS</td></tr>'..
       '<tr class="table_header"><th class="centertext">NAME</th>'..
       '<th class="colorMarkerRegion">COLOR</th>'..
       '<th class="centertext">TYPE</th>'..
       '<th class="centertext">NUMBER</th>'..
       '<th class="centertext">IDX</th>'..
-      '<th class="centertext">START POSITION</th>'..
-      '<th class="centertext">END POSITION (if Region)</th>'..
-      '<th class="centertext">DURATION (if Region)</th></tr>'
+      '<th class="centertext">START POSITION<br>(hh:mm:ss:ff)</th>'..
+      '<th class="centertext">END POSITION (if Region)<br>(hh:mm:ss:ff)</th>'..
+      '<th class="centertext">DURATION (if Region)<br>(hh:mm:ss:ff)</th></tr>'
 
       WriteFILE(PageHeaderHTML,PageHeaderCSV)
       
@@ -1235,7 +1239,7 @@ local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersr
                             ','..pj_MarkersRegions(idx).MR_Isrgn..
                             ','..pj_MarkersRegions(idx).MR_Number..
                             ','..pj_MarkersRegions(idx).MR_Markrgnindexnumber..
-                            ','..pj_MarkersRegions(idx).MR_Pos..
+                            ','..SecondsToHMS(pj_MarkersRegions(idx).MR_Pos)..
                             ','..pj_MarkersRegions(idx).MR_Rgnend..
                             ','..pj_MarkersRegions(idx).MR_Duration
                             
@@ -1246,7 +1250,7 @@ local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersr
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Isrgn..'</td>'..
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Number..'</td>'..
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Markrgnindexnumber..'</td>'..
-                              '<td class="right">'..pj_MarkersRegions(idx).MR_Pos..'</td>'..
+                              '<td class="right">'..SecondsToHMS(pj_MarkersRegions(idx).MR_Pos)..'</td>'..
                               '<td class="right">'..pj_MarkersRegions(idx).MR_Rgnend..'</td>'..
                               '<td class="right">'..pj_MarkersRegions(idx).MR_Duration..'</td></tr>'
             WriteFILE(lineHTML,lineCSV) 
@@ -1260,9 +1264,9 @@ local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersr
                             ','..pj_MarkersRegions(idx).MR_Isrgn..
                             ','..pj_MarkersRegions(idx).MR_Number..
                             ','..pj_MarkersRegions(idx).MR_Markrgnindexnumber..
-                            ','..pj_MarkersRegions(idx).MR_Pos..
-                            ','..pj_MarkersRegions(idx).MR_Rgnend..
-                            ','..pj_MarkersRegions(idx).MR_Duration
+                            ','..SecondsToHMS(pj_MarkersRegions(idx).MR_Pos)..
+                            ','..SecondsToHMS(pj_MarkersRegions(idx).MR_Rgnend)..
+                            ','..SecondsToHMS(pj_MarkersRegions(idx).MR_Duration)
                             
             local lineHTML =  '<tr><td>'..pj_MarkersRegions(idx).MR_Name..'</td>'..
                               '<td style="background-color: rgb('..pj_MarkersRegions(idx).MR_ColorR..
@@ -1271,9 +1275,9 @@ local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersr
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Isrgn..'</td>'..
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Number..'</td>'..
                               '<td class="centertext">'..pj_MarkersRegions(idx).MR_Markrgnindexnumber..'</td>'..
-                              '<td class="right">'..pj_MarkersRegions(idx).MR_Pos..'</td>'..
-                              '<td class="right">'..pj_MarkersRegions(idx).MR_Rgnend..'</td>'..
-                              '<td class="right">'..pj_MarkersRegions(idx).MR_Duration..'</td></tr>'
+                              '<td class="right">'..SecondsToHMS(pj_MarkersRegions(idx).MR_Pos)..'</td>'..
+                              '<td class="right">'..SecondsToHMS(pj_MarkersRegions(idx).MR_Rgnend)..'</td>'..
+                              '<td class="right">'..SecondsToHMS(pj_MarkersRegions(idx).MR_Duration)..'</td></tr>'
             WriteFILE(lineHTML,lineCSV) 
           end
         end
@@ -1409,7 +1413,7 @@ local tableNotedTracksHeader = [[
           <th class="TracksNoted">MUTE</th>
         </tr>]]
         
-local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:'..LF..'TRACK NAME,FX,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:'..LF..'TRACK NAME,FX,ITEM POSITION (hh:mm:ss:ff),ITEM LENGTH <br>(hh:mm:ss:ff),NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderItemsFXedHTML = [[ 
     <div class="spacer">&nbsp;</div>
     <table class="center">
@@ -1429,8 +1433,8 @@ local PageHeaderItemsFXedHTML = [[
         <tr class="table_header slaveFXedItems">
           <th>BELONGIN TO</th>
           <th>FX</th>
-          <th class="EffectedItems">POSITION</th>
-          <th class="EffectedItems">LENGTH</th>
+          <th class="EffectedItems">POSITION<br>(hh:mm:ss:ff)</th>
+          <th class="EffectedItems">LENGTH<br>(hh:mm:ss:ff)</th>
           <th>NOTES</th>
           <th class="EffectedItems">MUTE</th>
           <th class="EffectedItems">LOCKED</th>
@@ -1439,7 +1443,7 @@ local PageHeaderItemsFXedHTML = [[
           <th class="EffectedItems">BIT DEPTH</th>
         </tr>]]
         
-local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:'..LF..'TRACK NAME,ITEM POSITION,ITEM LENGTH,NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:'..LF..'TRACK NAME,ITEM POSITION (hh:mm:ss:ff),ITEM LENGTH (hh:mm:ss:ff),NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderNotedItemsHTML = [[
     <table class="center">
       <thead>
@@ -1456,8 +1460,8 @@ local PageHeaderNotedItemsHTML = [[
           <th colspan="3">SOURCE</th>
         </tr>
         <tr class="table_header slaveNotedItems">
-          <th>BELONGIN TO</th><th>POSITION</th>
-          <th>LENGTH</th><th>NOTES</th>
+          <th>BELONGIN TO</th><th>POSITION<br>(hh:mm:ss:ff)</th>
+          <th>LENGTH<br>(hh:mm:ss:ff)</th><th>NOTES</th>
           <th class="EffectedItems">MUTE</th>
           <th class="EffectedItems">LOCKED</th>
           <th>SOURCE NAME</th>
@@ -1954,8 +1958,8 @@ function FXedItems()
                         
               lineHTML = '   <tr class=\"tracks slaveFXedItems\"><td>'..itemTrackName..
                          '</td><td>'..fx_name..
-                         '</td><td class="right">'..round(itemPosition,precision)..
-                         '</td><td class="right">'..round(itemLength,precision)..
+                         '</td><td class="right">'..SecondsToHMS(round(itemPosition,precision))..
+                         '</td><td class="right">'..SecondsToHMS(round(itemLength,precision))..
                          '</td><td>'..itemNotes.. 
                          '</td>'..isMutedHTML..isLockedHTML..
                          '<td>'..itemFilename..
@@ -2037,8 +2041,8 @@ function NotedItems()
               -- ASSEMBLING CSV and HTML RECORDS
               ----------------------------------------------
               lineCSV = ridCommas(itemTrackName)..
-                        ','..round(itemPosition,precision)..
-                        ','..round(itemLength,precision)..
+                        ','..SecondsToHMS(round(itemPosition,precision))..
+                        ','..SecondsToHMS(round(itemLength,precision))..
                         ','..ridCommas(itemNotes)..
                         ','..isMutedCSV..
                         ','..isLockedCSV..
@@ -2047,8 +2051,8 @@ function NotedItems()
                         ','..bitDepth
                         
               lineHTML = '   <tr class=\"tracks slaveNotedItems\"><td>'..itemTrackName..
-                         '</td><td class="right">'..round(itemPosition,precision)..
-                         '</td><td class="right">'..round(itemLength,precision)..
+                         '</td><td class="right">'..SecondsToHMS(round(itemPosition,precision))..
+                         '</td><td class="right">'..SecondsToHMS(round(itemLength,precision))..
                          '</td><td>'..itemNotes.. 
                          '</td>'..isMutedHTML..isLockedHTML..
                          '<td>'..itemFilename..
