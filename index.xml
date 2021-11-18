@@ -171,8 +171,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.9.2" author="Tormy Van Cool" time="2021-11-18T14:03:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/09a42ca531bfbe11c066f33436a13ab488ef1688/TormyVanCool_ExportData.lua</source>
+            <version name="2.9.3" author="Tormy Van Cool" time="2021-11-18T20:25:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1f4c44cdb394ec0681d99d0625e49da9e233d324/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -253,6 +253,9 @@
                 v2.9.2
                     # HH:MM:SS:FF
                     + Project Tempo BPM
+                v2.9.3
+                    + URL Encode for spaces
+                    + Rendered audio: Only Audio Formats
 
                 @credits    Mario Bianchi for his contribution to expedite the process;
                             Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
