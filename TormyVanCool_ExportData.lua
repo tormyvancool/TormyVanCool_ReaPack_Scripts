@@ -750,11 +750,87 @@ end
 function MetaASWG(i) -- TO BE COMPLETED --
   local meta
     meta = MetaData('ASWG',"General","Title","project")[i]..
-    MetaData('ASWG',"Date","Date YYYY-MM-DD","OriginationDate")[i]..
-    MetaData('ASWG',"Date","Recording Time MM:SS","OriginationTime")[i]..
-    MetaData('ASWG',"Project","Originator","Originator")[i]..
-    MetaData('ASWG',"Project","Originator Refer","Originator Reference")[i]..
-    MetaData('ASWG',"Spot","Start Offset [Automatic]","TimeReference")[i]
+    MetaData('ASWG',"General","DescriptionD","session")[i]..
+    MetaData('ASWG',"General","Comment","notes")[i]..
+    MetaData('ASWG',"Artist","Artist","artist")[i]..
+    MetaData('ASWG',"Musical","Genre","genre")[i]..
+    MetaData('ASWG',"Musical","Instrument","instrument")[i]..
+    MetaData('ASWG',"Musical","Intensity","intensity")[i]..
+    MetaData('ASWG',"Musical","Key","inKey")[i]..
+    MetaData('ASWG',"Musical","Loop","isLoop")[i]..
+    MetaData('ASWG',"Musical","Sub-Genre","subGenre")[i]..
+    MetaData('ASWG',"Musical","Tempo","tempo")[i]..
+    MetaData('ASWG',"Musical","Time Signature","timeSig")[i]..
+    MetaData('ASWG',"Performance","Transcript","text")[i]..
+    MetaData('ASWG',"Performance","Actor Gender","actorGender")[i]..
+    MetaData('ASWG',"Performance","Actor Name","actorName")[i]..
+    MetaData('ASWG',"Performance","Character Age","characterAge")[i]..
+    MetaData('ASWG',"Performance","Character Gender","characterGender")[i]..
+    MetaData('ASWG',"Performance","Character Name","characterName")[i]..
+    MetaData('ASWG',"Performance","Character Role","characterRole")[i]..
+    MetaData('ASWG',"Performance","Digalogue Contains Efforts","efforts")[i]..
+    MetaData('ASWG',"Performance","Digalogue Effort Type","effortType")[i]..
+    MetaData('ASWG',"Performance","Digalogue Emotion","emotion")[i]..
+    MetaData('ASWG',"Performance","Digalogue Regional Accent","accent")[i]..
+    MetaData('ASWG',"Performance","Digalogue Timing Restriction","timingRestriction")[i]..
+    MetaData('ASWG',"Performance","Director","director")[i]..
+    MetaData('ASWG',"Performance","Director's Notes","direction")[i]..
+    MetaData('ASWG',"Personnel","Composer","composer")[i]..
+    MetaData('ASWG',"Personnel","Creator","creatorid")[i]..
+    MetaData('ASWG',"Personnel","Editor","editor")[i]..
+    MetaData('ASWG',"Personnel","Engineer","recEngineer")[i]..
+    MetaData('ASWG',"Personnel","Mixer","mixer")[i]..
+    MetaData('ASWG',"Personnel","Music Supervisor","musicSup")[i]..
+    MetaData('ASWG',"Personnel","Producer","producer")[i]..
+    MetaData('ASWG',"Personnel","Publisher","musicPublisher")[i]..
+    MetaData('ASWG',"Project","Cinematic","isCinematic")[i]..
+    MetaData('ASWG',"Project","Content Type","contentType")[i]..
+    MetaData('ASWG',"Project","Final","isFinal")[i]..
+    MetaData('ASWG',"Project","Original","isOst")[i]..
+    MetaData('ASWG',"Project","Originator","originator")[i]..
+    MetaData('ASWG',"Project","Originator Studio","originatorStudio")[i]..
+    MetaData('ASWG',"Project","Reoording Studio","recStudio")[i]..
+    MetaData('ASWG',"Project","Song Title","songTitle")[i]..
+    MetaData('ASWG',"Project","Source","isSource")[i]..
+    MetaData('ASWG',"Project","Version","musicVersion")[i]..
+    MetaData('ASWG',"Part","Part Number","orderRef")[i]..
+    MetaData('ASWG',"Code","ISRC","isrcId")[i]..
+    MetaData('ASWG',"Code","Billing Code","billingCode")[i]..
+    MetaData('ASWG',"License","License","isLicensed")[i]..
+    MetaData('ASWG',"License","Rights Owner","rightsOwner")[i]..
+    MetaData('ASWG',"License","Union Contract","isUnion")[i]..
+    MetaData('ASWG',"License","Usage Rights","usageRights")[i]..
+    MetaData('ASWG',"Technical","Ambisonic Channel Order","ambisonicChnOrder")[i]..
+    MetaData('ASWG',"Technical","Ambisonic Format","ambisonicFormat")[i]..
+    MetaData('ASWG',"Technical","Ambisonic Normalization Method","ambisonicNom")[i]..
+    MetaData('ASWG',"Technical","Average Zero Cross Rate","zeroCrossRate")[i]..
+    MetaData('ASWG',"Technical","Channel Layout Tex [Descriptive text]t","channelConfig")[i]..
+    MetaData('ASWG',"Technical","Designed Or Raw","isDesigned")[i]..
+    MetaData('ASWG',"Technical","Diegetic","isDiegetic")[i]..
+    MetaData('ASWG',"Technical","File State","state")[i]..
+    MetaData('ASWG',"Technical","FX Category","category")[i]..
+    MetaData('ASWG',"Technical","FX Category ID","catId")[i]..
+    MetaData('ASWG',"Technical","FX Chain Name","fxChainName")[i]..
+    MetaData('ASWG',"Technical","FX Name","fxName")[i]..
+    MetaData('ASWG',"Technical","FX Sub-Category","subCategory")[i]..
+    MetaData('ASWG',"Technical","FX Used","fxUsed")[i]..
+    MetaData('ASWG',"Technical","Language [eng. spa. ...]","language")[i]..
+    MetaData('ASWG',"Technical","LRA Loudness range","loudnessRange")[i]..
+    MetaData('ASWG',"Technical","LUFS-I Integrated Loudness","loudness")[i]..
+    MetaData('ASWG',"Technical","Maximum Peak Value dBFS","mxPeak")[i]..
+    MetaData('ASWG',"Technical","Microphone Configuration","micConfig")[i]..
+    MetaData('ASWG',"Technical","Microphone Distance","micDistance")[i]..
+    MetaData('ASWG',"Technical","Microphone Type","micType")[i]..
+    MetaData('ASWG',"Technical","Peak To Average Power Ratio","papr")[i]..
+    MetaData('ASWG',"Technical","Recording Location","impulseLocation")[i]..
+    MetaData('ASWG',"Technical","Recording Location","recordingLoc")[i]..
+    MetaData('ASWG',"Technical","RMS Power","mspower")[i]..
+    MetaData('ASWG',"Technical","Sound effects Library","library")[i]..
+    MetaData('ASWG',"Technical","Source IO","sourceId")[i]..
+    MetaData('ASWG',"Technical","Spectral Density [24 comma-separated values]","specDensity")[i]..
+    MetaData('ASWG',"Technical","User Category","userCategory")[i]..
+    MetaData('ASWG',"Technical","User Data","userData")[i]..
+    MetaData('ASWG',"Technical","Vendor Category","vendorCategory")[i]
   return tostring(meta)
 end
 
@@ -2451,4 +2527,3 @@ NotedTracks()
 FXedItems()
 NotedItems()
 closeFiles()
- 
