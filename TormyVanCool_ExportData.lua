@@ -1,11 +1,12 @@
 -- https://forum.cockos.com/archive/index.php/t-209658.html
 -- https://forum.cockos.com/showthread.php?t=238421
 -- https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k
+-- https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts
 --[[
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.9.3
+@version 2.9.4
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -89,6 +90,13 @@ v2.9.2
 v2.9.3
   + URL Encode for spaces
   + Rendered audio: Only Audio Formats
+v2.9.4
+  + Management UTF8 Characters on file names
+  + Metadata: Wavext
+  + Metadata: Aswg
+  + Metadata: Cafinfo
+  + Links to Documentation
+  # Mistyping corrections
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -97,8 +105,8 @@ v2.9.3
           Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
           MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
           Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
+          Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
 ]]--
-
 ----------------------------------------------
 -- NUMERICAL FUNCTIONS
 ----------------------------------------------
@@ -187,7 +195,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.9.3 FERRETS"
+local scriptVersion = "2.9.4 FERRETS"
 local precision = 4
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
@@ -209,7 +217,17 @@ local TVCEURL = "https://www.facebook.com/vancoolelektroakustik"
 local _, RenderDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrenderpath', '', reaper.get_ini_file())
 local _, RencordingDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrecpath', '', reaper.get_ini_file())
 local renderPath = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'..RenderDir
-
+local SonyASWG = "http://gameaudiopodcast.com/ASWG-R001.pdf"
+local AppleCAFINFO = "https://developer.apple.com/library/archive/documentation/MusicAudio/Reference/CAFSpec/CAF_overview/CAF_overview.html"
+local BBCID3 = "https://id3.org/"
+local BWFDoc = "https://tech.ebu.ch/docs/tech/tech3285.pdf"
+local IFFDoc = "https://www.loc.gov/preservation/digital/formats/fdd/fdd000115.shtml"
+local CUEDoc = "https://docs.fileformat.com/disc-and-media/cue/"
+local VORBISDoc = "https://www.xiph.org/vorbis/doc/v-comment.html"
+local AESDoc = "https://www.aes.org/publications/standards/search.cfm?docID=41"
+local iXMLDoc = "http://www.gallery.co.uk/ixml/"
+local XMPDoc = "https://www.adobe.com/products/xmp.html"
+local APEDoc = "https://en.wikipedia.org/wiki/APE_tag"
 
 ------------------------------------------------
 -- CHECK if SWS is INSTALLED and Reaper Version
@@ -220,9 +238,9 @@ if not test_SWS then
   exit()
 end
 
-local minVersion = '6.41'
+local minVersion = '6.42'
 if minVersion > version then
-  reaper.MB('Please update REAPER to the last version!', 'ERROR: REAPER OUTDATED', 0)
+  reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
   exit()
 end
 
@@ -240,36 +258,242 @@ function WriteFILE(listHTML,listCSV)
 end
 
 
-----------------------------------------------
--- SCAN RENDERED AUDIO
-----------------------------------------------
-function scandir(directory,format)
-  local i, t, popen = 0, {}, io.popen
-  t = ''
-  local f=io.popen('dir '..renderPath)
-  
-    for filename in popen('dir "'..renderPath..'" /b'):lines() do
-    
-      local extension = filename:match("^.+(%..+)$")
-      if extension == ".wav" or
-         extension == ".mp3" or
-         extension == ".flac" or
-         extension == ".mov" or
-         extension == ".ogg" or
-         extension == ".mp4" then
-          uriFormat = filename:gsub(" ", "%%20")
-          if format == 1 then
-            t = t..'<tr class="Rendered"><td>'..renderPath..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..renderPath..'/'..tostring(uriFormat)..'"/></td></tr>'
-          elseif format == 2 then
-            t = t..renderPath..','..tostring(filename)..','..renderPath..tostring(filename)..LF
-          end
-          i = i + 1
+
+---------------------------------------------------------------------
+-- Converter between win-125x and UTF-8 strings
+---------------------------------------------------------------------
+-- Written in pure Lua, compatible with Lua 5.1-5.4
+-- Usage example:
+--    require("win-125x")
+--    str_win  = utf8_to_win(str_utf8)
+--    str_utf8 = win_to_utf8(str_win)
+---------------------------------------------------------------------
+
+local codepage = 1252   -- Set your codepage here
+
+-- The following codepages are supported:
+--   874  Thai
+--  1250  Central European
+--  1251  Cyrillic
+--  1252  Western
+--  1253  Greek
+--  1254  Turkish
+--  1255  Hebrew
+--  1256  Arabic
+--  1257  Baltic
+--  1258  Vietnamese
+
+do
+   local compressed_mappings = {
+      -- Unicode to win-125x mappings are taken from unicode.org, compressed and protected by a checksum
+      [874]  =  -- Thai, 97 codepoints above U+007F
+         [[!%l+$"""WN^9=&$pqF'oheO#;0l#"hs)mI[=e!ufwkDB#OwLnJ|IRIUz8Q(MMM]],
+      [1250] =  -- Central European, 123 codepoints above U+007F
+         [[!<2#?v"1(ro;xh/tL_3hC^i;e~PjO"p<I\aTT};]Rb~M7/]&jRjfwuE%AJ)@XfBQy&\jy[V5:]!RtH]m>Yd8m?6LpsUA\V=x'VcMO<Wz+EOO
+         0m7U`u|$Y5x?Vk*6+qJ@/0Lie77_b}OEuwv$Qj/w`+J>M*<g2qxD3qEyC&*{VGI'UddQ`GQ)L=lj<{S;Jm),f3yzcQOuxacHSZ{X'XIWzDz!?E
+         =U0f]],
+      [1251] =  -- Cyrillic, 127 codepoints above U+007F
+         [[!-[;_8kMai7j]xB$^n)#7ngrX}_b%{<Cdot;P?2J&00&^wX|;]@N*fjq#ioX'v.&gG@ur~3yi8t1;xn40{G#NX?7+hGC{$D"4#oJ//~kflzs
+         "_\z9qP#}1o|@{t`2NrM%t{MW?X9d6o:MqHl6+z]],
+      [1252] =  -- Western, 123 codepoints above U+007F
+         [[!)W$<c~\OdA5TJ%/J/{:yoE]K[d,c<Mv+gp_[_UuB52c;H&{leFk%Kd8%cHnvLrB[>|:)t.}QH*)]AD|LqjsB+JCdKmbRIjO,]],
+      [1253] =  -- Greek, 111 codepoints above U+007F
+         [[!./yDCq;#WAuC\C1R{=[n'FpSuc!"R\EZ|4&J?A3-z?*TI?ufbhFq1J!x@Sjff\!G{o^dDXl|8NLZ!$d'8$f^=hh_DPm!<>>bCgV(>erUWhX
+         ?R+-JP@4ju:Yw#*C]],
+      [1254] =  -- Turkish, 121 codepoints above U+007F
+         [[!-(R[SPKY>cgcK5cCs4vk%MuL`yFx^Bl#/!l#M@#yoe|Jx+pxZuvh%r>O</n_gb>hDjmG]j#lA{]2"R-Z@(6Wy:Q~%;327b&fRSkF#BM/d+%
+         iWmSx4E*\F_z=s>QeJBqC^]],
+      [1255] =  -- Hebrew, 105 codepoints above U+007F
+         [[!.b\.H?S\21+7efm'`w&MW_Jg,mRbB;{X@T\3::DC#7<m_cAE!:%C%c7/,./u[8w*h-iwpz03QY,ay%]MI*D]W&]UG^3(=20a7$zG[Ng7MLt
+         sXIne(V37A?OO%|Hn13wMh-?^jNzhW`,-]],
+      [1256] =  -- Arabic, 128 codepoints above U+007F
+         [[!3n8GE$.to/ka%Nx`uOpcib>|9KU-N72!1J4c2NAUE3a,HlOE=M`@rsa||Nh_!og]:dILz9KNlF~vigNH*a0KxwjjfR*]?tO87(a3-RQex^V
+         Ww&SY{:AqE|s%}@U8%rKcr0,NCjR:N&L'YyGu<us'sN*1pl=gAXOwSJ[v?f;imBhDu_)d$F8T?%S[]],
+      [1257] =  -- Baltic, 116 codepoints above U+007F
+         [[!:<_.XQ[;n35s%I?g9)b/7DiGwIR)zy&=6?/3)6iO%rSnC_6yjl'8#zeN0vcW_yX/2*J93+EJVrW,^Rhe,h7wWl"}neF2~F[PyD;BcrG*5=J
+         fh<x!FJ?qSw9Xp!;WB3T<J^x?#Ie`xufezR'\I(eED]3d&)VJL$/+$Zf;W^I>L[3D5F<_IcGpn=oX"JR1%arS|FX|dia4]BeF>d5p`EV+:;*I<
+         x^Voq{"f]],
+      [1258] =  -- Vietnamese, 119 codepoints above U+007F
+         [[!3n8C{%C0}&p3gE0~|&RVm9Wr&^ln1}'$gV{bml1oByN*bb:Bm^E;~B3-WjF6Qubq^`Y*6\0^w!DKpK<\7lHVELmSXN{2~B"0C"<1CYN2{$a
+         5M?>|7%~qm{pXphwm3$}iyXjBYwtGqxp(f[!g^Ee9H.}1~0H-k-dzNDh1L]],
+   }
+   local char, byte, gmatch, floor, string_reverse = string.char, string.byte, string.gmatch, math.floor, string.reverse
+   local table_insert, table_concat = table.insert, table.concat
+
+   local function decompress_mapping()
+      local width, offset, base, CS1, CS2, get_next_char = 1.0, 0.0, 0.0, 7^18, 5^22, gmatch(compressed_mappings[codepage], "%S")
+      local mapping, rev_mapping, trees, unicode, ansi, prev_delta_unicode, prev_delta_ansi = {}, {}, {}, 0x7F, 0x7F
+
+      local function decompress_selection(qty, tree)
+         while width <= 94^7 do
+            width, offset, base = width * 94.0, offset * 94.0 + byte(get_next_char()) - 33.0, (base - floor((base + width - 1) / 94^7) * 94^7) * 94.0
+         end
+         if qty then
+            local big_qty = width % qty
+            local small_unit = (width - big_qty) / qty
+            local big_unit = small_unit + 1.0
+            local offset_small = big_qty * big_unit
+            local from, offset_from, left, right
+            if offset < offset_small then
+               width = big_unit
+               offset_from = offset - offset % big_unit
+               from = offset_from / big_unit
+            else
+               width = small_unit
+               offset_from = offset - (offset - offset_small) % small_unit
+               from = big_qty + (offset_from - offset_small) / small_unit
+            end
+            local len, leaf = 1.0, from
+            if tree then
+               leaf, left, right = 4, 0, qty
+               repeat
+                  local middle = tree[leaf]
+                  if from < middle then
+                     right = middle
+                  else
+                     left, leaf = middle, leaf + 1
+                  end
+                  leaf = tree[leaf + 1]
+               until leaf < 0
+               from, len = left, right - left
+               offset_from = left < big_qty and left * big_unit or offset_small + (left - big_qty) * small_unit
+               width = (right < big_qty and right * big_unit or offset_small + (right - big_qty) * small_unit) - offset_from
+            end
+            base, offset = base + offset_from, offset - offset_from
+            CS1, CS2 = (CS1 % 93471801.0) * (CS2 % 93471811.0) + qty, (CS1 % 93471821.0) * (CS2 % 93471831.0) - from * 773.0 - len * 7789.0
+            return leaf
+         end
+         assert((CS1 - CS2) % width == offset)
       end
- 
-    end
-  return t
+
+      local function get_delta(tree_idx)
+         local tree = trees[tree_idx]
+         local val = tree[3]
+         if val == 0.0 then
+            local leaf = decompress_selection(tree[1], tree)
+            local max_exp_cnt = tree[2]
+            val = leaf % max_exp_cnt
+            leaf = (leaf - val) / max_exp_cnt + 2.0
+            val = 2.0^val
+            val = val + decompress_selection(val)
+            if leaf ~= 0.0 then
+               return leaf * val
+            end
+         end
+         tree[3] = val - 1.0
+      end
+
+      for tree_idx = 1, 2 do
+         local total_freq = decompress_selection(2^15)
+         local max_exp_cnt = decompress_selection(17)
+         local tree, qty_for_leaf_info = {total_freq, max_exp_cnt, 0.0}, 3 * max_exp_cnt
+
+         local function build_subtree(left, right, idx)
+            local middle, subtree = left + 1
+            middle = decompress_selection(right - middle) + middle
+            tree[idx], idx = middle, idx + 3
+            for next_idx = idx - 2, idx - 1 do
+               if decompress_selection(2) == 1 then
+                  subtree, idx = idx, build_subtree(left, middle, idx)
+               else
+                  subtree = decompress_selection(qty_for_leaf_info) - qty_for_leaf_info
+               end
+               tree[next_idx], left, middle = subtree, middle, right
+            end
+            return idx
+         end
+
+         build_subtree(0, total_freq, 4)
+         trees[tree_idx] = tree
+      end
+      while true do
+         local delta = get_delta(1)
+         if not delta then
+            delta = prev_delta_unicode
+         elseif delta == prev_delta_unicode then
+            decompress_selection()
+            return mapping, rev_mapping
+         end
+         unicode, prev_delta_unicode, delta = unicode + delta, delta, get_delta(2) or prev_delta_ansi
+         ansi, prev_delta_ansi = ansi + delta, delta
+         mapping[unicode] = ansi
+         rev_mapping[ansi] = unicode
+      end
+   end
+
+   local map_unicode_to_ansi, map_ansi_to_unicode = decompress_mapping()
+
+   function utf8_to_win(str)
+      local result_ansi = {}
+      for u in gmatch(str, ".[\128-\191]*") do
+         local code = byte(u)%2^(8-#u)
+         for j = 2, #u do
+            code = (code-2)*64+byte(u,j)
+         end
+         table_insert(result_ansi, char(code < 128 and code or map_unicode_to_ansi[code] or byte"?"))
+      end
+      return table_concat(result_ansi)
+   end
+
+   function win_to_utf8(str)
+      local result_utf8 = {}
+      for pos = #str, 1, -1 do
+         local code, h = byte(str, pos), 127
+         code = code < 128 and code or map_ansi_to_unicode[code] or byte"?"
+         while code > h do
+            table_insert(result_utf8, char(128 + code%64))
+            code, h = floor(code/64), 288067%h
+         end
+         table_insert(result_utf8, char((127-h)*2+code))
+      end
+      return string_reverse(table_concat(result_utf8))
+   end
+
 end
 
+
+local function URI(file)
+   -- add more special symbols here
+   return file:gsub(" ", "%%20")
+end
+
+--local bat_file = utf8_to_win("C:\\path\\to\\cp.bat")  -- insert your path here
+
+----------------------------------------------
+-- SCAN RENDERED AUDIO
+-- DIRECTORY = string = Path to the rendered audio files repository
+-- FORMAT = Integer  => 1 = HTML format. 2 = CSV format
+----------------------------------------------
+function scandir(directory,format)
+  local i, t, popen = 0, {}, io.popen, _OsBasedString, bat_file, fileBat, extension
+  t = ''
+  local OS = reaper.GetOS()
+  if OS == "Win32" or OS == "Win64" then
+    fileBat = io.open(directory.."\\cp.bat","w")
+    fileBat:write("@chcp %1 >nul")
+    fileBat:close()
+    --os.remove(directory.."\\cp.bat")
+    bat_file = utf8_to_win(directory.."\\cp.bat")  -- insert your path here
+    _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'
+  end
+  for filename in popen(_OsBasedString):lines() do
+    extension = filename:match("^.+(%..+)$")
+    if extension == ".wav" or
+       extension == ".mp3" or
+       extension == ".flac" or
+       extension == ".mov" or
+       extension == ".ogg" or
+       extension == ".mp4" then
+        if format == 1 then
+          t = t..'<tr class="Rendered"><td>'..directory..'</td><td>'..tostring(filename)..'</td><td><audio controls src="'..URI(directory..'/'..filename)..'"/></td></tr>'
+        elseif format == 2 then
+          t = t..directory..','..filename..','..directory..'/'..filename..LF
+        end
+        i = i + 1
+    end
+  end
+  return t
+end
 
 ----------------------------------------------
 -- PROJECT METADATA
@@ -317,7 +541,7 @@ function MetaMP3(i)
     MetaData('ID3',"License","Copyright Mess","TCOP")[i]..
     MetaData('ID3',"Technical","Language","COMM_LANG")[i]..
     MetaData('ID3',"Binary","Image Type","APIC_TYPE")[i]..
-    MetaData('ID3',"Binary","Image Dsescription","APIC_DESC")[i]..
+    MetaData('ID3',"Binary","Image Description","APIC_DESC")[i]..
     MetaData('ID3',"Binary","Image File","APIC_FILE")[i]
   return tostring(meta)
 end
@@ -341,8 +565,6 @@ function MetaAXML(i)
   return tostring(meta)
 end
 
---reaper.ShowConsoleMsg("yeaa"..MetaMP3(1)..MetaBWF(1))
---exit()
 
 function MetaCART(i)
   local meta
@@ -519,6 +741,28 @@ function MetaVORBIS(i)
   return tostring(meta)
 end
 
+function MetaWAVEXT(i)
+  local meta
+    meta = MetaData('WAVEXT',"Technical","Channel Confituration<br>[only used if consistent with chnannel count]","channel configuration")[i]
+  return tostring(meta)
+end
+
+function MetaASWG(i) -- TO BE COMPLETED --
+  local meta
+    meta = MetaData('ASWG',"General","Title","project")[i]..
+    MetaData('ASWG',"Date","Date YYYY-MM-DD","OriginationDate")[i]..
+    MetaData('ASWG',"Date","Recording Time MM:SS","OriginationTime")[i]..
+    MetaData('ASWG',"Project","Originator","Originator")[i]..
+    MetaData('ASWG',"Project","Originator Refer","Originator Reference")[i]..
+    MetaData('ASWG',"Spot","Start Offset [Automatic]","TimeReference")[i]
+  return tostring(meta)
+end
+
+function MetaCAFINFO(i)
+  local meta
+    meta = MetaData('CAFINFO',"General","Title [$project]","title")[i]
+  return tostring(meta)
+end
 
 local jQuery = [[LyohIGpRdWVyeSB2My41LjEgfCAoYykgSlMgRm91bmRhdGlvbiBhbmQgb3RoZXIgY29udHJpYnV0b3JzIHwganF1ZXJ5Lm9yZy9saWNlbnNlICovCiFmdW5jdGlvbihlLHQpeyJ1c2Ugc3RyaWN0Ijsib2JqZWN0Ij09dHlwZW9mIG1vZHVsZSYmIm9iamVjdCI9PXR5cGVvZiBtb2R1bGUuZXhwb3J0cz9tb2R1bGUuZXhwb3J0cz1lLmRvY3VtZW50P3QoZSwhMCk6ZnVuY3Rpb24oZSl7aWYoIWUuZG9jdW1lbnQpdGhyb3cgbmV3IEVycm9yKCJqUXVlcnkgcmVxdWlyZXMgYSB3aW5kb3cgd2l0aCBhIGRvY3VtZW50Iik7cmV0dXJuIHQoZSl9OnQoZSl9KCJ1bmRlZmluZWQiIT10eXBlb2Ygd2luZG93P3dpbmRvdzp0aGlzLGZ1bmN0aW9uKEMsZSl7InVzZSBzdHJpY3QiO3ZhciB0PVtdLHI9T2JqZWN0LmdldFByb3RvdHlwZU9mLHM9d
 C5zbGljZSxnPXQuZmxhdD9mdW5jdGlvbihlKXtyZXR1cm4gdC5mbGF0LmNhbGwoZSl9OmZ1bmN0aW9uKGUpe3JldHVybiB0LmNvbmNhdC5hcHBseShbXSxlKX0sdT10LnB1c2gsaT10LmluZGV4T2Ysbj17fSxvPW4udG9TdHJpbmcsdj1uLmhhc093blByb3BlcnR5LGE9di50b1N0cmluZyxsPWEuY2FsbChPYmplY3QpLHk9e30sbT1mdW5jdGlvbihlKXtyZXR1cm4iZnVuY3Rpb24iPT10eXBlb2YgZSYmIm51bWJlciIhPXR5cGVvZiBlLm5vZGVUeXBlfSx4PWZ1bmN0aW9uKGUpe3JldHVybiBudWxsIT1lJiZlPT09ZS53aW5kb3d9LEU9Qy5kb2N1bWVudCxjPXt0eXBlOiEwLHNyYzohMCxub25jZTohMCxub01vZHVsZTohMH07ZnVuY3Rpb24gYihlLHQsbil7dmFyIHIsaSxvPShuPW58fEUpLmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO2lmKG8udGV4dD1
@@ -817,7 +1061,10 @@ local metaDataCSV = MetaMP3(2)..
                     MetaFLACPIC(2)..
                     MetaXMP(2)..
                     MetaAPE(2)..
-                    MetaVORBIS(2)
+                    MetaVORBIS(2)..
+                    MetaWAVEXT(2)..
+                    MetaASWG(2)..
+                    MetaCAFINFO(2)
                     
 local PageHeaderCSV = 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..pj_sampleRate..'Hz'..LF..'Duration: '..SecondsToHMS(pj_length)..LF..LF..
                       'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF..
@@ -879,6 +1126,46 @@ local PageHeaderHTML = [[
      img#TVCELogo { width: 120px; position: absolute; left: 139px; top: 15px;}
      img#REAPERLogo {position: absolute; top: 12px; right: 20px; }
      th#PlayerAudio { width: 200; }
+     .LinkTitle{color: red}
+     
+     
+     .modal {
+       display: none; /* Hidden by default */
+       position: fixed; /* Stay in place */
+       z-index: 1; /* Sit on top */
+       padding-top: 100px; /* Location of the box */
+       left: 0;
+       top: 0;
+       width: 100%; /* Full width */
+       height: 100%; /* Full height */
+       overflow: auto; /* Enable scroll if needed */
+       background-color: rgb(0,0,0); /* Fallback color */
+       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+     }
+     
+     /* Modal Content */
+     .modal-content {
+       background-color: #fefefe;
+       margin: auto;
+       padding: 20px;
+       border: 1px solid #888;
+       width: 80%;
+     }
+     
+     /* The Close Button */
+     .close {
+       color: #aaaaaa;
+       float: right;
+       font-size: 28px;
+       font-weight: bold;
+     }
+     
+     .close:hover,
+     .close:focus {
+       color: #000;
+       text-decoration: none;
+       cursor: pointer;
+     }
      </style>
      <script>
       $(document).ready(function() {
@@ -924,6 +1211,12 @@ local PageHeaderHTML = [[
           $("span.collapseAPE").hide()
           $("tr.childVORBIS").hide()
           $("span.collapseVORBIS").hide()
+          $("tr.childWAVEXT").hide()
+          $("span.collapseWAVEXT").hide()
+          $("tr.childASWG").hide()
+          $("span.collapseASWG").hide()
+          $("tr.childCAFINFO").hide()
+          $("span.collapseCAFINFO").hide()
           
           
           $(".masterRendered").click(function() {
@@ -1044,6 +1337,24 @@ local PageHeaderHTML = [[
              $(".childVORBIS").toggle(500);
              $("span.collapseVORBIS").toggle(500)
              $("span.expandVORBIS").toggle(500)
+          }); 
+          
+          $(".catWAVEXT").click(function () { 
+             $(".childWAVEXT").toggle(500);
+             $("span.collapseWAVEXT").toggle(500)
+             $("span.expandWAVEXT").toggle(500)
+          });
+          
+          $(".catASWG").click(function () { 
+             $(".childASWG").toggle(500);
+             $("span.collapseASWG").toggle(500)
+             $("span.expandASWG").toggle(500)
+          });
+          
+          $(".catCAFINFO").click(function () { 
+             $(".childCAFINFO").toggle(500);
+             $("span.collapseCAFINFO").toggle(500)
+             $("span.expandCAFINFO").toggle(500)
           });
       });
           
@@ -1101,7 +1412,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandID3 emboss pointer catID3">&#x25BC;</span>
       <span class="info collapseID3 engrave pointer catID3">&#x25B2;</span>
-      ID3 (IDentify an MP3) META DATA (No User Defined)</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..BBCID3..[[">ID3</a> (IDentify an MP3) (No User Defined)</td></tr>
       <tr class="table_header childID3">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1112,7 +1423,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandBWF emboss pointer catBWF">&#x25BC;</span>
       <span class="info collapseBWF engrave pointer catBWF">&#x25B2;</span>
-      BWF (Broadcast Wave Format) META DATA</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..BWFDoc..[[">BWF</a> (Broadcast Wave Format)</td></tr>
       <tr class="table_header childBWF">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1123,7 +1434,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandAXML emboss pointer catAXML">&#x25BC;</span>
       <span class="info collapseAXML engrave pointer catAXML">&#x25B2;</span>
-      AXML (Audio eXtended Markup Language) META DATA</td></tr>
+      AXML (Audio eXtended Markup Language)</td></tr>
       <tr class="table_header childAXML">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1134,7 +1445,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandCART emboss pointer catCART">&#x25BC;</span>
       <span class="info collapseCART engrave pointer catCART">&#x25B2;</span>
-      CART (AES46-2002) META DATA</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..AESDoc..[[">CART<a> (AES46-2002)</td></tr>
       <tr class="table_header childCART">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1145,7 +1456,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandIFF emboss pointer catIFF">&#x25BC;</span>
       <span class="info collapseIFF engrave pointer catIFF">&#x25B2;</span>
-      IFF (Interchange File Format) META DATA</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..IFFDoc..[[">IFF</a> (Interchange File Format)</td></tr>
       <tr class="table_header childIFF">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1156,7 +1467,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandCUE emboss pointer catCUE">&#x25BC;</span>
       <span class="info collapseCUE engrave pointer catCUE">&#x25B2;</span>
-      CUE (Cue Sheet) META DATA</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..CUEDoc..[[">CUE</a> (Cue Sheet)</td></tr>
       <tr class="table_header childCUE">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1167,7 +1478,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandINFO emboss pointer catINFO">&#x25BC;</span>
       <span class="info collapseINFO engrave pointer catINFO">&#x25B2;</span>
-      INFO META DATA</td></tr>
+      INFO</td></tr>
       <tr class="table_header childINFO">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1178,7 +1489,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandIXML emboss pointer catIXML">&#x25BC;</span>
       <span class="info collapseIXML engrave pointer catIXML">&#x25B2;</span>
-      IXML META DATA (No User Defined)</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..iXMLDoc..[[">IXML</a> (No User Defined)</td></tr>
       <tr class="table_header childIXML">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1189,7 +1500,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandFLACPIC emboss pointer catFLACPIC">&#x25BC;</span>
       <span class="info collapseFLACPIC engrave pointer catFLACPIC">&#x25B2;</span>
-      FLACPIC (FLAC Picture) META DATA</td></tr>
+      FLACPIC (FLAC Picture)</td></tr>
       <tr class="table_header childFLACPIC">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1200,7 +1511,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandXMP emboss pointer catXMP">&#x25BC;</span>
       <span class="info collapseXMP engrave pointer catXMP">&#x25B2;</span>
-      XMP (eXtensible Meta Platform) META DATA</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..XMPDoc..[[">XMP</a> (eXtensible Meta Platform)</td></tr>
       <tr class="table_header childXMP">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1211,7 +1522,7 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandAPE emboss pointer catAPE">&#x25BC;</span>
       <span class="info collapseAPE engrave pointer catAPE">&#x25B2;</span>
-      APE META DATA (No User Defined)</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..APEDoc..[[">APE</a> (No User Defined)</td></tr>
       <tr class="table_header childAPE">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
@@ -1222,14 +1533,49 @@ local PageHeaderMetaDataHTML =[[
       <tr class="MetaData"><td colspan="8" class="centertext markersregions">
       <span class="info expandVORBIS emboss pointer catVORBIS">&#x25BC;</span>
       <span class="info collapseVORBIS engrave pointer catVORBIS">&#x25B2;</span>
-      VORBIS META DATA (No User Defined)</td></tr>
+      <a class="LinkTitle" target="_blank" href="]]..VORBISDoc..[[">VORBIS</a> (No User Defined)</td></tr>
       <tr class="table_header childVORBIS">
         <th>CATEGORY</th>
         <th>DESCRIPTION</th>
         <th>VORBIS</th>
         <th colspan="5">VALUE</th>
       </tr>
-      ]]..MetaVORBIS(1)
+      ]]..MetaVORBIS(1)..[[
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
+      <span class="info expandWAVEXT emboss pointer catWAVEXT">&#x25BC;</span>
+      <span class="info collapseWAVEXT engrave pointer catWAVEXT">&#x25B2;</span>
+      <a class="LinkTitle" href="#">WAVEXT</a> (S.M.P.T.E.)</td></tr>
+      <tr class="table_header childWAVEXT">
+        <th>CATEGORY</th>
+        <th>DESCRIPTION</th>
+        <th>METAWAVEXT</th>
+        <th colspan="5">VALUE</th>
+      </tr>
+      ]]..MetaWAVEXT(1)..[[
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
+      <span class="info expandASWG emboss pointer catASWG">&#x25BC;</span>
+      <span class="info collapseASWG engrave pointer catASWG">&#x25B2;</span>
+      <a class="LinkTitle" target="_blank" href="]]..SonyASWG..[[">ASWG</a> (Sony Audio Standard Working Group)</td></tr>
+      <tr class="table_header childASWG">
+        <th>CATEGORY</th>
+        <th>DESCRIPTION</th>
+        <th>ASWG</th>
+        <th colspan="5">VALUE</th>
+      </tr>
+      
+      
+      ]]..MetaASWG(1)..[[
+      <tr class="MetaData"><td colspan="8" class="centertext markersregions">
+      <span class="info expandCAFINFO emboss pointer catCAFINFO">&#x25BC;</span>
+      <span class="info collapseCAFINFO engrave pointer catCAFINFO">&#x25B2;</span>
+      <a class="LinkTitle" target="_blank" href="]]..AppleCAFINFO..[[">CAFINFO</a> (Core Audio Format - Apple standard))</td></tr>
+      <tr class="table_header childCAFINFO">
+        <th>CATEGORY</th>
+        <th>DESCRIPTION</th>
+        <th>CAFINFO</th>
+        <th colspan="5">VALUE</th>
+      </tr>
+      ]]..MetaCAFINFO(1)
                     
 
 local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION (hh:mm:ss:ff), END POSITION (if Region)  (hh:mm:ss:ff),DURATION (if Region)  (hh:mm:ss:ff)'..LF..'MARKERS' 
@@ -1552,8 +1898,8 @@ function ScanTracks(tr,ii)
       local isFXenabled_ = reaper.TrackFX_GetEnabled(tr,ii-1) -- Checks if plugin BLOCKS is Enabled
       local isOffline_ = reaper.TrackFX_GetOffline(tr,ii-1) -- Checks if plugin is OffLine
       local retval, moduleName = reaper.BR_TrackFX_GetFXModuleName(tr,ii-1) -- Retrieves module name. The DLL (SWS mandatory!)
+
       a.moduleName = moduleName
-      
       if isFXenabled_ == true then 
           a.isFXenabled = '<td class="enabled">Enabled</td>' 
           a.isFXenabledCSV = "E"
