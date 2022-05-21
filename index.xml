@@ -125,7 +125,7 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2022-05-21T20:26:09Z">
+            <version name="1.0" author="Tormy Van Cool" time="2022-05-21T20:28:09Z">
                 <source main="main" file="TormyVanCool_Songs_Library.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/06f722cd17658cea9ace3db00c1cccc79a635116/TormyVanCool_Songs_Library.lua</source>
             </version>
         </reapack>
