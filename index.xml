@@ -108,6 +108,26 @@
             <version name="1.0" author="Tormy Van Cool" time="2021-07-24T16:09:09Z">
                 <source main="main" file="TormyVanCool_Podcasts_Updater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/695358ba22e6b0212d3fc21155cb944994841730/TormyVanCool_Podcasts_Updater.lua</source>
             </version>
+        </reapack>        
+        <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="Assign basics song data to the region">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                    {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+                    \pard\sa200\sl276\slmult1\f0\fs22\lang9 It assigns Performer, Title, Year Production and Label to a region.\par
+                    Exporting the file name as $region, it put in sequence the fields as\par
+                    \par
+                    performer_title_yearProduction_LabelCopyright_Duration\par
+                    \par
+                    it can be sued with mp3tag to assign from filename to tag\par
+                    %title%_%artist%_%year%_%copyright%_%length%\par
+                    In bulk\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2022-05-21T20:26:09Z">
+                <source main="main" file="TormyVanCool_Songs_Library.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/06f722cd17658cea9ace3db00c1cccc79a635116/TormyVanCool_Songs_Library.lua</source>
+            </version>
         </reapack>
     </category>
     <category name="Rendering">
