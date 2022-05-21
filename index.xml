@@ -109,7 +109,7 @@
                 <source main="main" file="TormyVanCool_Podcasts_Updater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/695358ba22e6b0212d3fc21155cb944994841730/TormyVanCool_Podcasts_Updater.lua</source>
             </version>
         </reapack>        
-        <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="Assign basics song data to the region">
+        <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="SONGS LIBRARY: Assign basics song data to the region">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
