@@ -127,8 +127,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.1" author="Tormy Van Cool" time="2022-05-22T11:33:09Z">
-                <source main="main" file="TormyVanCool_Songs_Library.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/99ab2a6579e0fc7be4559ff0a87a39752c0cc51a/TormyVanCool_Songs_Library.lua</source>
+            <version name="1.1" author="Tormy Van Cool" time="2022-05-22T17:10:09Z">
+                <source main="main" file="TormyVanCool_Songs_Library.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2fbcaae6f53c4433f8944230c701598bdcc390ab/TormyVanCool_Songs_Library.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (21 may 2022)
@@ -136,6 +136,9 @@
                 v1.1 (22 may 2022)
                     - NA
                     + UNKNOWN
+                v1.2 (22 may 2022)
+                    - upper
+                    + normal
                 ]]>
                 </changelog>
             </version>
