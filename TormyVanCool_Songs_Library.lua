@@ -6,6 +6,9 @@
 @changelog:
 v1.0 (21 may 2022)
   + Initial release
+v1.1 (22 may 2022)
+  - NA
+  + UNKNOWN
 ]]
 --------------------------------------------------------------------
 -- Script Initialization
@@ -244,14 +247,14 @@ InputString_TITLE= t[2]:upper()
 if t[3] ~= "" then
   InputString_PRODUCTION_YEAR = t[3]:upper()
 else
-  InputString_PRODUCTION_YEAR = 'NA'
+  InputString_PRODUCTION_YEAR = 'UNKNOWN'
   --InputString_PRODUCTION_YEAR_SideCar = ""
 end
 
 if t[4] ~= "" then
   InputString_PRODUCTION_LABEL = t[4]:upper()
 else
-  InputString_PRODUCTION_LABEL = 'NA'
+  InputString_PRODUCTION_LABEL = 'UNKNOWN'
   --InputString_PRODUCTION_LABEL_SideCar = ""
 end
 
