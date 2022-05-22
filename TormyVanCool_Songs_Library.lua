@@ -9,6 +9,9 @@ v1.0 (21 may 2022)
 v1.1 (22 may 2022)
   - NA
   + UNKNOWN
+v1.2 (22 may 2022)
+  - upper
+  + normal
 ]]
 --------------------------------------------------------------------
 -- Script Initialization
@@ -204,7 +207,7 @@ itemduration = roundup
 -- Asks for user's inputs
 --------------------------------------------------------------------
 reaper.ShowConsoleMsg("")
-reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nPERFORMER and SONG TITLE are mandatory fields.\n\nPRODUCTION YEAR and LABEL(s) [Optional fields] check on:\nhttps://www.discogs.com or\nhttps://www.musicbrainz.org\n\nYou can select the links above, copy them and paste into the browser\n\nPRODUCTION LABELS(s):\nin case of multiple labels, separate them by commas")
+reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nPERFORMER and SONG TITLE are mandatory fields.\nIn case of multiple performers, separate them with a comma.\n\nPRODUCTION YEAR and LABEL(s) [Optional fields] check on:\nhttps://www.discogs.com or\nhttps://www.musicbrainz.org\n\nYou can select the links above, copy them and paste into the browser\n\nPRODUCTION LABELS(s):\nin case of multiple labels, separate them by commas")
 repeat
 retval, InputString=reaper.GetUserInputs("SONG DATA", 4, "Performer (Mandatory),separator=\n,extrawidth=400,Song Title (Mandatory),Production Year,Label(s) (separated by commas)", SongPerformer..LF..SongTitle..LF..SongYear..LF..SongLabel)
 InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|'), ';') -- No reserved characters can be written
@@ -237,24 +240,27 @@ else
 end
 
 until( t[1] ~= "" and t[2]~= "" and flag == true and warning_ == true)
-InputString_PERFORMER = t[1]:upper()
-InputString_TITLE= t[2]:upper()
-
+--InputString_PERFORMER = t[1]:upper()
+--InputString_TITLE= t[2]:upper()
+InputString_PERFORMER = t[1]
+InputString_TITLE= t[2]
 
 --------------------------------------------------------------------
 -- Checks for presence of data in not-mandatory fields
 --------------------------------------------------------------------
 if t[3] ~= "" then
-  InputString_PRODUCTION_YEAR = t[3]:upper()
+  --InputString_PRODUCTION_YEAR = t[3]:upper()
+  InputString_PRODUCTION_YEAR = t[3]
 else
-  InputString_PRODUCTION_YEAR = 'UNKNOWN'
+  InputString_PRODUCTION_YEAR = 'Unknown'
   --InputString_PRODUCTION_YEAR_SideCar = ""
 end
 
 if t[4] ~= "" then
-  InputString_PRODUCTION_LABEL = t[4]:upper()
+  --InputString_PRODUCTION_LABEL = t[4]:upper()
+  InputString_PRODUCTION_LABEL = t[4]
 else
-  InputString_PRODUCTION_LABEL = 'UNKNOWN'
+  InputString_PRODUCTION_LABEL = 'Unknown'
   --InputString_PRODUCTION_LABEL_SideCar = ""
 end
 
