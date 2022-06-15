@@ -47,12 +47,22 @@ Click on the image to watch the video Tutorial
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
+
 VSTs-VSTis-Extractor (and AU/LV2) in function:
 -------
 Click on the image to watch the video Tutorial
 
 <a href="https://www.youtube.com/embed/J5Ko4uIya9w" target="_blank"><img src="http://img.youtube.com/vi/J5Ko4uIya9w/maxresdefault.jpg" 
 alt="VST/VSTi/AU/LV2 Extractor" width="560" height="315" border="10" /></a>
+
+
+
+SONGS LIBRARY
+-------
+Click on the image to watch the video Tutorial
+
+<a href="https://www.youtube.com/embed/kgi_-yJC6II" target="_blank"><img src="http://img.youtube.com/vi/kgi_-yJC6II/maxresdefault.jpg" 
+alt="SONGS LIBRARY" width="560" height="315" border="10" /></a>
 
 
 
@@ -63,7 +73,6 @@ Click on the image to watch the video Tutorial
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=_VDGMuxJ5xc
 " target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
-
 
 
 
