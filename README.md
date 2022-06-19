@@ -69,7 +69,7 @@ EXPORT DATA in function
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/embed/VDGMuxJ5xc" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
+<a href="http://www.youtube.com/embed/_VDGMuxJ5xc" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
