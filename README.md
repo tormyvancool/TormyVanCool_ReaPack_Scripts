@@ -42,8 +42,7 @@ Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkersUpdater in function:
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=eqNVImO4b2U
-" target="_blank"><img src="http://img.youtube.com/vi/eqNVImO4b2U/maxresdefault.jpg" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=eqNVImO4b2U" target="_blank"><img src="http://img.youtube.com/vi/eqNVImO4b2U/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
@@ -70,8 +69,7 @@ EXPORT DATA in function
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=_VDGMuxJ5xc
-" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
+<a href="http://www.youtube.com/embed/VDGMuxJ5xc" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
@@ -80,8 +78,7 @@ Podcasts_Songs (former ChapterRegions) in function (Video):
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=ZimOjRRKTzM
-" target="_blank"><img src="http://img.youtube.com/vi/ZimOjRRKTzM/maxresdefault.jpg" 
+<a href="http://www.youtube.com/embed/ZimOjRRKTzM" target="_blank"><img src="http://img.youtube.com/vi/ZimOjRRKTzM/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
 
@@ -90,7 +87,6 @@ Program_Runner in function (Video Tutorial. Click on the image here below):
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=GzpWgQH7ZEs
-" target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" 
+<a href="http://www.youtube.com/embed/GzpWgQH7ZEs" target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" 
 alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
 
