@@ -38,12 +38,17 @@ With this script, you save that space.
 The instruments are exported from the beginning of the project, till the very end of their track or FX tail whichever occurs first.
 
 
+
 Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkersUpdater in function:
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=eqNVImO4b2U" target="_blank"><img src="http://img.youtube.com/vi/eqNVImO4b2U/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=AMB1vA6EH6U" target="_blank"><img src="http://img.youtube.com/vi/AMB1vA6EH6U/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=eqNVImO4b2U" target="_blank">
+  <img src="http://img.youtube.com/vi/eqNVImO4b2U/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=AMB1vA6EH6U" target="_blank">
+  <img src="http://img.youtube.com/vi/AMB1vA6EH6U/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
 
 
 
@@ -53,8 +58,14 @@ VSTs-VSTis-Extractor (and AU/LV2) in function:
 -------
 Click on the image to watch the video Tutorial
 
-<a href="https://www.youtube.com/embed/J5Ko4uIya9w" target="_blank"><img src="http://img.youtube.com/vi/J5Ko4uIya9w/maxresdefault.jpg" alt="VST/VSTi/AU/LV2 Extractor" width="560" height="315" border="10" /></a> \
-<a href="https://www.youtube.com/embed/OqNFQt3hOC8" target="_blank"><img src="http://img.youtube.com/vi/OqNFQt3hOC8/maxresdefault.jpg" alt="VST/VSTi/AU/LV2 Extractor" width="560" height="315" border="10" /></a>
+<a href="https://www.youtube.com/embed/J5Ko4uIya9w" target="_blank">
+  <img src="http://img.youtube.com/vi/J5Ko4uIya9w/maxresdefault.jpg" alt="VST/VSTi/AU/LV2 Extractor" width="500" height="281" border="10" />
+</a>
+<a href="https://www.youtube.com/embed/OqNFQt3hOC8" target="_blank">
+  <img src="http://img.youtube.com/vi/OqNFQt3hOC8/maxresdefault.jpg" alt="VST/VSTi/AU/LV2 Extractor" width="500" height="281" border="10" />
+</a>
+
+
 
 
 
@@ -62,16 +73,27 @@ SONGS LIBRARY
 -------
 Click on the image to watch the video Tutorial
 
-<a href="https://www.youtube.com/embed/kgi_-yJC6II" target="_blank"><img src="http://img.youtube.com/vi/kgi_-yJC6II/maxresdefault.jpg" alt="SONGS LIBRARY" width="560" height="315" border="10" /></a>
-<a href="https://www.youtube.com/embed/J3-FalGaJlk" target="_blank"><img src="http://img.youtube.com/vi/J3-FalGaJlk/maxresdefault.jpg" alt="SONGS LIBRARY" width="560" height="315" border="10" /></a>
+<a href="https://www.youtube.com/embed/kgi_-yJC6II" target="_blank">
+  <img src="http://img.youtube.com/vi/kgi_-yJC6II/maxresdefault.jpg" alt="SONGS LIBRARY" width="500" height="281" border="10" />
+</a>
+<a href="https://www.youtube.com/embed/J3-FalGaJlk" target="_blank">
+  <img src="http://img.youtube.com/vi/J3-FalGaJlk/maxresdefault.jpg" alt="SONGS LIBRARY" width="500" height="281" border="10" />
+</a>
+
+
+
 
 
 EXPORT DATA in function
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/embed/_VDGMuxJ5xc" target="_blank"><img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
-<a href="http://www.youtube.com/embed/4y6Tj2nnHqQ" target="_blank"><img src="http://img.youtube.com/vi/4y6Tj2nnHqQ/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
+<a href="http://www.youtube.com/embed/_VDGMuxJ5xc" target="_blank">
+  <img src="http://img.youtube.com/vi/_VDGMuxJ5xc/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
+<a href="http://www.youtube.com/embed/4y6Tj2nnHqQ" target="_blank">
+  <img src="http://img.youtube.com/vi/4y6Tj2nnHqQ/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
 
 
 
@@ -79,8 +101,12 @@ Podcasts_Songs (former ChapterRegions) in function (Video):
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/embed/ZimOjRRKTzM" target="_blank"><img src="http://img.youtube.com/vi/ZimOjRRKTzM/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
-<a href="http://www.youtube.com/embed/S70V3g8iknI" target="_blank"><img src="http://img.youtube.com/vi/S70V3g8iknI/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
+<a href="http://www.youtube.com/embed/ZimOjRRKTzM" target="_blank">
+  <img src="http://img.youtube.com/vi/ZimOjRRKTzM/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
+<a href="http://www.youtube.com/embed/S70V3g8iknI" target="_blank">
+  <img src="http://img.youtube.com/vi/S70V3g8iknI/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
 
 
 
@@ -88,6 +114,10 @@ Program_Runner in function (Video Tutorial. Click on the image here below):
 -------
 Click on the image to watch the video Tutorial
 
-<a href="http://www.youtube.com/embed/GzpWgQH7ZEs" target="_blank"><img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
-<a href="http://www.youtube.com/embed/nYzzI7-RV_Y" target="_blank"><img src="http://img.youtube.com/vi/nYzzI7-RV_Y/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="560" height="315" border="10" /></a>
+<a href="http://www.youtube.com/embed/GzpWgQH7ZEs" target="_blank">
+  <img src="http://img.youtube.com/vi/GzpWgQH7ZEs/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
+<a href="http://www.youtube.com/embed/nYzzI7-RV_Y" target="_blank">
+  <img src="http://img.youtube.com/vi/nYzzI7-RV_Y/maxresdefault.jpg" alt="PROGRAM_RUNNER in FUNCTION" width="500" height="281" border="10" />
+</a>
 
