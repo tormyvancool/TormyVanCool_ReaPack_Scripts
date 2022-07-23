@@ -40,8 +40,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2022-07-23T11:33:30Z">
-                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ffcd9b4abf642c9d16ba470bb0f38f3398559de4/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
+            <version name="1.1" author="Tormy Van Cool" time="2022-07-23T13:33:30Z">
+                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/98c6dfc83e46ece6263ec1c0318bd4f6a9533350/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
             </version>
         </reapack>
     </category>
