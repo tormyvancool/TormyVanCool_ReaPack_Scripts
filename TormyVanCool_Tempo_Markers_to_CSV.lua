@@ -1,11 +1,13 @@
 --[[
 @description CSV containing Time Markers
 @author Tormy Van Cool
-@version 1.0
+@version 1.1
 @screenshot
 @changelog:
 v1.0 (23 july 222)
   + Initial release
+v1.0 (23 july 222)
+  # Time in format HH:mm:ss
 ]]
 
 ---------------------------------------------
@@ -32,11 +34,26 @@ local CSV_header = 'TIME MARKERS WRAP UP version'..version..'\nby Tormy VAN COOL
 CSV_file:write(CSV_header)
 
 ---------------------------------------------
+-- FUNCTIONS
+---------------------------------------------
+function SecondsToClock(seconds) -- Turns seconds into the format: "hh:mm:ss"
+  local seconds = tonumber(seconds)
+  if seconds <= 0 then
+    return "00:00:00";
+  else
+    hours = string.format("%02.f", math.floor(seconds/3600));
+    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    return hours..":"..mins..":"..secs
+  end
+end
+
+---------------------------------------------
 -- TEMPO MARKERS PROBING
 ---------------------------------------------
 while count < howmany do
   local retval, timepos, measurepos, beatpos, bpm, timesig_num = reaper.GetTempoTimeSigMarker(0, count) -- Extract markers infos
-  csv = '\n' .. bpm .. ',' .. timepos .. ',' .. measurepos .. ',' .. beatpos .. ',' .. timesig_num
+  csv = '\n' .. bpm .. ',' .. SecondsToClock(timepos) .. ',' .. SecondsToClock(measurepos) .. ',' .. SecondsToClock(beatpos) .. ',' .. timesig_num
   CSV_file:write(csv)
   count = count +1
 end
