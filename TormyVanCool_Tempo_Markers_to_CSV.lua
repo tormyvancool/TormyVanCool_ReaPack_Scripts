@@ -1,7 +1,7 @@
 --[[
 @description CSV containing Time Markers
 @author Tormy Van Cool
-@version 1.2
+@version 1.3
 @screenshot
 @changelog:
 v1.0 (23 july 2022)
@@ -18,15 +18,19 @@ v1.2 (23 july 2022)
   - Commas
   + Tabs
   + Beat
+v1.3 (23 july 2022)
+  - Tab separated
+  + Comme separated
+  # Removed Header from CSV
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
-local version = "1.2"
+local version = "1.3"
 local extension = ".csv"
 local LF = '\n'
-local tab = '\t'
+local tab = ','
 local howmany = reaper.CountTempoTimeSigMarkers(0) -- counts markers QTY
 local pj_name_ = reaper.GetProjectName(0, "") -- gets project name
 local pj_name = "Tempo_Markers".. extension
@@ -44,7 +48,7 @@ CSV_file = io.open(pj_path..'\\'..pj_name, "w")
 -- CSV HEADER
 ---------------------------------------------
 local CSV_header = 'TEMPO MARKERS WRAP UP version '..version.. LF ..'by Tormy VAN COOL'
-CSV_file:write(CSV_header)
+-- CSV_file:write(CSV_header)
 
 
 ---------------------------------------------
