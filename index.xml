@@ -32,6 +32,18 @@
                 <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47894d3cfb325ec3a535df5e8a288296a9562fbe/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
+        <reapack name="TormyVanCool_Tempo_Markers_to_CSV.lua" type="script" desc="TEMPO MARKERS to CSV: exports the tempo markers to CSV file located into the project's directory">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 TEMPO MARKERS to CSV: exports the tempo markers to CSV file located into the project's directory\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2022-07-23T11:33:30Z">
+                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47894d3cfb325ec3a535df5e8a288296a9562fbe/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+            </version>
+        </reapack>
     </category>
     <category name="Regions">
         <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="PODCASTS: PODCASTS SONGS. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
