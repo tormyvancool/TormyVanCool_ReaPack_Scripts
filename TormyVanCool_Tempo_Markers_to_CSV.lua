@@ -13,7 +13,7 @@ v1.0 (23 july 222)
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
-local version = "1.0"
+local version = "1.1"
 local extension = ".csv"
 local howmany = reaper.CountTempoTimeSigMarkers(0) -- counts markers QTY
 local pj_name_ = reaper.GetProjectName(0, "") -- gets project name
