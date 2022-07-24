@@ -29,13 +29,15 @@ v1.5 (24 july 2022)
   # cleaned HTML
 v1.6 (24 july 2022)
   # HTML Even Odd lines
+v1.7 (24 july 2022)
+  # double records on TXT
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
 local pluginName = "TEMPO MARKERS WRAP UP"
-local version = "1.6"
+local version = "1.7"
 local LF = '\n'
 local tab = ','
 local fileName = "Tempo_Markers"
@@ -245,16 +247,17 @@ while count < howmany do
   local Beat = reaper.format_timestr_pos( timepos, "", 2 )
   local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. beatpos .. tab .. SampleQTY .. tab .. fractional .. LF
   local html = '<tr><td class="right">'..count..'</td><td class="right">'..bpm..'</td><td class="right">'..SecondsToClock(timepos)..'</td><td class="right">'..SecondsToClock(measurepos)..'</td><td class="right">'..Beat..'</td><td class="right">'..SecondsToClock(beatpos)..'</td><td class="right">'..SampleQTY..'</td><td class="right">'..fractional.."</td></tr>"
-  ConsMsg = ConsMsg .. 'N: '.. count .. LF ..
-            'BPM: ' .. bpm .. LF ..
-            'Time Position: ' .. SecondsToClock(timepos) .. LF ..
-            'Measure Position: ' .. SecondsToClock(measurepos) .. LF ..
-            'Beat: ' .. Beat .. LF .. 
-            'Beat Position: ' .. SecondsToClock(beatpos) .. LF ..
-            'Samples: ' .. SampleQTY .. LF ..
-            'Fractional: ' .. fractional .. LF .. LF
+  local txt = 'N: '.. count .. LF ..
+              'BPM: ' .. bpm .. LF ..
+              'Time Position: ' .. SecondsToClock(timepos) .. LF ..
+              'Measure Position: ' .. SecondsToClock(measurepos) .. LF ..
+              'Beat: ' .. Beat .. LF .. 
+              'Beat Position: ' .. SecondsToClock(beatpos) .. LF ..
+              'Samples: ' .. SampleQTY .. LF ..
+              'Fractional: ' .. fractional .. LF .. LF
+  ConsMsg = ConsMsg .. txt
   CSV_file:write(csv)
-  TXT_file:write(ConsMsg)
+  TXT_file:write(txt)
   HTML_file:write(html)
   count = count +1
 end
