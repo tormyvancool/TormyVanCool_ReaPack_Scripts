@@ -27,13 +27,15 @@ v1.4 (24 july 2022)
   + TXT page
 v1.5 (24 july 2022)
   # cleaned HTML
+v1.6 (24 july 2022)
+  # HTML Even Odd lines
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
 local pluginName = "TEMPO MARKERS WRAP UP"
-local version = "1.4"
+local version = "1.6"
 local LF = '\n'
 local tab = ','
 local fileName = "Tempo_Markers"
@@ -158,8 +160,8 @@ local HeaderHTML = [[
       #openFolderButton {    height: 33px;    margin-top: 10px;}
       th.header { background: #2db1ef; color: white; font-size: 51px; position: relative; padding: 30px; }
       .table_title { margin-top: 10px; background: linear-gradient( 48deg , #2dbbff, transparent); font-weight: bolder; color: #ca5603; font-size: 22px; }
-      tr:nth-child(even) {background: #bcbcbc}
-      tr:nth-child(odd) {background: #f1f1f1}
+      tr:nth-child(odd) {background: #bcbcbc}
+      tr:nth-child(even) {background: #f1f1f1}
       th, tr, td {padding: 10px 20px 10px 20px; position: relative;}
       thead th:first-of-type{ border-top-left-radius: 10px; }
       thead th:last-of-type{ border-top-right-radius: 10px; }
@@ -199,6 +201,7 @@ local HeaderHTML = [[
       <thead>
         <tr>
           <th colspan="8" class="header">]]..pluginName..[[<sub>]]..date..[[ - v.]]..version..[[ by Tormy Van Cool</sub></th>
+        </tr>
         <tr>
           <th class="table_header">Marker N.</th>
           <th class="table_header">BPM</th>
@@ -241,7 +244,7 @@ while count < howmany do
   local SampleQTY = reaper.format_timestr_pos( timepos, "", 4 )
   local Beat = reaper.format_timestr_pos( timepos, "", 2 )
   local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. beatpos .. tab .. SampleQTY .. tab .. fractional .. LF
-  local html = '<tr><td class="right">'..count..'</td><td class="right">'..bpm..'</td><td class="right">'..SecondsToClock(timepos)..'</td><td class="right">'..SecondsToClock(measurepos)..'</td><td class="right">'..Beat..'</td><td class="right">'..SecondsToClock(beatpos)..'</td><td class="right">'..SampleQTY..'</td><td class="right">'..fractional.."</td><tr>"
+  local html = '<tr><td class="right">'..count..'</td><td class="right">'..bpm..'</td><td class="right">'..SecondsToClock(timepos)..'</td><td class="right">'..SecondsToClock(measurepos)..'</td><td class="right">'..Beat..'</td><td class="right">'..SecondsToClock(beatpos)..'</td><td class="right">'..SampleQTY..'</td><td class="right">'..fractional.."</td></tr>"
   ConsMsg = ConsMsg .. 'N: '.. count .. LF ..
             'BPM: ' .. bpm .. LF ..
             'Time Position: ' .. SecondsToClock(timepos) .. LF ..
@@ -262,6 +265,6 @@ HTML_file:write(FooterHTML)
 CSV_file:close()
 TXT_file:close()
 HTML_file:close()
-reaper.MB("File Path: " .. pj_path .. "Saved" ..LF .. "CSV File: "  .. CSV_name  , "Saved CSV" ,0)
+reaper.MB("File Path: " .. pj_path .. "Saved" ..LF..LF .. "CSV File: "  .. CSV_name  ..LF.. "TXT File: "  .. TXT_name  ..LF.. "HTML File: "  .. HTML_name  , "Saved CSV" ,0)
 reaper.ShowConsoleMsg('')
 reaper.ShowConsoleMsg(CSV_header .. LF .. LF .. ConsMsg)
