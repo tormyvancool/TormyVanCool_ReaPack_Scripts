@@ -31,6 +31,7 @@ v1.6 (24 july 2022)
   # HTML Even Odd lines
 v1.7 (24 july 2022)
   # double records on TXT
+  + CSV added Beat
 ]]
 
 ---------------------------------------------
@@ -245,7 +246,7 @@ while count < howmany do
   if timesig_denom < 0 then timesig_denom = NS end
   local SampleQTY = reaper.format_timestr_pos( timepos, "", 4 )
   local Beat = reaper.format_timestr_pos( timepos, "", 2 )
-  local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. beatpos .. tab .. SampleQTY .. tab .. fractional .. LF
+  local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. Beat .. tab .. beatpos .. tab .. SampleQTY .. tab .. fractional .. LF
   local html = '<tr><td class="right">'..count..'</td><td class="right">'..bpm..'</td><td class="right">'..SecondsToClock(timepos)..'</td><td class="right">'..SecondsToClock(measurepos)..'</td><td class="right">'..Beat..'</td><td class="right">'..SecondsToClock(beatpos)..'</td><td class="right">'..SampleQTY..'</td><td class="right">'..fractional.."</td></tr>"
   local txt = 'N: '.. count .. LF ..
               'BPM: ' .. bpm .. LF ..
