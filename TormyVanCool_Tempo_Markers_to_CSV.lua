@@ -25,6 +25,8 @@ v1.3 (23 july 2022)
 v1.4 (24 july 2022)
   + HTML page
   + TXT page
+v1.5 (24 july 2022)
+  # cleaned HTML
 ]]
 
 ---------------------------------------------
@@ -189,6 +191,7 @@ local HeaderHTML = [[
     </style>
   </head>
   <body>
+  
   <div id="TormyLOGO"><a href="]]..TormyLogoURL..[[" target="_blank"><img src="data:image/png;base64, ]]..TormyLOGO..[[" /></a></div>
   <div id="TVCLogo"><a href="]]..TVCLogoURL..[[" target="_blank"><img src="data:image/png;base64, ]]..TVCLogo..[[" /></a></div> 
   <div id="REAPERLogo"><a href="]]..reaperURL..[[" target="_blank"><img src="data:image/png;base64, ]]..REAPERLogo..[[" /></a></div>
@@ -212,8 +215,6 @@ local HeaderHTML = [[
 local FooterHTML = [[
       </tbody>
     </table>
-<div id="mainContainer">
-    </div>
   </body>
 </html>]]
 
