@@ -32,13 +32,16 @@ v1.6 (24 july 2022)
 v1.7 (24 july 2022)
   # double records on TXT
   + CSV added Beat
+v1.8 (25 july 2022)
+  + CSV Headers (rooll back to v1.3)
+  # Variables' Names
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
 local pluginName = "TEMPO MARKERS WRAP UP"
-local version = "1.7"
+local version = "1.8"
 local LF = '\n'
 local tab = ','
 local fileName = "Tempo_Markers"
@@ -56,6 +59,17 @@ local TVCLogoURL = "https://www.facebook.com/vancoolelektroakustik"
 local TormyLogoURL = "https://www.facebook.com/TormyVanCool.MediaProductions"
 local REAPER_path = reaper.GetResourcePath()
 local NS = 'Not Set'
+local Author = "Tormy Van Cool"
+local nameField_0 = 'Marker N.'
+local nameField_1 = 'BPM'
+local nameField_2 = 'Time Position'
+local nameField_3 = 'Measure Position'
+local nameField_4 = 'Beat'
+local nameField_5 = 'Beat Position'
+local nameField_6 = 'Samples'
+local nameField_7 = 'Tempo Fractional'
+local nameField_8 = 'Tempo Numerator'
+local nameField_9 = 'Tempo Denominator'
 
 ---------------------------------------------
 -- FILE MANAGEMENT
@@ -206,14 +220,14 @@ local HeaderHTML = [[
           <th colspan="8" class="header">]]..pluginName..[[<sub>]]..date..[[ - v.]]..version..[[ by Tormy Van Cool</sub></th>
         </tr>
         <tr>
-          <th class="table_header">Marker N.</th>
-          <th class="table_header">BPM</th>
-          <th class="table_header">Time Position</th>
-          <th class="table_header">Measure Position</th>
-          <th class="table_header">Beat</th>
-          <th class="table_header">Beat Position</th>
-          <th class="table_header">Samples</th>
-          <th class="table_header">Tempo Fractional</th>
+          <th class="table_header">]] .. nameField_0  .. [[</th>
+          <th class="table_header">]] .. nameField_1  .. [[</th>
+          <th class="table_header">]] .. nameField_2  .. [[</th>
+          <th class="table_header">]] .. nameField_3  .. [[</th>
+          <th class="table_header">]] .. nameField_4  .. [[</th>
+          <th class="table_header">]] .. nameField_5  .. [[</th>
+          <th class="table_header">]] .. nameField_6  .. [[</th>
+          <th class="table_header">]] .. nameField_7  .. [[</th>
         </tr>
       </thead>
       <tbody>
@@ -225,9 +239,10 @@ local FooterHTML = [[
 </html>]]
 
 
-local CSV_header = pluginName .. ' version '..version..LF..'by Tormy VAN COOL'
-local TXT_header = pluginName .. ' version '..version..LF..'by Tormy VAN COOL'..LF..LF
--- CSV_file:write(CSV_header)
+local CSV_header = pluginName .. ' version '.. version .. LF .. 'by ' .. Author
+      CSV_header = CSV_header .. LF .. LF .. nameField_0  .. tab .. nameField_1  .. tab .. nameField_2  .. tab .. nameField_3  .. tab .. nameField_4  .. tab .. nameField_5  .. tab .. nameField_6  .. tab .. nameField_8  .. tab .. nameField_9 .. LF
+local TXT_header = pluginName .. ' version '.. version .. LF .. 'by ' .. Author .. LF .. LF
+CSV_file:write(CSV_header)
 TXT_file:write(TXT_header)
 HTML_file:write(HeaderHTML)
 
@@ -238,24 +253,24 @@ HTML_file:write(HeaderHTML)
 while count < howmany do
   local retval, timepos, measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, count) -- Extract markers infos
   local fractional = ''
-  if timesig_num < 0 then 
+  if timesig_num < 0 or timesig_denom < 0  then 
     fractional = NS
   else
     fractional = timesig_num.."/"..timesig_denom
   end
-  if timesig_denom < 0 then timesig_denom = NS end
+  --if timesig_denom < 0 then timesig_denom = NS end
   local SampleQTY = reaper.format_timestr_pos( timepos, "", 4 )
   local Beat = reaper.format_timestr_pos( timepos, "", 2 )
-  local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. Beat .. tab .. beatpos .. tab .. SampleQTY .. tab .. fractional .. LF
+  local csv =  count .. tab .. bpm .. tab .. timepos .. tab .. measurepos .. tab .. Beat .. tab .. beatpos .. tab .. SampleQTY .. tab .. timesig_num .. tab .. timesig_denom .. LF
   local html = '<tr><td class="right">'..count..'</td><td class="right">'..bpm..'</td><td class="right">'..SecondsToClock(timepos)..'</td><td class="right">'..SecondsToClock(measurepos)..'</td><td class="right">'..Beat..'</td><td class="right">'..SecondsToClock(beatpos)..'</td><td class="right">'..SampleQTY..'</td><td class="right">'..fractional.."</td></tr>"
-  local txt = 'N: '.. count .. LF ..
-              'BPM: ' .. bpm .. LF ..
-              'Time Position: ' .. SecondsToClock(timepos) .. LF ..
-              'Measure Position: ' .. SecondsToClock(measurepos) .. LF ..
-              'Beat: ' .. Beat .. LF .. 
-              'Beat Position: ' .. SecondsToClock(beatpos) .. LF ..
-              'Samples: ' .. SampleQTY .. LF ..
-              'Fractional: ' .. fractional .. LF .. LF
+  local txt = nameField_0 .. ': '.. count .. LF ..
+              nameField_1 .. ': ' .. bpm .. LF ..
+              nameField_2 .. ': ' .. SecondsToClock(timepos) .. LF ..
+              nameField_3 .. ': ' .. SecondsToClock(measurepos) .. LF ..
+              nameField_4 .. ': ' .. Beat .. LF .. 
+              nameField_5 .. ': ' .. SecondsToClock(beatpos) .. LF ..
+              nameField_6 .. ': ' .. SampleQTY .. LF ..
+              nameField_7 .. ': ' .. fractional .. LF .. LF
   ConsMsg = ConsMsg .. txt
   CSV_file:write(csv)
   TXT_file:write(txt)
