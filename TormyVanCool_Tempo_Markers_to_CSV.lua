@@ -35,13 +35,15 @@ v1.7 (24 july 2022)
 v1.8 (25 july 2022)
   + CSV Headers (rooll back to v1.3)
   # Variables' Names
+v1.9 (25 july 2022)
+  # Wrong header in the Console
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
 local pluginName = "TEMPO MARKERS WRAP UP"
-local version = "1.8"
+local version = "1.9"
 local LF = '\n'
 local tab = ','
 local fileName = "Tempo_Markers"
@@ -286,4 +288,4 @@ TXT_file:close()
 HTML_file:close()
 reaper.MB("File Path: " .. pj_path .. "Saved" ..LF..LF .. "CSV File: "  .. CSV_name  ..LF.. "TXT File: "  .. TXT_name  ..LF.. "HTML File: "  .. HTML_name  , "Saved CSV" ,0)
 reaper.ShowConsoleMsg('')
-reaper.ShowConsoleMsg(CSV_header .. LF .. LF .. ConsMsg)
+reaper.ShowConsoleMsg(TXT_header .. LF .. ConsMsg)
