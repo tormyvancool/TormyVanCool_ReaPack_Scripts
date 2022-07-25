@@ -42,6 +42,7 @@
             </metadata>
             <version name="1.9" author="Tormy Van Cool" time="2022-07-25T13:53:30Z">
                 <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2e297b5cc509381af290c5f7a4153cb829895ea8/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
+                <source file="GitAmp/57v.png">https://raw.githubusercontent.com/TukanStudios/TUKAN_STUDIOS_PLUGINS/main/GitAmp/57v.png</source>
             </version>
         </reapack>
     </category>
