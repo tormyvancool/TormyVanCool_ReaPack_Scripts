@@ -97,6 +97,9 @@ v2.9.4
   + Metadata: Cafinfo
   + Links to Documentation
   # Mistyping corrections
+v3.0
+  # Version of Reaper
+  + Tempo Markers
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -126,9 +129,11 @@ function SecondsToHMS(seconds)
   else
     hours = string.format("%02.f", math.floor(seconds/3600));
     mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
-    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    --secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    secs = string.format("%.3f", (seconds - hours*3600 - mins *60));
     local fps = string.format("%02.f", math.floor(seconds * currentFrameRate % currentFrameRate));
-    return hours..":"..mins..":"..secs..":"..fps
+    --return hours..":"..mins..":"..secs..":"..fps
+    return hours..":"..mins..":"..secs
   end
 end
 
@@ -173,8 +178,8 @@ end
 ---------------------------------------------
 -- BASE64 DECODE
 ---------------------------------------------
-local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 function dec(data)
+  local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     data = string.gsub(data, '[^'..b..'=]', '')
     return (data:gsub('.', function(x)
         if (x == '=') then return '' end
@@ -195,8 +200,10 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "2.9.4 FERRETS"
+local scriptVersion = "3.0 FERRETS"
+local Creator = "Tormy Van Cool"
 local precision = 4
+local timeFormat = "(hh:mm:ss,sss)"
 local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
 local pj_name_ = reaper.GetProjectName(0, "")
@@ -211,6 +218,17 @@ local pj_length=round(reaper.GetProjectLength(),precision)
 local totalMediaItems = reaper.CountMediaItems()
 local _, totalMarkers, totalRegions = reaper.CountProjectMarkers()
 local totalMarkersRegions = totalMarkers+totalRegions
+local nameField_0 = 'Marker N.'
+local nameField_1 = 'BPM'
+local nameField_2 = 'Time Position'
+local nameField_3 = 'Measure Position'
+local nameField_4 = 'Beat'
+local nameField_5 = 'Beat Position'
+local nameField_6 = 'Samples'
+local nameField_7 = 'Tempo Fractional'
+local nameField_8 = 'Tempo Numerator'
+local nameField_9 = 'Tempo Denominator'
+local nameField_10 = 'Tempo Linearity'
 local reaperURL = "https://www.reaper.fm"
 local TormyURL = "https://www.facebook.com/TormyVanCool.MediaProductions"
 local TVCEURL = "https://www.facebook.com/vancoolelektroakustik"
@@ -238,7 +256,7 @@ if not test_SWS then
   exit()
 end
 
-local minVersion = '6.42'
+local minVersion = '6.64'
 if minVersion > version then
   reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
   exit()
@@ -1146,8 +1164,8 @@ local PageHeaderCSV = 'PROJECT:'..LF..'Name: '..pj_name_..LF..'Sample Rate: '..p
                       'TOTAL TRACKS: ' .. reaper.CountTracks() ..LF..LF..
                       'DAW:'..LF ..'REAPER v.' .. version ..LF..LF..
                       'CREATED:'..LF .. date ..LF..LF..
-                      'AUTHOR:'..LF..author..LF..LF..
-                      "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by Tormy Van Cool"..LF..LF..'CATEGORY,DESCRIPTION,META [FORMAT],TAG CODE,VALUE'..LF..metaDataCSV..LF..LF..
+                      'AUTHOR:'..LF..Creator..LF..LF..
+                      "Exported with 'EXPORT DATA' v." .. scriptVersion .. " by "..Creator..LF..LF..'CATEGORY,DESCRIPTION,META [FORMAT],TAG CODE,VALUE'..LF..metaDataCSV..LF..LF..
                       'RENDERED AUDIO'..LF..'PATH,FILE NAME,FULL PATH'..LF..scandir(renderPath,2)
 local PageHeaderHTML = [[
 <html lang="en">
@@ -1257,6 +1275,8 @@ local PageHeaderHTML = [[
           $("span.collapseFXedItems").hide()
           $("tr.slaveNotedItems").hide()
           $("span.collapseNotedItems").hide()
+          $("tr.slaveTempoMarkers").hide()
+          $("span.collapseTempoMarkers").hide()
           $("tr.slaveHier").hide()
           $("span.collapseHier").hide()
           $("tr.slaveMaster").hide()
@@ -1329,7 +1349,13 @@ local PageHeaderHTML = [[
              $("tr.slaveNotedItems").toggle(500);
              $("span.collapseNotedItems").toggle(500)
              $("span.expandNotedItems").toggle(500)
-          });          
+          });   
+          
+          $(".masterTempoMarkers").click(function() {
+             $("tr.slaveTempoMarkers").toggle(500);
+             $("span.collapseTempoMarkers").toggle(500)
+             $("span.expandTempoMarkers").toggle(500)
+          });           
           
           $(".masterHier").click(function() {
              $("tr.slaveHier").toggle(500);
@@ -1446,8 +1472,8 @@ local PageHeaderHTML = [[
         <a href="]]..TVCEURL..[[" target="_blank"><img id="TVCELogo" src="data:image/png;base64, ]]..TVCELogo..[[" /></a>
         <a href="]]..reaperURL..[[" target="_blank"><img id="REAPERLogo" src="data:image/png;base64, ]]..REAPERLogo..[[" /></a>
         PROJECT DATA<sub>Created: ]] .. date .. 
-        ' with \'EXPORT DATA\' v.'.. scriptVersion .. 
-        [[ by Tormy Van Cool</sub></th></tr>
+        [[ with 'EXPORT DATA' v.]].. scriptVersion .. 
+        [[ by ]]..Creator..[[</sub></th></tr>
       </thead>
       <tbody>
         <tr><td colspan="8" class="centertext markersregions">MAIN DATA</td></tr>
@@ -1459,7 +1485,7 @@ local PageHeaderHTML = [[
           <th id="hd_regions">REGIONS</th>
           <th id="hd_notes"colspan="3">NOTES</th>
         </tr>
-        '<tr><td class="left"><span class="label">Name:</span> ]]..pj_name_..
+        <tr><td class="left"><span class="label">Name:</span> ]]..pj_name_..
           '<br/><span class="label">Song Title:</span> '..pj_title..
           '<br/><span class="label">Song Author:</span> '..author..
           '<br/><span class="label">DAW Version:</span> '..version..
@@ -1468,7 +1494,7 @@ local PageHeaderHTML = [[
           '<br/><span class="label">Project BPM (Tempo):</span> '..reaper.Master_GetTempo(0)..'</td>'..
           '<td class="centertext">'.. reaper.CountTracks() ..'</td>'..
           '<td class="centertext">'..totalMediaItems..'</td>'..
-          '><td class="centertext">'..totalMarkers..'</td>'..
+          '<td class="centertext">'..totalMarkers..'</td>'..
           '<td class="centertext">'..totalRegions..'</td>'..
           '<td colspan="3">'..pj_notes..[[
       </td></tr>]]
@@ -1654,16 +1680,16 @@ local PageHeaderMetaDataHTML =[[
       ]]..MetaCAFINFO(1)
                     
 
-local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION (hh:mm:ss:ff), END POSITION (if Region)  (hh:mm:ss:ff),DURATION (if Region)  (hh:mm:ss:ff)'..LF..'MARKERS' 
+local MarkersRegionsHeaderCSV = 'NAME,COLOR,TYPE,NUMBER,IDX,START POSITION '..timeFormat..', END POSITION (if Region)  '..timeFormat..',DURATION (if Region) '..timeFormat..LF..'MARKERS' 
 local MarkersRegionsHeaderHTML = '<tr><td colspan="8" class="centertext markersregions">MARKERS</td></tr>'..
       '<tr class="table_header"><th class="centertext">NAME</th>'..
       '<th class="colorMarkerRegion">COLOR</th>'..
       '<th class="centertext">TYPE</th>'..
       '<th class="centertext">NUMBER</th>'..
       '<th class="centertext">IDX</th>'..
-      '<th class="centertext">START POSITION<br>(hh:mm:ss:ff)</th>'..
-      '<th class="centertext">END POSITION (if Region)<br>(hh:mm:ss:ff)</th>'..
-      '<th class="centertext">DURATION (if Region)<br>(hh:mm:ss:ff)</th></tr>'
+      '<th class="centertext">START POSITION<br>'..timeFormat..'</th>'..
+      '<th class="centertext">END POSITION (if Region)<br>'..timeFormat..'</th>'..
+      '<th class="centertext">DURATION (if Region)<br>'..timeFormat..'</th></tr>'
 
       WriteFILE(PageHeaderHTML,PageHeaderCSV)
       
@@ -1852,7 +1878,7 @@ local tableNotedTracksHeader = [[
           <th class="TracksNoted">MUTE</th>
         </tr>]]
         
-local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:'..LF..'TRACK NAME,FX,ITEM POSITION (hh:mm:ss:ff),ITEM LENGTH <br>(hh:mm:ss:ff),NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderItemsFXedCSV = LF..LF..'EFFECTED ITEMS:'..LF..'TRACK NAME,FX,ITEM POSITION '..timeFormat..',ITEM LENGTH <br>'..timeFormat..',NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderItemsFXedHTML = [[ 
     <div class="spacer">&nbsp;</div>
     <table class="center">
@@ -1872,8 +1898,8 @@ local PageHeaderItemsFXedHTML = [[
         <tr class="table_header slaveFXedItems">
           <th>BELONGIN TO</th>
           <th>FX</th>
-          <th class="EffectedItems">POSITION<br>(hh:mm:ss:ff)</th>
-          <th class="EffectedItems">LENGTH<br>(hh:mm:ss:ff)</th>
+          <th class="EffectedItems">POSITION<br>]]..timeFormat..[[</th>
+          <th class="EffectedItems">LENGTH<br>]]..timeFormat..[[</th>
           <th>NOTES</th>
           <th class="EffectedItems">MUTE</th>
           <th class="EffectedItems">LOCKED</th>
@@ -1882,7 +1908,7 @@ local PageHeaderItemsFXedHTML = [[
           <th class="EffectedItems">BIT DEPTH</th>
         </tr>]]
         
-local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:'..LF..'TRACK NAME,ITEM POSITION (hh:mm:ss:ff),ITEM LENGTH (hh:mm:ss:ff),NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
+local PageHeaderNotedItemsCSV = LF..LF..'NOTED ITEMS:'..LF..'TRACK NAME,ITEM POSITION '..timeFormat..',ITEM LENGTH '..timeFormat..',NOTE,MUTE,LOCKED,SOURCE FILE NAME,SAMPLE RATE,BIT DEPTH'
 local PageHeaderNotedItemsHTML = [[
     <table class="center">
       <thead>
@@ -1899,8 +1925,8 @@ local PageHeaderNotedItemsHTML = [[
           <th colspan="3">SOURCE</th>
         </tr>
         <tr class="table_header slaveNotedItems">
-          <th>BELONGIN TO</th><th>POSITION<br>(hh:mm:ss:ff)</th>
-          <th>LENGTH<br>(hh:mm:ss:ff)</th><th>NOTES</th>
+          <th>BELONGIN TO</th><th>POSITION<br>]]..timeFormat..[[</th>
+          <th>LENGTH<br>]]..timeFormat..[[</th><th>NOTES</th>
           <th class="EffectedItems">MUTE</th>
           <th class="EffectedItems">LOCKED</th>
           <th>SOURCE NAME</th>
@@ -1908,6 +1934,31 @@ local PageHeaderNotedItemsHTML = [[
           <th class="EffectedItems">BIT DEPTH</th>
         </tr>]]
 
+
+    
+local PageHeaderCSVTempo = LF..LF..'TEMPO MARKERS:'..LF..'TRACK IDX,TRACK NAME,TRACK TYPE,NOTES,N. ITEMS,SOLO,MUTE'
+local tableTempoMarkersHeader = [[
+    <table class="center">
+      <thead>
+        <tr>
+          <th colspan="9" class="header">
+            <span class="info expandTempoMarkers emboss pointer masterTempoMarkers">&#x25BC;</span>
+            <span class="info collapseTempoMarkers engrave pointer masterTempoMarkers">&#x25B2;</span>TEMPO MARKERS
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table_header slaveTempoMarkers">
+          <th>Marker N.</th>
+          <th>BPM</th>
+          <th>Time Position</th>
+          <th>Measure Position</th>
+          <th>Beat</th>
+          <th>Beat Position</th>
+          <th>Samples</th>
+          <th>Tempo Fractional</th>
+          <th>Tempo Linearity</th>
+        </tr>]]
 
 local PageFooterHTML = "  "..LF.."</body>"..LF.."</html>"
 
@@ -2081,6 +2132,96 @@ function RetrieveVSTPath(track,ii)
 end
 
 
+function pj_tempo_Markers()
+  WriteFILE(tableTempoMarkersHeader,PageHeaderCSVTempo)
+  local howmany = reaper.CountTempoTimeSigMarkers(0) -- counts markers QTY
+  local count = 0
+  local ConsMsg = ''
+  local separator = ','
+  local NS = 'Not Set'
+  
+  ----------------------------------------------
+  -- DEDICATED FILES
+  ----------------------------------------------
+  local fileName = "Tempo_Markers"
+  local CSV_name = fileName .. ".csv"
+  local TXT_name = fileName .. ".txt"
+  
+  local CSV_file = io.open(pj_path..'\\'..CSV_name, "w")
+  local TXT_file = io.open(pj_path..'\\'..TXT_name, "w")
+
+  local CSV_header = LF .. 'TEMPO MARKERS'
+  CSV_header = CSV_header .. LF ..
+               nameField_0 .. separator .. 
+               nameField_1 .. separator .. 
+               nameField_2 .. separator .. 
+               nameField_3 .. separator .. 
+               nameField_4 .. separator .. 
+               nameField_5 .. separator .. 
+               nameField_6 .. separator .. 
+               nameField_8 .. separator .. 
+               nameField_9 .. separator ..
+               nameField_10
+  local TXT_header = 'TEMPO MARKERS version '.. scriptVersion .. LF .. 'by ' .. Creator .. LF .. LF
+  TXT_file:write(TXT_header)
+  WriteFILE('',CSV_header)
+
+  while count < howmany do
+    local retval, timepos, measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, count) -- Extract markers infos
+    local fractional, curveType, tempoType = ''
+    if timesig_num < 0 or timesig_denom < 0  then 
+      fractional = NS
+    else
+      fractional = timesig_num.."/"..timesig_denom
+    end
+    if lineartempo == true then
+      curveType = "Linear"
+      tempoType = "1"
+    else
+      curveType = "Square"
+      tempoType = "0"
+    end
+    local SampleQTY = reaper.format_timestr_pos( timepos, "", 4 )
+    local Beat = reaper.format_timestr_pos( timepos, "", 2 )
+    local csv = count .. separator .. 
+                bpm .. separator .. 
+                timepos .. separator .. 
+                measurepos .. separator .. 
+                Beat .. separator .. 
+                beatpos .. separator .. 
+                SampleQTY .. separator .. 
+                timesig_num .. separator .. 
+                timesig_denom .. separator ..
+                tempoType .. LF
+    local html = '<tr class="slaveTempoMarkers"><td class="right">'..count..
+                     '</td><td class="right">'..bpm..
+                     '</td><td class="right">'..SecondsToHMS(timepos)..
+                     '</td><td class="right">'..SecondsToHMS(measurepos)..
+                     '</td><td class="right">'..Beat..
+                     '</td><td class="right">'..SecondsToHMS(beatpos)..
+                     '</td><td class="right">'..SampleQTY..
+                     '</td><td class="right">'..fractional..
+                     '</td><td class="right">'..curveType..
+                     "</td></tr>"
+    local txt = nameField_0 .. ': '.. count .. LF ..
+                nameField_1 .. ': ' .. bpm .. LF ..
+                nameField_2 .. ': ' .. SecondsToHMS(timepos) .. LF ..
+                nameField_3 .. ': ' .. SecondsToHMS(measurepos) .. LF ..
+                nameField_4 .. ': ' .. Beat .. LF .. 
+                nameField_5 .. ': ' .. SecondsToHMS(beatpos) .. LF ..
+                nameField_6 .. ': ' .. SampleQTY .. LF ..
+                nameField_7 .. ': ' .. fractional .. LF ..
+                nameField_10 .. ': ' .. curveType .. LF .. LF
+    ConsMsg = ConsMsg .. txt
+    count = count +1
+    CSV_file:write(csv)
+    TXT_file:write(txt)
+    WriteFILE(html,csv:gsub(LF,''))
+  end
+  CSV_file:close()
+  TXT_file:close()
+  reaper.ShowConsoleMsg(TXT_header .. LF .. ConsMsg)
+end
 ----------------------------------------------
 -- MAIN FUNCTIONS
 ----------------------------------------------
@@ -2505,7 +2646,7 @@ function NotedItems()
       end
     end --for
   end
-  WriteFILE("  </tbody>"..LF.."</table>","")
+  WriteFILE("  </tbody>"..LF.."</table>"..LF..'<div class="spacer">&nbsp;</div>',"")
   reaper.UpdateArrange()
 end
 
@@ -2526,4 +2667,5 @@ FXedTracks()
 NotedTracks()
 FXedItems()
 NotedItems()
+pj_tempo_Markers()
 closeFiles()
