@@ -42,7 +42,18 @@
             </metadata>
             <version name="2.0" author="Tormy Van Cool" time="2022-07-26T14:32:30Z">
                 <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9c18fb3d901400e40b8592b1bee78dd38b9e45aa/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
-                <source file="jQuery/jquery-3.6.0.min.js">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2f8881fda5e3f9087863faf4f7d404e7869c1f25/jQuery/jquery-3.6.0.min.js</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="IMPORT TEMPO MARKERS: it reads the file Tempo_Markers.csv if present, and imports the Tempo Markers into the project.">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 It reads the file Tempo_Markers.csv exported with TEMPO MARKERS to CSV or with EXPORT DATA, and imports the Tempo Markers into the project.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2022-07-28T18:00:30Z">
+                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e95ebac6179f50a251a141b4b6071a336a8a31b/TormyVanCool_Import_Tempo_Markers.lua</source>
             </version>
         </reapack>
     </category>
@@ -202,7 +213,7 @@
                 <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/36c9db3aee01179cc2eb6ea928b2f8ea7250c4c6/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
-        <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats">
+        <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats and TEMPO MARKERS in All formats included TXT">
             <metadata>
                 <description>
                 <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
@@ -218,8 +229,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="2.9.4" author="Tormy Van Cool" time="2021-12-28T21:47:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/5e830876ab8dc9a6f8fb686bf3a70755f65a9e02/TormyVanCool_ExportData.lua</source>
+            <version name="3.0" author="Tormy Van Cool" time="2022-07-28T18:00:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e95ebac6179f50a251a141b4b6071a336a8a31b/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -310,6 +321,9 @@
                     + Metadata: Cafinfo
                     + Links to Documentation
                     # Mistyping corrections
+                v3.0
+                    # Version of Reaper
+                    + Tempo Markers
                 @credits  Mario Bianchi for his contribution to expedite the process;
                         Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
                         Solger for his help on the color decode [t=253981]
