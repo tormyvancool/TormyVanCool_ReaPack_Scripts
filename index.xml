@@ -100,40 +100,38 @@
         <reapack name="TormyVanCool_Podcasts_Auto_GetMetaData.lua" type="script" desc="PODCASTS AUTO GET METADATA: Automatically retrieve the metadata from the Source File and it adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
             <metadata>
                 <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
-                    {\colortbl ;\red255\green0\blue0;}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the item containing a song, a region will be created and a pop-up will ask for:\par
-                    \pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1\qj                     \b Song title:\b0   (\cf1\b mandatory field\cf0\b0 )\par
-                    {\pntext\f2\'B7\tab}                    \b Performer: \b0 (\cf1\b mandatory field\cf0\b0 )\par
-                    \pard\sa200\sl276\slmult1\qj                     \par
-                    Once clicked on OK, the duration of the song is automatically calculated in seconds. A region will be created with the following coded name:\par
-                    \pard\sa200\sl276\slmult1                     CHAP=\i offset\i0 |\i given_title\i0 |\i given_performer\i0 |\i production_year\i0 |\i Label\i0 |\i duration_in_seconds\i0\par
-                    \pard\sa200\sl276\slmult1\qj\par
-                    \pard\sa200\sl276\slmult1 At the same time, a SideCar file is created into the directory of the project, where the file  \b .RPP\b0  is placed, with the same name of the project, and TXT extension:\par
-                    \pard\sl276\slmult1\qc\par
-                    PROJECT_NAME.txt\par
-                    \pard\sl276\slmult1 Each line is a record, so structured\par
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}}
+                    {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+                    \pard\sa200\sl276\slmult1\qj\b\fs24\lang9 Activating \b0 or \b Arming \b0 this script, by clicking on the item containing a song, a region will be created getting the MetaData from the Source Audio File:\par
+                    A region will be created with the following coded name:\par
+
+                    \pard\sa200\sl276\slmult1 CHAP=\i offset\i0 |\i given_title\i0 |\i given_performer\i0 |\i production_year\i0 |\i Label\i0 |\i duration_in_seconds\i0\par
+                    At the same time, a SideCar file is created into the directory of the project, where the file  \b .RPP\b0  is placed, with the same name of the project, and TXT extension:\par
+
+                    \pard\sl276\slmult1\qc                     \par
+                                        PROJECT_NAME.txt\par
+
+                    \pard\sl276\slmult1                     Each line is a record, so structured\par
+                                        \par
+                    \i Offset\i0 ,\i MidStream_Tag\i0 ,"\i Song_Performer\i0  - \i Song_Title\i0 - \i Production_Year\i0 - \i Label\i0 - \i Duration mm:ss\i0 "\par
                     \par
-                    \pard\sl276\slmult1\qc\i Offset\i0 ,\i MidStream_Tag\i0 ,"\i Song_Performer\i0  - \i Song_Title\i0 - \i Production_Year\i0 - \i Label\i0 - \i Duration mm:ss\i0"\par
-                    \par
-                    \pard\sl276\slmult1\i Offset \i0 = AUTOMATIC by SYSTEM: Seconds from the begining of the file, where the song starts\par
+                    \i Offset \i0 = AUTOMATIC by SYSTEM: Seconds from the begining of the file, where the song starts\par
                     \i MidStream_Tag \i0 = AUTOMATIC by SYSTEM: 1 (in signifies: text string)\par
                     \i Song_Performer \i0 = MANDATORY: the given song performer\par
                     \i Song_Title \i0 = MANDATORY: the given song title\par
                     \i Production_Year \i0 = OPTIONAL: The productionyear in 4 digits taken from Discogs or MusicBrainz if possible, or just NULL\par
                     \i Label \i0 = OPTIONAL: The label for that specific release taken from Discogs or MusicBrainz if possible, or just NULL\par
-                    \i Duration seconds \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted
-                    \par
-                    \par
+                    \i Duration seconds \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted                    \par
+                                        \par
                     \b Versioning:\b0\par
-                    \par
+                                        \par
                     On purpose, are not available versions previous the present one.\par
-                    You can alwasy open the file and read what I did in the pervious versions. It's reported into the header.\par
+                    You can always open the file and read what I did in the pervious versions. It's reported into the header.\par
                     }]]>
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool" time="2022-07-30T22:24:33Z">
-                <source main="main" file="TormyVanCool_Podcasts_Auto_GetMetaData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e445a313c3a576ab595f963b0c0b3155afb6754/TormyVanCool_Podcast_Auto_GetMetaData.lua</source>
+                <source main="main" file="TormyVanCool_Podcasts_Auto_GetMetaData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e2d7bd6ca4ab90a472657a0d9983a3cf4fec98f/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
