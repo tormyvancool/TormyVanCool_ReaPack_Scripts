@@ -203,7 +203,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "3.0 FERRETS"
+local scriptVersion = "3.1 FERRETS"
 local Creator = "Tormy Van Cool"
 local precision = 4
 local timeFormat = "(hh:mm:ss,sss)"
