@@ -266,8 +266,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="3.0" author="Tormy Van Cool" time="2022-07-28T18:00:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e95ebac6179f50a251a141b4b6071a336a8a31b/TormyVanCool_ExportData.lua</source>
+            <version name="3.1" author="Tormy Van Cool" time="2022-08-03T20:45:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d6f2371103390a9009d925390cec947560420baf/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -361,6 +361,9 @@
                 v3.0
                     # Version of Reaper
                     + Tempo Markers
+                v3.1
+                    + Error travp in case project is not finished
+                    + export CSV Headers
                 @credits  Mario Bianchi for his contribution to expedite the process;
                         Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
                         Solger for his help on the color decode [t=253981]
