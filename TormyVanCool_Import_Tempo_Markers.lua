@@ -11,8 +11,10 @@ v1.0 (27 july 2022)
 v1.1 (03 august 2022)
   + avoid line headers
   + version
+v1.2 (03 august 2022)
+  + gradual change
 ]]--
-local version = "Tempo Markers Import: v1.1"
+local version = "Tempo Markers Import: v1.2"
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'
 local filepath = pj_path..'Tempo_Markers.csv'
 local i = 0
@@ -99,10 +101,10 @@ function Main()
         local timesig_num = csv:get_attribute(a,8) -- From Function 8
         local timesig_denom = csv:get_attribute(a,9)  -- From Function 9
         local tempoType = csv:get_attribute(a,10)  -- From Function Lineartempo Boolean
-        if tempoType == O then
-            lineartempo = true
+        if tempoType == "0" then
+            lineartempo = false
         else
-            lineartempo = false 
+            lineartempo = true 
         end
     retval = reaper.SetTempoTimeSigMarker(0, -1, timepos, measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo) 
     
