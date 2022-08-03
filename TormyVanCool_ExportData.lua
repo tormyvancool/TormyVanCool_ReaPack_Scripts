@@ -100,6 +100,9 @@ v2.9.4
 v3.0
   # Version of Reaper
   + Tempo Markers
+v3.1
+  + Error travp in case project is not finished
+  + export CSV Headers
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -488,7 +491,10 @@ function scandir(directory,format)
   local OS = reaper.GetOS()
   if OS == "Win32" or OS == "Win64" then
     fileBat = io.open(directory.."\\cp.bat","w")
-    fileBat:write("@chcp %1 >nul")
+    if fileBat == nil then
+      reaper.MB("YOU WILL RECEIVE AN ERROR\n\nThe project must be finished upfront report export\nIt means:\n- Render the audio files;\n- finish the project;\n- and then export this report", 'WARNING', 0)
+    end
+    fileBat:write("@chcp %1 >nul") 
     fileBat:close()
     --os.remove(directory.."\\cp.bat")
     bat_file = utf8_to_win(directory.."\\cp.bat")  -- insert your path here
@@ -2150,20 +2156,20 @@ function pj_tempo_Markers()
   local CSV_file = io.open(pj_path..'\\'..CSV_name, "w")
   local TXT_file = io.open(pj_path..'\\'..TXT_name, "w")
 
-  local CSV_header = LF .. 'TEMPO MARKERS'
-  CSV_header = CSV_header .. LF ..
-               nameField_0 .. separator .. 
+  --local CSV_header = LF .. 'TEMPO MARKERS'
+  local CSV_header = nameField_0 .. separator .. 
                nameField_1 .. separator .. 
                nameField_2 .. separator .. 
                nameField_3 .. separator .. 
-               nameField_4 .. separator .. 
+               nameField_4 .. separator ..
                nameField_5 .. separator .. 
                nameField_6 .. separator .. 
                nameField_8 .. separator .. 
                nameField_9 .. separator ..
-               nameField_10
+               nameField_10 .. LF
   local TXT_header = 'TEMPO MARKERS version '.. scriptVersion .. LF .. 'by ' .. Creator .. LF .. LF
   TXT_file:write(TXT_header)
+  CSV_file:write(CSV_header)
   WriteFILE('',CSV_header)
 
   while count < howmany do

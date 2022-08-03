@@ -39,13 +39,16 @@ v1.9 (25 july 2022)
   # Wrong header in the Console
 v2.0 (26 july 2022)
   + curveType
+v2.1 (03 august 2022)
+  - full header
+  + min header
 ]]
 
 ---------------------------------------------
 -- VARIABLES
 ---------------------------------------------
 local pluginName = "TEMPO MARKERS WRAP UP"
-local version = "2.0"
+local version = "2.1"
 local LF = '\n'
 local separator = ','
 local fileName = "Tempo_Markers"
@@ -245,18 +248,17 @@ local FooterHTML = [[
 </html>]]
 
 
-local CSV_header = pluginName .. ' version '.. version .. LF .. 'by ' .. Author
-      CSV_header = CSV_header .. LF .. LF .. 
-                   nameField_0 .. separator .. 
-                   nameField_1 .. separator .. 
-                   nameField_2 .. separator .. 
-                   nameField_3 .. separator .. 
-                   nameField_4 .. separator .. 
-                   nameField_5 .. separator .. 
-                   nameField_6 .. separator .. 
-                   nameField_8 .. separator .. 
-                   nameField_9 .. separator ..
-                   nameField_10 .. LF
+-- local CSV_header = pluginName .. ' version '.. version .. LF .. 'by ' .. Author
+local CSV_header = '"'..nameField_0..'"' .. separator .. 
+                   '"'..nameField_1..'"' .. separator .. 
+                   '"'..nameField_2..'"' .. separator .. 
+                   '"'..nameField_3..'"' .. separator .. 
+                   '"'..nameField_4..'"' .. separator .. 
+                   '"'..nameField_5..'"' .. separator .. 
+                   '"'..nameField_6..'"' .. separator .. 
+                   '"'..nameField_8..'"' .. separator .. 
+                   '"'..nameField_9..'"' .. separator ..
+                   '"'..nameField_10..'"' .. LF
 local TXT_header = pluginName .. ' version '.. version .. LF .. 'by ' .. Author .. LF .. LF
 CSV_file:write(CSV_header)
 TXT_file:write(TXT_header)

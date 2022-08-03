@@ -8,7 +8,11 @@
 @changelog:
 v1.0 (27 july 2022)
   + Initial release
+v1.1 (03 august 2022)
+  + avoid line headers
+  + version
 ]]--
+local version = "Tempo Markers Import: v1.1"
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'
 local filepath = pj_path..'Tempo_Markers.csv'
 local i = 0
@@ -47,7 +51,7 @@ function TempoMarkersCSV:load_csvfile(filepath)
             i = i+1
 		end
 	else
-        reaper.MB(filepath.." doesn't exist", 'WARNING', 0)
+        reaper.MB(filepath.." doesn't exist", version..' - WARNING', 0)
 		return false
 	end
 	return true
@@ -63,17 +67,17 @@ end
 function TempoMarkersCSV:get_attribute(row, column)
 	if next(self.csv_table) ~= nil then
 		if row > #self.csv_table or row < 0 then
-            reaper.MB("Row is outside of allowed range", 'WARNING', 0)
+            reaper.MB("Row is outside of allowed range", version..' - WARNING', 0)
 		else
 			row_attr = self.csv_table[row]
 			if column > #row_attr or column < 0 then
-                reaper.MB("Column is outside of allowed range", 'WARNING', 0)
+                reaper.MB("Column is outside of allowed range", version..' - WARNING', 0)
 			else
 				return row_attr[column]
 			end
 		end
 	else
-        reaper.MB(filepath.." doesn't contain required data", 'WARNING', 0)
+        reaper.MB(filepath.." doesn't contain required data", version..' - WARNING', 0)
 	end
 	return "No Attribute found"
 end
@@ -81,7 +85,7 @@ local csv = TempoMarkersCSV.new()
 
 function Main()
     csv:load_csvfile(filepath)
-    local a = 1
+    local a = 2 -- avoid header line
     local retval = false
     while a <= i do
         local lineartempo = false
@@ -117,9 +121,9 @@ function Main()
     a = a+1
     end
     if retval == true then
-        reaper.MB("Tempo Markers Succesfully Created"..LF.."Click on OK and then click into the project, to see the Tempo Envelope", 'OK', 0)
+        reaper.MB("Tempo Markers Succesfully Created"..LF.."Click on OK and then click into the project, to see the Tempo Envelope", version..' - OK', 0)
     else
-        reaper.MB("An error occurred", 'WARNING', 0)
+        reaper.MB("An error occurred", version..' - WARNING', 0)
     end
 end
 
