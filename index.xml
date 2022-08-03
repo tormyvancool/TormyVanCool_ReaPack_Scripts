@@ -40,8 +40,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.0" author="Tormy Van Cool" time="2022-07-26T14:32:30Z">
-                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9c18fb3d901400e40b8592b1bee78dd38b9e45aa/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
+            <version name="2.1" author="Tormy Van Cool" time="2022-08-03T20:44:30Z">
+                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/803e2c36b047c35c51c2770fa4f77732a969048c/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="IMPORT TEMPO MARKERS: it reads the file Tempo_Markers.csv if present, and imports the Tempo Markers into the project.">
@@ -52,8 +52,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.0" author="Tormy Van Cool" time="2022-07-28T18:00:30Z">
-                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e95ebac6179f50a251a141b4b6071a336a8a31b/TormyVanCool_Import_Tempo_Markers.lua</source>
+            <version name="1.1" author="Tormy Van Cool" time="2022-08-03T20:44:30Z">
+                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/803e2c36b047c35c51c2770fa4f77732a969048c/TormyVanCool_Import_Tempo_Markers.lua</source>
             </version>
         </reapack>
     </category>
