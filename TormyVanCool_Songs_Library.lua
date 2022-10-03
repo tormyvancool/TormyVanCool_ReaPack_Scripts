@@ -1,7 +1,7 @@
 --[[
 @description Assign Performer and Title to a song's Region
 @author Tormy Van Cool
-@version 1.0
+@version 1.3
 @screenshot Example:
 @changelog:
 v1.0 (21 may 2022)
@@ -12,6 +12,11 @@ v1.1 (22 may 2022)
 v1.2 (22 may 2022)
   - upper
   + normal
+v1.3 (03 october 2022)
+  + Forbidden characters list
+  + Forbidden characters: /, \
+  + version
+  + by
 ]]
 --------------------------------------------------------------------
 -- Script Initialization
@@ -22,9 +27,32 @@ local pipe = "|"
 local LF = "\n"
 local extension = ".txt"
 local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
+local forbiddenChars = [[
+_________________________________________________________
+FORBIDDEN CHARS:
+
+These characters will be replaced with a SPACE:
+
+        :
+        -
+        :
+        =
+        "
+        |
+        /
+        \
+        |
+        ;
+_________________________________________________________
+
+
+]]
 local author = reaper.GetSetProjectAuthor(0, 0, '')
 local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = ""
 local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = ""
+local version = "1.3"
+local by = "Tormy Van Cool"
+local MainTitle = "SONG DATA LIBRARY - v" .. version .. " by " .. by
 
 
 --------------------------------------------------------------------
@@ -207,10 +235,16 @@ itemduration = roundup
 -- Asks for user's inputs
 --------------------------------------------------------------------
 reaper.ShowConsoleMsg("")
-reaper.ShowConsoleMsg("INSTRUCTIONS\n\n\nPERFORMER and SONG TITLE are mandatory fields.\nIn case of multiple performers, separate them with a comma.\n\nPRODUCTION YEAR and LABEL(s) [Optional fields] check on:\nhttps://www.discogs.com or\nhttps://www.musicbrainz.org\n\nYou can select the links above, copy them and paste into the browser\n\nPRODUCTION LABELS(s):\nin case of multiple labels, separate them by commas")
+reaper.ShowConsoleMsg(MainTitle .. LF .. LF .. LF .. LF .. "INSTRUCTIONS".. LF.. LF.. forbiddenChars .. 
+"PERFORMER and SONG TITLE are mandatory fields.\nIn case of multiple performers, separate them with a comma.\n\nPRODUCTION YEAR and LABEL(s) [Optional fields] check on:" .. LF .. 
+"https://www.discogs.com or" .. LF .. 
+"https://www.musicbrainz.org" .. LF .. LF ..
+"You can select the links above, copy them and paste into the browser" .. LF .. LF ..
+"PRODUCTION LABELS(s):" .. LF ..
+"in case of multiple labels, separate them by commas")
 repeat
-retval, InputString=reaper.GetUserInputs("SONG DATA", 4, "Performer (Mandatory),separator=\n,extrawidth=400,Song Title (Mandatory),Production Year,Label(s) (separated by commas)", SongPerformer..LF..SongTitle..LF..SongYear..LF..SongLabel)
-InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|'), ';') -- No reserved characters can be written
+retval, InputString=reaper.GetUserInputs(MainTitle, 4, "Performer (Mandatory),separator=\n,extrawidth=400,Song Title (Mandatory),Production Year,Label(s) (separated by commas)", SongPerformer..LF..SongTitle..LF..SongYear..LF..SongLabel)
+InputString = ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(ChapRid(InputString, pipe), '-'), ':'), '='), '"'), '|'), ';'), '/', ' '), '\\', ' ') -- No reserved characters can be written
 if retval==false then return end
 if retval then
   t = {}
@@ -281,4 +315,4 @@ repeat
   numMarkers = numMarkers+1
 until mkr == 0
 i = 0
-reaper.Undo_OnStateChangeEx("SONG DATA", -1, -1)
+reaper.Undo_OnStateChangeEx(MainTitle, -1, -1)
