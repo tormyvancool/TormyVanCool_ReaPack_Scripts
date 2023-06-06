@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.6 FERRETS
+@version 2.7 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
