@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.7 FERRETS
+@version 2.8 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
@@ -40,12 +40,16 @@ v2.6 FERRETS (1 november 2021)
 v2.7 FERRETS (1 june 2023) 
   + CLAP
   # Corrected a bug that could list less plugins than the ones really installed
+v2.8 FERRETS (1 june 2023) 
+  # Fixed issue with Mac (both x86_64 and arch64)
+  # Fixed issue with Linux
+  + "Not applicable (don't even ask)" to CLAP files
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.7 FERRETS"
+local version = "2.8 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
-local path_CLAP = reaper.GetResourcePath()..'/reaper-clap-win64.ini'
+local path_CLAP = ""
 local path_MAC = reaper.GetResourcePath()..'/reaper-auplugins64.ini'
 local FileName = REAPER_path.."/REAPER.VSTinstalled"
 local VST_RegisterHTML = FileName..".html"
@@ -92,7 +96,7 @@ function getOS()
   end
   if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
     a.slash = '/'
-    a.os = "m"
+    a.os = "m"    
   end
   if OS == "Other" then
     a.slash = '/'
@@ -297,7 +301,7 @@ local HeaderHTML = [[
       button#myBtn { position: fixed; top: 547px; left: 91px; z-index: 1; }
       div#buttons { position: fixed; left: 60px; top: 348px; background: #0057a1; width: 200px; height: 270px; border-radius: 0 0 10px 10px;}
       span#info { background: red; position: fixed; left: 60px; top: 209px; width: 180px; border-radius: 10px 10px 0 0; height: 119px; padding: 10px; text-align: center; color: white; font-weight: bold; word-wrap: break-word;}
-      table#rows { position: relative; top: 153px; }
+      table#rows { position: relative; top: 191px; }
       table#title { position: fixed; top: 0px; left: 291px; z-index: 1; }
       #mainContainer { position: absolute; left: 291px; }
       .inst {width: 36px;}
@@ -400,8 +404,8 @@ local HeaderHTML = [[
         <tr>
           <th class="table_header checkbox1">&nbsp;</th>
           <th class="table_header inst">Instr.</th>
-          <th class="table_header name">VST/VSTi/AU NAME (Manufacturer)</th>
-          <th class="table_header file">FILE (VSTs) - INST-NotINST (AUs)</th>
+          <th class="table_header name">VST/VSTi/AU/CLAP NAME (Manufacturer)</th>
+          <th class="table_header file">FILE (VSTs)<br>INST-NotINST (AUs)<br>CLAP (Clap Plugins)</th>
         </tr>
       </thead>
     </table>
@@ -443,9 +447,22 @@ local FooterHTML = [[
   </body>
 </html>]]
 local HeaderCSV = "REAPER,VST/VSTi INSTALLED EXTRACTOR\nVersion:,"..version.."\nby:,Tormy Van Cool\nDate:,"..date.."\n\n"
-HeaderCSV = HeaderCSV.."CHECK,N.,INSTR.,VST/VSTi/AU NAME (Manufacturer),FILE (VSTs) - INST-NotINST (AUs)\n"
+HeaderCSV = HeaderCSV.."CHECK,N.,INSTR.,VST/VSTi/AU/CLAP NAME (Manufacturer),FILE (VSTs) - INST-NotINST (AUs) - CLAP (for Clap Plugins)\n"
 
 
+---------------------------------------------
+-- VIARIABLES SETUP
+---------------------------------------------
+if getOS().os == "w" then  path_CLAP = reaper.GetResourcePath()..'/reaper-clap-win64.ini' end
+if getOS().os ~= "w" then
+  if getOS().os == "OSX32" or OS == "OSX64" then
+    path_CLAP =  reaper.GetResourcePath()..'/reaper-clap-macos-x86_64.ini'
+  end
+  
+  if getOS().os == "macOS-arm64" then
+    path_CLAP =  reaper.GetResourcePath()..'/reaper-clap-macos-aarch64.ini'
+  end
+end
 
 ---------------------------------------------
 -- FILES
@@ -455,7 +472,14 @@ local handle_CLAP = io.open(path_CLAP, "r")
 local HTML = io.open(VST_RegisterHTML, 'w')
 local CSV = io.open(VST_RegisterCSV, 'w')
 
-
+if handle == nil then
+  reaper.MB("Not existing VST cache. Isntall at least 1 plugin!!!", "ERROR" ,0)
+  return
+end
+if handle_CLAP == nil then
+  reaper.MB("Not existing CLAP cache. Isntall at least 1 plugin!!!", "ERROR" ,0)
+  return
+end
 
 function main()
    HTML:write(HeaderHTML)
@@ -470,6 +494,7 @@ function main()
    function all()
      local lineHTML = ''
      local lineCSV = ''
+     local CLAP_File = "CLAP Type"
      
      -- VST and VSTi
       for _ in handle:lines() do
@@ -514,8 +539,8 @@ function main()
           end
         --reaper.ShowConsoleMsg(instr ..' - ' .. CLAP_Name .. '\n')
 
-        lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..'</td></tr>\n'
-        lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..'\n' 
+        lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..CLAP_File..'</td></tr>\n'
+        lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..CLAP_File..'\n' 
         n=n+1
         end -- if 1
       end -- for
@@ -524,9 +549,6 @@ function main()
     HTML:write(lineHTML)
     CSV:write(lineCSV)
    end -- function
-   
-
-   
    
    ---------------------------------------------
    -- MAC
@@ -579,6 +601,9 @@ function main()
     if handle_MAC ~= nil then
       InterHEADAER()
       mac(handle_MAC)
+    else
+      reaper.MB("Not existing cache. Install at least 1 plugin!!!", "ERROR" ,0)
+      return
     end
   end
   HTML:write(FooterHTML)
