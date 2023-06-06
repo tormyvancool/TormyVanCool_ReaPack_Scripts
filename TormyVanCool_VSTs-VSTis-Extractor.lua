@@ -37,7 +37,7 @@ v2.5 FERRETS (1 november 2021)
   + instr Column CSV
 v2.6 FERRETS (1 november 2021)
   # glitch on jQuery: Hide/Show button was not working any longer
-v2.7 FERRETS (1 june 2023)
+v2.7 FERRETS (1 june 2023) 
   + CLAP
   # Corrected a bug that could list less plugins than the ones really installed
 ]]
