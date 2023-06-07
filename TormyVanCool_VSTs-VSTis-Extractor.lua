@@ -45,7 +45,7 @@ v2.8 FERRETS (1 june 2023)
   # Fixed issue with Linux
   + "Not applicable (don't even ask)" to CLAP files
 v2.8.5
-  # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
+  # Fixed message ""Not existing VST cache. Isntall at least 1 plugin!!!""
 ]]
 reaper.ShowConsoleMsg('')
 local version = "2.8.5 FERRETS"
