@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.8 FERRETS
+@version 2.8.5 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
@@ -44,9 +44,11 @@ v2.8 FERRETS (1 june 2023)
   # Fixed issue with Mac (both x86_64 and arch64)
   # Fixed issue with Linux
   + "Not applicable (don't even ask)" to CLAP files
+v2.8.5
+  # Fixed message ""Not existing VST cache. Isntall at least 1 plugin!!!""
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.8 FERRETS"
+local version = "2.8.5 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
 local path_CLAP = ""
@@ -476,10 +478,7 @@ if handle == nil then
   reaper.MB("Not existing VST cache. Isntall at least 1 plugin!!!", "ERROR" ,0)
   return
 end
-if handle_CLAP == nil then
-  reaper.MB("Not existing CLAP cache. Isntall at least 1 plugin!!!", "ERROR" ,0)
-  return
-end
+
 
 function main()
    HTML:write(HeaderHTML)
@@ -525,26 +524,28 @@ function main()
         end -- if 1
       end -- for
 
-     -- CLAP and CLAPi 
-      for _ in handle_CLAP:lines() do
+      if handle_CLAP ~= nil then
+      
+      -- CLAP and CLAPi 
+        for _ in handle_CLAP:lines() do
 
-        BLOCK,CLAP_Name = string.match(_, "(.+)|(.+)$")
-          
-        if CLAP_Name  ~= nil then 
+          BLOCK,CLAP_Name = string.match(_, "(.+)|(.+)$")
+            
+          if CLAP_Name  ~= nil then 
 
-          if string.match(BLOCK, "=(.+)") == "1" then
-            instr= "Instr."
-          else
-            instr= ""
-          end
-        --reaper.ShowConsoleMsg(instr ..' - ' .. CLAP_Name .. '\n')
+            if string.match(BLOCK, "=(.+)") == "1" then
+              instr= "Instr."
+            else
+              instr= ""
+            end
+          --reaper.ShowConsoleMsg(instr ..' - ' .. CLAP_Name .. '\n')
 
-        lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..CLAP_File..'</td></tr>\n'
-        lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..CLAP_File..'\n' 
-        n=n+1
-        end -- if 1
-      end -- for
-
+          lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..CLAP_File..'</td></tr>\n'
+          lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..CLAP_File..'\n' 
+          n=n+1
+          end -- if 1
+        end -- for
+    end
     handle:close()
     HTML:write(lineHTML)
     CSV:write(lineCSV)
