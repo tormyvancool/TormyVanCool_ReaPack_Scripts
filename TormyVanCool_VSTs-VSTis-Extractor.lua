@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.8.5 FERRETS
+@version 2.9 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 may 2021)
@@ -46,9 +46,11 @@ v2.8 FERRETS (1 june 2023)
   + "Not applicable (don't even ask)" to CLAP files
 v2.8.5
   # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
+v2.9
+  + CLAP File Name
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.8.5 FERRETS"
+local version = "2.9 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
 local path_CLAP = ""
@@ -303,7 +305,7 @@ local HeaderHTML = [[
       button#myBtn { position: fixed; top: 547px; left: 91px; z-index: 1; }
       div#buttons { position: fixed; left: 60px; top: 348px; background: #0057a1; width: 200px; height: 270px; border-radius: 0 0 10px 10px;}
       span#info { background: red; position: fixed; left: 60px; top: 209px; width: 180px; border-radius: 10px 10px 0 0; height: 119px; padding: 10px; text-align: center; color: white; font-weight: bold; word-wrap: break-word;}
-      table#rows { position: relative; top: 191px; }
+      table#rows { position: relative; top: 173px; }
       table#title { position: fixed; top: 0px; left: 291px; z-index: 1; }
       #mainContainer { position: absolute; left: 291px; }
       .inst {width: 36px;}
@@ -407,7 +409,7 @@ local HeaderHTML = [[
           <th class="table_header checkbox1">&nbsp;</th>
           <th class="table_header inst">Instr.</th>
           <th class="table_header name">VST/VSTi/AU/CLAP NAME (Manufacturer)</th>
-          <th class="table_header file">FILE (VSTs)<br>INST-NotINST (AUs)<br>CLAP (Clap Plugins)</th>
+          <th class="table_header file">FILE (VSTs &amp; CLAPs)<br>INST-NotINST (AUs)</th>
         </tr>
       </thead>
     </table>
@@ -493,8 +495,8 @@ function main()
    function all()
      local lineHTML = ''
      local lineCSV = ''
-     local CLAP_File = "CLAP Type"
-     
+     local CLAP_File = ''
+
      -- VST and VSTi
       for _ in handle:lines() do
         --s = handle:read("*l")
@@ -528,22 +530,33 @@ function main()
       
       -- CLAP and CLAPi 
         for _ in handle_CLAP:lines() do
+          
+          if not string.match(_, "_=") then
 
-          BLOCK,CLAP_Name = string.match(_, "(.+)|(.+)$")
-            
-          if CLAP_Name  ~= nil then 
-
-            if string.match(BLOCK, "=(.+)") == "1" then
-              instr= "Instr."
-            else
-              instr= ""
+            BLOCK,CLAP_Name = string.match(_, "(.+)|(.+)$")
+            --reaper.ShowConsoleMsg(_ .. '\n')
+            if string.match(_, "%[") then
+              CLAP_FileName = _:gsub('[%[%]]', '')
+              CLAP_File = CLAP_File..CLAP_FileName..'<br>'
+              --reaper.ShowConsoleMsg(CLAP_File .. '\n')
             end
-          --reaper.ShowConsoleMsg(instr ..' - ' .. CLAP_Name .. '\n')
+              
+            if CLAP_Name  ~= nil then 
+              --CLAP_File = CLAP_File..CLAP_Name
+              if string.match(BLOCK, "=(.+)") == "1" then
+                instr= "Instr."
+              else
+                instr= ""
+              end
+            --reaper.ShowConsoleMsg(instr ..' - ' .. CLAP_Name .. CLAP_File..'\n')
 
-          lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..CLAP_File..'</td></tr>\n'
-          lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..CLAP_File..'\n' 
-          n=n+1
-          end -- if 1
+            lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..CLAP_Name..'</td><td class="file">'..CLAP_File..'</td></tr>\n'
+            lineCSV = lineCSV..','..n..','..instr..','..CLAP_Name..','..CLAP_File..'\n' 
+            n=n+1
+            --reaper.ShowConsoleMsg(CLAP_File .. '\n')
+            CLAP_File = ''
+            end -- if 1
+          end
         end -- for
     end
     handle:close()
