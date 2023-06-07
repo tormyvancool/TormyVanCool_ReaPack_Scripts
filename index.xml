@@ -432,8 +432,8 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.8.5" author="Tormy Van Cool" time="2023-06-07T07:20:18Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ce62422d5e77d94fef91d1f01a368bd4ec02d1dd/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.9" author="Tormy Van Cool" time="2023-06-07T20:33:18Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9261467b834ca1ed501231d95348a1ab40e54ca2/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -478,6 +478,8 @@
                     + "CLAP Type" to CLAP files
                 v2.8.5
                     # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
+                v2.9
+                    + CLAP File Name
                 ]]>
                 </changelog>
             </version>
