@@ -432,8 +432,8 @@
                 ]]>
                 </changelog>
             </version>
-            <version name="2.8" author="Tormy Van Cool" time="2023-06-06T22:20:18Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4e148f1be9b35a1ff8e23142863c51c378937291/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+            <version name="2.8.5" author="Tormy Van Cool" time="2023-06-07T07:20:18Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8c50f9aad03c26c9ca50a31b104d281d611cbd77/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
@@ -476,6 +476,8 @@
                     # Fixed issue with Mac (both x86_64 and arch64)
                     # Fixed issue with Linux
                     + "CLAP Type" to CLAP files
+                v2.8.5
+                
                 ]]>
                 </changelog>
             </version>
