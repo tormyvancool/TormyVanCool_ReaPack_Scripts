@@ -485,6 +485,18 @@
             </version>
         </reapack>
     </category>
+    <category name="Multichannel">
+        <reapack name="5.1 Surround" type="effect" desc="Level Adjuster for 5.1 speakers, for Monitor FX">
+            <version name="1.0" author="Tormy Van Cool" time="2023-06-16T23:30:00.864Z">
+                <source main="main" file="5.1_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ca91c595f4fbcdc942df1e23d43e9e4f4311e89a/5.1_MultiChannel_Volume_Adjuster</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                ]]>
+            </changelog>
+            </version>
+        </reapack>
+    </category>
     <metadata>
         <description>
         <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
