@@ -487,7 +487,7 @@
     </category>
     <category name="Multichannel">
         <reapack name="5.1 Surround" type="effect" desc="Level Adjuster for 5.1 speakers, for Monitor FX">
-            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:30:09Z">
+            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:40:09Z">
                 <source main="main" file="5.1_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f7448d12b5e09a53c91182324ab341eb7eae2752/5.1_MultiChannel_Volume_Adjuster</source>
                 <changelog><![CDATA[
                     v1.0
@@ -499,7 +499,7 @@
             </version>
         </reapack>
         <reapack name="7.1 Surround" type="effect" desc="Level Adjuster for 7.1 speakers, for Monitor FX">
-            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:30:09Z">
+            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:40:09Z">
                 <source main="main" file="7.1_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f7448d12b5e09a53c91182324ab341eb7eae2752/7.1_MultiChannel_Volume_Adjuster</source>
                 <changelog><![CDATA[
                     v1.0
@@ -511,7 +511,7 @@
             </version>
         </reapack>
         <reapack name="7.1.2 Surround" type="effect" desc="Level Adjuster for 7.1.2 speakers, for Monitor FX">
-            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:30:09Z">
+            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:40:09Z">
                 <source main="main" file="7.1.2_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f7448d12b5e09a53c91182324ab341eb7eae2752/7.1.2_MultiChannel_Volume_Adjuster</source>
                 <changelog><![CDATA[
                     v1.0
@@ -523,7 +523,7 @@
             </version>
         </reapack>
         <reapack name="7.1.4 Surround" type="effect" desc="Level Adjuster for 7.1.4 speakers, for Monitor FX">
-            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:30:09.18Z">
+            <version name="1.1" author="Tormy Van Cool" time="2023-06-16T23:40:09.18Z">
                 <source main="main" file="7.1.4_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f7448d12b5e09a53c91182324ab341eb7eae2752/7.1.4_MultiChannel_Volume_Adjuster</source>
                 <changelog><![CDATA[
                     v1.0
