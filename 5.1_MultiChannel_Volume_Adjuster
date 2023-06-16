@@ -1,7 +1,8 @@
 desc:Multichannel 5.1 Level Adjuster (Tormy Van Cool)
 /* tags: Multichannel 5.1 Levele Adjuster
  * author: Tormy van Cool
- *
+ * version: 1.0: Launch
+ * version: 1.1: + function db2gain() 
  * Copyright (C) 2023 Tormy van Cool
  * License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
@@ -44,12 +45,17 @@ slider4 = min(max(slider4, gainMin), gainMax);
 slider5 = min(max(slider5, gainMin), gainMax);
 slider6 = min(max(slider6, gainMin), gainMax);
 
-gain1 = 2 ^ (slider1 / 6);
-gain2 = 2 ^ (slider2 / 6);
-gain3 = 2 ^ (slider3 / 6);
-gain4 = 2 ^ (slider4 / 6);
-gain5 = 2 ^ (slider5 / 6);
-gain6 = 2 ^ (slider6 / 6);
+function db2gain(db)
+(
+  2^(db/6); // good enough approx
+);
+
+gain1 = db2gain(slider1);
+gain2 = db2gain(slider2);
+gain3 = db2gain(slider3);
+gain4 = db2gain(slider4);
+gain5 = db2gain(slider5);
+gain6 = db2gain(slider6);
 
 @sample
 

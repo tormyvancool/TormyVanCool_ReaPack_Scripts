@@ -1,7 +1,8 @@
 desc:Multichannel 7.1.4 Level Adjuster (Tormy Van Cool)
 /* tags: Multichannel 7.1.4 Levele Adjuster
  * author: Tormy van Cool
- *
+ * version: 1.0: Launch
+ * version: 1.1: + function db2gain() 
  * Copyright (C) 2023 Tormy van Cool
  * License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
@@ -68,18 +69,24 @@ slider10 = min(max(slider10, gainMin), gainMax);
 slider11 = min(max(slider11, gainMin), gainMax);
 slider12 = min(max(slider12, gainMin), gainMax);
 
-gain1 = 2 ^ (slider1 / 6);
-gain2 = 2 ^ (slider2 / 6);
-gain3 = 2 ^ (slider3 / 6);
-gain4 = 2 ^ (slider4 / 6);
-gain5 = 2 ^ (slider5 / 6);
-gain6 = 2 ^ (slider6 / 6);
-gain7 = 2 ^ (slider7 / 6);
-gain8 = 2 ^ (slider8 / 6);
-gain9 = 2 ^ (slider9 / 6);
-gain10 = 2 ^ (slider10 / 6);
-gain11 = 2 ^ (slider11 / 6);
-gain12 = 2 ^ (slider12 / 6);
+
+function db2gain(db)
+(
+  2^(db/6); // good enough approx
+);
+
+gain1 = db2gain(slider1);
+gain2 = db2gain(slider2);
+gain3 = db2gain(slider3);
+gain4 = db2gain(slider4);
+gain5 = db2gain(slider5);
+gain6 = db2gain(slider6);
+gain7 = db2gain(slider7);
+gain8 = db2gain(slider8);
+gain9 = db2gain(slider9);
+gain10 = db2gain(slider10);
+gain11 = db2gain(slider11);
+gain12 = db2gain(slider12);
 
 @sample
 
