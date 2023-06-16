@@ -1,0 +1,83 @@
+desc:Multichannel 7.1 Level Adjuster (Tormy Van Cool)
+/* tags: Multichannel 7.1 Levele Adjuster
+ * author: Tormy van Cool
+ *
+ * Copyright (C) 2023 Tormy van Cool
+ * License: LGPL - http://www.gnu.org/licenses/lgpl.html
+*/
+
+slider1:0<-120,10,0.01>Left Output (dB)
+slider2:0<-120,10,0.01>Right Output (dB)
+slider3:0<-120,10,0.01>Center Output (dB)
+slider4:0<-120,10,0.01>LFE Output (dB)
+slider5:0<-120,10,0.01>Left Surround [Ls] Output (dB)
+slider6:0<-120,10,0.01>Right Surround [Rs Output (dB)
+slider7:0<-120,10,0.01>Left Rear [Lr] Output (dB)
+slider8:0<-120,10,0.01>Right Rear [Rr] Output (dB)
+
+in_pin:Left input
+in_pin:Right input
+in_pin:Center input
+in_pin:LFE input
+in_pin:Left Surround [Ls] input
+in_pin:Right Surround [Rs] input
+in_pin:Left Rear [Lr] input
+in_pin:Right Rear [Rr] input
+
+out_pin:Left output
+out_pin:Right output
+out_pin:Center output
+out_pin:LFE output
+out_pin:Left Surround [Ls] output
+out_pin:Right Surround [Rs] output
+out_pin:Left Rear [Lr] output
+out_pin:Right Rear [Rr output
+
+
+@init
+ext_tail_size = -2;
+gainMin = -120;
+gainMax = 10;
+
+
+@slider
+
+// Clamp to repectable values
+slider1 = min(max(slider1, gainMin), gainMax);
+slider2 = min(max(slider2, gainMin), gainMax);
+slider3 = min(max(slider3, gainMin), gainMax);
+slider4 = min(max(slider4, gainMin), gainMax);
+slider5 = min(max(slider5, gainMin), gainMax);
+slider6 = min(max(slider6, gainMin), gainMax);
+slider7 = min(max(slider7, gainMin), gainMax);
+slider8 = min(max(slider8, gainMin), gainMax);
+
+gain1 = 2 ^ (slider1 / 6);
+gain2 = 2 ^ (slider2 / 6);
+gain3 = 2 ^ (slider3 / 6);
+gain4 = 2 ^ (slider4 / 6);
+gain5 = 2 ^ (slider5 / 6);
+gain6 = 2 ^ (slider6 / 6);
+gain7 = 2 ^ (slider7 / 6);
+gain8 = 2 ^ (slider8 / 6);
+
+@sample
+
+// Catch the inputs
+in1 = spl0;
+in2 = spl1;
+in3 = spl2;
+in4 = spl3;
+in5 = spl4;
+in6 = spl5;
+in7 = spl6;
+in8 = spl7;
+
+spl0 = (in1 * gain1);
+spl1 = (in2 * gain2);
+spl2 = (in3 * gain3);
+spl3 = (in4 * gain4);
+spl4 = (in5 * gain5);
+spl5 = (in6 * gain6);
+spl6 = (in7 * gain7);
+spl7 = (in8 * gain8);
