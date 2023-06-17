@@ -1,18 +1,20 @@
 desc:Multichannel 5.1 Level Adjuster (Tormy Van Cool)
 /* tags: Multichannel 5.1 Levele Adjuster
- * author: Tormy van Cool
- * version: 1.0: Launch
- * version: 1.1: + function db2gain() 
- * Copyright (C) 2023 Tormy van Cool
- * License: LGPL - http://www.gnu.org/licenses/lgpl.html
+   author: Tormy van Cool
+   v1.0: Launch
+   v1.1: + function db2gain()
+   v1.2: - -120 +10
+         + -30 +10
+   Copyright (C) 2023 Tormy van Cool
+   License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
 
-slider1:0<-120,10,0.01>Left Output (dB)
-slider2:0<-120,10,0.01>Right Output (dB)
-slider3:0<-120,10,0.01>Center Output (dB)
-slider4:0<-120,10,0.01>LFE Output (dB)
-slider5:0<-120,10,0.01>Left Surround [Ls] Output (dB)
-slider6:0<-120,10,0.01>Right Surround [Rs Output (dB)
+slider1:0<-30,10,0.01>Left Output (dB)
+slider2:0<-30,10,0.01>Right Output (dB)
+slider3:0<-30,10,0.01>Center Output (dB)
+slider4:0<-30,10,0.01>LFE Output (dB)
+slider5:0<-30,10,0.01>Left Surround [Ls] Output (dB)
+slider6:0<-30,10,0.01>Right Surround [Rs Output (dB)
 
 in_pin:Left input
 in_pin:Right input
@@ -31,7 +33,7 @@ out_pin:Right Surround [Rs] output
 
 @init
 ext_tail_size = -2;
-gainMin = -120;
+gainMin = -30;
 gainMax = 10;
 
 

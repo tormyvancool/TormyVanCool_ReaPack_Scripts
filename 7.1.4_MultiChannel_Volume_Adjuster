@@ -1,24 +1,25 @@
 desc:Multichannel 7.1.4 Level Adjuster (Tormy Van Cool)
 /* tags: Multichannel 7.1.4 Levele Adjuster
- * author: Tormy van Cool
- * version: 1.0: Launch
- * version: 1.1: + function db2gain() 
- * Copyright (C) 2023 Tormy van Cool
+   author: Tormy van Cool
+   v1.0: Launch
+   v1.1: + function db2gain() 
+   v1.2: - -30 +10
+         + -30 +10
  * License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
 
-slider1:0<-120,10,0.01>Left Output (dB)
-slider2:0<-120,10,0.01>Right Output (dB)
-slider3:0<-120,10,0.01>Center Output (dB)
-slider4:0<-120,10,0.01>LFE Output (dB)
-slider5:0<-120,10,0.01>Left Surround [Ls] Output (dB)
-slider6:0<-120,10,0.01>Right Surround [Rs Output (dB)
-slider7:0<-120,10,0.01>Left Rear [Lr] Output (dB)
-slider8:0<-120,10,0.01>Right Rear [Rr] Output (dB)
-slider9:0<-120,10,0.01>Left Top Front [Ltf] Output (dB)
-slider10:0<-120,10,0.01>Right Top Front [Rtf] Output (dB)
-slider11:0<-120,10,0.01>Left Top Rear [Ltr] Output (dB)
-slider12:0<-120,10,0.01>Right Top Rear [Rtr] Output (dB)
+slider1:0<-30,10,0.01>Left Output (dB)
+slider2:0<-30,10,0.01>Right Output (dB)
+slider3:0<-30,10,0.01>Center Output (dB)
+slider4:0<-30,10,0.01>LFE Output (dB)
+slider5:0<-30,10,0.01>Left Surround [Ls] Output (dB)
+slider6:0<-30,10,0.01>Right Surround [Rs Output (dB)
+slider7:0<-30,10,0.01>Left Rear [Lr] Output (dB)
+slider8:0<-30,10,0.01>Right Rear [Rr] Output (dB)
+slider9:0<-30,10,0.01>Left Top Front [Ltf] Output (dB)
+slider10:0<-30,10,0.01>Right Top Front [Rtf] Output (dB)
+slider11:0<-30,10,0.01>Left Top Rear [Ltr] Output (dB)
+slider12:0<-30,10,0.01>Right Top Rear [Rtr] Output (dB)
 
 in_pin:Left input
 in_pin:Right input
@@ -49,7 +50,7 @@ out_pin:Right Top Rear [Rtr] output
 
 @init
 ext_tail_size = -2;
-gainMin = -120;
+gainMin = -30;
 gainMax = 10;
 
 
