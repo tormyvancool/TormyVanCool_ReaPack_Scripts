@@ -1,10 +1,11 @@
-desc:Multichannel 7.1.4 Level Adjuster (Tormy Van Cool)
+desc:Multichannel 7.1.4 Level Adjuster (Tormy Van Cool) v1.3
 /* tags: Multichannel 7.1.4 Levele Adjuster
    author: Tormy van Cool
    v1.0: Launch
    v1.1: + function db2gain() 
    v1.2: - -30 +10
          + -30 +10
+   v1.3: + vesioning into title
  * License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
 
