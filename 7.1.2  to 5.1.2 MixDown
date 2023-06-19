@@ -1,10 +1,11 @@
-desc:7.1.2 > 5.1.2 MixDown
+desc:7.1.2 > 5.1.2 MixDown (Tormy Van Cool) v1.3
 /* tags: 7.1.4 and 7.1.2 MixDown to 5.1.4 and 5.1.2
    author: Tormy van Cool
    v1.0: Launch
    v1.1: Mapped Top Channels
    v1.2: + Global Level Potentiometer
          + Single Channel Level Potentiometer
+   v1.3: + Versioning into title
    License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
 slider1:gain_db=0<-20,12,0.01>Global gain (dB)
