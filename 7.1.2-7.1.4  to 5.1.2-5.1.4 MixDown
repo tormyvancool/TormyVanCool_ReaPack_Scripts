@@ -1,0 +1,57 @@
+desc:7.1.2/7.1.4 > 5.1.2/5.1.4 MixDown
+/* tags: 7.1.4 and 7.1.2 MixDown to 5.1.4 and 5.1.2
+   author: Tormy van Cool
+   v1.0: Launch
+   License: LGPL - http://www.gnu.org/licenses/lgpl.html
+*/
+//slider1:gain_db=0<-150,12,1>gain (dB)
+
+in_pin:Left input
+in_pin:Right input
+in_pin:Center input
+in_pin:LFE input
+in_pin:Left Surround [Ls] input
+in_pin:Right Surround [Rs] input
+in_pin:Left Rear [Lr] input
+in_pin:Right Rear [Rr] input
+in_pin:Left Front Top [Lft] input
+in_pin:Right Front Top [Rft] input
+in_pin:Left Rear Top [Lrt] input
+in_pin:Right Rear Top [Rrt] input
+
+out_pin:Left output
+out_pin:Right output
+out_pin:Center output
+out_pin:LFE output
+out_pin:Left Surround [Ls] output
+out_pin:Right Surround [Rs] output
+
+
+@init
+//last_gain=10^(gain_db/20);
+
+@slider
+//next_gain=10^(gain_db/20);
+
+@block
+//d_gain = (next_gain - last_gain)/samplesblock;
+
+
+@sample
+in1 = spl0; // L
+in2 = spl1; // R
+in3 = spl2; // C
+in4 = spl3; // LFE
+in5 = spl4; // Ls
+in6 = spl5; // Rs
+in7 = spl6; // Lb
+in8 = spl7; // Rb
+in9 = spl8; // Lt
+in10 = spl9; // Rt
+
+spl0 += (sqrt(1/2) * in5);
+spl1 += (sqrt(1/2) * in6);
+spl2 = in3; // Center
+spl3 = in4; // LFE
+spl4 = in7 + (sqrt(1/2) * in5); // Ls
+spl5 = in8 + (sqrt(1/2) * in6); // Rs
