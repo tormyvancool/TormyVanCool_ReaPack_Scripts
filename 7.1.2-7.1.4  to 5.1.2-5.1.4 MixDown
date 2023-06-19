@@ -2,9 +2,20 @@ desc:7.1.2/7.1.4 > 5.1.2/5.1.4 MixDown
 /* tags: 7.1.4 and 7.1.2 MixDown to 5.1.4 and 5.1.2
    author: Tormy van Cool
    v1.0: Launch
+   v1.1: Mapped Top Channels
+   v1.2: + Global Level Potentiometer
+         + Single Channel Level Potentiometer
    License: LGPL - http://www.gnu.org/licenses/lgpl.html
 */
-//slider1:gain_db=0<-150,12,1>gain (dB)
+slider1:gain_db=0<-20,12,0.01>Global gain (dB)
+slider3:L=0<-20,12,0.01>L (dB)
+slider4:R=0<-20,12,0.01>R (dB)
+slider5:C=0<-20,12,0.01>C (dB)
+slider6:LFE=0<-20,12,0.01>LFE (dB)
+slider7:Ls=0<-20,12,0.01>Ls (dB)
+slider8:Rs=0<-20,12,0.01>Rs (dB)
+slider10:Lt=0<-20,12,0.01>Lt (dB)
+slider11:Rt=0<-20,12,0.01>Rt (dB)
 
 in_pin:Left input
 in_pin:Right input
@@ -16,22 +27,34 @@ in_pin:Left Rear [Lr] input
 in_pin:Right Rear [Rr] input
 in_pin:Left Front Top [Lft] input
 in_pin:Right Front Top [Rft] input
-in_pin:Left Rear Top [Lrt] input
-in_pin:Right Rear Top [Rrt] input
 
 out_pin:Left output
 out_pin:Right output
 out_pin:Center output
 out_pin:LFE output
-out_pin:Left Surround [Ls] output
-out_pin:Right Surround [Rs] output
-
+out_pin:a
+out_pin:b
+out_pin:Left Surround [Ls] input
+out_pin:Right Surround [Rs] input
+out_pin:Left Front Top [Lft] input
+out_pin:Right Front Top [Rft] input
 
 @init
 //last_gain=10^(gain_db/20);
 
 @slider
-//next_gain=10^(gain_db/20);
+function dB(dB)(
+  10^(dB/20);
+);
+global_gain=dB(gain_db);
+L_level = dB(L);
+R_level = dB(R);
+C_level = dB(C);
+LFE_level = dB(LFE);
+Ls_level = dB(Ls);
+Rs_level = dB(Rs);
+Lt_level = dB(Lt);
+Rt_level = dB(Rt);
 
 @block
 //d_gain = (next_gain - last_gain)/samplesblock;
@@ -49,9 +72,11 @@ in8 = spl7; // Rb
 in9 = spl8; // Lt
 in10 = spl9; // Rt
 
-spl0 += (sqrt(1/2) * in5);
-spl1 += (sqrt(1/2) * in6);
-spl2 = in3; // Center
-spl3 = in4; // LFE
-spl4 = in7 + (sqrt(1/2) * in5); // Ls
-spl5 = in8 + (sqrt(1/2) * in6); // Rs
+spl0 = (in1 + (sqrt(1/2) * in5)) * global_gain * L_level;
+spl1 = (in2 + (sqrt(1/2) * in6)) * global_gain * R_level;
+spl2 = in3 * global_gain * C_level; // Center
+spl3 = in4 * global_gain * LFE_level; // LFE
+spl6 = (in7 + (sqrt(1/2) * in5)) * global_gain * Ls_level; // Ls
+spl7 = (in8 + (sqrt(1/2) * in6)) * global_gain * Rs_level; // Rs
+spl8 = in9 * global_gain * Lt_level; // Lt
+spl9 = in10 * global_gain * Rt_level; // Rr
