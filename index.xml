@@ -555,8 +555,8 @@
             </version>
         </reapack>        
         <reapack name="7.1.2 DownMix to 5.1.2 Surround" type="effect" desc="MixDown the SIDE speakers (Ls, Rs) virtualizing them throught the FRONT (L, R) and the REAR (Lr, Rr), for Monitor FX">
-            <version name="1.2" author="Tormy Van Cool" time="2023-06-19T22:03:09Z">
-                <source main="main" file="7.1.2 to 5.1.2 MixDown">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6d2961186ab2c888be7fedd6516d537b7d98b8dc/7.1.2%20%20to%205.1.2%20MixDown</source>
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-19T22:09:09Z">
+                <source main="main" file="7.1.2 to 5.1.2 MixDown">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3b950bb1f3fee82d5e569cbc46ce538f9fddb82f/7.1.2%20%20to%205.1.2%20MixDown</source>
                 <changelog><![CDATA[
                     v1.0
                         # First Release
@@ -565,6 +565,8 @@
                     v1.2:
                         + Global Level Potentiometer
                         + Single Channel Level Potentiometer
+                    v1.3:
+                        + Versioning into title
                 ]]>
             </changelog>
             </version>
