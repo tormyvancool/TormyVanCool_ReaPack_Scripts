@@ -48,7 +48,7 @@ v2.8.5
   # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
 v2.9 FERRETS (7 June 2023)
   + CLAP File Name
-v3.0 FERRETS
+v3.0 FERRETS (05 August 2023)
   + Old 32bit VST List
 ]]
 reaper.ShowConsoleMsg('')
