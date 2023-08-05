@@ -1,58 +1,61 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 2.9 FERRETS
+@version 3.0 FERRETS
 @screenshot
 @changelog:
-v1.0 (30 may 2021)
+v1.0 (30 May 2021)
   + Initial release
-v1.1 (31 may 2021)
+v1.1 (31 May 2021)
   + Save status of HTML File
   + Retrieve status of HTML file
-v1.2 (31 may 2021)
+v1.2 (31 May 2021)
   + Saves files into Reaper's Folder
   + No more need internet connection
-v1.3 (31 may 2021)
+v1.3 (31 May 2021)
   # Minor adjustments
-v1.3.1 (31 may 2021)
+v1.3.1 (31 May 2021)
   # Slved a bug occurred with mac (what else!)
-v1.3.2 (31 may 2021)
+v1.3.2 (31 May 2021)
   + Added info block at the end of the process
 v2.0 (1 june 2021)
   + AU detection on MAC
-v2.1 (1 june2021)
+v2.1 (1 June 2021)
   + Helper with modal pop-up
-v2.2 (13 june 2021) PIXY
+v2.2 (13 June 2021) PIXY
   - Import button
   + Automatic import JSON file if present
   + Hide checked button
   + Show checked button
-v2.3 (30 october 2021)
+v2.3 (30 October 2021)
   # ameliorated columns
   # CSS glitch
-v2.4 (30 october 2021)
+v2.4 (30 October 2021)
   + instr Column
   + Links
-v2.5 FERRETS (1 november 2021)
+v2.5 FERRETS (1 November 2021)
   + instr Column CSV
 v2.6 FERRETS (1 november 2021)
   # glitch on jQuery: Hide/Show button was not working any longer
-v2.7 FERRETS (1 june 2023) 
+v2.7 FERRETS (1 June 2023) 
   + CLAP
   # Corrected a bug that could list less plugins than the ones really installed
-v2.8 FERRETS (1 june 2023) 
+v2.8 FERRETS (1 June 2023) 
   # Fixed issue with Mac (both x86_64 and arch64)
   # Fixed issue with Linux
   + "Not applicable (don't even ask)" to CLAP files
 v2.8.5
   # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
-v2.9
+v2.9 FERRETS (7 June 2023)
   + CLAP File Name
+v3.0 FERRETS
+  + Old 32bit VST List
 ]]
 reaper.ShowConsoleMsg('')
-local version = "2.9 FERRETS"
+local version = "3.0 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
+local path32 = reaper.GetResourcePath()..'/reaper-vstplugins.ini'
 local path_CLAP = ""
 local path_MAC = reaper.GetResourcePath()..'/reaper-auplugins64.ini'
 local FileName = REAPER_path.."/REAPER.VSTinstalled"
@@ -472,12 +475,13 @@ end
 -- FILES
 ---------------------------------------------
 local handle = io.open(path, "r")
+local handle32 = io.open(path32, "r")
 local handle_CLAP = io.open(path_CLAP, "r")
 local HTML = io.open(VST_RegisterHTML, 'w')
 local CSV = io.open(VST_RegisterCSV, 'w')
 
-if handle == nil then
-  reaper.MB("Not existing VST cache. Isntall at least 1 plugin!!!", "ERROR" ,0)
+if handle == nil and handle32 == nil then
+  reaper.MB("WTF!!! Not existing VST cache (nor 32bit nor64 bit). Install at least 1 plugin!!!", "ERROR" ,0)
   return
 end
 
@@ -497,7 +501,7 @@ function main()
      local lineCSV = ''
      local CLAP_File = ''
 
-     -- VST and VSTi
+     -- VST and VSTi 64bit
       for _ in handle:lines() do
         --s = handle:read("*l")
         s = _
@@ -525,6 +529,35 @@ function main()
             end
         end -- if 1
       end -- for
+
+      -- VST and VSTi 32bit
+       for _ in handle32:lines() do
+         --s = handle:read("*l")
+         s = _
+         
+         if _ == nil then 
+             handle32:close() 
+           else
+          
+             if s ~= nil then 
+               match = string.gsub(s, "%,", "|",2)
+               VST_dll,VST_Integer1,VST_Integer2,VST_Name = match:match("^(.+)=(.+)|(.+)|(.+)$")
+             end
+     
+             if VST_Name ~= nil and VST_dll ~= nil then
+               VST_Name = string.gsub(VST_Name, "%,", " / ")
+               local instr = ""
+               if string.find(VST_Name, "VSTi") then
+                 instr= "Instr."
+               else
+                 instr= ""
+               end
+               lineHTML = lineHTML..'<tr><td class="checkbox"><input type="checkbox" name="checkfield'..n..'" class="hideshow"></td><td class="inst">'..instr..'</td><td class="name">'..n..' - '..VST_Name..' (32bit)</td><td class="file">'..VST_dll..'</td></tr>\n'
+               lineCSV = lineCSV..','..n..','..instr..','..VST_Name..'  (32bit),'..VST_dll..'\n' 
+               n=n+1
+             end
+         end -- if 1
+       end -- for
 
       if handle_CLAP ~= nil then
       
@@ -560,6 +593,7 @@ function main()
         end -- for
     end
     handle:close()
+    handle32:close()
     HTML:write(lineHTML)
     CSV:write(lineCSV)
    end -- function
