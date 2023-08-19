@@ -1,7 +1,7 @@
 --[[
 @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
 @author Tormy Van Cool
-@version 3.0 FERRETS
+@version 3.1 FERRETS
 @screenshot
 @changelog:
 v1.0 (30 May 2021)
@@ -50,9 +50,12 @@ v2.9 FERRETS (7 June 2023)
   + CLAP File Name
 v3.0 FERRETS (05 August 2023)
   + Old 32bit VST List
+v3.1 FERRETS (19 August 2023)
+  # Corrected bug: if no 64bit or not 32bit plugins where installed, an error was displayed.
+  + Close file CLAP
 ]]
 reaper.ShowConsoleMsg('')
-local version = "3.0 FERRETS"
+local version = "3.1 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
 local path = reaper.GetResourcePath()..'/reaper-vstplugins64.ini'
 local path32 = reaper.GetResourcePath()..'/reaper-vstplugins.ini'
@@ -502,6 +505,7 @@ function main()
      local CLAP_File = ''
 
      -- VST and VSTi 64bit
+     if handle ~= nil then
       for _ in handle:lines() do
         --s = handle:read("*l")
         s = _
@@ -527,10 +531,13 @@ function main()
               lineCSV = lineCSV..','..n..','..instr..','..VST_Name..','..VST_dll..'\n' 
               n=n+1
             end
-        end -- if 1
+        end -- if 2
       end -- for
+      handle:close()
+    end -- if 1
 
       -- VST and VSTi 32bit
+    if handle32 ~= nil then
        for _ in handle32:lines() do
          --s = handle:read("*l")
          s = _
@@ -556,12 +563,14 @@ function main()
                lineCSV = lineCSV..','..n..','..instr..','..VST_Name..'  (32bit),'..VST_dll..'\n' 
                n=n+1
              end
-         end -- if 1
+         end -- if 2
        end -- for
+       handle32:close()
+      end -- if 1
+
 
       if handle_CLAP ~= nil then
-      
-      -- CLAP and CLAPi 
+            -- CLAP and CLAPi 
         for _ in handle_CLAP:lines() do
           
           if not string.match(_, "_=") then
@@ -588,12 +597,11 @@ function main()
             n=n+1
             --reaper.ShowConsoleMsg(CLAP_File .. '\n')
             CLAP_File = ''
-            end -- if 1
+            end -- if 2
           end
         end -- for
-    end
-    handle:close()
-    handle32:close()
+        handle_CLAP:close()
+    end -- if 1
     HTML:write(lineHTML)
     CSV:write(lineCSV)
    end -- function
@@ -604,6 +612,7 @@ function main()
    function mac(handle_MAC)
     local lineHTML = ''
     local lineCSV = ''
+    if handle_CLAP ~= nil then
      for _ in handle_MAC:lines() do
        --s = handle_MAC:read("*l")
        s = _
@@ -627,10 +636,11 @@ function main()
              lineHTML = lineHTML..'<tr><td><input type="checkbox" name="checkfield'..n..'" class="checkbox"></td><td class="name">'..n..' - MAC AU - '..AU_Name..' ('..AU_Manufacturer..')</td><td class="file centertext '..class..'">'..AU_InstCSV..'</td></tr>\n'
              lineCSV = lineCSV..','..n..',MAC AU - '..AU_Name..' ('..AU_Manufacturer..'),'..AU_InstCSV..'\n' 
              n=n+1
-           end -- if 2
-       end -- if 1
+           end -- if 3
+       end -- if 2
     end -- for
     handle_MAC:close()
+  end -- if 1
     HTML:write(lineHTML)
     CSV:write(lineCSV)
   end -- function
