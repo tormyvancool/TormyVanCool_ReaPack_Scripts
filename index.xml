@@ -271,8 +271,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="3.1" author="Tormy Van Cool" time="2022-08-03T20:45:09Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d6f2371103390a9009d925390cec947560420baf/TormyVanCool_ExportData.lua</source>
+            <version name="3.2" author="Tormy Van Cool" time="2023-09-13T07:45:09Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c0277b99956f506526d69e1b6c0ac0456757b79e/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -369,6 +369,8 @@
                 v3.1
                     + Error travp in case project is not finished
                     + export CSV Headers
+                v3.2
+                    # Not rading BWF Originator Reference
                 @credits  Mario Bianchi for his contribution to expedite the process;
                         Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
                         Solger for his help on the color decode [t=253981]
