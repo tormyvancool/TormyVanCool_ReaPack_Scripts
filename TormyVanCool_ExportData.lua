@@ -6,7 +6,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 2.9.4
+@version 3.2
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -103,6 +103,8 @@ v3.0
 v3.1
   + Error travp in case project is not finished
   + export CSV Headers
+v3.2
+  # Not rading BWF Originator Reference
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -203,7 +205,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "3.1 FERRETS"
+local scriptVersion = "3.2 FERRETS"
 local Creator = "Tormy Van Cool"
 local precision = 4
 local timeFormat = "(hh:mm:ss,sss)"
@@ -577,7 +579,7 @@ function MetaBWF(i)
     MetaData('BWF',"Date","Date YYYY-MM-DD","OriginationDate")[i]..
     MetaData('BWF',"Date","Recording Time MM:SS","OriginationTime")[i]..
     MetaData('BWF',"Project","Originator","Originator")[i]..
-    MetaData('BWF',"Project","Originator Refer","Originator Reference")[i]..
+    MetaData('BWF',"Project","Originator Refer","OriginatorReference")[i]..
     MetaData('BWF',"Spot","Start Offset [Automatic]","TimeReference")[i]
   return tostring(meta)
 end
