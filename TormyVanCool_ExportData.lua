@@ -6,7 +6,7 @@
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 3.2
+@version 3.3
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -105,6 +105,9 @@ v3.1
   + export CSV Headers
 v3.2
   # Not rading BWF Originator Reference
+v3.3
+  # Corrected file lsit for Mac
+  + Remove cp.bat
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -114,6 +117,8 @@ v3.2
           MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
           Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
           Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
+          Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
+          Alb Vedo to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
 ]]--
 ----------------------------------------------
 -- NUMERICAL FUNCTIONS
@@ -205,7 +210,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "3.2 FERRETS"
+local scriptVersion = "3.3 FERRETS"
 local Creator = "Tormy Van Cool"
 local precision = 4
 local timeFormat = "(hh:mm:ss,sss)"
@@ -500,7 +505,10 @@ function scandir(directory,format)
     fileBat:close()
     --os.remove(directory.."\\cp.bat")
     bat_file = utf8_to_win(directory.."\\cp.bat")  -- insert your path here
-    _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'
+    _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'    
+  else
+    _OsBasedString = utf8_to_win(directory.."\\ls")
+  else
   end
   for filename in popen(_OsBasedString):lines() do
     extension = filename:match("^.+(%..+)$")
@@ -517,6 +525,9 @@ function scandir(directory,format)
         end
         i = i + 1
     end
+  end  
+  if OS == "Win32" or OS == "Win64" then
+    os.remove(directory.."\\cp.bat")
   end
   return t
 end
@@ -2228,7 +2239,7 @@ function pj_tempo_Markers()
   end
   CSV_file:close()
   TXT_file:close()
-  reaper.ShowConsoleMsg(TXT_header .. LF .. ConsMsg)
+  -- reaper.ShowConsoleMsg(TXT_header .. LF .. ConsMsg)
 end
 ----------------------------------------------
 -- MAIN FUNCTIONS

@@ -271,7 +271,7 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="3.2" author="Tormy Van Cool" time="2023-09-13T07:45:09Z">
+            <version name="3.3" author="Tormy Van Cool" time="2024-02-17T23:01:48Z">
                 <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c0277b99956f506526d69e1b6c0ac0456757b79e/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
@@ -371,6 +371,9 @@
                     + export CSV Headers
                 v3.2
                     # Not rading BWF Originator Reference
+                v3.3
+                    # Corrected file lsit for Mac
+                    + Remove cp.bat
                 @credits  Mario Bianchi for his contribution to expedite the process;
                         Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
                         Solger for his help on the color decode [t=253981]
@@ -379,6 +382,8 @@
                         MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
                         Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
                         Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
+                        Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
+                        Alb Vedo to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
                 ]]>
                 </changelog>
             </version>
