@@ -508,7 +508,6 @@ function scandir(directory,format)
     _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'    
   else
     _OsBasedString = utf8_to_win(directory.."\\ls")
-  else
   end
   for filename in popen(_OsBasedString):lines() do
     extension = filename:match("^.+(%..+)$")
