@@ -134,7 +134,10 @@ function round(val, decimal)
   local iXMLDoc = "http://www.gallery.co.uk/ixml/"
   local XMPDoc = "https://www.adobe.com/products/xmp.html"
   local APEDoc = "https://en.wikipedia.org/wiki/APE_tag"
-  
+  reaper.ShowConsoleMsg("1a."..version.."\n\n")
+  reaper.ShowConsoleMsg("1b."..pj_sampleRate.."\n\n")
+  reaper.ShowConsoleMsg("1c."..pj_name_.."\n\n")
+  reaper.ShowConsoleMsg("1d."..RenderDir.."\n\n")
   ------------------------------------------------
   -- CHECK if SWS is INSTALLED and Reaper Version
   ------------------------------------------------
