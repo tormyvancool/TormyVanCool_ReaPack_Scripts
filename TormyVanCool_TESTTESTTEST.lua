@@ -509,7 +509,7 @@ function scandir(directory,format)
   else
     _OsBasedString = utf8_to_win(directory.."\\ls")
   end
-  reaper.MB("The project MUST BE SAVED!!","WARNING",0,0)
+  reaper.MB(_OsBasedString,"WARNING",0,0)
   for filename in popen(_OsBasedString):lines() do
     extension = filename:match("^.+(%..+)$")
     if extension == ".wav" or
