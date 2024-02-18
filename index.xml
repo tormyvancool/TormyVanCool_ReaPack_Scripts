@@ -9,8 +9,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="3" author="Tormy Van Cool" time="2024-02-18T11:56:09Z">
-                <source main="main" file="TormyVanCool_TESTTESTTEST.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/62a475b7f8b281e7bb60e5f92dde209d284caca8/TormyVanCool_TESTTESTTEST.lua</source>
+            <version name="4" author="Tormy Van Cool" time="2024-02-18T12:06:09Z">
+                <source main="main" file="TormyVanCool_TESTTESTTEST.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a76514e0b7f498b55a616820656a7af2a1b0b628/TormyVanCool_TESTTESTTEST.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
