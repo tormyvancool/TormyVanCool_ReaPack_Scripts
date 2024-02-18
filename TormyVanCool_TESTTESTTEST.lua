@@ -507,7 +507,8 @@ function scandir(directory,format)
     bat_file = utf8_to_win(directory.."\\cp.bat")  -- insert your path here
     _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'    
   else
-    _OsBasedString = utf8_to_win(directory.."\\ls")
+    --_OsBasedString = utf8_to_win(directory.."\\ls")
+    _OsBasedString = '""'..directory..'"\\ls "'..'""'
   end
   for filename in popen(_OsBasedString):lines() do  
     reaper.MB(filename,"WARNING",0,0)
