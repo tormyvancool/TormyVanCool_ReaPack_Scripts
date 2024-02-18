@@ -106,6 +106,9 @@ function round(val, decimal)
   local totalMediaItems = reaper.CountMediaItems()
   local _, totalMarkers, totalRegions = reaper.CountProjectMarkers()
   local totalMarkersRegions = totalMarkers+totalRegions
+  
+  reaper.ShowConsoleMsg("1a."..version.."\n\n")
+  reaper.ShowConsoleMsg("1b."..pj_sampleRate.."\n\n")
   local nameField_0 = 'Marker N.'
   local nameField_1 = 'BPM'
   local nameField_2 = 'Time Position'
