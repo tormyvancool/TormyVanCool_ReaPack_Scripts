@@ -506,6 +506,7 @@ function scandir(directory,format)
     --os.remove(directory.."\\cp.bat")
     bat_file = utf8_to_win(directory.."\\cp.bat")  -- insert your path here
     _OsBasedString = '""'..bat_file..'" 65001 <nul & dir /b "'..utf8_to_win(directory)..'""'    
+    reaper.ExecProcess('cmd.exe /C dir "'..directory..'" > "'..directory..'/test_list.txt"', -1)
   else
     --_OsBasedString = utf8_to_win(directory.."\\ls")
     _OsBasedString = '""'..directory..'"\\ls "'..'""'
