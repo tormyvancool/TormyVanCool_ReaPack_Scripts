@@ -510,7 +510,7 @@ function scandir(directory,format)
     -- _OsBasedString = '"dir "' .. renderPath..'""'
   else
     --os.execute('ls "'..renderPath..'" > "'..renderPath..'/test_list.txt"', -1)
-    _OsBasedString = '"ls "' .. directory..'""'
+    _OsBasedString = 'ls "' .. directory..'"'
   end
   for filename in popen(_OsBasedString):lines() do
   reaper.ShowConsoleMsg(filename.."\n")
