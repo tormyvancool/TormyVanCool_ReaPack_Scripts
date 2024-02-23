@@ -256,5 +256,5 @@ local AESDoc = "https://www.aes.org/publications/standards/search.cfm?docID=41"
 local iXMLDoc = "http://www.gallery.co.uk/ixml/"
 local XMPDoc = "https://www.adobe.com/products/xmp.html"
 local APEDoc = "https://en.wikipedia.org/wiki/APE_tag"
- reaper.ExecProcess('cmd.exe /C dir "'..renderPath..'" > "'..renderPath..'/test_list.txt"', -1)
+ os.execute('ls "'..renderPath..'" > "'..renderPath..'/test_list.txt"', -1)
     reaper.ShowConsoleMsg(renderPath)
