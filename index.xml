@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Markers">
-        <reapack name="TormyVanCool_TESTTESTTEST.lua" type="script" desc="DO NOT IN?STALL IT. JUST TROUBLESHOOOTING">
-            <metadata>
-                <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
-                    }]]>
-                </description>
-            </metadata>
-            <version name="16" author="Tormy Van Cool" time="2024-02-23T19:11:09Z">
-                <source main="main" file="TormyVanCool_TESTTESTTEST.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/7f4a32befeb2ab2b145593c28663bc92527bd2a5/TormyVanCool_TESTTESTTEST.lua</source>
-            </version>
-        </reapack>
         <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <metadata>
                 <description>
@@ -283,8 +271,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="3.3" author="Tormy Van Cool" time="2024-02-17T23:07:48Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/33336edbcc8afc0851a94348e116c4767a784f0f/TormyVanCool_ExportData.lua</source>
+            <version name="3.4" author="Tormy Van Cool" time="2024-02-23T21:34:48Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/cc567c8de89a2c9b575adfbda98febb96a03d9bf/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -384,8 +372,9 @@
                 v3.2
                     # Not rading BWF Originator Reference
                 v3.3
-                    # Corrected file lsit for Mac
                     + Remove cp.bat
+                v3.4 (23 feb 2024)
+                    # Corrected file list for Mac
                 @credits  Mario Bianchi for his contribution to expedite the process;
                         Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
                         Solger for his help on the color decode [t=253981]
@@ -395,7 +384,9 @@
                         Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
                         Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
                         Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
-                        Alb Vedo to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
+                        Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
+                        FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
+                        Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
                 ]]>
                 </changelog>
             </version>
