@@ -2,11 +2,12 @@
 -- https://forum.cockos.com/showthread.php?t=238421
 -- https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k
 -- https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts
+-- https://forum.cockos.com/showthread.php?t=259730
 --[[
 IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
 @description Exporets project's data related to tracks, into CSV and HTML file
 @author Tormy Van Cool
-@version 3.4
+@version 3.5
 @screenshot
 @changelog:
 v1.0 (18 may 2021)
@@ -109,6 +110,8 @@ v3.3
   + Remove cp.bat
 v3.4 (23 feb 2024)
   # Corrected file list for Mac
+v3.5
+  + Decoding of the wildcards
 
 @credits  Mario Bianchi for his contribution to expedite the process;
           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
@@ -122,6 +125,7 @@ v3.4 (23 feb 2024)
           Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
           FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
           Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
+          Schwa https://forum.cockos.com/showthread.php?t=282944
 ]]--
 ----------------------------------------------
 -- NUMERICAL FUNCTIONS
@@ -213,7 +217,7 @@ end
 local LF = "\n"
 local CSV = ".csv"
 local HTML = ".html"
-local scriptVersion = "3.4 FERRETS"
+local scriptVersion = "3.5 FERRETS"
 local Creator = "Tormy Van Cool"
 local precision = 4
 local timeFormat = "(hh:mm:ss,sss)"
@@ -221,7 +225,7 @@ local pj_notes = reaper.GetSetProjectNotes(0, 0, "")
 local pj_sampleRate = tonumber(reaper.GetSetProjectInfo(0, "PROJECT_SRATE", 0, 0))
 local pj_name_ = reaper.GetProjectName(0, "")
 local _, pj_title = reaper.GetSetProjectInfo_String(0, "PROJECT_TITLE", '', 0)
-local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")
+local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)[\\/].*$","%1")
 --local pj_name_ = string.gsub(string.gsub(pj_name_, ".rpp", ""), ".RPP", "")
 local date = os.date("%Y-%m-%d %H:%M:%S")
 local dateFile = '_' .. os.date("%Y-%m-%d_%H.%M.%S")
@@ -247,7 +251,7 @@ local TormyURL = "https://www.facebook.com/TormyVanCool.MediaProductions"
 local TVCEURL = "https://www.facebook.com/vancoolelektroakustik"
 local _, RenderDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrenderpath', '', reaper.get_ini_file())
 local _, RencordingDir = reaper.BR_Win32_GetPrivateProfileString('REAPER', 'defrecpath', '', reaper.get_ini_file())
-local renderPath = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)[\\/].*$","%1")..'/'..RenderDir
+local renderPath = pj_path..'/'..RenderDir
 local SonyASWG = "http://gameaudiopodcast.com/ASWG-R001.pdf"
 local AppleCAFINFO = "https://developer.apple.com/library/archive/documentation/MusicAudio/Reference/CAFSpec/CAF_overview/CAF_overview.html"
 local BBCID3 = "https://id3.org/"
@@ -537,10 +541,38 @@ end
 ----------------------------------------------
 -- PROJECT METADATA
 ----------------------------------------------
+
+function resolve_wildcard(wildcard)
+  ok,restore_path=reaper.GetSetProjectInfo_String(0, "RENDER_FILE", "", 0)
+  ok,restore_pattern=reaper.GetSetProjectInfo_String(0, "RENDER_PATTERN", "", 0)
+  
+  reaper.GetSetProjectInfo_String(0, "RENDER_FILE", "C:\\", 1)
+  reaper.GetSetProjectInfo_String(0, "RENDER_PATTERN", wildcard, 1);
+  ok,resolved=reaper.GetSetProjectInfo_String(0, "RENDER_TARGETS", "", 0)
+  resolved=string.sub(resolved, 4, string.len(resolved)-4)
+  --reaper.ShowConsoleMsg(wildcard .. ' : ' .. resolved.. '\n')
+
+  reaper.GetSetProjectInfo_String(0, "RENDER_FILE", restore_path, 1)
+  reaper.GetSetProjectInfo_String(0, "RENDER_PATTERN", restore_pattern, 1)
+  return resolved
+end
+
+reaper.ShowConsoleMsg('')
 function MetaData(Scheme,Category,Description,Meta)
-  reaper.ShowConsoleMsg('')
-  local retval, valuestrNeedBig = reaper.GetSetProjectInfo_String(0, "RENDER_METADATA", Scheme..":"..Meta, 0)
+ local retval, valuestrNeedBig = reaper.GetSetProjectInfo_String(0, "RENDER_METADATA", Scheme..":"..Meta, 0)
   local a={}
+  --local w =''
+  local decoded = ""
+  if string.match (valuestrNeedBig, "%$(%w+)") then
+    for w in string.gmatch(valuestrNeedBig,"%$(%w+)") do
+    wildcard = "$"..w
+    --reaper.ShowConsoleMsg(w)
+    decoded = decoded .. resolve_wildcard(wildcard)
+    valuestrNeedBig = valuestrNeedBig:gsub(wildcard, resolve_wildcard("$"..w))
+    end
+    else
+    decoded = ""
+  end
   if valuestrNeedBig ~= nil then
     a[1] = '<tr class="child'..Scheme..'"><td>'..Category..'</td><td>'..Description..'<td class="id3ttl">'..Meta..'</td><td class="" colspan="5">'..valuestrNeedBig..'</td></tr>'
     a[2] = Scheme..','..Category..','..Description..','..Meta..','..valuestrNeedBig..LF
