@@ -271,8 +271,8 @@
                 }]]>
                 </description>
             </metadata>
-            <version name="3.4" author="Tormy Van Cool" time="2024-02-23T21:34:48Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/cc567c8de89a2c9b575adfbda98febb96a03d9bf/TormyVanCool_ExportData.lua</source>
+            <version name="3.5" author="Tormy Van Cool" time="2024-02-25T21:23:57Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/17966d06ac0ebefbff6fe4a96d723da9f22e9fa6/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -375,18 +375,21 @@
                     + Remove cp.bat
                 v3.4 (23 feb 2024)
                     # Corrected file list for Mac
+                v3.5
+                    + Decoding of the wildcards
                 @credits  Mario Bianchi for his contribution to expedite the process;
-                        Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
-                        Solger for his help on the color decode [t=253981]
-                        Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
-                        Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
-                        MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
-                        Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
-                        Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
-                        Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
-                        Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
-                        FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
-                        Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
+                    Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+                    Solger for his help on the color decode [t=253981]
+                    Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+                    Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+                    MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
+                    Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
+                    Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
+                    Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
+                    Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
+                    FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
+                    Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
+                    Schwa https://forum.cockos.com/showthread.php?t=282944
                 ]]>
                 </changelog>
             </version>
