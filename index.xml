@@ -15,7 +15,7 @@
             </version>
         </reapack>
     
-        <reapack name="TOST_MAIN.lua" type="script" desc="AAAAAAAAAAAAAAAAAAAAAA">
+        <reapack name="TOST_MAIN.lua" type="script" desc="BBBBBBBBBBBBBBBBBBBBBBB">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
