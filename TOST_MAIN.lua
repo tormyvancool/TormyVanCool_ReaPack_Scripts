@@ -1,0 +1,6 @@
+-- @description Example of anything
+-- @author Tormy Van Cool
+-- @version 1.0
+-- @changelog
+--   Somtheing here and there
+-- @about What a beautiful script
