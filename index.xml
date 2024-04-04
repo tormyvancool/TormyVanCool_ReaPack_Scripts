@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <index version="1" name="Tormy Van Cool ReaPack Scripts">
     <category name="Markers">
-    
-        <reapack name="TEST.lua" type="script" desc="AAAAAAAAAAAAAAAAAA">
-            <metadata>
-                <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
-                    }]]>
-                </description>
-            </metadata>
-            <version name="3.5" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
-                <source main="main" file="TEST.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1ae8e257777745c51cf31c401975a10a16402f91/TEST.lua</source>
-            </version>
-        </reapack>
-    
-        <reapack name="TOST.lua" type="script" desc="BBBBBBBBBBBBBBBBBBBBBBB">
-            <metadata>
-                <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
-                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
-                    }]]>
-                </description>
-            </metadata>
-            <version name="3.5" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
-                <source main="main" file="TOST.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1ae8e257777745c51cf31c401975a10a16402f91/TOST.lua</source>
-            </version>
-        </reapack>
-
         <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
             <metadata>
                 <description>
@@ -39,7 +12,7 @@
                 </description>
             </metadata>
             <version name="2.3" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
-                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47894d3cfb325ec3a535df5e8a288296a9562fbe/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/12d20c276e087bb6e67776f9d7db197c1874970f/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
                 <changelog>
                 <![CDATA[
                 Changed marker format into: CHAP=chapter_title. The SideCar.txt file, reports now in this way: seconds_from_the_beginning_of_the_file,1,"chapter_title" The ',1,' is added for compatibility with certain radio automation softwares, not capable to fully read MP3s
