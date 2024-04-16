@@ -5,5 +5,5 @@
 --   Somtheing here and there
 --   secodn point
 --   therd point
--- @provides . > TOST_MAIN.lua
+-- @provides [main] TOST_MAIN.lua
 -- @about What a beautiful script
