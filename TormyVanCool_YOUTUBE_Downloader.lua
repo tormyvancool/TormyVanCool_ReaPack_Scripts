@@ -33,6 +33,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 2
+local ver = 1.6
 local version = reaper.GetAppVersion()
 
 ---------------------------------------------
@@ -129,7 +130,7 @@ local version = reaper.GetAppVersion()
         reaper.MB("VIDEO TITLE is MANDATORY","ERROR",0,0)
       end
       until( t[1] ~= "")
-      reaper.MB("STARTED THE FOLLOWING PROCESSES:\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
+      reaper.MB("STARTED THE FOLLOWING PROCESSES v" .. ver .. ":\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
 
 --Pics = "curl -X GET " .. url .. ' --output "' .. Destination ..'"'
 
