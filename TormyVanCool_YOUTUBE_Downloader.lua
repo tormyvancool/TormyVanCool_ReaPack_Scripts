@@ -1,12 +1,14 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.1
+-- @version: 1.2
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
   1.0 2024-26-10 - First Release
-  1.1 2021-26-10 - +Processes Notifications
+  1.1 2024-26-10 - +Processes Notifications
                    -/Video/
                    +/Videos/
+  1.2 2024-26-10 - ---merge-output-format mp4
+                   +-S vcodec:h264,res,acodec:aac
 ]]--
 
 reaper.ClearConsole()
@@ -130,7 +132,7 @@ local zzz = 10
       end
       
       -- ARGS
-      args = " --merge-output-format mp4 " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
+      args = " -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
       
       -- TRIGGERS
       Video = 'start "" "' .. MainPath .. '" ' .. args
