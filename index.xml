@@ -238,7 +238,7 @@
         </reapack>
     </category>
     <category name="Various">
-        <reapack name="TormyVanCool_YOUTUBE_Downloader" type="script" desc="UTILITY: Downloads videos from youTUBE and imports them into the project">
+        <reapack name="TormyVanCool_YOUTUBE_Downloader" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
