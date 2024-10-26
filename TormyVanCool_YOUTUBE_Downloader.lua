@@ -9,6 +9,8 @@
                    +/Videos/
   1.2 2024-26-10 - ---merge-output-format mp4
                    +-S vcodec:h264,res,acodec:aac
+  1.3 2024-26-10 - 10
+                 + 2
 ]]--
 
 reaper.ClearConsole()
@@ -22,7 +24,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 10
+local zzz = 2
 
 
 ---------------------------------------------
