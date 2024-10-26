@@ -246,10 +246,10 @@
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool" time="2021-03-17T01:38:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/36c9db3aee01179cc2eb6ea928b2f8ea7250c4c6/TormyVanCool_Program_Runner.lua</source>
-                <source file="yt-dlp Win">https://raw.githubusercontent.com/TukanStudios/TUKAN_STUDIOS_PLUGINS/main/DecemberSynthAdd/December%20Synth%20(Tukan)%2025.png</source>
-                <source file="yt-dlp Mac">https://raw.githubusercontent.com/TukanStudios/TUKAN_STUDIOS_PLUGINS/main/DecemberSynthAdd/December%20Synth%20(Tukan)%2025.png</source>
-                <source file="yt-dlp Lnx">https://raw.githubusercontent.com/TukanStudios/TUKAN_STUDIOS_PLUGINS/main/DecemberSynthAdd/December%20Synth%20(Tukan)%2025.png</source>
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source file="yt-dlp Win">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp.exe</source>
+                <source file="yt-dlp Mac">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp_macos</source>
+                <source file="yt-dlp Lnx">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: PROGRAM RUNNER. It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
