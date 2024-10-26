@@ -54,6 +54,14 @@ local zzz = 10
         return ridchap
       end
 
+      -- CHECK FOR URL VALIDITY
+      function is_valid_url(url)
+        -- Pattern to match a basic URL structure
+        local pattern = "^https?://[%w-_%.%?%.:/%+=&]+$"
+        return url:match(pattern) ~= nil
+      end
+
+
 ---------------------------------------------
 -- INTERACTIONS
 ---------------------------------------------
@@ -75,7 +83,10 @@ local zzz = 10
       if t[1]== "" then
         reaper.MB("VIDEO URL is MANDATORY","ERROR",0,0)
       end
-      until( t[1] ~= "")
+      if is_valid_url(t[1]) == false then
+        reaper.MB("URL NOT VALID","ERROR",0,0)
+      end
+      until( t[1] ~= "" and is_valid_url(t[1]) == true)
       
       
       -- GET FILENAME
