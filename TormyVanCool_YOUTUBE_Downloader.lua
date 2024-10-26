@@ -1,6 +1,13 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.0
+-- @version: 1.1
 -- @author: Tormy Van Cool
+-- @Changelog
+--[[
+  1.0 2024-26-10 - First Release
+  1.1 2021-26-10 - +Processes Notifications
+                   -/Video/
+                   +/Videos/
+]]--
 
 reaper.ClearConsole()
 
@@ -106,6 +113,7 @@ local zzz = 10
         reaper.MB("VIDEO TITLE is MANDATORY","ERROR",0,0)
       end
       until( t[1] ~= "")
+      reaper.MB("STARTED THE FOLLOWING PROCESSES:\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
 
 --Pics = "curl -X GET " .. url .. ' --output "' .. Destination ..'"'
 
@@ -122,12 +130,12 @@ local zzz = 10
       end
       
       -- ARGS
-      args = " --merge-output-format mp4 " .. url .. ' -P "' .. ProjDir .. '/Video/"' .. argument
+      args = " --merge-output-format mp4 " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
       
       -- TRIGGERS
       Video = 'start "" "' .. MainPath .. '" ' .. args
       Update = 'start "" "' .. MainPath .. '" --update-to master'
-      Destination =  ProjDir ..'/Video/' .. FileName
+      Destination =  ProjDir ..'/Videos/' .. FileName
       Destination = Destination:gsub('\\','/')
 
 
