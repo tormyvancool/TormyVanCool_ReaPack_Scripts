@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.3
+-- @version: 1.4
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -11,6 +11,8 @@
                    +-S vcodec:h264,res,acodec:aac
   1.3 2024-26-10 - 10
                  + 2
+  1.4 2024-26-10 - 2
+                 + 5
 ]]--
 
 reaper.ClearConsole()
@@ -24,7 +26,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 2
+local zzz = 5
 
 
 ---------------------------------------------
