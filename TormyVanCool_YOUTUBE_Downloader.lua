@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.2
+-- @version: 1.3
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
