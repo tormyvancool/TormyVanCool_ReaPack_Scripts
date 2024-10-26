@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.4
+-- @version: 1.5
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -13,6 +13,9 @@
                  + 2
   1.4 2024-26-10 - 2
                  + 5
+  1.5 2024-26-10 - 5
+                 + 1
+                 # Unified Update
 ]]--
 
 reaper.ClearConsole()
@@ -26,7 +29,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 5
+local zzz = 1
 
 
 ---------------------------------------------
@@ -136,7 +139,7 @@ local zzz = 5
       end
       
       -- ARGS
-      args = " -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
+      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
       
       -- TRIGGERS
       Video = 'start "" "' .. MainPath .. '" ' .. args
@@ -149,8 +152,6 @@ local zzz = 5
 -- UPDATE AND IMPORT VIDEO
 ---------------------------------------------
       if url  ~= "" then
-          os.execute(Update)
-          sleep(zzz)
           os.execute(Video)
           if debug == true then 
             reaper.ShowConsoleMsg("FileName: " .. FileName .. "\n")
