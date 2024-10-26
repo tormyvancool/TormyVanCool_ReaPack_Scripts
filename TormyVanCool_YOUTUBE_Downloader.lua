@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.5
+-- @version: 1.6
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -16,6 +16,9 @@
   1.5 2024-26-10 - 5
                  + 1
                  # Unified Update
+ 1.6  2024-26-10 - 1
+                 + 2
+                 + Version
 ]]--
 
 reaper.ClearConsole()
@@ -29,8 +32,8 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 1
-
+local zzz = 2
+local version = reaper.GetAppVersion()
 
 ---------------------------------------------
 -- FUNCTIONS
@@ -77,7 +80,11 @@ local zzz = 1
         return url:match(pattern) ~= nil
       end
 
-
+      local minVersion = '7.27'
+      if minVersion > version then
+        reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
+        goto done
+      end
 ---------------------------------------------
 -- INTERACTIONS
 ---------------------------------------------
@@ -184,3 +191,4 @@ local zzz = 1
       
           reaper.InsertMedia(Destination, 1)
       end
+::done::
