@@ -81,7 +81,7 @@ local version = reaper.GetAppVersion()
         return url:match(pattern) ~= nil
       end
 
-      local minVersion = '7.27'
+      local minVersion = '7.26'
       if minVersion > version then
         reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
         goto done
