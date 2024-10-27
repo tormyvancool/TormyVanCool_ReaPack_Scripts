@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.8
+-- @version: 1.9
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -25,6 +25,7 @@
                  - 1
                  + Start = '"'
                  + 2
+  1.9 2024-27-10 + Check saved project
 ]]--
 
 reaper.ClearConsole()
@@ -39,8 +40,9 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 1.8
+local ver = 1.9
 local version = reaper.GetAppVersion()
+local pj_name_ = reaper.GetProjectName(0, "")
 
 ---------------------------------------------
 -- FUNCTIONS
@@ -64,10 +66,12 @@ local version = reaper.GetAppVersion()
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp_macos"   
           Start = '"'
+          os.execute("chmod +x " ..  MainPath)
         end
         if OS == "Other" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp"
           Start = '"'
+          os.execute("chmod +x " ..  MainPath)
         end
         return MainPath
       end
@@ -98,6 +102,12 @@ local version = reaper.GetAppVersion()
 ---------------------------------------------
 -- INTERACTIONS
 ---------------------------------------------
+
+      -- CHECK WHETHER PROJECT IS SAVED
+      if pj_name_ == "" then 
+        reaper.MB("YOU MUST SAVE THE PROJECT FIRST! Then relaunch this script!",'WARNING',0)
+        return
+      end
 
       -- GET URL
       ProjDir = reaper.GetProjectPathEx(0)
