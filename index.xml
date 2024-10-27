@@ -252,24 +252,39 @@
                 <source file="yt-dlp/yt-dlp">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp</source>
                 <changelog>
                 <![CDATA[
-                    1.0 2024-26-10 - First Release
-                    1.1 2024-26-10 - +Processes Notifications
-                                    -/Video/
-                                    +/Videos/
-                    1.2 2024-26-10 - ---merge-output-format mp4
-                                    +-S vcodec:h264,res,acodec:aac
-                    1.3 2024-26-10 - 10
-                                    + 2
-                    1.4 2024-26-10 - 2
-                                    + 5
-                    1.5 2024-26-10 - 5
-                                    + 1
-                                    # Unified Update
-                    1.6 2024-26-10 - 1
-                                    + 2
-                                    + Version
-                    1.7 2024-27-10 - 'start "" "' from all O.S.s
-                                    + 'start "UPDATE & DOWNLOAD" "' Win
+                    1.0 2024-26-10
+                    - First Release
+                    
+                    1.1 2024-26-10
+                    +Processes Notifications
+                    -/Video/
+                    +/Videos/
+                    
+                    1.2 2024-26-10
+                    - --merge-output-format mp4
+                    + -S vcodec:h264,res,acodec:aac
+                    
+                    1.3 2024-26-10
+                    - 10
+                    + 2
+                    
+                    1.4 2024-26-10
+                    - 2
+                    + 5
+                    
+                    1.5 2024-26-10
+                    - 5
+                    + 1
+                    # Unified Update
+                    
+                    1.6 2024-26-10
+                    - 1
+                    + 2
+                    + Version
+
+                    1.7 2024-27-10
+                    - 'start "" "' from all O.S.s
+                    + 'start "UPDATE & DOWNLOAD" "' Win
                 ]]>
                 </changelog>
             </version>
