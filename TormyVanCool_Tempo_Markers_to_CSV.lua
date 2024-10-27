@@ -270,7 +270,9 @@ HTML_file:write(HeaderHTML)
 ---------------------------------------------
 while count < howmany do
   local retval, timepos, measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, count) -- Extract markers infos
-  local fractional, curveType, tempoType = ''
+  local fractional = ''
+  local curveType = ''
+  local tempoType = ''
   if timesig_num < 0 or timesig_denom < 0  then 
     fractional = NS
   else
