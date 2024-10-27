@@ -245,8 +245,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="1.7" author="Tormy Van Cool" time="2024-27-10T09:36:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/34aeee1bc7170c58ea363c6b47bd827c08cb360d/TormyVanCool_YOUTUBE_Downloader.lua</source>
+            <version name="1.8" author="Tormy Van Cool" time="2024-27-10T13:24:35Z">
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/88257b8183fcf0052093f7a9069ab0d616b4595e/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source file="yt-dlp/yt-dlp.exe">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp.exe</source>
                 <source file="yt-dlp/yt-dlp_macos">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp_macos</source>
                 <source file="yt-dlp/yt-dlp">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0de35bac5740e04276f1d378328cfabd79884d14/Donwloaders/yt-dlp</source>
