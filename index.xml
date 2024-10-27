@@ -42,7 +42,7 @@
                 </description>
             </metadata>
             <version name="2.1" author="Tormy Van Cool" time="2022-08-03T20:44:30Z">
-                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/803e2c36b047c35c51c2770fa4f77732a969048c/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
+                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d3769cabff22918043b743b88938df07b7c044cd/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="IMPORT TEMPO MARKERS: it reads the file Tempo_Markers.csv if present, and imports the Tempo Markers into the project.">
