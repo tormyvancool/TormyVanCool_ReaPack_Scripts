@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.7
+-- @version: 1.8
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -21,6 +21,8 @@
                  + Version
   1.7 2024-27-10 - 'start "" "' from all O.S.s
                  + 'start "UPDATE & DOWNLOAD" "' Win
+  1.8 2024-27-10 - Start = ''
+                 + Start = '"'
 ]]--
 
 reaper.ClearConsole()
@@ -35,7 +37,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 2
-local ver = 1.7
+local ver = 1.8
 local version = reaper.GetAppVersion()
 
 ---------------------------------------------
@@ -59,11 +61,11 @@ local version = reaper.GetAppVersion()
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp_macos"   
-          Start = ''
+          Start = '"'
         end
         if OS == "Other" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp"
-          Start = ''
+          Start = '"'
         end
         return MainPath
       end
