@@ -1,7 +1,8 @@
 -- @description: Download videos from YT and see what happens
--- @version: 2.2
+-- @version: 2.3
 -- @author: Tormy Van Cool
--- @Changelog
+-- @Credits: Stefano marcantoni - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
+-- @Changelog:
 --[[
   1.0 2024-26-10 - First Release
   1.1 2024-26-10 - +Processes Notifications
@@ -34,6 +35,9 @@
                  - 2
                  + 1
                  + Apple Trial
+  2.3 2024-27-10 #Linux execution correction
+                 + Credits
+                 # 2.1 and 2.2 just trials due issues with Linux and Apple
 ]]--
 
 reaper.ClearConsole()
@@ -48,7 +52,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 2.2
+local ver = 2.3
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -84,9 +88,12 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Variou
           os.execute('chmod +x "' ..  MainPath .. '"')
         end
         if OS == "Other" then
-          MainPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
-          Start = '"'
-          os.execute('chmod +x "' ..  MainPath .. '"')
+         -- MainPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
+         -- Start = '"'
+         -- os.execute('chmod +x "' ..  MainPath .. '"')
+          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
+          Start = ''
+          os.execute('chmod +x ' ..  MainPath)
         end
         return MainPath
       end
