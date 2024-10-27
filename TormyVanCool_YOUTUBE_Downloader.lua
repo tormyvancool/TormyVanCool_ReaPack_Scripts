@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.9
+-- @version: 2.0
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -28,6 +28,12 @@
   1.9 2024-27-10 + Check saved project
                  - 1
                  + 2
+  2.0 2024-27-10 - "chmod +x " ..  MainPath
+                 + 'chmod +x "' ..  MainPath .. '"'
+                 # Ordered Variables
+                 - 2
+                 + 1
+                 + Apple Trial
 ]]--
 
 reaper.ClearConsole()
@@ -41,10 +47,17 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 2
-local ver = 1.9
+local zzz = 1
+local ver = 2.0
+local InputVariable = ""
+local dlpWin = 'yt-dlp.exe'
+local dlpMac = 'yt-dlp_macos'
+local dlpLnx = 'yt-dlp'
 local version = reaper.GetAppVersion()
 local pj_name_ = reaper.GetProjectName(0, "")
+local ProjDir = reaper.GetProjectPathEx(0)
+local ResourcePATH = reaper.GetResourcePath()
+local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' -- Get FullPath to yt-dlp
 
 ---------------------------------------------
 -- FUNCTIONS
@@ -62,18 +75,18 @@ local pj_name_ = reaper.GetProjectName(0, "")
         local a = {}
         local MainPath = ''
         if OS == "Win32" or OS == "Win64" then
-          MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp.exe"
-          Start = 'start "UPDATE & DOWNLOAD" "'
+          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpWin .. '"'
+          Start = 'start "UPDATE & DOWNLOAD" '
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
-          MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp_macos"   
-          Start = '"'
-          os.execute("chmod +x " ..  MainPath)
+          MainPath  = './yt-dlp_macos'
+          Start = 'cd ' .. CallPath .. ' && chmod +x ' .. dlpMac .. ' && '
+          os.execute('chmod +x "' ..  MainPath .. '"')
         end
         if OS == "Other" then
-          MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp"
+          MainPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
           Start = '"'
-          os.execute("chmod +x " ..  MainPath)
+          os.execute('chmod +x "' ..  MainPath .. '"')
         end
         return MainPath
       end
@@ -112,8 +125,6 @@ local pj_name_ = reaper.GetProjectName(0, "")
       end
 
       -- GET URL
-      ProjDir = reaper.GetProjectPathEx(0)
-      InputVariable = ""
       repeat
       retval, url=reaper.GetUserInputs("DOWNLOAD VIDEO", 1, "Paste URL,extrawidth=400", InputVariable)
       if retval==false then return end
@@ -171,10 +182,11 @@ local pj_name_ = reaper.GetProjectName(0, "")
       args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
       
       -- TRIGGERS
-      Video = Start .. MainPath .. '" ' .. args
+      Video = Start .. MainPath .. args
       Destination =  ProjDir ..'/Videos/' .. FileName
       Destination = Destination:gsub('\\','/')
 
+--cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
 
 ---------------------------------------------
 -- UPDATE AND IMPORT VIDEO
