@@ -22,7 +22,9 @@
   1.7 2024-27-10 - 'start "" "' from all O.S.s
                  + 'start "UPDATE & DOWNLOAD" "' Win
   1.8 2024-27-10 - Start = ''
+                 - 1
                  + Start = '"'
+                 + 2
 ]]--
 
 reaper.ClearConsole()
@@ -36,7 +38,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 2
+local zzz = 1
 local ver = 1.8
 local version = reaper.GetAppVersion()
 
