@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 1.6
+-- @version: 1.7
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -16,9 +16,11 @@
   1.5 2024-26-10 - 5
                  + 1
                  # Unified Update
- 1.6  2024-26-10 - 1
+  1.6 2024-26-10 - 1
                  + 2
                  + Version
+  1.7 2024-27-10 - 'start "" "' from all O.S.s
+                 + 'start "UPDATE & DOWNLOAD" "' Win
 ]]--
 
 reaper.ClearConsole()
@@ -33,7 +35,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 2
-local ver = 1.6
+local ver = 1.7
 local version = reaper.GetAppVersion()
 
 ---------------------------------------------
@@ -53,12 +55,15 @@ local version = reaper.GetAppVersion()
         local MainPath = ''
         if OS == "Win32" or OS == "Win64" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp.exe"
+          Start = 'start "UPDATE & DOWNLOAD" "'
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp_macos"   
+          Start = ''
         end
         if OS == "Other" then
           MainPath = reaper.GetResourcePath() .. "/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/yt-dlp"
+          Start = ''
         end
         return MainPath
       end
@@ -150,8 +155,7 @@ local version = reaper.GetAppVersion()
       args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
       
       -- TRIGGERS
-      Video = 'start "" "' .. MainPath .. '" ' .. args
-      Update = 'start "" "' .. MainPath .. '" --update-to master'
+      Video = Start .. MainPath .. '" ' .. args
       Destination =  ProjDir ..'/Videos/' .. FileName
       Destination = Destination:gsub('\\','/')
 
