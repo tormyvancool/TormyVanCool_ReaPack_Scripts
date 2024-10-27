@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 2.1
+-- @version: 2.2
 -- @author: Tormy Van Cool
 -- @Changelog
 --[[
@@ -48,7 +48,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 2.1
+local ver = 2.2
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -186,8 +186,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Variou
       Destination =  ProjDir ..'/Videos/' .. FileName
       Destination = Destination:gsub('\\','/')
       
-      reaper.ShowConsoleMsg(Video)
-      goto done
+
 --cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
 
 ---------------------------------------------
