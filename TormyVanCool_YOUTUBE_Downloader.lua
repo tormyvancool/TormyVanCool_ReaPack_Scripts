@@ -26,6 +26,8 @@
                  + Start = '"'
                  + 2
   1.9 2024-27-10 + Check saved project
+                 - 1
+                 + 2
 ]]--
 
 reaper.ClearConsole()
@@ -39,7 +41,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 1
+local zzz = 2
 local ver = 1.9
 local version = reaper.GetAppVersion()
 local pj_name_ = reaper.GetProjectName(0, "")
