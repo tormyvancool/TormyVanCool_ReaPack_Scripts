@@ -1,5 +1,5 @@
 -- @description: Download videos from YT and see what happens
--- @version: 2.3
+-- @version: 2.31
 -- @author: Tormy Van Cool
 -- @Credits: Stefano marcantoni - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
 -- @Changelog:
@@ -38,6 +38,7 @@
   2.3 2024-27-10 #Linux execution correction
                  + Credits
                  # 2.1 and 2.2 just trials due issues with Linux and Apple
+  2.31 2024-28-10 # Binaries directly form the source
 ]]--
 
 reaper.ClearConsole()
@@ -52,11 +53,11 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 2.3
+local ver = 2.31
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
-local dlpLnx = 'yt-dlp'
+local dlpLnx = 'yt-dlp_linux'
 local version = reaper.GetAppVersion()
 local pj_name_ = reaper.GetProjectName(0, "")
 local ProjDir = reaper.GetProjectPathEx(0)
