@@ -1,7 +1,7 @@
 -- @description: Download videos from YT and see what happens
 -- @version: 2.32
 -- @author: Tormy Van Cool
--- @Credits: Stefano marcantoni - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
+-- @Credits: Stefano marcantoni and Talagan - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
 -- @Changelog:
 --[[
   1.0 2024-26-10 - First Release
