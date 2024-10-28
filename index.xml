@@ -245,8 +245,8 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.3" author="Tormy Van Cool" time="2024-27-10T22:13:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/430ee5d7f7ddbc4b371e276ea1ee095aaa47a712/TormyVanCool_YOUTUBE_Downloader.lua</source>
+            <version name="2.31" author="Tormy Van Cool" time="2024-28-10T10:08:35Z">
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3ec120514694fd173019adfb09df532cef8c9a31/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source file="yt-dlp/yt-dlp">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux</source>
@@ -307,6 +307,7 @@
                     2.3 2024-27-10 #Linux execution correction
                                     + Credits
                                     # 2.1 and 2.2 just trials due issues with Linux and Apple
+                    2.31 2024-28-10 # Binaries directly form the source
                 ]]>
                 </changelog>
             </version>
