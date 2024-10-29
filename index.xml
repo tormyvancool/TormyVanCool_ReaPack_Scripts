@@ -302,6 +302,8 @@
                     2.31 2024-28-10
                         - yt-dlp
                         + yt-dlp_linux
+                    2.4 2024-29-10
+                        # Adjusted header style for production
                 ]]>
                 </changelog>
             </version>
