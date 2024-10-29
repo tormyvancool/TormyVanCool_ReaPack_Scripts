@@ -1,47 +1,77 @@
--- @description: Download videos from YT and see what happens
--- @version: 2.32
--- @author: Tormy Van Cool
--- @Credits: Stefano marcantoni and Talagan - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
--- @Changelog:
---[[
-  1.0 2024-26-10 - First Release
-  1.1 2024-26-10 - +Processes Notifications
-                   -/Video/
-                   +/Videos/
-  1.2 2024-26-10 - ---merge-output-format mp4
-                   +-S vcodec:h264,res,acodec:aac
-  1.3 2024-26-10 - 10
-                 + 2
-  1.4 2024-26-10 - 2
-                 + 5
-  1.5 2024-26-10 - 5
-                 + 1
-                 # Unified Update
-  1.6 2024-26-10 - 1
-                 + 2
-                 + Version
-  1.7 2024-27-10 - 'start "" "' from all O.S.s
-                 + 'start "UPDATE & DOWNLOAD" "' Win
-  1.8 2024-27-10 - Start = ''
-                 - 1
-                 + Start = '"'
-                 + 2
-  1.9 2024-27-10 + Check saved project
-                 - 1
-                 + 2
-  2.0 2024-27-10 - "chmod +x " ..  MainPath
-                 + 'chmod +x "' ..  MainPath .. '"'
-                 # Ordered Variables
-                 - 2
-                 + 1
-                 + Apple Trial
-  2.3 2024-27-10 #Linux execution correction
-                 + Credits
-                 # 2.1 and 2.2 just trials due issues with Linux and Apple
-  2.31 2024-28-10 # Binaries directly form the source
-  2.31 2024-28-10 - yt-dlp
-                  + yt-dlp_linux
-]]--
+-- @description Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
+-- @author Tormy Van Cool
+-- @version 2.4
+-- @Changelog
+-- 1.0 2024-26-10
+--     # First Release
+-- 1.1 2024-26-10
+--     + Processes Notifications
+--     - /Video/
+--     + /Videos/
+-- 1.2 2024-26-10
+--     - --merge-output-format mp4
+--     + -S vcodec:h264,res,acodec:aac
+-- 1.3 2024-26-10
+--     - 10
+--     + 2
+-- 1.4 2024-26-10
+--     - 2
+--     + 5
+-- 1.5 2024-26-10
+--     - 5
+--     + 1
+--     # Unified Update
+-- 1.6 2024-26-10 - 1
+--     + 2
+--     + Version
+-- 1.7 2024-27-10
+--     - 'start "" "' from all O.S.s
+--     + 'start "UPDATE & DOWNLOAD" "' Win
+-- 1.8 2024-27-10
+--     - Start = ''
+--     - 1
+--     + Start = '"'
+--     + 2
+-- 1.9 2024-27-10
+--     + Check saved project
+--     - 1
+--     + 2
+-- 2.0 2024-27-10
+--     - "chmod +x " ..  MainPath
+--     + 'chmod +x "' ..  MainPath .. '"'
+--     # Ordered Variables
+--     - 2
+--     + 1
+--     + Apple Trial
+-- 2.3 2024-27-10
+--     # Linux execution correction
+--     + Credits
+--     # 2.1 and 2.2 just trials due issues with Linux and Apple
+-- 2.31 2024-28-10
+--     # Binaries directly form the source
+-- 2.31 2024-28-10
+--     - yt-dlp
+--     + yt-dlp_linux
+-- 2.4 2024-29-10
+--     # Adjusted header style for production
+--
+-- @about
+--   # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
+--
+--   Key Features:
+--
+--   - 4 click operation: Start the script, enter the URL, give a title, click on OK
+--   - Import any Video in TimeLine by giving just the URL
+--   - Videos are saved into the project folder under the dedicated /Videos/ folder
+--   - Videos are imported into a new track, having the given name, and at the cursor position
+--   - Auto-update of the binaries "yt-dlp" each time the script is invoked, to ensure top quality at each use
+--   - Compatible with about thousand platforms included:
+--   -- YouTUBE
+--   -- Vimeo
+--   -- Patreons
+--   -- and several other ones ...
+--
+--   Credits: Stefano marcantoni and Talagan - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
 
 reaper.ClearConsole()
 
@@ -55,7 +85,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 2.32
+local ver = 2.4
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
