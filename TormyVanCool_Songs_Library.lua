@@ -48,8 +48,8 @@ _________________________________________________________
 
 ]]
 local author = reaper.GetSetProjectAuthor(0, 0, '')
-local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = ""
-local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = ""
+local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = '', '', '',''
+local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = '', '', '', '', '', '', '', '', '', ''
 local version = "1.3"
 local by = "Tormy Van Cool"
 local MainTitle = "SONG DATA LIBRARY - v" .. version .. " by " .. by
