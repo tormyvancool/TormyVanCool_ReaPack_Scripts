@@ -49,7 +49,7 @@
 --     # 2.1 and 2.2 just trials due issues with Linux and Apple
 -- 2.31 2024-28-10
 --     # Binaries directly form the source
--- 2.31 2024-28-10
+-- 2.32 2024-28-10
 --     - yt-dlp
 --     + yt-dlp_linux
 -- 2.4 2024-29-10
