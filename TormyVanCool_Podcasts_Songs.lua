@@ -102,8 +102,8 @@ local LF = "\n"
 local extension = ".txt"
 local UltraschallLua = "/UserPlugins/ultraschall_api.lua"
 local author = reaper.GetSetProjectAuthor(0, 0, '')
-local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = ""
-local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = ""
+local InputString_TITLE, InputString_PERFORMER, InputString_PRODUCTION_YEAR, InputString_LABEL  = '', '', '', ''
+local region_, regionData, regionID, regionPOS, regionNAME, pj_name_, pj_name, SideCar, itemduration, warning_ = '', '', '', '', '', '', '', '', '', ''
 
 
 --------------------------------------------------------------------
