@@ -240,7 +240,7 @@
     <category name="Various">
         <reapack name="TOST_MAIN.lua" type="script" desc="TEST">
             <version name="0.22" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
-                <source main="main" file="TOST_MAIN.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/222e62f3b1eec5ec34ca920b78f3b5056ed88608/TOST_MAIN.lua</source>
+                <source main="main" file="TOST_MAIN.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9cd537bc186f46de3ef8636ca468132aefe6065d/Various/TOST_MAIN.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
