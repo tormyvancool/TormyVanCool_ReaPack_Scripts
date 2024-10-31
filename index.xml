@@ -239,8 +239,8 @@
     </category>
     <category name="Various">
         <reapack name="TOST_MAIN.lua" type="script" desc="TEST">
-            <version name="0.1" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
-                <source main="main" file="TOST_MAIN.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/313a0682f0a8196b6b9dce39a6f502a39035479c/TOST_MAIN.lua</source>
+            <version name="0.15" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
+                <source main="main" file="TOST_MAIN.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ae84937d7fa3522bfa66b96d0f251f21769b7e3a/TOST_MAIN.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
