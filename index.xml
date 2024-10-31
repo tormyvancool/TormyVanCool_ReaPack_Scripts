@@ -233,7 +233,7 @@
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool" time="2021-02-19T01:38:35Z">
-                <source main="main" file="TormyVanCool_ExportStems.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8524d4502738d92a29505488d195b04f6eef2452/TormyVanCool_ExportStems.lua</source>
+                <source main="main" file="TormyVanCool_ExportStems.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/bcd53a9e6767dd51ee39e2dde940a4e1e175c1ba/TormyVanCool_ExportStems.lua</source>
             </version>
         </reapack>
     </category>

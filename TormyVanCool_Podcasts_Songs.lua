@@ -1,97 +1,95 @@
---[[
-@description Chapter region for podcasts and recorded broadcasts
-@author Tormy Van Cool
-@version 2.7.3
-@screenshot Example: Podcasts_songs.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
-@changelog:
-v1.0 (01 feb 2021)
-  + Initial release
-v1.0.1
-  + Implementation SideCar.txt
-v1.0.2
-  + Added Production Year field
-  + Added Label field
-v1.1
-  + Song Title field: mandatory
-  + Performer field: mandatory
-v1.2
-  + Added Offset parameter
-v1.3
-  # Functions declarations
-v1.3 > v2.0
-  # Correction minor bugs
-v2.0
-  - Removed field titling: Offset:, Title:, Performer:, Duration:
-  + Added Podcast Title and Artist if speaker talks for more than 5 seconds 
-  + Added final Podcast Line on SideCar file
-v2.1
-  # Minor corrections/adjustments on variable declarations
-  - Removed Production Year field
-  - Removed Label field
-v2.2
-  # correction reaper.ShowConsoleMsg() was opening
-v2.3
-  + Due problems with MB Studio, chagned the flag from 1 to 12
-v2.4
-  - Removed the changes from 1 to 12 beign the issue located somewhere else in MB Studio rather than into the SideCar
-v2.5
-  # SideCar.txt file: removed the extension PROJECT_NAME.Sidecar.txt with just PROJECT_NAME.txt
-v2.5.1
-  + Converted the song duration for the SideCar into mm:ss instead s
-  + At the very end, if the song ends at the end of the file, 3 seconds before the end, the name of the  podcast is added with " >"
-  + Podcast name added if spekarr talsk more than 15 seconds
-v2.6
-  + Added name of the podcast each time there is a song, separated by column
-  + Substituted the '-' as forbidden character, removing it from the project name if used.
-  + Added square brackets to indicate duration of the song, into SideCar file
-  + Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
-  # Instead of -3 seconds form the end, it's -5 seconds from the end
-  # Podcast name added if spekarr talsk more than 7 seconds
-v2.6.1
-  # Corrected minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
-v2.6.2
-  + Parsed the "-" into file name and replaced with ">" due certain javascripts like icecast.min.js
-v2.7
-  # Due compatibility with MB Studio Radio Automation 
-  # Flipped Title and Artist
-  + Added Production Year field
-  + Added Label field
-  + Field Year is checked against only number or NULL values
-  + Added pop up error windows for missing Song Tile and missing Performer
-  + Check out the YEAR is 4 digits figure
-  - Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
-  + Added "offset,1,"performer - title - production_year - lebel - duration mm:ss"" on SideCar .TXT file for compatibility with MB Studio, agreed together with Maurizio Burato directly
-  + Added "PROJECT_NAME - Author" into SideCar .TXT when interval betwwen songsOR between the beginning of the file is more than 7 seconds
-  + Added "PROJECT_NAME - Author >" into SideCar .TXT 5 seconds before the EOF
-  + Added " | End Part N >" when the Podcast is splitted in 2 or more parts, and project name contains the name of the parts separated by a dash from the podcast name.
-    i.e. Project Name "PODCAST_TITLE - PART 1" Author (ALT+ENTER tab INFO) "Tormy Van Cool", and the file ends at second 1004, 5 second before the EOF, the result is
-    999,1,"PODCAST_TITLE > TORMY VAN COOL | End  Part 1 >"
-    In case the Podcast is not splitted in parts, it returns
-    999,1,"PODCAST_TITLE > TORMY VAN COOL | The  End >"
-v2.7.1
-  + Added Instructions table
-v2.7.2
-  + Added Forbidden character ";" used in the compilation of the CSV file in MB STUDIO from version 8.68.5 on
-  - ChapterRegion.lua
-  + Podcasts_Songs.lua
-v2.7.3
-  + Editing an imported CHAP= ID3V2, is able to modify it 
-  # Solved a "nil arithmetic operation"
-@about
-# Chapter Region for Podcasts and Recorded Broadcasts
-  It's an ideal feature for Podcasts and Recorded Broadcasts
-  It enables the user to highlight all the embedded songs by just a click.
-  By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
-  Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
-  It creates a region with the following line preceded by the ID3 Tag "CHAP="
-  "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds"
-  This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
-  Key features:
-  - It can work also as Armed Action
-  - It creates a region that contains the required Tags without sintaxis errors.
-  - It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.
-Ver. 1.0 made by by Tormy Van Cool 01 feb 2021
-]]
+-- @description Chapter region for podcasts and recorded broadcasts
+-- @author Tormy Van Cool
+-- @version 2.7.3
+-- @screenshot Example: Podcasts_songs.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
+-- @about
+-- # Chapter Region for Podcasts and Recorded Broadcasts
+--   It's an ideal feature for Podcasts and Recorded Broadcasts
+--   It enables the user to highlight all the embedded songs by just a click.
+--   By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
+--   Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item.
+--   It creates a region with the following line preceded by the ID3 Tag "CHAP="
+--   "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds"
+--   This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection.
+--   Key features:
+--   > It can work also as Armed Action
+--   > It creates a region that contains the required Tags without sintaxis errors.
+--   > It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.
+-- Ver. 1.0 made by by Tormy Van Cool 01 feb 2021
+-- @changelog:
+-- v1.0 (01 feb 2021)
+--   + Initial release
+-- v1.0.1
+--   + Implementation SideCar.txt
+-- v1.0.2
+--   + Added Production Year field
+--   + Added Label field
+-- v1.1
+--   + Song Title field: mandatory
+--   + Performer field: mandatory
+-- v1.2
+--   + Added Offset parameter
+-- v1.3
+--   # Functions declarations
+-- v1.3 > v2.0
+--   # Correction minor bugs
+-- v2.0
+--   - Removed field titling: Offset:, Title:, Performer:, Duration:
+--   + Added Podcast Title and Artist if speaker talks for more than 5 seconds 
+--   + Added final Podcast Line on SideCar file
+-- v2.1
+--   # Minor corrections/adjustments on variable declarations
+--   - Removed Production Year field
+--   - Removed Label field
+-- v2.2
+--   # correction reaper.ShowConsoleMsg() was opening
+-- v2.3
+--   + Due problems with MB Studio, chagned the flag from 1 to 12
+-- v2.4
+--   - Removed the changes from 1 to 12 beign the issue located somewhere else in MB Studio rather than into the SideCar
+-- v2.5
+--   # SideCar.txt file: removed the extension PROJECT_NAME.Sidecar.txt with just PROJECT_NAME.txt
+-- v2.5.1
+--   + Converted the song duration for the SideCar into mm:ss instead s
+--   + At the very end, if the song ends at the end of the file, 3 seconds before the end, the name of the  podcast is added with " >"
+--   + Podcast name added if spekarr talsk more than 15 seconds
+-- v2.6
+--   + Added name of the podcast each time there is a song, separated by column
+--   + Substituted the '-' as forbidden character, removing it from the project name if used.
+--   + Added square brackets to indicate duration of the song, into SideCar file
+--   + Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
+--   # Instead of -3 seconds form the end, it's -5 seconds from the end
+--   # Podcast name added if spekarr talsk more than 7 seconds
+-- v2.6.1
+--   # Corrected minor bug: it was not removing the dash "-" from the "PROJECT_NAME: "
+-- v2.6.2
+--   + Parsed the "-" into file name and replaced with ">" due certain javascripts like icecast.min.js
+-- v2.7
+--   # Due compatibility with MB Studio Radio Automation 
+--   # Flipped Title and Artist
+--   + Added Production Year field
+--   + Added Label field
+--   + Field Year is checked against only number or NULL values
+--   + Added pop up error windows for missing Song Tile and missing Performer
+--   + Check out the YEAR is 4 digits figure
+--   - Added "PROJECT_NAME: title - performer [mm:ss]" instead of "title - performer [mm:ss]"
+--   + Added "offset,1,"performer - title - production_year - lebel - duration mm:ss"" on SideCar .TXT file for compatibility with MB Studio, agreed together with Maurizio Burato directly
+--   + Added "PROJECT_NAME - Author" into SideCar .TXT when interval betwwen songsOR between the beginning of the file is more than 7 seconds
+--   + Added "PROJECT_NAME - Author >" into SideCar .TXT 5 seconds before the EOF
+--   + Added " | End Part N >" when the Podcast is splitted in 2 or more parts, and project name contains the name of the parts separated by a dash from the podcast name.
+--     i.e. Project Name "PODCAST_TITLE - PART 1" Author (ALT+ENTER tab INFO) "Tormy Van Cool", and the file ends at second 1004, 5 second before the EOF, the result is
+--     999,1,"PODCAST_TITLE > TORMY VAN COOL | End  Part 1 >"
+--     In case the Podcast is not splitted in parts, it returns
+--     999,1,"PODCAST_TITLE > TORMY VAN COOL | The  End >"
+-- v2.7.1
+--   + Added Instructions table
+-- v2.7.2
+--   + Added Forbidden character ";" used in the compilation of the CSV file in MB STUDIO from version 8.68.5 on
+--   - ChapterRegion.lua
+--   + Podcasts_Songs.lua
+-- v2.7.3
+--   + Editing an imported CHAP= ID3V2, is able to modify it 
+--   # Solved a "nil arithmetic operation"
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
