@@ -8,22 +8,21 @@
 --   Just calling the script, it remove the old file, with a new updated one.
 --
 --   Once done, it returns a popup window that informs the users, that everything is perfectly done.
--- versions
---[[
-  1.0 Initial release
-  2.0 
-    + Code rewritten from scratch
-  2.1 
-    - removed reaper.ShowConsoleMsg()
-  2.2 
-    # Solved failed update of the marker pointer
-  2.2.1
-    - Debug window still opening
-  2.2.2
-    + Recovering audiobooks: Conversion from imporeted regions to markers
-  2.2.3
-    - Removed Pipe and Pointer from the marker
-]]
+-- @Changelog
+-- 1.0 Initial release
+-- 2.0 
+--   + Code rewritten from scratch
+-- 2.1 
+--   - removed reaper.ShowConsoleMsg()
+-- 2.2 
+--   # Solved failed update of the marker pointer
+-- 2.2.1
+--   - Debug window still opening
+-- 2.2.2
+--   + Recovering audiobooks: Conversion from imporeted regions to markers
+-- 2.2.3
+--   - Removed Pipe and Pointer from the marker
+
 --------------------------------------------------------------------
 -- Gets the project's name and open the SideCr file to be ovewritten
 --------------------------------------------------------------------
