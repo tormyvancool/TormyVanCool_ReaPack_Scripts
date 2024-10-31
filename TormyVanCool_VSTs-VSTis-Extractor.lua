@@ -1,59 +1,58 @@
---[[
-@description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
-@author Tormy Van Cool
-@version 3.1 FERRETS
-@screenshot
-@changelog:
-v1.0 (30 May 2021)
-  + Initial release
-v1.1 (31 May 2021)
-  + Save status of HTML File
-  + Retrieve status of HTML file
-v1.2 (31 May 2021)
-  + Saves files into Reaper's Folder
-  + No more need internet connection
-v1.3 (31 May 2021)
-  # Minor adjustments
-v1.3.1 (31 May 2021)
-  # Slved a bug occurred with mac (what else!)
-v1.3.2 (31 May 2021)
-  + Added info block at the end of the process
-v2.0 (1 june 2021)
-  + AU detection on MAC
-v2.1 (1 June 2021)
-  + Helper with modal pop-up
-v2.2 (13 June 2021) PIXY
-  - Import button
-  + Automatic import JSON file if present
-  + Hide checked button
-  + Show checked button
-v2.3 (30 October 2021)
-  # ameliorated columns
-  # CSS glitch
-v2.4 (30 October 2021)
-  + instr Column
-  + Links
-v2.5 FERRETS (1 November 2021)
-  + instr Column CSV
-v2.6 FERRETS (1 november 2021)
-  # glitch on jQuery: Hide/Show button was not working any longer
-v2.7 FERRETS (1 June 2023) 
-  + CLAP
-  # Corrected a bug that could list less plugins than the ones really installed
-v2.8 FERRETS (1 June 2023) 
-  # Fixed issue with Mac (both x86_64 and arch64)
-  # Fixed issue with Linux
-  + "Not applicable (don't even ask)" to CLAP files
-v2.8.5
-  # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
-v2.9 FERRETS (7 June 2023)
-  + CLAP File Name
-v3.0 FERRETS (05 August 2023)
-  + Old 32bit VST List
-v3.1 FERRETS (19 August 2023)
-  # Corrected bug: if no 64bit or not 32bit plugins where installed, an error was displayed.
-  + Close file CLAP
-]]
+-- @description Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
+-- @author Tormy Van Cool
+-- @version 3.1 FERRETS
+-- @screenshot ENGLISH https://www.youtube.com/watch?v=J5Ko4uIya9w ITALIAN https://www.youtube.com/watch?v=OqNFQt3hOC8
+-- @changelog
+-- v1.0 (30 May 2021)
+--   + Initial release
+-- v1.1 (31 May 2021)
+--   + Save status of HTML File
+--   + Retrieve status of HTML file
+-- v1.2 (31 May 2021)
+--   + Saves files into Reaper's Folder
+--   + No more need internet connection
+-- v1.3 (31 May 2021)
+--   # Minor adjustments
+-- v1.3.1 (31 May 2021)
+--   # Slved a bug occurred with mac (what else!)
+-- v1.3.2 (31 May 2021)
+--   + Added info block at the end of the process
+-- v2.0 (1 june 2021)
+--   + AU detection on MAC
+-- v2.1 (1 June 2021)
+--   + Helper with modal pop-up
+-- v2.2 (13 June 2021) PIXY
+--   - Import button
+--   + Automatic import JSON file if present
+--   + Hide checked button
+--   + Show checked button
+-- v2.3 (30 October 2021)
+--   # ameliorated columns
+--   # CSS glitch
+-- v2.4 (30 October 2021)
+--   + instr Column
+--   + Links
+-- v2.5 FERRETS (1 November 2021)
+--   + instr Column CSV
+-- v2.6 FERRETS (1 november 2021)
+--   # glitch on jQuery: Hide/Show button was not working any longer
+-- v2.7 FERRETS (1 June 2023) 
+--   + CLAP
+--   # Corrected a bug that could list less plugins than the ones really installed
+-- v2.8 FERRETS (1 June 2023) 
+--   # Fixed issue with Mac (both x86_64 and arch64)
+--   # Fixed issue with Linux
+--   + "Not applicable (don't even ask)" to CLAP files
+-- v2.8.5
+--   # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
+-- v2.9 FERRETS (7 June 2023)
+--   + CLAP File Name
+-- v3.0 FERRETS (05 August 2023)
+--   + Old 32bit VST List
+-- v3.1 FERRETS (19 August 2023)
+--   # Corrected bug: if no 64bit or not 32bit plugins where installed, an error was displayed.
+--   + Close file CLAP
+
 reaper.ShowConsoleMsg('')
 local version = "3.1 FERRETS"
 local REAPER_path = reaper.GetResourcePath()
