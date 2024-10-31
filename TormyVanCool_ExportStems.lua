@@ -1,21 +1,20 @@
---[[
-@Description: Insert empty item on all tracks at the position of the edit cursor
-@Version: 1.0
-@Author: Tormy Van Cool
-@About: 
-  Performs the following actions:
-  - Get the cursor position
-  - Selects all tracks
-  - Insert empty item
-  - Glue all items on all tracks
-  - Calls the rendering window
-  - Unslects all tracks
-  - Selects all items for stems
-  - Calls the rendering window
-  Once exported, each track has a duration form the begining of the song
-  to the end of the track itself, not to the very end of the song.
-  This saves HD space, making shorter files
-]]
+-- @Description: Insert empty item on all tracks at the position of the edit cursor
+-- @Author: Tormy Van Cool
+-- @Version: 1.0
+-- @About: 
+--   Performs the following actions:
+--   > Get the cursor position
+--   > Selects all tracks
+--   > Insert empty item
+--   > Glue all items on all tracks
+--   > Calls the rendering window
+--   > Unslects all tracks
+--   > Selects all items for stems
+--   > Calls the rendering window
+--   Once exported, each track has a duration form the begining of the song
+--   to the end of the track itself, not to the very end of the song.
+--   This saves HD space, making shorter files
+
 reaper.Undo_BeginBlock()
 reaper.Main_OnCommand(40296, 0) -- Selects all tracks
 CursorPosition = reaper.GetCursorPositionEx()
