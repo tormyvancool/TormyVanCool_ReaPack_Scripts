@@ -246,7 +246,7 @@
                 </description>
             </metadata>
             <version name="2.4" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8289a3ab0bfe43d087214201de75bd109b5b5d60/Various/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38261424d583227c075e4cf61fe8f58ba48edd97/Various/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
@@ -323,7 +323,7 @@
                 </description>
             </metadata>
             <version name="1.0.4" author="Tormy Van Cool" time="2021-03-17T01:38:35Z">
-                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8438fbb294587c57d63d6f97472b93867ee41a0b/TormyVanCool_Program_Runner.lua</source>
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38261424d583227c075e4cf61fe8f58ba48edd97/Various/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats and TEMPO MARKERS in All formats included TXT">
@@ -343,7 +343,7 @@
                 </description>
             </metadata>
             <version name="3.5" author="Tormy Van Cool" time="2024-02-25T21:23:57Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/735752e0c573c8aa25cb34615e9a92d9309f2cb8/TormyVanCool_ExportData.lua</source>
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38261424d583227c075e4cf61fe8f58ba48edd97/Various/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -475,7 +475,7 @@
                 </description>
             </metadata>
             <version name="2.1" author="Tormy Van Cool" time="2021-06-01T19:08:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4513020341c34afb3a7d8a9270d7779d665050ff/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38261424d583227c075e4cf61fe8f58ba48edd97/Various/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
