@@ -1,48 +1,46 @@
---[[
-@description CSV containing Time Markers
-@author Tormy Van Cool
-@version 1.3
-@screenshot
-@changelog:
-v1.0 (23 july 2022)
-  + Initial release
-v1.1 (23 july 2022)
-  # Time in format HH:mm:ss
-v1.2 (23 july 2022)
-  # Exports with predetermined and univocal file_name
-  - Time in format HH:mm:ss
-  + Time in format HH:mm:ss in console
-  + Line number
-  + Fractional Value
-  + Info Pop Up
-  - Commas
-  + Tabs
-  + Beat
-v1.3 (23 july 2022)
-  - Tab separated
-  + Comme separated
-  # Removed Header from CSV
-v1.4 (24 july 2022)
-  + HTML page
-  + TXT page
-v1.5 (24 july 2022)
-  # cleaned HTML
-v1.6 (24 july 2022)
-  # HTML Even Odd lines
-v1.7 (24 july 2022)
-  # double records on TXT
-  + CSV added Beat
-v1.8 (25 july 2022)
-  + CSV Headers (rooll back to v1.3)
-  # Variables' Names
-v1.9 (25 july 2022)
-  # Wrong header in the Console
-v2.0 (26 july 2022)
-  + curveType
-v2.1 (03 august 2022)
-  - full header
-  + min header
-]]
+-- @description CSV containing Time Markers
+-- @author Tormy Van Cool
+-- @version 1.3
+-- @screenshot
+-- @changelog:
+-- v1.0 (23 july 2022)
+--   + Initial release
+-- v1.1 (23 july 2022)
+--   # Time in format HH:mm:ss
+-- v1.2 (23 july 2022)
+--   # Exports with predetermined and univocal file_name
+--   - Time in format HH:mm:ss
+--   + Time in format HH:mm:ss in console
+--   + Line number
+--   + Fractional Value
+--   + Info Pop Up
+--   - Commas
+--   + Tabs
+--   + Beat
+-- v1.3 (23 july 2022)
+--   - Tab separated
+--   + Comme separated
+--   # Removed Header from CSV
+-- v1.4 (24 july 2022)
+--   + HTML page
+--   + TXT page
+-- v1.5 (24 july 2022)
+--   # cleaned HTML
+-- v1.6 (24 july 2022)
+--   # HTML Even Odd lines
+-- v1.7 (24 july 2022)
+--   # double records on TXT
+--   + CSV added Beat
+-- v1.8 (25 july 2022)
+--   + CSV Headers (rooll back to v1.3)
+--   # Variables' Names
+-- v1.9 (25 july 2022)
+--   # Wrong header in the Console
+-- v2.0 (26 july 2022)
+--   + curveType
+-- v2.1 (03 august 2022)
+--   - full header
+--   + min header
 
 ---------------------------------------------
 -- VARIABLES
