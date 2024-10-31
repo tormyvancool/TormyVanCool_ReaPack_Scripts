@@ -1,23 +1,22 @@
---[[
-@description Assign Performer and Title to a song's Region
-@author Tormy Van Cool
-@version 1.3
-@screenshot Example:
-@changelog:
-v1.0 (21 may 2022)
-  + Initial release
-v1.1 (22 may 2022)
-  - NA
-  + UNKNOWN
-v1.2 (22 may 2022)
-  - upper
-  + normal
-v1.3 (03 october 2022)
-  + Forbidden characters list
-  + Forbidden characters: /, \
-  + version
-  + by
-]]
+-- @description Assign Performer and Title to a song's Region
+-- @author Tormy Van Cool
+-- @version 1.3
+-- @screenshot Example
+-- @changelog
+-- v1.0 (21 may 2022)
+--   + Initial release
+-- v1.1 (22 may 2022)
+--   - NA
+--   + UNKNOWN
+-- v1.2 (22 may 2022)
+--   - upper
+--   + normal
+-- v1.3 (03 october 2022)
+--   + Forbidden characters list
+--   + Forbidden characters: /, \
+--   + version
+--   + by
+
 --------------------------------------------------------------------
 -- Script Initialization
 --------------------------------------------------------------------
