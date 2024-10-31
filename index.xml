@@ -132,7 +132,7 @@
                 </description>
             </metadata>
             <version name="1.0" author="Tormy Van Cool" time="2022-07-30T22:24:33Z">
-                <source main="main" file="TormyVanCool_Podcasts_Auto_GetMetaData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6e2d7bd6ca4ab90a472657a0d9983a3cf4fec98f/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
+                <source main="main" file="TormyVanCool_Podcasts_Auto_GetMetaData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/773b95439d6b21a0653e93bfb67f33a84578e167/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
