@@ -72,6 +72,10 @@
 --   -- and several other ones ...
 --
 --   Credits: Stefano marcantoni and Talagan - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation
+-- @provides
+--   [windows] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
+--   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+--   [darwin] yt-dlp/yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos
 
 reaper.ClearConsole()
 
