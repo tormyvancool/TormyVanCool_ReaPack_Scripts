@@ -1,22 +1,21 @@
---[[
-@description It creates scripts that are supposed to fire-up an external program, after have selected it
-@author: Tormy Van Cool
-@version: 1.0.4
-@about
-# First release made 28 feb 2021
-Versioning:
-1.0
-  + File creation 28.02.2021
-1.0.1
-  + Declared all variable at the begnining of the file
-  + Capitalized the filename into reaper.MB() when the fiel already exists
-1.0.2
-  + When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
-1.0.3
-  + Chek for the presence of the UltraShall library
-1.0.4
- # Correction minor bugs
-]]
+-- @description It creates scripts that are supposed to fire-up an external program, after have selected it
+-- @author Tormy Van Cool
+-- @version 1.0.4
+-- @about
+-- @changelog
+-- 1.0
+-- # First release made 28 feb 2021
+--   + File creation 28.02.2021
+-- 1.0.1
+--   + Declared all variable at the begnining of the file
+--   + Capitalized the filename into reaper.MB() when the fiel already exists
+-- 1.0.2
+--   + When the action is imported, the Add Menu/Toolbar tool is opened, instead of the action list
+-- 1.0.3
+--   + Chek for the presence of the UltraShall library
+-- 1.0.4
+--  # Correction minor bugs
+
 --local retval, folder = reaper.JS_Dialog_BrowseForFolder( caption, initialFolder )
 
 --------------------------------------------------------------------
