@@ -1,8 +1,7 @@
 -- @description CSV containing Time Markers
 -- @author Tormy Van Cool
 -- @version 1.3
--- @screenshot
--- @changelog
+-- @changelog:
 -- v1.0 (23 july 2022)
 --   + Initial release
 -- v1.1 (23 july 2022)
