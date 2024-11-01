@@ -8,7 +8,7 @@
 --   Just calling the script, it remove the old file, with a new updated one.
 --
 --   Once done, it returns a popup window that informs the users, that everything is perfectly done.
--- @Changelog
+-- @Changelog:
 -- 1.0 Initial release
 -- 2.0 
 --   + Code rewritten from scratch
