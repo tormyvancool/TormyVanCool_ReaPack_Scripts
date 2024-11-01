@@ -1,8 +1,7 @@
 -- @description Assign Performer and Title to a song's Region
 -- @author Tormy Van Cool
 -- @version 1.3
--- @screenshot Example
--- @changelog
+-- @changelog:
 -- v1.0 (21 may 2022)
 --   + Initial release
 -- v1.1 (22 may 2022)
