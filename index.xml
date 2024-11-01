@@ -237,7 +237,7 @@
             </version>
         </reapack>
     </category>
-    <category name="Videos">
+    <category name="Video">
         <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
             <metadata>
                 <description>
