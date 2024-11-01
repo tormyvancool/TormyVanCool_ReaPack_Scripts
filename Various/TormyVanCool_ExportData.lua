@@ -1,132 +1,135 @@
--- https://forum.cockos.com/archive/index.php/t-209658.html
--- https://forum.cockos.com/showthread.php?t=238421
--- https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k
--- https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts
--- https://forum.cockos.com/showthread.php?t=259730
---[[
-IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
-@description Exporets project's data related to tracks, into CSV and HTML file
-@author Tormy Van Cool
-@version 3.5
-@screenshot
-@changelog:
-v1.0 (18 may 2021)
-  + Initial release
-v1.0.1 (18 may 2021)
-  + Added pop-up when files are saved
-v1.0.2 (18 may 2021)
-  + Pup up if project is not saved
-v1.0.3 (18 may 2021)
-  + Date to file names 
-  + Creation date into files 
-  + Version into files 
-v1.0.4 (18 may 2021)
-  + Project Notes
-  + Track Notes
-  + Project Sample Rate
-v2.0 (18 may 2021)
-  + Expandable/Collapsible Tables
-  + Odd/Even on Mute flag
-  + Odd/Even on Solo flag
-  + Only noted tracks
-  - Pipe separated Values
-  + Comma Separated Values
-  + Effected items 
-  + Noted items 
-v2.0.1 (18 may 2021)
-  # Buf Fix: all FX where displayed as Disalbed
-v2.0.2 (18 may 2021)
-  + FX Chain Status
-v2.1 (19 may 2021)
-  + All Tracks Hierarchy
-  + All tracks Statuses
-  + Master Channel FX and Notes
-  + Precision
-  + Project Length HH:MM:SS
-v2.1.1 (19 may 2021)
-  # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil
-v2.1.2 (20 may 2021)
-  # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication
-v2.2 (24 may 2021)
-  # Optimized Code
-  + VSTS' Path Detection
-  + SUbfolder indication into FFEXed Tracks
-  - Table width 90%
-  + Table width 100%
-  + Num. Items, Num. Markers, Num. Region in Project Data
-  # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
-  # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS.
-v2.3 (26 may 2021)
-  + Project Markers
-  + Project Regions
-  + Solo in Tracks Hierarchy
-  + Mute in Tracks Hierarchy
-  # Cosmetic changes on Project Data and Master Channel table
-  # Minor issues on CSV format
-v2.3a
-  # Corrections into description
-v2.3b
-  # Mistyping correction
-v2.4
-  + Included jQuery base64
-v2.5
-  + Project MetaData
-v2.6
-  + Song Title (due new fiels on ALT+ENTER)
-v2.7
-  + Collapsible MetaData Table
-v2.8
-  + Check if SWS is installed
-  + Check the Reaper version
-  + Path into the export box
-  # Specified Noted Tracks only
-  # Specified Noted Items only
-v2.9
-  # CSS adaptation
-v2.9.1
-  # UTF-8 on HTML
-v2.9.2
-  # HH:MM:SS:FF
-  + Project Tempo BPM
-v2.9.3
-  + URL Encode for spaces
-  + Rendered audio: Only Audio Formats
-v2.9.4
-  + Management UTF8 Characters on file names
-  + Metadata: Wavext
-  + Metadata: Aswg
-  + Metadata: Cafinfo
-  + Links to Documentation
-  # Mistyping corrections
-v3.0
-  # Version of Reaper
-  + Tempo Markers
-v3.1
-  + Error travp in case project is not finished
-  + export CSV Headers
-v3.2
-  # Not rading BWF Originator Reference
-v3.3
-  + Remove cp.bat
-v3.4 (23 feb 2024)
-  # Corrected file list for Mac
-v3.5
-  + Decoding of the wildcards
+-- @description Export Data
+-- @about
+--   Exports project's data related to tracks, into CSV and HTML file
+--   IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES!
+--   https://forum.cockos.com/archive/index.php/t-209658.html
+--   https://forum.cockos.com/showthread.php?t=238421
+--   https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k
+--   https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts
+--   https://forum.cockos.com/showthread.php?t=259730
+-- @author Tormy Van Cool
+-- @version 3.5
+-- @screenshot
+--     English https://youtu.be/_VDGMuxJ5xc
+--     Italian https://youtu.be/4y6Tj2nnHqQ
+-- @changelog
+-- v1.0 (18 may 2021)
+--   + Initial release
+-- v1.0.1 (18 may 2021)
+--   + Added pop-up when files are saved
+-- v1.0.2 (18 may 2021)
+--   + Pup up if project is not saved
+-- v1.0.3 (18 may 2021)
+--   + Date to file names 
+--   + Creation date into files 
+--   + Version into files 
+-- v1.0.4 (18 may 2021)
+--   + Project Notes
+--   + Track Notes
+--   + Project Sample Rate
+-- v2.0 (18 may 2021)
+--   + Expandable/Collapsible Tables
+--   + Odd/Even on Mute flag
+--   + Odd/Even on Solo flag
+--   + Only noted tracks
+--   - Pipe separated Values
+--   + Comma Separated Values
+--   + Effected items 
+--   + Noted items 
+-- v2.0.1 (18 may 2021)
+--   # Buf Fix: all FX where displayed as Disalbed
+-- v2.0.2 (18 may 2021)
+--   + FX Chain Status
+-- v2.1 (19 may 2021)
+--   + All Tracks Hierarchy
+--   + All tracks Statuses
+--   + Master Channel FX and Notes
+--   + Precision
+--   + Project Length HH:MM:SS
+-- v2.1.1 (19 may 2021)
+--   # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil
+-- v2.1.2 (20 may 2021)
+--   # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication
+-- v2.2 (24 may 2021)
+--   # Optimized Code
+--   + VSTS' Path Detection
+--   + SUbfolder indication into FFEXed Tracks
+--   - Table width 90%
+--   + Table width 100%
+--   + Num. Items, Num. Markers, Num. Region in Project Data
+--   # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
+--   # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS.
+-- v2.3 (26 may 2021)
+--   + Project Markers
+--   + Project Regions
+--   + Solo in Tracks Hierarchy
+--   + Mute in Tracks Hierarchy
+--   # Cosmetic changes on Project Data and Master Channel table
+--   # Minor issues on CSV format
+-- v2.3a
+--   # Corrections into description
+-- v2.3b
+--   # Mistyping correction
+-- v2.4
+--   + Included jQuery base64
+-- v2.5
+--   + Project MetaData
+-- v2.6
+--   + Song Title (due new fiels on ALT+ENTER)
+-- v2.7
+--   + Collapsible MetaData Table
+-- v2.8
+--   + Check if SWS is installed
+--   + Check the Reaper version
+--   + Path into the export box
+--   # Specified Noted Tracks only
+--   # Specified Noted Items only
+-- v2.9
+--   # CSS adaptation
+-- v2.9.1
+--   # UTF-8 on HTML
+-- v2.9.2
+--   # HH:MM:SS:FF
+--   + Project Tempo BPM
+-- v2.9.3
+--   + URL Encode for spaces
+--   + Rendered audio: Only Audio Formats
+-- v2.9.4
+--   + Management UTF8 Characters on file names
+--   + Metadata: Wavext
+--   + Metadata: Aswg
+--   + Metadata: Cafinfo
+--   + Links to Documentation
+--   # Mistyping corrections
+-- v3.0
+--   # Version of Reaper
+--   + Tempo Markers
+-- v3.1
+--   + Error travp in case project is not finished
+--   + export CSV Headers
+-- v3.2
+--   # Not rading BWF Originator Reference
+-- v3.3
+--   + Remove cp.bat
+-- v3.4 (23 feb 2024)
+--   # Corrected file list for Mac
+-- v3.5
+--   + Decoding of the wildcards
+-- 
+-- @credits  Mario Bianchi for his contribution to expedite the process;
+--           Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+--           Solger for his help on the color decode [t=253981]
+--           Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+--           Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+--           MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
+--           Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
+--           Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
+--           Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
+--           Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
+--           FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
+--           Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
+--           Schwa https://forum.cockos.com/showthread.php?t=282944
 
-@credits  Mario Bianchi for his contribution to expedite the process;
-          Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
-          Solger for his help on the color decode [t=253981]
-          Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
-          Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
-          MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
-          Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
-          Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
-          Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
-          Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
-          FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
-          Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
-          Schwa https://forum.cockos.com/showthread.php?t=282944
-]]--
 ----------------------------------------------
 -- NUMERICAL FUNCTIONS
 ----------------------------------------------
