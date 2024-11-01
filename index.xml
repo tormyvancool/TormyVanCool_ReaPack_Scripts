@@ -54,7 +54,7 @@
                 </description>
             </metadata>
             <version name="1.2" author="Tormy Van Cool" time="2022-08-03T23:03:30Z">
-                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8189bc6078a0f4d13c4a7f11a8275faa5051c611/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
+                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/abd3127ef8818cbdf43e420198290b3300665944/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
             </version>
         </reapack>
     </category>
