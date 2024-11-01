@@ -1,9 +1,8 @@
--- @description Chapter region for podcasts and recorded broadcasts
+-- @description Podcast Songs
 -- @author Tormy Van Cool
 -- @version 2.7.3
 -- @screenshot Example: Podcasts_songs.lua in action https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif
--- @about
--- # Chapter Region for Podcasts and Recorded Broadcasts
+-- @about # Chapter Region for Podcasts and Recorded Broadcasts
 --   It's an ideal feature for Podcasts and Recorded Broadcasts
 --   It enables the user to highlight all the embedded songs by just a click.
 --   By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song.
