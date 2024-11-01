@@ -30,7 +30,7 @@
                 </description>
             </metadata>
             <version name="2.2.3" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
-                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8189bc6078a0f4d13c4a7f11a8275faa5051c611/Markers/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/afe66ce671fb113926bace1a71368867a45304e7/Markers/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Tempo_Markers_to_CSV.lua" type="script" desc="TEMPO MARKERS to CSV: exports the tempo markers to CSV file located into the project's directory">
