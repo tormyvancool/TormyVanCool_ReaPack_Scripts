@@ -1,19 +1,18 @@
---[[
-    https://gist.github.com/obikag/6118422
-@description Imports Tempo Markers
-@author Tormy Van Cool
-@version 1.0
-@screenshot
-@credits: obikag https://gist.github.com/obikag
-@changelog:
-v1.0 (27 july 2022)
-  + Initial release
-v1.1 (03 august 2022)
-  + avoid line headers
-  + version
-v1.2 (03 august 2022)
-  + gradual change
-]]--
+-- @description Tempo Markers
+-- @about Imports Tempo Markers     https://gist.github.com/obikag/6118422
+-- @author Tormy Van Cool
+-- @version 1.0
+-- @screenshot
+-- @credits: obikag https://gist.github.com/obikag
+-- @changelog:
+-- v1.0 (27 july 2022)
+--   + Initial release
+-- v1.1 (03 august 2022)
+--   + avoid line headers
+--   + version
+-- v1.2 (03 august 2022)
+--   + gradual change
+
 local version = "Tempo Markers Import: v1.2"
 local pj_path = reaper.GetProjectPathEx(0 , '' ):gsub("(.*)\\.*$","%1")..'/'
 local filepath = pj_path..'Tempo_Markers.csv'
