@@ -1,7 +1,8 @@
--- @description Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
+-- @description YOUTUBE Downloader
+-- @about Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- @author Tormy Van Cool
 -- @version 2.4
--- @Changelog
+-- @Changelog 2.4 2024-29-10 # Adjusted header style for production
 -- 1.0 2024-26-10
 --     # First Release
 -- 1.1 2024-26-10
