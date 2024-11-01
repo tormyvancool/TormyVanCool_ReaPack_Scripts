@@ -2,7 +2,7 @@
 -- @author Tormy Van Cool
 -- @version 3.1 FERRETS
 -- @screenshot ENGLISH https://www.youtube.com/watch?v=J5Ko4uIya9w ITALIAN https://www.youtube.com/watch?v=OqNFQt3hOC8
--- @changelog
+-- @changelog v3.1 FERRETS (19 August 2023) + Close file CLAP, + Close file CLAP
 -- v1.0 (30 May 2021)
 --   + Initial release
 -- v1.1 (31 May 2021)
