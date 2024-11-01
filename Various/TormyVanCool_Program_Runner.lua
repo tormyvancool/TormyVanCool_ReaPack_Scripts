@@ -1,8 +1,8 @@
--- @description It creates scripts that are supposed to fire-up an external program, after have selected it
+-- @description Program Runner
 -- @author Tormy Van Cool
 -- @version 1.0.4
--- @about
--- @changelog
+-- @about It creates scripts that are supposed to fire-up an external program, after have selected it
+-- @changelog 1.0.4 # Correction minor bugs
 -- 1.0
 -- # First release made 28 feb 2021
 --   + File creation 28.02.2021
