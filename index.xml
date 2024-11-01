@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<index version="1" name="Tormy Van Cool ReaPack Scripts" commit="6f0af8227f315928f2bcabeccd5641b81024ddae">
+  <category name="Markers">
+    <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="Chapter marker for audiobooks (ID3 Metatag &quot;CHAP=Chapter_Title&quot;)">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Marker for Audiobooks\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It adds ID3 Metatag "CHAP=Chapter_Title_by_the_User" by a pop up that asks to the user, the title of each chapter. Then it adds the marker with the correct tag at the mouse position\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Key features:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Asks for the title of each chapter by a pop up field\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab It can be used very effectively as Armed Action\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab It add the prefix "CHAP=" to any title inserted by the user, avoiding sintaxis errors\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab When metadata is used, rendering an MP3, "CHAP=" is automatically added\sa180\par}
+}
+]]></description>
+        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif">Example: ChapterMarker.lua in action</link>
+      </metadata>
+      <version name="2.3" author="Tormy Van Cool" time="2024-10-31T23:06:29Z">
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8189bc6078a0f4d13c4a7f11a8275faa5051c611/Markers/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua" type="script" desc="Chapter Marker Updater for Audiobooks">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Marker Updater for Audiobooks\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The script, updates the PROJECT_NAME.SideCar.txt file, when markers are renamed and/or moved. Just calling the script, it remove the old file, with a new updated one.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Once done, it returns a popup window that informs the users, that everything is perfectly done.\par}
+}
+]]></description>
+      </metadata>
+      <version name="2.2.2" author="Tormy Van Cool" time="2024-11-01T10:10:08Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/afe66ce671fb113926bace1a71368867a45304e7/Markers/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="Tempo Markers">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Imports Tempo Markers https://gist.github.com/obikag/6118422\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="Tormy Van Cool" time="2024-11-01T10:14:09Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4a5db3a05aa5b39412d34751d1f64397aa7f8154/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Tempo_Markers_to_CSV.lua" type="script" desc="Tempo Markers to CSV">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 CSV containing Time Markers\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.3" author="Tormy Van Cool" time="2024-11-01T10:15:39Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ebb0ae7c8ae249de64a138ca38fd9817cc647c5/Markers/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Regions">
+    <reapack name="TormyVanCool_Podcasts_Auto_GetMetaData.lua" type="script" desc="Chapter region for podcasts and recorded broadcasts retrieving the metadata from the Source file">
+      <metadata>
+        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif">Example: Podcasts_songs.lua in action</link>
+      </metadata>
+      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="Markers for Podcasts Segmentation and Final marker with greetings (ID3 Metatag &quot;CHAP=text&quot;)">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Segmentation markers for Podcasts\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="Podcast Songs">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Region for Podcasts and Recorded Broadcasts\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It's an ideal feature for Podcasts and Recorded Broadcasts It enables the user to highlight all the embedded songs by just a click. By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song. Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item. It creates a region with the following line preceded by the ID3 Tag "CHAP=" "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds" This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection. Key features:\par}
+{\pard \ql \f0 \sa180 \li720 \fi0 It can work also as Armed Action It creates a region that contains the required Tags without sintaxis errors. It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.\par}
+}
+]]></description>
+        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif">Example: Podcasts_songs.lua in action</link>
+      </metadata>
+      <version name="2.7.3" author="Tormy Van Cool" time="2024-11-01T10:08:06Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c04f346dd3b3383dca4e8d35771735e28cb542ee/Regions/TormyVanCool_Podcasts_Songs.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Podcasts_Updater.lua" type="script" desc="Update Podcasts Songs after have imported and adapted">
+      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Updater.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="Assign Performer and Title to a song's Region">
+      <version name="1.3" author="Tormy Van Cool" time="2024-11-01T10:06:22Z">
+        <changelog><![CDATA[:]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/64f8f0b0a3b1049bec5aa0e1a046262f76d21a48/Regions/TormyVanCool_Songs_Library.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Rendering">
+    <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="Export Stems">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Performs the following actions:\par}
+{\pard \ql \f0 \sa180 \li720 \fi0 Get the cursor position Selects all tracks Insert empty item Glue all items on all tracks Calls the rendering window Unslects all tracks Selects all items for stems Calls the rendering window Once exported, each track has a duration form the begining of the song to the end of the track itself, not to the very end of the song. This saves HD space, making shorter files\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="Tormy Van Cool" time="2024-11-01T10:18:15Z">
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f0af8227f315928f2bcabeccd5641b81024ddae/Rendering/TormyVanCool_ExportStems.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Various">
+    <reapack name="TormyVanCool_ExportData.lua" type="script" desc="Export Data">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Exports project's data related to tracks, into CSV and HTML file IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES! https://forum.cockos.com/archive/index.php/t-209658.html https://forum.cockos.com/showthread.php?t=238421 https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts https://forum.cockos.com/showthread.php?t=259730\par}
+}
+]]></description>
+        <link rel="screenshot" href="https://youtu.be/_VDGMuxJ5xc">English</link>
+        <link rel="screenshot" href="https://youtu.be/4y6Tj2nnHqQ">Italian</link>
+      </metadata>
+      <version name="3.5" author="Tormy Van Cool" time="2024-11-01T09:53:04Z">
+        <changelog><![CDATA[v1.0 (18 may 2021)
++ Initial release]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/df98fba793e07f6ca621ddd3bd43df32bb472e32/Various/TormyVanCool_ExportData.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="Program Runner">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 It creates scripts that are supposed to fire-up an external program, after have selected it\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0.4" author="Tormy Van Cool" time="2024-11-01T09:57:29Z">
+        <changelog><![CDATA[1.0.4 # Correction minor bugs]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f3a41d0e81ed7c7f297c2176bc4ebacbbc6330f/Various/TormyVanCool_Program_Runner.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder">
+      <metadata>
+        <link rel="screenshot" href="https://www.youtube.com/watch?v=J5Ko4uIya9w ITALIAN https://www.youtube.com/watch?v=OqNFQt3hOC8">ENGLISH</link>
+      </metadata>
+      <version name="3.1 FERRETS" author="Tormy Van Cool" time="2024-11-01T09:59:54Z">
+        <changelog><![CDATA[v3.1 FERRETS (19 August 2023) + Close file CLAP, + Close file CLAP]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ce60e459b44e636b3de8cc714780ca6023cc43d6/Various/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TOST_MAIN.lua" type="script" desc="Youtube Downloader">
+      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T21:15:24Z">
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/488b463c9122a93ff35b7fa20a171009c87a6363/Various/TOST_MAIN.lua</source>
+        <source platform="windows" file="AAA/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
+        <source platform="linux" file="AAA/ytdlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
+        <source platform="darwin" file="AAA/ytdlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Video">
+    <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="YOUTUBE Downloader">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Key Features:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab 4 click operation: Start the script, enter the URL, give a title, click on OK\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Import any Video in TimeLine by giving just the URL\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Videos are saved into the project folder under the dedicated /Videos/ folder\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Videos are imported into a new track, having the given name, and at the cursor position\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Auto-update of the binaries "yt-dlp" each time the script is invoked, to ensure top quality at each use\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Compatible with about thousand platforms included: -- YouTUBE -- Vimeo -- Patreons -- and several other ones ...\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Credits: Stefano marcantoni and Talagan - to have helped for MAC implementation, Paolo Saggese - to have helped for Linux implementation\par}
+}
+]]></description>
+      </metadata>
+      <version name="2.4" author="Tormy Van Cool" time="2024-11-01T10:02:27Z">
+        <changelog><![CDATA[2.4 2024-29-10 # Adjusted header style for production]]></changelog>
+        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0bbf740f7ed02184796a8d8b30887f2ece902e25/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
+        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
+        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
+      </version>
+    </reapack>
+  </category>
+</index>
