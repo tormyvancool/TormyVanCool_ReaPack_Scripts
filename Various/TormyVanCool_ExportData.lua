@@ -12,8 +12,7 @@
 -- @screenshot
 --     English https://youtu.be/_VDGMuxJ5xc
 --     Italian https://youtu.be/4y6Tj2nnHqQ
--- @changelog
--- v1.0 (18 may 2021)
+-- @changelog v1.0 (18 may 2021)
 --   + Initial release
 -- v1.0.1 (18 may 2021)
 --   + Added pop-up when files are saved
