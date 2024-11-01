@@ -56,7 +56,8 @@
 --     + yt-dlp_linux
 -- 2.4 2024-29-10
 --     # Adjusted header style for production
--- @about:
+--
+-- @about
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- 
 --    Key Features:
@@ -73,9 +74,11 @@
 --    and several other ones ...
 -- 
 --   [Full list here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
--- @Credits:
+--
+-- @Credits
 --    Stefano marcantoni and Talagan - to have helped for MAC implementation
 --    Paolo Saggese - to have helped for Linux implementation
+--
 -- @provides
 --   [windows] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 --   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
