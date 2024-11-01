@@ -95,7 +95,7 @@
                 </description>
             </metadata>
             <version name="2.7.3" author="Tormy Van Cool" time="2021-07-21T18:42:33Z">
-                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Songs.lua</source>
+                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c04f346dd3b3383dca4e8d35771735e28cb542ee/Regions/TormyVanCool_Podcasts_Songs.lua</source>
             </version>
         </reapack>
         <reapack name="TormyVanCool_Podcasts_Auto_GetMetaData.lua" type="script" desc="PODCASTS AUTO GET METADATA: Automatically retrieve the metadata from the Source File and it adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
