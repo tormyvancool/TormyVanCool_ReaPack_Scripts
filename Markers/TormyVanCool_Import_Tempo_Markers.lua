@@ -2,7 +2,6 @@
 -- @about Imports Tempo Markers     https://gist.github.com/obikag/6118422
 -- @author Tormy Van Cool
 -- @version 1.0
--- @screenshot
 -- @credits: obikag https://gist.github.com/obikag
 -- @changelog:
 -- v1.0 (27 july 2022)
