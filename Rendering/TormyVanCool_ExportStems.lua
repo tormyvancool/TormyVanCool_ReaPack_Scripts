@@ -1,7 +1,8 @@
--- @Description: Insert empty item on all tracks at the position of the edit cursor
--- @Author: Tormy Van Cool
--- @Version: 1.0
--- @About: 
+-- @Description Export Stems
+-- @about Insert empty item on all tracks at the position of the edit cursor
+-- @Author Tormy Van Cool
+-- @Version 1.0
+-- @About 
 --   Performs the following actions:
 --   > Get the cursor position
 --   > Selects all tracks

@@ -1,4 +1,5 @@
--- @description CSV containing Time Markers
+-- @description Tempo Markers to CSV
+-- @about CSV containing Time Markers
 -- @author Tormy Van Cool
 -- @version 1.3
 -- @changelog:
