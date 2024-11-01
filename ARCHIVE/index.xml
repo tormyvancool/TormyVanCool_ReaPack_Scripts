@@ -237,8 +237,8 @@
             </version>
         </reapack>
     </category>
-    <category name="Various">
-        <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
+    <category name="Video">
+       <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
             <metadata>
                 <description>
                     <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
@@ -246,7 +246,7 @@
                 </description>
             </metadata>
             <version name="2.4" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ce60e459b44e636b3de8cc714780ca6023cc43d6/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/af8bf7d96078d098c71816643a610fd47c2cc041/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
@@ -307,7 +307,9 @@
                 ]]>
                 </changelog>
             </version>
-        </reapack>
+        </reapack>    
+    </category>
+    <category name="Various">
         <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: PROGRAM RUNNER. It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
             <metadata>
                 <description>
