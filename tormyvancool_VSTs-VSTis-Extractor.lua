@@ -5,7 +5,8 @@
 --  English https://www.youtube.com/watch?v=J5Ko4uIya9w
 --  Italian https://www.youtube.com/watch?v=OqNFQt3hOC8
 -- @about Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder
--- @changelog v1.0 (30 May 2021)
+-- @changelog:
+-- v1.0 (30 May 2021)
 --   + Initial release
 -- v1.1 (31 May 2021)
 --   + Save status of HTML File
