@@ -1,7 +1,7 @@
 -- @description YOUTUBE Downloader
 -- @about Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- @author Tormy Van Cool
--- @version 2.4
+-- @version 2.5
 -- @Changelog:
 -- 2.4 2024-29-10 # Adjusted header style for production
 -- 1.0 2024-26-10
@@ -96,7 +96,7 @@ local quote = '"'
 local clock = os.clock
 local debug = false
 local zzz = 1
-local ver = 2.4
+local ver = 2.5
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
