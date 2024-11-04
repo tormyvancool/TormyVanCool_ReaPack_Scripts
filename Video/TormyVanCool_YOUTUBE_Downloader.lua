@@ -56,6 +56,9 @@
 --     + yt-dlp_linux
 -- 2.4 2024-29-10
 --     # Adjusted header style for production
+-- 2.5 2024-11-04
+--     - Various 
+--     + VideoPath = 'Video'
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- 
@@ -102,7 +105,8 @@ local version = reaper.GetAppVersion()
 local pj_name_ = reaper.GetProjectName(0, "")
 local ProjDir = reaper.GetProjectPathEx(0)
 local ResourcePATH = reaper.GetResourcePath()
-local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' -- Get FullPath to yt-dlp
+local VideoPath = 'Video'
+local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' -- Get FullPath to yt-dlp
 
 ---------------------------------------------
 -- FUNCTIONS
@@ -120,7 +124,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Variou
         local a = {}
         local MainPath = ''
         if OS == "Win32" or OS == "Win64" then
-          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpWin .. '"'
+          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' .. dlpWin .. '"'
           Start = 'start "UPDATE & DOWNLOAD" '
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
@@ -132,7 +136,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Variou
          -- MainPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
          -- Start = '"'
          -- os.execute('chmod +x "' ..  MainPath .. '"')
-          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
+          MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' .. dlpLnx .. '"'
           Start = ''
           os.execute('chmod +x ' ..  MainPath)
         end
