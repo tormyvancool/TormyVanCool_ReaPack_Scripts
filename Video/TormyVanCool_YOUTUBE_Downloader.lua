@@ -59,6 +59,8 @@
 -- 2.5 2024-11-04
 --     - Various 
 --     + VideoPath = 'Video'
+-- 2.6 2024-11-05
+--     + check for temrination of temporary file upfrotn import the video
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- 
@@ -94,9 +96,9 @@ local pipe = "|"
 local colon = ":"
 local quote = '"' 
 local clock = os.clock
-local debug = false
+local debug = true
 local zzz = 1
-local ver = 2.5
+local ver = 2.6
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -225,9 +227,11 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       if FileName ~= "" 
         then
           if string.find(FileName, ".mp4") == nil then
+            FileTemp = FileName .. '.f137.mp4.part'
             FileName = FileName .. ".mp4"
           end
           argument = ' -o "'  .. FileName .. '"'
+          FileTemp = FileName:sub(1, -5) .. '.f137.mp4.part'
       end
       
       -- ARGS
@@ -244,10 +248,11 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
 ---------------------------------------------
 -- UPDATE AND IMPORT VIDEO
 ---------------------------------------------
+
       if url  ~= "" then
           os.execute(Video)
           if debug == true then 
-            reaper.ShowConsoleMsg("FileName: " .. FileName .. "\n")
+            reaper.ShowConsoleMsg("FileName: " .. FileTemp .. "\n")
             reaper.ShowConsoleMsg("Destination: " .. Destination .. "\n")
           end
           
@@ -260,12 +265,20 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
               return size
           end
           
+          -- GET FILE TEMP
+          function get_file_temp(FileTemp)
+              local file = io.open(FileTemp, "rb")
+              if not file then return 0 end
+              local size = file:seek("end")
+              file:close()
+              return size
+          end
+          
           -- WAIT UNTIL THE OUTPUT FILE SIZE IS STABLE (NOT CHANGING)
           local stable = false
           local last_size = get_file_size(Destination)
           while not stable do
               
-              sleep(zzz)
               local new_size = get_file_size(Destination)
               
               if new_size > 0 and new_size == last_size then
@@ -274,7 +287,11 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
                   last_size = new_size
               end
           end
-      
-          reaper.InsertMedia(Destination, 1)
+         if not io.open(FileTemp, "rb") then
+            reaper.InsertMedia(Destination, 1)
+         else 
+            reaper.ShowConsoleMsg("Network Error")
+         end
       end
+
 ::done::
