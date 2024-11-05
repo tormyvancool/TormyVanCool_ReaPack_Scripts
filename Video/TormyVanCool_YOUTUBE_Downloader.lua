@@ -1,7 +1,7 @@
 -- @description YOUTUBE Downloader
 -- @about Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- @author Tormy Van Cool
--- @version 2.5
+-- @version 2.7
 -- @Changelog:
 -- 2.4 2024-29-10 # Adjusted header style for production
 -- 1.0 2024-26-10
@@ -30,7 +30,7 @@
 --     - 'start "" "' from all O.S.s
 --     + 'start "UPDATE & DOWNLOAD" "' Win
 -- 1.8 2024-27-10
---     - Start = ''
+--     - GGGGG = ''
 --     - 1
 --     + Start = '"'
 --     + 2
@@ -61,6 +61,8 @@
 --     + VideoPath = 'Video'
 -- 2.6 2024-11-05
 --     + check for temrination of temporary file upfrotn import the video
+-- 2.7 2024-11-05
+--     - Check Routine
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- 
@@ -97,8 +99,7 @@ local colon = ":"
 local quote = '"' 
 local clock = os.clock
 local debug = false
-local zzz = 1
-local ver = 2.6
+local ver = 2.7
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -127,7 +128,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
         local MainPath = ''
         if OS == "Win32" or OS == "Win64" then
           MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' .. dlpWin .. '"'
-          Start = 'start "UPDATE & DOWNLOAD" '
+          Start = 'start /b /wait "UPDATE & DOWNLOAD" '
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
           MainPath  = './yt-dlp_macos'
@@ -163,7 +164,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
         return url:match(pattern) ~= nil
       end
 
-      local minVersion = '7.26'
+      local minVersion = '7.27'
       if minVersion > version then
         reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
         goto done
@@ -236,7 +237,8 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
       -- ARGS
       args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
-      
+      Update = Start .. MainPath .. upArgs
+
       -- TRIGGERS
       Video = Start .. MainPath .. args
       Destination =  ProjDir ..'/Videos/' .. FileName
@@ -244,11 +246,14 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
 
 --cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
-
+reaper.ShowConsoleMsg(Update)
+os.execute(Update)
+os.execute(Video)
+reaper.InsertMedia(Destination, 1)
 ---------------------------------------------
 -- UPDATE AND IMPORT VIDEO
 ---------------------------------------------
-
+--[[
       if url  ~= "" then
           os.execute(Video)
           if debug == true then 
@@ -277,7 +282,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
           -- WAIT UNTIL THE OUTPUT FILE SIZE IS STABLE (NOT CHANGING)
           local stable = false
           local last_size = get_file_size(Destination)
-          while not stable do
+          while not stable or io.open(FileTemp, "rb")  do
               
               local new_size = get_file_size(Destination)
               
@@ -287,11 +292,11 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
                   last_size = new_size
               end
           end
-         if not io.open(FileTemp, "rb") then
+        -- if not io.open(FileTemp, "rb") then
             reaper.InsertMedia(Destination, 1)
-         else 
+        -- else 
             reaper.ShowConsoleMsg("Network Error")
-         end
+        -- end
       end
-
+]]--
 ::done::
