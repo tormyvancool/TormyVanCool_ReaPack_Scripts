@@ -247,19 +247,20 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
 
 --cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
-os.execute(Update)
-os.execute(Video)
-reaper.InsertMedia(Destination, 1)
+
 ---------------------------------------------
 -- UPDATE AND IMPORT VIDEO
 ---------------------------------------------
---[[
+
       if url  ~= "" then
-          os.execute(Video)
+
           if debug == true then 
             reaper.ShowConsoleMsg("FileName: " .. FileTemp .. "\n")
             reaper.ShowConsoleMsg("Destination: " .. Destination .. "\n")
           end
+
+          os.execute(Update)
+          os.execute(Video)
           
           -- GET FILE SIZE
           function get_file_size(filename)
@@ -279,6 +280,7 @@ reaper.InsertMedia(Destination, 1)
               return size
           end
           
+          --[[
           -- WAIT UNTIL THE OUTPUT FILE SIZE IS STABLE (NOT CHANGING)
           local stable = false
           local last_size = get_file_size(Destination)
@@ -292,11 +294,9 @@ reaper.InsertMedia(Destination, 1)
                   last_size = new_size
               end
           end
-        -- if not io.open(FileTemp, "rb") then
-            reaper.InsertMedia(Destination, 1)
-        -- else 
-            reaper.ShowConsoleMsg("Network Error")
-        -- end
+          ]]--
+
+          reaper.InsertMedia(Destination, 1)
       end
-]]--
+
 ::done::
