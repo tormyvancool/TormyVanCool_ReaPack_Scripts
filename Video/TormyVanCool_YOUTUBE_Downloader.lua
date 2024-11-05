@@ -247,7 +247,6 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
 
 --cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
-reaper.ShowConsoleMsg(Update)
 os.execute(Update)
 os.execute(Video)
 reaper.InsertMedia(Destination, 1)
