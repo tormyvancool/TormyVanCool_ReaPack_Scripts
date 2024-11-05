@@ -237,9 +237,10 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
       -- ARGS
       args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
-      Update = Start .. MainPath .. upArgs
+      upArgs = " --update-to master"
 
       -- TRIGGERS
+      Update = Start .. MainPath .. upArgs
       Video = Start .. MainPath .. args
       Destination =  ProjDir ..'/Videos/' .. FileName
       Destination = Destination:gsub('\\','/')
