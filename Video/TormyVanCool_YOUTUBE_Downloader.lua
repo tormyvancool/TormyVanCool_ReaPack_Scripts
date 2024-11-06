@@ -67,6 +67,7 @@
 --     + Removes leftovers
 --     + URLs as filename: forbidden
 --     + Limitation to only alphanumerical characters
+--     + Force overwrite
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
@@ -253,7 +254,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       end
       
       -- ARGS
-      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument
+      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .." --force-overwrite"
       upArgs = " --update-to master"
 
       -- TRIGGERS
