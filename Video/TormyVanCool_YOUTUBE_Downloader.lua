@@ -1,8 +1,7 @@
 -- @description YOUTUBE Downloader
 -- @author Tormy Van Cool
--- @version 2.8
+-- @version 2.9
 -- @Changelog:
--- 2.4 2024-29-10 # Adjusted header style for production
 -- 1.0 2024-26-10
 --     # First Release
 -- 1.1 2024-26-10
@@ -67,7 +66,8 @@
 --     + Removes leftovers
 --     + URLs as filename: forbidden
 --     + Limitation to only alphanumerical characters
---     + Force overwrite
+-- 2.9 2024-11-06
+--     + Check IfFileExists: Overwrite, Newname, Exit
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
@@ -106,7 +106,7 @@ local slash = '\\'
 local backslash = '/'
 local clock = os.clock
 local debug = false
-local ver = 2.8
+local ver = 2.9
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -154,6 +154,15 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
           OpSys = 3
         end
         return MainPath
+      end
+      
+      -- GET FILE SIZE
+      function get_file_size(filename)
+          local file = io.open(filename, "rb")
+          if not file then return 0 end
+          local size = file:seek("end")
+          file:close()
+          return size
       end
       
       local MainPath = getOS()
@@ -211,6 +220,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       
       
       -- GET FILENAME
+      ::getfilename::
       repeat
       retval_1, FileName=reaper.GetUserInputs("DOWNLOAD VIDEO", 1, "Insert FILE NAME,extrawidth=400", InputVariable)
       FileName = GetRid(GetRid(GetRid(GetRid(GetRid(FileName, pipe), colon), quote), slash), backslash) -- No reserved characters can be written
@@ -237,7 +247,6 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
         t[1]=""
       end
       until( t[1] ~= "")
-      reaper.MB("STARTED THE FOLLOWING PROCESSES v" .. ver .. ":\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
 
 ---------------------------------------------
 -- ARGS & TRIGGERS
@@ -254,7 +263,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       end
       
       -- ARGS
-      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .." --force-overwrite"
+      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
       upArgs = " --update-to master"
 
       -- TRIGGERS
@@ -277,6 +286,21 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
             reaper.ShowConsoleMsg("Destination: " .. Destination .. "\n")
           end
           
+          -- CHECK IF FILE EXISTS
+          local checkfile = reaper.file_exists(Destination)
+          local answer = nil
+          if checkfile == true then
+            answer = reaper.MB("A file with the same filename exists\nWould you want to overwrite it?\n\nYES => Go on\nNO => Rewrite the filname\nCANCEL => Exit",'WARNING: FILENAME EXISTS',3)
+          end
+          if answer == 7 then 
+            goto getfilename 
+          elseif answer == 2 then
+            goto done
+          end
+          
+          reaper.MB("STARTED THE FOLLOWING PROCESSES v" .. ver .. ":\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
+          
+          -- DIFFERENTIATE EXECUTION BASED ON O.S.
           if OpSys == 2 then
             os.execute(Update)
             os.execute(Video)
@@ -284,18 +308,9 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
             os.execute(Start .. MainPath .. upArgs .. args)
           end
           
-          -- GET FILE SIZE
-          function get_file_size(filename)
-              local file = io.open(filename, "rb")
-              if not file then return 0 end
-              local size = file:seek("end")
-              file:close()
-              return size
-          end
-          
           
           ---------------------------------------------
-          -- NETWORL DISRUPTION
+          -- NETWORK DISRUPTION
           ---------------------------------------------
           
           -- GET RESIDUAL FILES
