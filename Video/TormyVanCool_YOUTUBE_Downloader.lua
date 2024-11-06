@@ -1,7 +1,7 @@
 -- @description YOUTUBE Downloader
 -- @about Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- @author Tormy Van Cool
--- @version 2.7
+-- @version 2.8
 -- @Changelog:
 -- 2.4 2024-29-10 # Adjusted header style for production
 -- 1.0 2024-26-10
@@ -63,6 +63,11 @@
 --     + check for temrination of temporary file upfrotn import the video
 -- 2.7 2024-11-05
 --     - Check Routine
+-- 2.8 2024-11-06
+--     + Detects Nework Interruptions during download
+--     + Removes leftovers
+--     + URLs as filename: forbidden
+--     + Limitation to only alphanumerical characters
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- 
@@ -96,10 +101,12 @@ reaper.ClearConsole()
 local LF = "\n"
 local pipe = "|"
 local colon = ":"
-local quote = '"' 
+local quote = '"'
+local slash = '\\'
+local backslash = '/'
 local clock = os.clock
 local debug = false
-local ver = 2.7
+local ver = 2.8
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -129,11 +136,13 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
         if OS == "Win32" or OS == "Win64" then
           MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' .. dlpWin .. '"'
           Start = 'start /b /wait "UPDATE & DOWNLOAD" '
+          OpSys = 1
         end
         if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
           MainPath  = './yt-dlp_macos'
           Start = 'cd "' .. CallPath .. '" && chmod +x ' .. dlpMac .. ' && '
           os.execute('chmod +x "' ..  MainPath .. '"')
+          OpSys = 2
         end
         if OS == "Other" then
          -- MainPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/Various/yt-dlp/' .. dlpLnx .. '"'
@@ -142,6 +151,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
           MainPath = '"' .. ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' .. dlpLnx .. '"'
           Start = ''
           os.execute('chmod +x ' ..  MainPath)
+          OpSys = 3
         end
         return MainPath
       end
@@ -203,7 +213,9 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       -- GET FILENAME
       repeat
       retval_1, FileName=reaper.GetUserInputs("DOWNLOAD VIDEO", 1, "Insert FILE NAME,extrawidth=400", InputVariable)
-      FileName = GetRid(GetRid(GetRid(FileName, pipe), colon), quote) -- No reserved characters can be written
+      FileName = GetRid(GetRid(GetRid(GetRid(GetRid(FileName, pipe), colon), quote), slash), backslash) -- No reserved characters can be written
+      FileName = FileName:gsub("http", "")
+
       if retval_1==false then return end
       if retval_1 then
         t = {}
@@ -213,13 +225,19 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
             t[i] = line
         end
       end
+      
+      -- NO EMPTY TITLE ADMITTED
       if t[1]== "" then
         reaper.MB("VIDEO TITLE is MANDATORY","ERROR",0,0)
       end
+      
+      -- NO URLS AND NOT ALPHANUMERICAL CHARACTERS ADMITTED
+      if t[1]:match("[^%w%s]") then
+        reaper.MB("ONLY ALPHANUMERIC CHARACTERS ADMITTED","ERROR",0,0)
+        t[1]=""
+      end
       until( t[1] ~= "")
       reaper.MB("STARTED THE FOLLOWING PROCESSES v" .. ver .. ":\n\n1. Update YT-DLP\n2. Downlaod the video: " ..url .. "\n3. Naming the video: " .. FileName .. ".mp4 \n4. Saving the video into " .. ProjDir .. "/Videos/\n5. Import the video into the project\n\nHEY it will take a little while. DON'T PANIC!\n\nCLICK ON \"OK\" TO CONTINUE", "PROCESS STARTED. PROCESSES LISTED HERE BELOW",0)
-
---Pics = "curl -X GET " .. url .. ' --output "' .. Destination ..'"'
 
 ---------------------------------------------
 -- ARGS & TRIGGERS
@@ -258,9 +276,13 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
             reaper.ShowConsoleMsg("FileName: " .. FileTemp .. "\n")
             reaper.ShowConsoleMsg("Destination: " .. Destination .. "\n")
           end
-
-          os.execute(Update)
-          os.execute(Video)
+          
+          if OpSys == 2 then
+            os.execute(Update)
+            os.execute(Video)
+          elseif OpSys == 1 or OpSys == 3 then
+            os.execute(Start .. MainPath .. upArgs .. args)
+          end
           
           -- GET FILE SIZE
           function get_file_size(filename)
@@ -271,32 +293,58 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
               return size
           end
           
-          -- GET FILE TEMP
-          function get_file_temp(FileTemp)
-              local file = io.open(FileTemp, "rb")
-              if not file then return 0 end
-              local size = file:seek("end")
-              file:close()
-              return size
-          end
           
-          --[[
-          -- WAIT UNTIL THE OUTPUT FILE SIZE IS STABLE (NOT CHANGING)
-          local stable = false
-          local last_size = get_file_size(Destination)
-          while not stable or io.open(FileTemp, "rb")  do
-              
-              local new_size = get_file_size(Destination)
-              
-              if new_size > 0 and new_size == last_size then
-                  stable = true
-              else
-                  last_size = new_size
-              end
+          ---------------------------------------------
+          -- NETWORL DISRUPTION
+          ---------------------------------------------
+          
+          -- GET RESIDUAL FILES
+          local ResFiles
+          if OpSys == 2 or OpSys == 3 then
+              ResFiles = "ls -a " .. ProjDir .."/Videos/*.mp4.part"
+              ResDel = 'rm "' .. ProjDir .. '\\Videos\\*.mp4.part"'
+          elseif OpSys == 1 then
+              ResFiles = 'dir /b "' .. ProjDir .. '\\Videos\\*.mp4.part"'
+              ResDel = 'del "' .. ProjDir .. '\\Videos\\*.mp4.part"' 
           end
-          ]]--
+  
+          local handle = io.popen(ResFiles)
+          
+          if handle == nil then
+              return
+          end
+          local stdout = handle:read("*all")
+          success = handle:close()
+          
+          -- REMOVE RESIDUAL FILES
+          if success then
+              if debug == true then reaper.ShowConsoleMsg('output is: \n' .. tostring(stdout) .. "\n") end
+              local retQuery = reaper.MB("Due a Network Error, the video was not properly downloaded.\nBY CLICKING OK THESE LEFTOVERS WILL BE REMOVED\n\nLeftovers:\n\n" .. tostring(stdout), "NETWORK ERROR", 0)
+              if retQuery == 1 then
+                handle = io.popen(ResDel)
+                success = handle:close()
+              end
+          else
+              if debug == true then reaper.ShowConsoleMsg('error when executing command' .. ResFiles) end
+              reaper.InsertMedia(Destination, 1)
+          end
 
-          reaper.InsertMedia(Destination, 1)
+          if debug == true then 
+            local stable = false
+            local last_size = get_file_size(Destination)
+            while not stable or io.open(FileTemp, "rb")  do
+                
+                local new_size = get_file_size(Destination)
+                
+                if new_size > 0 and new_size == last_size then
+                    stable = true
+                else
+                    last_size = new_size
+                end
+            end
+          end
+
+
       end
 
 ::done::
