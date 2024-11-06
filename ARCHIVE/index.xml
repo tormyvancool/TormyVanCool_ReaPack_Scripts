@@ -241,12 +241,80 @@
        <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
             <metadata>
                 <description>
-                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
-                    }]]>
+                    <![CDATA[{\rtf1\ansi\deff3\adeflang1025
+                    {\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset0 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset0 Liberation Sans{\*\falt Arial};}{\f5\fmodern\fprq1\fcharset0 Liberation Mono{\*\falt Courier New};}{\f6\fnil\fprq2\fcharset0 Source Han Sans CN;}{\f7\fmodern\fprq1\fcharset0 Noto Sans Mono CJK SC;}{\f8\fswiss\fprq0\fcharset128 Noto Sans Devanagari;}{\f9\fnil\fprq2\fcharset0 Noto Sans Devanagari;}}
+                    {\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}
+                    {\stylesheet{\s0\snext0\rtlch\af9\afs24\alang1081 \ltrch\lang1033\langfe2052\hich\af3\loch\nowidctlpar\hyphpar0\ltrpar\cf0\f3\fs24\lang1033\dbch\af10\langfe2052 Normal;}
+                    {\s15\sbasedon0\snext16\rtlch\af9\afs28 \ltrch\hich\af4\loch\sb240\sa120\keepn\f4\fs28\dbch\af6 Heading;}
+                    {\s16\sbasedon0\snext16\loch\sl276\slmult1\sb0\sa140 Body Text;}
+                    {\s17\sbasedon16\snext17\rtlch\af8 \ltrch\loch\sl276\slmult1\sb0\sa140 List;}
+                    {\s18\sbasedon0\snext18\rtlch\af8\afs24\ai \ltrch\loch\sb120\sa120\noline\fs24\i Caption;}
+                    {\s19\sbasedon0\snext19\rtlch\af8 \ltrch\loch\noline Index;}
+                    {\s20\sbasedon0\snext20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7 Preformatted Text;}
+                    }{\*\generator LibreOffice/7.6.7.2$Linux_X86_64 LibreOffice_project/dd47e4b30cb7dab30588d6c79c651f218165e3c5}{\info{\creatim\yr0\mo0\dy0\hr0\min0}{\revtim\yr0\mo0\dy0\hr0\min0}{\printim\yr0\mo0\dy0\hr0\min0}}{\*\userprops}\deftab709
+                    \hyphauto1\viewscale100\formshade\nobrkwrptbl\paperh15840\paperw12240\margl1134\margr1134\margt1134\margb1134\sectd\sbknone\sftnnar\saftnnrlc\sectunlocked1\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+                    {\*\ftnsep\chftnsep}\pgndec\pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Key Features:\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - 4 click operation: Start the script, enter the URL, give a title, click on OK\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Import any Video in TimeLine by giving just the URL\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Videos are saved into the project folder under the dedicated /Videos/ folder\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Videos are imported into a new track, having the given name, and at the cursor position\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Auto-update of the binaries "yt-dlp" each time the script is invoked, to ensure top quality at each use\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Compatible with about thousand platforms included:\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - YouTUBE\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Vimeo\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Patreons\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    and several other ones ...\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    [Full list here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    # Credits\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Stefano marcantoni and Talagan - to have helped for MAC implementation\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Paolo Saggese - to have helped for Linux implementation}
+                    \par }]]>
                 </description>
             </metadata>
             <version name="2.8" author="Tormy Van Cool" time="2024-11-06T10:45:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4780fa66303b1ed64c97528eddaa1c4df97fbc66/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1b3f60047ad4a69df0d8384915c758e16812448b/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
