@@ -1,5 +1,4 @@
 -- @description YOUTUBE Downloader
--- @about Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 -- @author Tormy Van Cool
 -- @version 2.8
 -- @Changelog:
@@ -70,7 +69,7 @@
 --     + Limitation to only alphanumerical characters
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
--- 
+--  
 --    Key Features:
 -- 
 --    - 4 click operation: Start the script, enter the URL, give a title, click on OK

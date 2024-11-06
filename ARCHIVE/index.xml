@@ -245,11 +245,11 @@
                     }]]>
                 </description>
             </metadata>
-            <version name="2.4" author="Tormy Van Cool" time="2024-10-30T12:19:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/af8bf7d96078d098c71816643a610fd47c2cc041/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+            <version name="2.8" author="Tormy Van Cool" time="2024-11-06T10:45:35Z">
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4780fa66303b1ed64c97528eddaa1c4df97fbc66/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-                <source platform="linux" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-                <source platform="darwin" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
+                <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
+                <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
                 <changelog>
                 <![CDATA[
                     1.0 2024-26-10
@@ -328,6 +328,8 @@
                 <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f3a41d0e81ed7c7f297c2176bc4ebacbbc6330f/Various/TormyVanCool_Program_Runner.lua</source>
             </version>
         </reapack>
+    </category>
+    <category name="Project Properties">
         <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats and TEMPO MARKERS in All formats included TXT">
             <metadata>
                 <description>
@@ -345,7 +347,7 @@
                 </description>
             </metadata>
             <version name="3.5" author="Tormy Van Cool" time="2024-02-25T21:23:57Z">
-                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/61f24f815677bd3abe29d917a708c162e659355d/Various/TormyVanCool_ExportData.lua</source>
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/509d83a22cc8de33d25eb07c0cc5f6d477dcede0/Project%20Properties/TormyVanCool_ExportData.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (18 may 2021)
@@ -467,6 +469,8 @@
                 </changelog>
             </version>
         </reapack>
+    </category>
+    <category name="FX">
         <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="UTILITY: EXPORTS VSTs/VSTis/AUs/CLAPs data in CSV and HTML formats in the main REAPER's Folder">
             <metadata>
                 <description>
@@ -477,7 +481,7 @@
                 </description>
             </metadata>
             <version name="2.1" author="Tormy Van Cool" time="2021-06-01T19:08:09Z">
-                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/ce60e459b44e636b3de8cc714780ca6023cc43d6/Various/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e4f8c845ae55608de3a3fc59d0dcb6dbcb8d7fb7/FX/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
                 <changelog>
                 <![CDATA[
                 v1.0 (30 may 2021)
