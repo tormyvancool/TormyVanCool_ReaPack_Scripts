@@ -89,9 +89,14 @@
 --    Stefano marcantoni and Talagan - to have helped for MAC implementation
 --    Paolo Saggese - to have helped for Linux implementation
 -- @provides
---   [windows] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
+--   [win64] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 --   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
---   [darwin] yt-dlp/yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos
+--   [darwin64] yt-dlp/yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos
+--   [darwin-arm64] yt-dlp/yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos
+--   [win64]        .
+--   [linux]        .
+--   [darwin64]     .
+--   [darwin-arm64] .
 
 reaper.ClearConsole()
 
@@ -138,7 +143,7 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
           Start = 'start /b /wait "UPDATE & DOWNLOAD" '
           OpSys = 1
         end
-        if OS == "OSX32" or OS == "OSX64" or OS == "macOS-arm64" then
+        if OS == "OSX64" or OS == "macOS-arm64" then
           MainPath  = './yt-dlp_macos'
           Start = 'cd "' .. CallPath .. '" && chmod +x ' .. dlpMac .. ' && '
           os.execute('chmod +x "' ..  MainPath .. '"')
