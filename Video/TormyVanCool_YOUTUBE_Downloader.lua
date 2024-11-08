@@ -68,6 +68,7 @@
 --     + Limitation to only alphanumerical characters
 -- 2.9 2024-11-06
 --     + Check IfFileExists: Overwrite, Newname, Exit
+--     + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
