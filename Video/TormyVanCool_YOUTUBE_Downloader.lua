@@ -278,8 +278,6 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
       Destination = Destination:gsub('\\','/')
       
 
---cd ~/Library/"Application Support"/REAPER/Scripts/Tormy\ Van\ Cool\ ReaPack\ Scripts/Various/yt-dlp/ && ./yt-dlp_macos
-
 ---------------------------------------------
 -- UPDATE AND IMPORT VIDEO
 ---------------------------------------------
@@ -318,35 +316,24 @@ local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. V
           -- NETWORK DISRUPTION
           ---------------------------------------------
           
-          -- GET RESIDUAL FILES
-          local ResFiles
-          if OpSys == 2 or OpSys == 3 then
-              ResFiles = "ls -a " .. ProjDir .."/Videos/*.mp4.part"
-              ResDel = 'rm "' .. ProjDir .. '\\Videos\\*.mp4.part"'
-          elseif OpSys == 1 then
-              ResFiles = 'dir /b "' .. ProjDir .. '\\Videos\\*.mp4.part"'
-              ResDel = 'del "' .. ProjDir .. '\\Videos\\*.mp4.part"' 
-          end
-  
-          local handle = io.popen(ResFiles)
-          
-          if handle == nil then
-              return
-          end
-          local stdout = handle:read("*all")
-          success = handle:close()
-          
-          -- REMOVE RESIDUAL FILES
-          if success then
-              if debug == true then reaper.ShowConsoleMsg('output is: \n' .. tostring(stdout) .. "\n") end
-              local retQuery = reaper.MB("Due a Network Error, the video was not properly downloaded.\nBY CLICKING OK THESE LEFTOVERS WILL BE REMOVED\n\nLeftovers:\n\n" .. tostring(stdout), "NETWORK ERROR", 0)
-              if retQuery == 1 then
-                handle = io.popen(ResDel)
-                success = handle:close()
-              end
+          -- GET RESIDUAL FILES AND REMOVE THEM
+          local ResFiles ="" 
+          a=0
+          test = ""
+          repeat
+            if test:find(".mp4.part") then
+              returned = test
+            end
+            test = reaper.EnumerateFiles( ProjDir .. "/Videos", a)
+            a = a + 1
+          until(test == nil)
+          if returned ~= nil then
+            local retQuery = reaper.MB("Due a Network Error, the video was not properly downloaded.\nBY CLICKING OK THESE LEFTOVERS WILL BE REMOVED\n\nLeftovers:\n\n" .. returned, "NETWORK ERROR", 0)
+            if retQuery == 1 then
+            os.remove(ProjDir .. "/Videos/" .. returned)
+            end
           else
-              if debug == true then reaper.ShowConsoleMsg('error when executing command' .. ResFiles) end
-              reaper.InsertMedia(Destination, 1)
+            reaper.InsertMedia(Destination, 1)
           end
 
           if debug == true then 
