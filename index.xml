@@ -306,10 +306,13 @@
                     # Credits\u13\'0d}
                     \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
                         }{\loch
-                    Stefano marcantoni and Talagan - to have helped for MAC implementation\u13\'0d}
+                    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation\u13\'0d}
                     \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
                         }{\loch
-                    Paolo Saggese - to have helped for Linux implementation}
+                    Paolo Saggese PMS67 - to have helped for Linux implementation}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    cfillion - for his support during general debug}
                     \par }]]>
                 </description>
             </metadata>
