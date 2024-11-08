@@ -89,6 +89,7 @@
 --    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation
 --    Paolo Saggese PMS67 - to have helped for Linux implementation
 --    cfillion - for his support during general debug
+--    smandrap - for his key suggestoin to that helped to improve the reliability. Topic https://forum.cockos.com/showthread.php?t=96087
 -- @provides
 --   [win64] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 --   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
