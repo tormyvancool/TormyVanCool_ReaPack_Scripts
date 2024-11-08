@@ -128,7 +128,23 @@ _,ScriptName = reaper.get_action_context()
 local ScriptPath = ScriptName:match('^.+[\\/]') -- Script Path
 local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
 
-
+      -- CHECK IF YT-DLP FOLDER IS CREATED BY REAPACK AS EXPECTED
+      a=0
+      CheckForDir = ""
+      repeat
+        if CheckForDir == "yt-dlp" then
+          returnedDir = CheckForDir
+        end
+        CheckForDir = reaper.EnumerateSubdirectories( ScriptPath, a)
+        a = a + 1
+      until(CheckForDir == nil)
+      if returnedDir == nil then
+        local retQuery = reaper.MB("This script must be isntalled from a Reapack Repository.\n\nClick \"OK\", remove it and install it as it should!\n", "INSTALLATION ERROR", 0)
+        if retQuery == 1 then
+          goto done 
+        end
+      end
+      
 ---------------------------------------------
 -- FUNCTIONS
 ---------------------------------------------
