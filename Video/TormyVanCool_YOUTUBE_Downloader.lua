@@ -122,7 +122,10 @@ local pj_name_ = reaper.GetProjectName(0, "")
 local ProjDir = reaper.GetProjectPathEx(0)
 local ResourcePATH = reaper.GetResourcePath()
 local VideoPath = 'Video'
-local CallPath = ResourcePATH .. '/Scripts/Tormy Van Cool ReaPack Scripts/' .. VideoPath .. '/yt-dlp/' -- Get FullPath to yt-dlp
+_,ScriptName = reaper.get_action_context()
+local ScriptPath = ScriptName:match('^.+[\\/]') -- Script Path
+local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
+
 
 ---------------------------------------------
 -- FUNCTIONS
