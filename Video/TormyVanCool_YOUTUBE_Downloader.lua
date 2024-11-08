@@ -86,8 +86,9 @@
 -- 
 --   [Full list here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
 -- @Credits:
---    Stefano marcantoni and Talagan - to have helped for MAC implementation
---    Paolo Saggese - to have helped for Linux implementation
+--    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation
+--    Paolo Saggese PMS67 - to have helped for Linux implementation
+--    cfillion - for his support during general debug
 -- @provides
 --   [win64] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 --   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
