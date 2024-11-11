@@ -306,15 +306,21 @@
                     # Credits\u13\'0d}
                     \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
                         }{\loch
-                    Stefano marcantoni and Talagan - to have helped for MAC implementation\u13\'0d}
+                    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation\u13\'0d}
                     \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
                         }{\loch
-                    Paolo Saggese - to have helped for Linux implementation}
+                    Paolo Saggese PMS67 - to have helped for Linux implementation}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    cfillion - for his support during general debug}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    smandrap - for his key suggestoin to that helped to improve the reliability. Topic https://forum.cockos.com/showthread.php?t=96087
                     \par }]]>
                 </description>
             </metadata>
-            <version name="2.9" author="Tormy Van Cool" time="2024-11-06T19:12:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/909bb4714188433ece48a9842241c527c15e5703/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+            <version name="3.0" author="Tormy Van Cool" time="2024-11-11T14:30:35Z">
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/57194db507af915cb396ddf985bf71ae27a3a5e0/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
@@ -362,7 +368,7 @@
                         + 1
                         + Apple Trial
                     2.3 2024-27-10
-                        #Linux execution correction
+                        # Linux execution correction
                         + Credits
                         # 2.1 and 2.2 just trials due issues with Linux and Apple
                     2.31 2024-28-10
@@ -372,6 +378,23 @@
                         + yt-dlp_linux
                     2.4 2024-29-10
                         # Adjusted header style for production
+                   2.5 2024-11-04
+                       - Various 
+                       + VideoPath = 'Video'
+                   2.6 2024-11-05
+                       + check for temrination of temporary file upfrotn import the video
+                   2.7 2024-11-05
+                       - Check Routine
+                   2.8 2024-11-06
+                       + Detects Nework Interruptions during download
+                       + Removes leftovers
+                       + URLs as filename: forbidden
+                       + Limitation to only alphanumerical characters
+                   2.9 2024-11-06
+                       + Check IfFileExists: Overwrite, Newname, Exit
+                       + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
+                   3.0 2024-11-11
+                       - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
                 ]]>
                 </changelog>
             </version>
