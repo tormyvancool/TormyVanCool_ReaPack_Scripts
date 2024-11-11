@@ -1,258 +1,781 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="Tormy Van Cool ReaPack Scripts" commit="a96594eb7991adfdad160c2d4150aac5a3cd1e3e">
-  <category name="FX">
-    <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="Extracts and exports VSTs and VSTIs from reaper-vstplugins64.ini, in HTML and CSV format on a Project Folder">
-      <metadata>
-        <link rel="screenshot" href="https://www.youtube.com/watch?v=J5Ko4uIya9w ITALIAN https://www.youtube.com/watch?v=OqNFQt3hOC8">ENGLISH</link>
-      </metadata>
-      <version name="3.1 FERRETS" author="Tormy Van Cool" time="2024-11-02T22:20:23Z">
-        <changelog><![CDATA[v3.1 FERRETS (19 August 2023) + Close file CLAP, + Close file CLAP]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e4f8c845ae55608de3a3fc59d0dcb6dbcb8d7fb7/FX/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Markers">
-    <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="Chapter marker for audiobooks (ID3 Metatag &quot;CHAP=Chapter_Title&quot;)">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+<index version="1" name="Tormy Van Cool ReaPack Scripts">
+    <category name="Markers">
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Marker for Audiobooks\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 It adds ID3 Metatag "CHAP=Chapter_Title_by_the_User" by a pop up that asks to the user, the title of each chapter. Then it adds the marker with the correct tag at the mouse position\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Key features:\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Asks for the title of each chapter by a pop up field\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab It can be used very effectively as Armed Action\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab It add the prefix "CHAP=" to any title inserted by the user, avoiding sintaxis errors\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab When metadata is used, rendering an MP3, "CHAP=" is automatically added\sa180\par}
-}
-]]></description>
-        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/ChapterMarker.gif">Example: ChapterMarker.lua in action</link>
-      </metadata>
-      <version name="2.3" author="Tormy Van Cool" time="2024-10-31T23:06:29Z">
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8189bc6078a0f4d13c4a7f11a8275faa5051c611/Markers/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua" type="script" desc="Chapter Marker Updater for Audiobooks">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+        <reapack name="TormyVanCool_AudioBooks_ChapterMarker.lua" type="script" desc="AUDIOBOOKS: CHAPTER MARKER. It Adds/Edits 'CHAP=' markers for Audiobooks, adding a SideCar.TXT file">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 AUDIOBOOKS CHAPTER MARKER \b0: Activating \b0 or \b Arming \b0 this script, by clicking on the point in which a chapter should be added,\line a popup window asks for the chapter title. \par
+                    Writing it and giving \b OK, \b0 a marker will be added with the ID3 TAG "\b CHAP=\b0 " followed by the inserted title.\par
+                    Automatically  a SideCar file is created into the directory of teh project, where the file .RPP is placed.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="2.3" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/8189bc6078a0f4d13c4a7f11a8275faa5051c611/Markers/TormyVanCool_AudioBooks_ChapterMarker.lua</source>
+                <changelog>
+                <![CDATA[
+                Changed marker format into: CHAP=chapter_title. The SideCar.txt file, reports now in this way: seconds_from_the_beginning_of_the_file,1,"chapter_title" The ',1,' is added for compatibility with certain radio automation softwares, not capable to fully read MP3s
+                ]]>
+                </changelog>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua" type="script" desc="AUDIOBOOKS: UPDATER' position when moved on the time line, on the SideCar.txt file">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 When one or more markers of an Audiobook is just moved on the time line, activatig this script, the SideCar file is updated with the new markers' positions.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="2.2.3" author="Tormy Van Cool" time="2021-07-25T18:42:30Z">
+                <source main="main" file="TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/afe66ce671fb113926bace1a71368867a45304e7/Markers/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Tempo_Markers_to_CSV.lua" type="script" desc="TEMPO MARKERS to CSV: exports the tempo markers to CSV file located into the project's directory">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 TEMPO MARKERS to CSV: exports the tempo markers to CSV file located into the project's directory\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="2.1" author="Tormy Van Cool" time="2022-08-03T20:44:30Z">
+                <source main="main" file="TormyVanCool_Tempo_Markers_to_CSV.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f0af8227f315928f2bcabeccd5641b81024ddae/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="IMPORT TEMPO MARKERS: it reads the file Tempo_Markers.csv if present, and imports the Tempo Markers into the project.">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl360\slmult1\qj\lang9\fs24 It reads the file Tempo_Markers.csv exported with TEMPO MARKERS to CSV or with EXPORT DATA, and imports the Tempo Markers into the project.\f1\fs22\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.2" author="Tormy Van Cool" time="2022-08-03T23:03:30Z">
+                <source main="main" file="TormyVanCool_Import_Tempo_Markers.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4a5db3a05aa5b39412d34751d1f64397aa7f8154/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
+            </version>
+        </reapack>
+    </category>
+    <category name="Regions">
+        <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="PODCASTS: PODCASTS SONGS. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
+                    {\colortbl ;\red255\green0\blue0;}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qj\lang9\b\fs24 Activating \b0 or \b Arming \b0 this script, by clicking on the item containing a song, a region will be created and a pop-up will ask for:\par
+                    \pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1\qj                     \b Song title:\b0   (\cf1\b mandatory field\cf0\b0 )\par
+                    {\pntext\f2\'B7\tab}                    \b Performer: \b0 (\cf1\b mandatory field\cf0\b0 )\par
+                    \pard\sa200\sl276\slmult1\qj                     \par
+                    Once clicked on OK, the duration of the song is automatically calculated in seconds. A region will be created with the following coded name:\par
+                    \pard\sa200\sl276\slmult1                     CHAP=\i offset\i0 |\i given_title\i0 |\i given_performer\i0 |\i production_year\i0 |\i Label\i0 |\i duration_in_seconds\i0\par
+                    \pard\sa200\sl276\slmult1\qj\par
+                    \pard\sa200\sl276\slmult1 At the same time, a SideCar file is created into the directory of the project, where the file  \b .RPP\b0  is placed, with the same name of the project, and TXT extension:\par
+                    \pard\sl276\slmult1\qc\par
+                    PROJECT_NAME.txt\par
+                    \pard\sl276\slmult1 Each line is a record, so structured\par
+                    \par
+                    \pard\sl276\slmult1\qc\i Offset\i0 ,\i MidStream_Tag\i0 ,"\i Song_Performer\i0  - \i Song_Title\i0 - \i Production_Year\i0 - \i Label\i0 - \i Duration mm:ss\i0"\par
+                    \par
+                    \pard\sl276\slmult1\i Offset \i0 = AUTOMATIC by SYSTEM: Seconds from the begining of the file, where the song starts\par
+                    \i MidStream_Tag \i0 = AUTOMATIC by SYSTEM: 1 (in signifies: text string)\par
+                    \i Song_Performer \i0 = MANDATORY: the given song performer\par
+                    \i Song_Title \i0 = MANDATORY: the given song title\par
+                    \i Production_Year \i0 = OPTIONAL: The productionyear in 4 digits taken from Discogs or MusicBrainz if possible, or just NULL\par
+                    \i Label \i0 = OPTIONAL: The label for that specific release taken from Discogs or MusicBrainz if possible, or just NULL\par
+                    \i Duration seconds \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted
+                    \par
+                    \par
+                    \b Versioning:\b0\par
+                    \par
+                    On purpose, are not available versions previous the present one.\par
+                    You can alwasy open the file and read what I did in the pervious versions. It's reported into the header.\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="2.7.3" author="Tormy Van Cool" time="2021-07-21T18:42:33Z">
+                <source main="main" file="TormyVanCool_Podcasts_Songs.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c04f346dd3b3383dca4e8d35771735e28cb542ee/Regions/TormyVanCool_Podcasts_Songs.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Podcasts_Auto_GetMetaData.lua" type="script" desc="PODCASTS AUTO GET METADATA: Automatically retrieve the metadata from the Source File and it adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil\fcharset0 Arial;}}
+                    {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+                    \pard\sa200\sl276\slmult1\qj\b\fs24\lang9 Activating \b0 or \b Arming \b0 this script, by clicking on the item containing a song, a region will be created getting the MetaData from the Source Audio File:\par
+                    A region will be created with the following coded name:\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Marker Updater for Audiobooks\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 The script, updates the PROJECT_NAME.SideCar.txt file, when markers are renamed and/or moved. Just calling the script, it remove the old file, with a new updated one.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Once done, it returns a popup window that informs the users, that everything is perfectly done.\par}
-}
-]]></description>
-      </metadata>
-      <version name="2.2.2" author="Tormy Van Cool" time="2024-11-01T10:10:08Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/afe66ce671fb113926bace1a71368867a45304e7/Markers/TormyVanCool_AudioBooks_ChapterMarkerUpdater.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Import_Tempo_Markers.lua" type="script" desc="Tempo Markers">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard\sa200\sl276\slmult1 CHAP=\i offset\i0 |\i given_title\i0 |\i given_performer\i0 |\i production_year\i0 |\i Label\i0 |\i duration_in_seconds\i0\par
+                    At the same time, a SideCar file is created into the directory of the project, where the file  \b .RPP\b0  is placed, with the same name of the project, and TXT extension:\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 Imports Tempo Markers https://gist.github.com/obikag/6118422\par}
-}
-]]></description>
-      </metadata>
-      <version name="1.0" author="Tormy Van Cool" time="2024-11-01T10:14:09Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4a5db3a05aa5b39412d34751d1f64397aa7f8154/Markers/TormyVanCool_Import_Tempo_Markers.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Tempo_Markers_to_CSV.lua" type="script" desc="Tempo Markers to CSV">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard\sl276\slmult1\qc                     \par
+                                        PROJECT_NAME.txt\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 CSV containing Time Markers\par}
-}
-]]></description>
-      </metadata>
-      <version name="1.3" author="Tormy Van Cool" time="2024-11-01T10:15:39Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0ebb0ae7c8ae249de64a138ca38fd9817cc647c5/Markers/TormyVanCool_Tempo_Markers_to_CSV.lua</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Project Properties">
-    <reapack name="TormyVanCool_ExportData.lua" type="script" desc="Export Data">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard\sl276\slmult1                     Each line is a record, so structured\par
+                                        \par
+                    \i Offset\i0 ,\i MidStream_Tag\i0 ,"\i Song_Performer\i0  - \i Song_Title\i0 - \i Production_Year\i0 - \i Label\i0 - \i Duration mm:ss\i0 "\par
+                    \par
+                    \i Offset \i0 = AUTOMATIC by SYSTEM: Seconds from the begining of the file, where the song starts\par
+                    \i MidStream_Tag \i0 = AUTOMATIC by SYSTEM: 1 (in signifies: text string)\par
+                    \i Song_Performer \i0 = MANDATORY: the given song performer\par
+                    \i Song_Title \i0 = MANDATORY: the given song title\par
+                    \i Production_Year \i0 = OPTIONAL: The productionyear in 4 digits taken from Discogs or MusicBrainz if possible, or just NULL\par
+                    \i Label \i0 = OPTIONAL: The label for that specific release taken from Discogs or MusicBrainz if possible, or just NULL\par
+                    \i Duration seconds \i0 = AUTOMATIC by SYSTEM: Duration in mm:ss automatically calculated. It states how long the song is broadcasted                    \par
+                                        \par
+                    \b Versioning:\b0\par
+                                        \par
+                    On purpose, are not available versions previous the present one.\par
+                    You can always open the file and read what I did in the pervious versions. It's reported into the header.\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2022-07-30T22:24:33Z">
+                <source main="main" file="TormyVanCool_Podcasts_Auto_GetMetaData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="PODCASTS: SEGMENTATION MARKERS and FINAL TAIL. It adds region with songs metadata, for Podcasts and Pre-Recorded Broadcasts">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+                    {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+                    \pard\sl240\slmult1\f0\fs22\lang9 PODCATS SEGMENTATION FINAL MARKER script, enables you to split your podcast in several parts.\par
+                    \par
+                    Some seconds before the end of each part, at your taste, you enter the marker with a write like\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 Exports project's data related to tracks, into CSV and HTML file IF YOU DON'T KEEP UPDATED: DON'T COMPLAIN FOR ISSUES! https://forum.cockos.com/archive/index.php/t-209658.html https://forum.cockos.com/showthread.php?t=238421 https://www.extremraym.com/en/downloads/reascripts-html-export/?fbclid=IwAR1W-wr0qf5M7hUaaTf_ca7WmI98Ty9BsGKXMIB-sHhD6xL5GmcsFxZ9W9k https://stackoverflow.com/questions/36717078/handle-special-characters-in-lua-file-path-umlauts https://forum.cockos.com/showthread.php?t=259730\par}
-}
-]]></description>
-        <link rel="screenshot" href="https://youtu.be/_VDGMuxJ5xc">English</link>
-        <link rel="screenshot" href="https://youtu.be/4y6Tj2nnHqQ">Italian</link>
-      </metadata>
-      <version name="3.5" author="Tormy Van Cool" time="2024-11-02T22:20:23Z">
-        <changelog><![CDATA[v3.5 + Decoding of the wildcards]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e4f8c845ae55608de3a3fc59d0dcb6dbcb8d7fb7/Project%20Properties/TormyVanCool_ExportData.lua</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Regions">
-    <reapack name="TormyVanCool_Podcasts_Auto_GetMetaData.lua" type="script" desc="Chapter region for podcasts and recorded broadcasts retrieving the metadata from the Source file">
-      <metadata>
-        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif">Example: Podcasts_songs.lua in action</link>
-      </metadata>
-      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Auto_GetMetaData.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua" type="script" desc="Markers for Podcasts Segmentation and Final marker with greetings (ID3 Metatag &quot;CHAP=text&quot;)">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 "Continues" or\par
+                    {\pntext\f1\'B7\tab}"See you" or\par
+                    {\pntext\f1\'B7\tab}"And Part-x", wher "x" can be 1 or 2 or 3 etc, or\par
+                    {\pntext\f1\'B7\tab}"Stay tuned" etc\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Segmentation markers for Podcasts\par}
-}
-]]></description>
-      </metadata>
-      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Podcasts_Songs.lua" type="script" desc="Podcast Songs">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard\sl240\slmult1\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Chapter Region for Podcasts and Recorded Broadcasts\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 It's an ideal feature for Podcasts and Recorded Broadcasts It enables the user to highlight all the embedded songs by just a click. By selecting the item of a song, a pop up windows asks to enter: Title and Performer of the song. Automatically the script calculates the duration of the song in second, rounding it up to the 2nd decimal, based on the duration of the item. It creates a region with the following line preceded by the ID3 Tag "CHAP=" "CHAP=offset|title_of_the_song|Performer_of_the_song|Duration_in_seconds" This can be used by any decoder, to get all the CHAP tags inside the Podcast, getting out all the required information to be sent to Collecting Societies for the Rights collection. Key features:\par}
-{\pard \ql \f0 \sa180 \li720 \fi0 It can work also as Armed Action It creates a region that contains the required Tags without sintaxis errors. It embeds the ID3 tags while Reaper is rendering the MP3s with Metadata, in automatic way.\par}
-}
-]]></description>
-        <link rel="screenshot" href="https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/Region.gif">Example: Podcasts_songs.lua in action</link>
-      </metadata>
-      <version name="2.7.3" author="Tormy Van Cool" time="2024-11-01T10:08:06Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/c04f346dd3b3383dca4e8d35771735e28cb542ee/Regions/TormyVanCool_Podcasts_Songs.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Podcasts_Updater.lua" type="script" desc="Update Podcasts Songs after have imported and adapted">
-      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T22:52:17Z">
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Updater.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="Assign Performer and Title to a song's Region">
-      <version name="1.3" author="Tormy Van Cool" time="2024-11-01T10:06:22Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/64f8f0b0a3b1049bec5aa0e1a046262f76d21a48/Regions/TormyVanCool_Songs_Library.lua</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Rendering">
-    <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="Export Stems">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
+                    \pard\sl240\slmult1 The total length of the phrase shoudn't be more than 20 characters.\par
 
-{\pard \ql \f0 \sa180 \li0 \fi0 Performs the following actions:\par}
-{\pard \ql \f0 \sa180 \li720 \fi0 Get the cursor position Selects all tracks Insert empty item Glue all items on all tracks Calls the rendering window Unslects all tracks Selects all items for stems Calls the rendering window Once exported, each track has a duration form the begining of the song to the end of the track itself, not to the very end of the song. This saves HD space, making shorter files\par}
-}
-]]></description>
-      </metadata>
-      <version name="1.0" author="Tormy Van Cool" time="2024-11-01T10:18:15Z">
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f0af8227f315928f2bcabeccd5641b81024ddae/Rendering/TormyVanCool_ExportStems.lua</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Various">
-    <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="Program Runner">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
-
-{\pard \ql \f0 \sa180 \li0 \fi0 It creates scripts that are supposed to fire-up an external program, after have selected it\par}
-}
-]]></description>
-      </metadata>
-      <version name="1.0.4" author="Tormy Van Cool" time="2024-11-01T09:57:29Z">
-        <changelog><![CDATA[1.0.4 # Correction minor bugs]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f3a41d0e81ed7c7f297c2176bc4ebacbbc6330f/Various/TormyVanCool_Program_Runner.lua</source>
-      </version>
-    </reapack>
-    <reapack name="TOST_MAIN.lua" type="script" desc="Youtube Downloader">
-      <version name="1.0" author="Tormy Van Cool" time="2024-10-31T21:15:24Z">
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/488b463c9122a93ff35b7fa20a171009c87a6363/Various/TOST_MAIN.lua</source>
-        <source platform="windows" file="AAA/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="AAA/ytdlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="AAA/ytdlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-    </reapack>
-  </category>
-  <category name="Video">
-    <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="YOUTUBE Downloader">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
-
-{\pard \ql \f0 \sa180 \li0 \fi0 :\par}
-}
-]]></description>
-      </metadata>
-      <version name="2.4" author="Tormy Van Cool" time="2024-11-01T10:02:27Z">
-        <changelog><![CDATA[2.4 2024-29-10 # Adjusted header style for production]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/0bbf740f7ed02184796a8d8b30887f2ece902e25/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-      <version name="2.5" author="Tormy Van Cool" time="2024-11-04T11:18:24Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/feac0fc2d4425c33376cfb029ec610578b649b36/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-      <version name="2.7" author="Tormy Van Cool" time="2024-11-05T17:09:56Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/bf7efe9ff2d043c7d922bb994acd7dbad1b1c827/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-      <version name="2.8" author="Tormy Van Cool" time="2024-11-06T09:44:23Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/4780fa66303b1ed64c97528eddaa1c4df97fbc66/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-      <version name="2.9" author="Tormy Van Cool" time="2024-11-06T18:11:03Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source main="main">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/9fcf1ef2805ef37d40fc4aed8af4c144c30c5483/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-      </version>
-      <version name="3.0" author="Tormy Van Cool" time="2024-11-11T13:05:53Z">
-        <changelog><![CDATA[:]]></changelog>
-        <source platform="win64" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
-        <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-        <source platform="darwin64" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-        <source platform="darwin-arm64" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
-        <source main="main" platform="win64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source main="main" platform="linux">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source main="main" platform="darwin64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-        <source main="main" platform="darwin-arm64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-      </version>
-    </reapack>
-  </category>
+                    \pard\sa200\sl276\slmult1\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-07-18T17:01:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Segmentation_FinalMarker.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Segmentation_FinalMarker.lua</source>
+            </version>
+        </reapack>
+        <reapack name="TormyVanCool_Podcasts_Updater.lua" type="script" desc="PODCASTS: UPDATER. It updates imported songs from library with only 1 click. Wathc tutorial on YT to understand how to use  it">
+            <metadata>
+                <description>
+                    <![CDATA[]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-07-24T16:09:09Z">
+                <source main="main" file="TormyVanCool_Podcasts_Updater.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/d90150c2db1c469213fe2cfbba9682a799ad108b/Regions/TormyVanCool_Podcasts_Updater.lua</source>
+            </version>
+        </reapack>        
+        <reapack name="TormyVanCool_Songs_Library.lua" type="script" desc="SONGS LIBRARY: Assign basics song data to the region">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                    {\colortbl ;\red255\green0\blue0;}
+                    {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+                    \pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+                    It assigns Performer, Title, Year Production and Label to a region.\par
+                    Exporting the file name as $region, it put in sequence the fields as\par
+                    \par
+                    \cf1 performer_title_yearProduction_LabelCopyright_Duration\cf0\par
+                    \par
+                    it can be used with \b mp3tag\b0  to assign from "\i filename to tag\i0 "\par
+                    \b %artist%_%title%_%year%_%copyright%_%length%\par
+                    \b0 In bulk\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.3" author="Tormy Van Cool" time="2022-10-03T13:40:09Z">
+                <source main="main" file="TormyVanCool_Songs_Library.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/64f8f0b0a3b1049bec5aa0e1a046262f76d21a48/Regions/TormyVanCool_Songs_Library.lua</source>
+                <changelog>
+                <![CDATA[
+                v1.0 (21 may 2022)
+                    + Initial release
+                v1.1 (22 may 2022)
+                    - NA
+                    + UNKNOWN
+                v1.2 (22 may 2022)
+                    - upper
+                    + normal
+                v1.3 (03 october 2022)
+                    + Forbidden characters list
+                    + Forbidden characters: /, \
+                    + version
+                    + by
+                ]]>
+                </changelog>
+            </version>
+        </reapack>
+    </category>
+    <category name="Rendering">
+        <reapack name="TormyVanCool_ExportStems.lua" type="script" desc="STEMS: EXPORT STEMS. Prepares stems to be exported for the real length of each track.">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 EXPORT STEMS\b0    Performs the following actions:\par
+                    \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1   Gets the cursor position\par
+                    {\pntext\f1\'B7\tab}  Selects all tracks\par
+                    {\pntext\f1\'B7\tab}  Insert empty item\par
+                    {\pntext\f1\'B7\tab}  Glue all items on all tracks\par
+                    {\pntext\f1\'B7\tab}  Calls the rendering window\par
+                    {\pntext\f1\'B7\tab}  Unslects all tracks\par
+                    {\pntext\f1\'B7\tab}  Selects all items for stems\par
+                    {\pntext\f1\'B7\tab}  Calls the rendering window\par
+                    \pard\sl276\slmult1\par
+                    Once exported, each track has a duration form the begining of the song\par
+                    to the end of the track itself, not to the very end of the song.\par
+                    This saves HD space, making shorter files\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0" author="Tormy Van Cool" time="2021-02-19T01:38:35Z">
+                <source main="main" file="TormyVanCool_ExportStems.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/1ebcd4ee0f783f7b82804fe0100761a14c11ec5b/Rendering/TormyVanCool_ExportStems.lua</source>
+            </version>
+        </reapack>
+    </category>
+    <category name="Video">
+       <reapack name="TormyVanCool_YOUTUBE_Downloader.lua" type="script" desc="UTILITY: Downloads videos from YouTUBE, VIMEO, PATREON and others, and imports them into the project">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\deff3\adeflang1025
+                    {\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset0 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset0 Liberation Sans{\*\falt Arial};}{\f5\fmodern\fprq1\fcharset0 Liberation Mono{\*\falt Courier New};}{\f6\fnil\fprq2\fcharset0 Source Han Sans CN;}{\f7\fmodern\fprq1\fcharset0 Noto Sans Mono CJK SC;}{\f8\fswiss\fprq0\fcharset128 Noto Sans Devanagari;}{\f9\fnil\fprq2\fcharset0 Noto Sans Devanagari;}}
+                    {\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}
+                    {\stylesheet{\s0\snext0\rtlch\af9\afs24\alang1081 \ltrch\lang1033\langfe2052\hich\af3\loch\nowidctlpar\hyphpar0\ltrpar\cf0\f3\fs24\lang1033\dbch\af10\langfe2052 Normal;}
+                    {\s15\sbasedon0\snext16\rtlch\af9\afs28 \ltrch\hich\af4\loch\sb240\sa120\keepn\f4\fs28\dbch\af6 Heading;}
+                    {\s16\sbasedon0\snext16\loch\sl276\slmult1\sb0\sa140 Body Text;}
+                    {\s17\sbasedon16\snext17\rtlch\af8 \ltrch\loch\sl276\slmult1\sb0\sa140 List;}
+                    {\s18\sbasedon0\snext18\rtlch\af8\afs24\ai \ltrch\loch\sb120\sa120\noline\fs24\i Caption;}
+                    {\s19\sbasedon0\snext19\rtlch\af8 \ltrch\loch\noline Index;}
+                    {\s20\sbasedon0\snext20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7 Preformatted Text;}
+                    }{\*\generator LibreOffice/7.6.7.2$Linux_X86_64 LibreOffice_project/dd47e4b30cb7dab30588d6c79c651f218165e3c5}{\info{\creatim\yr0\mo0\dy0\hr0\min0}{\revtim\yr0\mo0\dy0\hr0\min0}{\printim\yr0\mo0\dy0\hr0\min0}}{\*\userprops}\deftab709
+                    \hyphauto1\viewscale100\formshade\nobrkwrptbl\paperh15840\paperw12240\margl1134\margr1134\margt1134\margb1134\sectd\sbknone\sftnnar\saftnnrlc\sectunlocked1\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+                    {\*\ftnsep\chftnsep}\pgndec\pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Key Features:\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - 4 click operation: Start the script, enter the URL, give a title, click on OK\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Import any Video in TimeLine by giving just the URL\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Videos are saved into the project folder under the dedicated /Videos/ folder\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Videos are imported into a new track, having the given name, and at the cursor position\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Auto-update of the binaries "yt-dlp" each time the script is invoked, to ensure top quality at each use\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Compatible with about thousand platforms included:\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - YouTUBE\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Vimeo\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    - Patreons\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    and several other ones ...\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                    }{\loch
+                    [Full list here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    \u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{\loch
+                    # Credits\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation\u13\'0d}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    Paolo Saggese PMS67 - to have helped for Linux implementation}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    cfillion - for his support during general debug}
+                    \par \pard\plain \s20\rtlch\af5\afs20 \ltrch\hich\af5\loch\sb0\sa0\f5\fs20\dbch\af7\ql\sb0\sa0\ltrpar{
+                        }{\loch
+                    smandrap - for his key suggestoin to that helped to improve the reliability. Topic https://forum.cockos.com/showthread.php?t=96087
+                    \par }]]>
+                </description>
+            </metadata>
+            <version name="3.0" author="Tormy Van Cool" time="2024-11-11T14:30:35Z">
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/57194db507af915cb396ddf985bf71ae27a3a5e0/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
+                <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
+                <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
+                <source main="main" platform="win64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="linux">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin-arm64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <changelog>
+                <![CDATA[
+                    1.0 2024-26-10
+                        - First Release
+                    1.1 2024-26-10
+                        +Processes Notifications
+                        -/Video/
+                        +/Videos/
+                    1.2 2024-26-10
+                        - --merge-output-format mp4
+                        + -S vcodec:h264,res,acodec:aac
+                    1.3 2024-26-10
+                        - 10
+                        + 2
+                    1.4 2024-26-10
+                        - 2
+                        + 5
+                    1.5 2024-26-10
+                        - 5
+                        + 1
+                    # Unified Update
+                    1.6 2024-26-10
+                        - 1
+                        + 2
+                        + Version
+                    1.7 2024-27-10
+                        - 'start "" "' from all O.S.s
+                        + 'start "UPDATE & DOWNLOAD" "' Win
+                    1.8 2024-27-10
+                        - Start = ''
+                        - 1
+                        + Start = '"'
+                        + 2
+                    1.9 2024-27-10 + Check saved project
+                        - 1
+                        + 2
+                    2.0 2024-27-10
+                        - "chmod +x " ..  MainPath
+                        + 'chmod +x "' ..  MainPath .. '"'
+                        # Ordered Variables
+                        - 2
+                        + 1
+                        + Apple Trial
+                    2.3 2024-27-10
+                        # Linux execution correction
+                        + Credits
+                        # 2.1 and 2.2 just trials due issues with Linux and Apple
+                    2.31 2024-28-10
+                        # Binaries directly form the source
+                    2.31 2024-28-10
+                        - yt-dlp
+                        + yt-dlp_linux
+                    2.4 2024-29-10
+                        # Adjusted header style for production
+                   2.5 2024-11-04
+                       - Various 
+                       + VideoPath = 'Video'
+                   2.6 2024-11-05
+                       + check for temrination of temporary file upfrotn import the video
+                   2.7 2024-11-05
+                       - Check Routine
+                   2.8 2024-11-06
+                       + Detects Nework Interruptions during download
+                       + Removes leftovers
+                       + URLs as filename: forbidden
+                       + Limitation to only alphanumerical characters
+                   2.9 2024-11-06
+                       + Check IfFileExists: Overwrite, Newname, Exit
+                       + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
+                   3.0 2024-11-11
+                       - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
+                ]]>
+                </changelog>
+            </version>
+        </reapack>    
+    </category>
+    <category name="Various">
+        <reapack name="TormyVanCool_Program_Runner.lua" type="script" desc="UTILITY: PROGRAM RUNNER. It creates scripts that launch any external program you select with just 1 click, automatically adding it to the Action List, ready to be used!">
+            <metadata>
+                <description>
+                    <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                    {\colortbl ;\red255\green0\blue0;}
+                    {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 What is PROGRAM RUNNER?\b0\par
+                    \cf1\b\i Program Runner\cf0\i0  \b0 is an utility that helps you to run any external program, without write any Code!!\line By just 1 click, \cf1\b\i Program Runner\i0   \cf0\b0 creates a proper dedicated script, that fires-up the program you wanted. Any!! From Word to Excel, to Chrome, to MP3TAG, to DDP_to_CUE, to any ...\par
+                    The created script is automatically loaded/imported into the Action List, and it will be always available to you.\par
+                    You can assign it to a button on a toolbar, or to any menu (the Main one as well as a contextual one and so on).\par
+                    It turns this operation from \i nerdy \i0 to \b user friendly one\b0\par
+                    UltraSchall ReaPack Library is manatory: https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/raw/master/ultraschall_api_index.xml\par
+                    }]]>
+                </description>
+            </metadata>
+            <version name="1.0.4" author="Tormy Van Cool" time="2021-03-17T01:38:35Z">
+                <source main="main" file="TormyVanCool_Program_Runner.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/6f3a41d0e81ed7c7f297c2176bc4ebacbbc6330f/Various/TormyVanCool_Program_Runner.lua</source>
+            </version>
+        </reapack>
+    </category>
+    <category name="Project Properties">
+        <reapack name="TormyVanCool_ExportData.lua" type="script" desc="UTILITY: EXPORT PROJECT DATA. It exports project data in CSV and HTML formats and TEMPO MARKERS in All formats included TXT">
+            <metadata>
+                <description>
+                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 EXPORT DATA \b0 collects  all tracks with FX and creates a  pair of files: CSV and HTML format, listing all tracks with FX, the FX list for each track, and their status.\par
+                NOTES are also exported: \i project notes\i0 , as well as \i track notes\i0  and \i item notes\i0 .\par
+                The content is dived in 5 main tables, on HTML file:\par
+                \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b PROJECT DATA\b0\line It contains basic data of the project as:\line Project name and sample rate\line Total tracks\line DAW Employed\line Author\line Notes\par
+                \b{\pntext\f1\'B7\tab}EFFECTED TRACKS\b0\line TRACK\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Track IDX\line Name\line Type (Folder or Track)\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 N.Item on that track\line Solo\line Mute\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 FX\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 FX Name\line Enabled/Bypassed\line OnLine/OffLine\line Plugin File\par
+                \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b NOTED TRACKS\b0\line TRACK\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 IDX\line Name\line Type (Folder or Track)\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 N.Item on that track\line Solo\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Mute\par
+                \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b EFFECTED ITEMS\b0\line MAIN DATA\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Belonging to (Track Name)\line FX\line Position\line Length\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Mute\line Locked\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 SOURCE\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Source Name (and Location)\line Sample Rate\line Bit Depth\par
+                \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b NOTED ITEMS\b0\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 MAIN DATA\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Belonging to (Track Name)\line Position\line Length\line Notes\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 STATUS\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Mute\line Locked\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 SOURCE\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080\sa200\sl276\slmult1 Source Name (and Location)\line Sample Rate\line\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Bit Depth\par
+                \pard\sa200\sl276\slmult1\fs22\par
+                }]]>
+                </description>
+            </metadata>
+            <version name="3.5" author="Tormy Van Cool" time="2024-02-25T21:23:57Z">
+                <source main="main" file="TormyVanCool_ExportData.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/509d83a22cc8de33d25eb07c0cc5f6d477dcede0/Project%20Properties/TormyVanCool_ExportData.lua</source>
+                <changelog>
+                <![CDATA[
+                v1.0 (18 may 2021)
+                    + Initial release
+                v1.0.1 (18 may 2021)
+                    + Added pop-up when files are saved
+                v1.0.2 (18 may 2021)
+                    + Pup up if project is not saved
+                v1.0.3 (18 may 2021)
+                    + Date to file names 
+                    + Creation date into files 
+                    + Version into files 
+                v1.0.4 (18 may 2021)
+                    + Project Notes
+                    + Track Notes
+                    + Project Sample Rate
+                v2.0 (18 may 2021)
+                    + Expandable/Collapsible Tables
+                    + Odd/Even on Mute flag
+                    + Odd/Even on Solo flag
+                    + Only noted tracks
+                    - Pipe separated Values
+                    + Comma Separated Values
+                    + Effected items 
+                    + Noted items 
+                v2.0.1 (18 may 2021)
+                    # Buf Fix: all FX where displayed as Disalbed
+                v2.0.2 (18 may 2021)
+                    + FX Chain Status
+                v2.1 (19 may 2021)
+                    + All Tracks Hierarchy
+                    + All tracks Statuses
+                    + Master Channel FX and Notes
+                    + Precision
+                    + Project Length HH:MM:SS
+                v2.1.1 (19 may 2021)
+                    # Minor bug fixed: when no FX on Master, returned error on variable lineCSV because nil
+                v2.1.2 (20 may 2021)
+                    # Tracks in the HIerarchy & Master Channel without FX have not FX Chain indication
+                v2.2 (24 may 2021)
+                    # Optimized Code
+                    + VSTS' Path Detection
+                    + SUbfolder indication into FFEXed Tracks
+                    - Table width 90%
+                    + Table width 100%
+                    + Num. Items, Num. Markers, Num. Region in Project Data
+                    # Known issue 1: Paths of LV2 FXes are not detected or correctly detected. WORKS IN PROGRESS. 
+                    # Known Issue 2: Paths of 32bit FXes are not detected or correctly detected. WORKS IN PROGRESS.
+                v2.3 (26 may 2021)
+                    + Project Markers
+                    + Project Regions
+                    + Solo in Tracks Hierarchy
+                    + Mute in Tracks Hierarchy
+                    # Cosmetic changes on Project Data and Master Channel table
+                    # Minor issues on CSV format
+                v2.3b
+                    # Mistyping correction
+                v2.4
+                    + Included jQuery base64
+                v2.5
+                    + Project MetaData
+                v2.6
+                    + Song Title (due new fiels on ALT+ENTER)
+                v2.7
+                    + Collapsible MetaData Table
+                v2.8
+                    + Check if SWS is installed
+                    + Check the Reaper version
+                    + Path into the export box
+                    # Specified Noted Tracks only
+                    # Specified Noted Items only
+                v2.9
+                    # CSS adaptation
+                    
+                v2.9.1
+                    # UTF-8 on HTML
+                    
+                v2.9.2
+                    # HH:MM:SS:FF
+                    + Project Tempo BPM
+                v2.9.3
+                    + URL Encode for spaces
+                    + Rendered audio: Only Audio Formats
+                v2.9.4
+                    + Management UTF8 Characters on file names
+                    + Metadata: Wavext
+                    + Metadata: Aswg
+                    + Metadata: Cafinfo
+                    + Links to Documentation
+                    # Mistyping corrections
+                v3.0
+                    # Version of Reaper
+                    + Tempo Markers
+                v3.1
+                    + Error travp in case project is not finished
+                    + export CSV Headers
+                v3.2
+                    # Not rading BWF Originator Reference
+                v3.3
+                    + Remove cp.bat
+                v3.4 (23 feb 2024)
+                    # Corrected file list for Mac
+                v3.5
+                    + Decoding of the wildcards
+                @credits  Mario Bianchi for his contribution to expedite the process;
+                    Edgemeal, Meo-Ada Mespotine for the help into extracting directories [t=253830];
+                    Solger for his help on the color decode [t=253981]
+                    Spk77 for the part of the list to explore directories [p=1542391&postcount=3]
+                    Meo-Ada Mespotine for her suggestion to spot the REAPER.ini to find the correct rendering path [t=259455]
+                    MPL to give me the shortcut using SWS API isntead ot Reaper to extract the correct name from REAPER.ini [t=259455]
+                    Yanick & schwa to have given the easiest way to check the installation of SWS. Respectively [p=2495432&postcount=3] [p=1706951&postcount=7]
+                    Egor Skriptunoff for his precious help to convert special characters UTF8 [https://stackoverflow.com/questions/70170504/lua-how-to-correctly-read-uft8-file-names-and-path-with-accented-letters-and-um]
+                    Jack London to have highlighted the but on Mac system https://www.youtube.com/watch?v=_VDGMuxJ5xc
+                    Alb Vedo (the_metal_priest) to have helped me to debug Mac https://www.facebook.com/groups/959114728148422/posts/1453458458714044/
+                    FeedTheCat that have sugegsted the correct line code helping to solve the Mac issue https://forum.cockos.com/showthread.php?p=2761566#post2761566
+                    Cfillion adn Sexan https://forum.cockos.com/showthread.php?p=2761711#post2761711
+                    Schwa https://forum.cockos.com/showthread.php?t=282944
+                ]]>
+                </changelog>
+            </version>
+        </reapack>
+    </category>
+    <category name="FX">
+        <reapack name="TormyVanCool_VSTs-VSTis-Extractor.lua" type="script" desc="UTILITY: EXPORTS VSTs/VSTis/AUs/CLAPs data in CSV and HTML formats in the main REAPER's Folder">
+            <metadata>
+                <description>
+                <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+                {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs22 GOAL\b0 :\line\pard\li720\sa200\sl276\slmult1 Platform migration.\line It faciitate the reinstallation of the plugins on a new machine\par
+                \pard\sa200\sl276\slmult1\b ACTION\b0 :\line\pard\li720\sa200\sl276\slmult1 Extracts and exports all the VSTs, VSTis and AUs installed on Reaper, saving the list in HTML and CSV file.\par
+                }]]>
+                </description>
+            </metadata>
+            <version name="2.1" author="Tormy Van Cool" time="2021-06-01T19:08:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/e4f8c845ae55608de3a3fc59d0dcb6dbcb8d7fb7/FX/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <changelog>
+                <![CDATA[
+                v1.0 (30 may 2021)
+                    + Initial release
+                v1.1 (31 may 2021)
+                    + Save status of HTML File
+                    + Retrieve status of HTML file
+                v1.2 (31 may 2021)
+                    + Saves files into tReaper's Folder
+                    + No more need internet connection
+                v1.3 (31 may 2021)
+                    # Minor adjustments 
+                v1.3.1 (31 may 2021)
+                    # Solved a bug occurred with mac (what else!)
+                v1.3.2 (31 may 2021)
+                    + Added info block at the end of the process
+                v2.0 (1 june 2021)
+                    + AU detection on MAC
+                v2.1 (1 june2021)
+                    + Helper with modal pop-up
+                v2.2 (13 june 2021)
+                - Import button
+                + Automatic import JSON file if present
+                + Hide checked button
+                + Show checked button
+                ]]>
+                </changelog>
+            </version>
+            <version name="2.2 PIXY" author="Tormy Van Cool" time="2021-06-13T09:09:09Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/b2842fcc1537b955767e3eb71400f6cdd5c8f209/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <changelog>
+                <![CDATA[
+                v2.2 (13 june 2021) PIXY
+                - Import button
+                + Automatic import JSON file if present
+                + Hide checked button
+                + Show checked button
+                ]]>
+                </changelog>
+            </version>
+            <version name="3.1" author="Tormy Van Cool" time="2023-08-19T15:40:18Z">
+                <source main="main" file="TormyVanCool_VSTs-VSTis-Extractor.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/f03f40cd1e68e091a036bc7cca6fac72a2da1a25/TormyVanCool_VSTs-VSTis-Extractor.lua</source>
+                <changelog>
+                <![CDATA[
+                v1.0 (30 may 2021)
+                    + Initial release
+                v1.1 (31 may 2021)
+                    + Save status of HTML File
+                    + Retrieve status of HTML file
+                v1.2 (31 may 2021)
+                    + Saves files into Reaper's Folder
+                    + No more need internet connection
+                v1.3 (31 may 2021)
+                    # Minor adjustments
+                v1.3.1 (31 may 2021)
+                    # Slved a bug occurred with mac (what else!)
+                v1.3.2 (31 may 2021)
+                    + Added info block at the end of the process
+                v2.0 (1 june 2021)
+                    + AU detection on MAC
+                v2.1 (1 june2021)
+                    + Helper with modal pop-up
+                v2.2 (13 june 2021) PIXY
+                    - Import button
+                    + Automatic import JSON file if present
+                    + Hide checked button
+                    + Show checked button
+                v2.3 (30 october 2021)
+                    # ameliorated columns
+                    # CSS glitch
+                v2.4 (30 october 2021)
+                    + instr Column
+                    + Links
+                v2.5 FERRETS (1 november 2021)
+                    + instr Column CSV
+                v2.6 FERRETS (1 november 2021)
+                    # glitch on jQuery: Hide/Show button was not working any longer
+                v2.7 FERRETS (1 june 2023)
+                    + CLAP
+                    # Corrected a bug that could list less plugins than the ones really installed
+                v2.8 FERRETS (1 june 2023) 
+                    # Fixed issue with Mac (both x86_64 and arch64)
+                    # Fixed issue with Linux
+                    + "CLAP Type" to CLAP files
+                v2.8.5
+                    # Fixed message "Not existing VST cache. Isntall at least 1 plugin!!!"
+                v2.9
+                    + CLAP File Name
+                v3.0 FERRETS (05 August 2023)
+                    + Old 32bit VST List
+                v3.1 FERRETS (19 August 2023)
+                    # Corrected bug: if no 64bit or not 32bit plugins where installed, an error was displayed.
+                    + Close file CLAP
+                ]]>
+                </changelog>
+            </version>
+        </reapack>
+    </category>
+    <category name="Multichannel">
+        <reapack name="5.1 Surround" type="effect" desc="Level Adjuster for 5.1 speakers, for Monitor FX">
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-17T11:57:09Z">
+                <source main="main" file="5.1_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38ccdaa6e91af5cbf306c31e6a1bff478ed1bafb/5.1_MultiChannel_Volume_Adjuster</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                    v1.1
+                        + function db2gain()
+                    v1.2
+                        - -120 10
+                        + -30 10
+                    v1.3
+                        + versioning into title
+                ]]>
+            </changelog>
+            </version>
+        </reapack>
+        <reapack name="7.1 Surround" type="effect" desc="Level Adjuster for 7.1 speakers, for Monitor FX">
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-17T11:57:09Z">
+                <source main="main" file="7.1_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38ccdaa6e91af5cbf306c31e6a1bff478ed1bafb/7.1_MultiChannel_Volume_Adjuster</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                    v1.1
+                        + function db2gain()
+                    v1.2
+                        - -120 10
+                        + -30 10
+                    v1.3
+                        + versioning into title
+                ]]>
+            </changelog>
+            </version>
+        </reapack>
+        <reapack name="7.1.2 Surround" type="effect" desc="Level Adjuster for 7.1.2 speakers, for Monitor FX">
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-17T11:57:09Z">
+                <source main="main" file="7.1.2_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38ccdaa6e91af5cbf306c31e6a1bff478ed1bafb/7.1.2_MultiChannel_Volume_Adjuster</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                    v1.1
+                        + function db2gain()
+                    v1.2
+                        - -120 10
+                        + -30 10
+                    v1.3
+                        + versioning into title
+                ]]>
+            </changelog>
+            </version>
+        </reapack>
+        <reapack name="7.1.4 Surround" type="effect" desc="Level Adjuster for 7.1.4 speakers, for Monitor FX">
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-17T11:42:09Z">
+                <source main="main" file="7.1.4_MultiChannel_Volume_Adjuster">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/38ccdaa6e91af5cbf306c31e6a1bff478ed1bafb/7.1.4_MultiChannel_Volume_Adjuster</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                    v1.1
+                        + function db2gain()
+                    v1.2
+                        - -120 10
+                        + -30 10
+                    v1.3
+                        + versioning into title
+                ]]>
+            </changelog>
+            </version>
+        </reapack>        
+        <reapack name="7.1.2 DownMix to 5.1.2 Surround" type="effect" desc="MixDown the SIDE speakers (Ls, Rs) virtualizing them throught the FRONT (L, R) and the REAR (Lr, Rr), for Monitor FX">
+            <version name="1.3" author="Tormy Van Cool" time="2023-06-19T22:09:09Z">
+                <source main="main" file="7.1.2 to 5.1.2 MixDown">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3b950bb1f3fee82d5e569cbc46ce538f9fddb82f/7.1.2%20%20to%205.1.2%20MixDown</source>
+                <changelog><![CDATA[
+                    v1.0
+                        # First Release
+                    v1.1:
+                        # Mapped Top Channels
+                    v1.2:
+                        + Global Level Potentiometer
+                        + Single Channel Level Potentiometer
+                    v1.3:
+                        + Versioning into title
+                ]]>
+            </changelog>
+            </version>
+        </reapack>
+    </category>
+    <metadata>
+        <description>
+        <![CDATA[{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+        {\colortbl ;\red0\green0\blue255;}
+        {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22          \par
+        \pard\sl240\slmult1\ul\fs28 Tormy Van Cool's ReaScripts\ulnone  for \b Cockos REAPER \b0{\field{\*\fldinst{HYPERLINK "https://www.reaper.fm"}}{\fldrslt{\ul\cf1 https://www.reaper.fm}}}\f0\fs22\par
+        \par
+        \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Scripts written by Tormy Van Cool\par
+        {\pntext\f1\'B7\tab}Scripts written for Tormy Van Cool\par
+        {\pntext\f1\'B7\tab}Scripts moded by Tormy Van Cool\par
+        {\pntext\f1\'B7\tab}Scripts needed for other scripts on this repository\par
+        \pard\sa200\sl276\slmult1\par
+        \par
+        }]]>
+        </description>
+    </metadata>
 </index>
