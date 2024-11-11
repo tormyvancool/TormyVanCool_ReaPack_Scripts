@@ -71,7 +71,7 @@
 --     + Checks if the subdir for yt-dlp exists. if not it warns the user and stops the script
 --     + If the video wasn't downloaded or the donloaded file is 0 bytes size, the script stops and doesn't generate any new track
 -- 3.0 2024-11-11
---     - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
+--     - os.execute('chmod +x "' ..  MainPath .. '"')
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
@@ -171,8 +171,7 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
         end
         if OS == "OSX64" or OS == "macOS-arm64" then
           MainPath  = './yt-dlp_macos'
-          Start = 'cd "' .. CallPath .. '"' .. dlpMac .. ' && '
-          os.execute('chmod +x "' ..  MainPath .. '"')
+          Start = 'cd "' .. CallPath .. '" && chmod +x ' .. dlpMac .. ' && '
           OpSys = 2
         end
         if OS == "Other" then
