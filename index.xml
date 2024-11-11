@@ -393,6 +393,8 @@
                    2.9 2024-11-06
                        + Check IfFileExists: Overwrite, Newname, Exit
                        + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
+                   3.0 2024-11-11
+                       - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
                 ]]>
                 </changelog>
             </version>
