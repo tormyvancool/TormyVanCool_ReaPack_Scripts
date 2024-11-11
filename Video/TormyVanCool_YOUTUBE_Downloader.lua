@@ -1,6 +1,6 @@
 -- @description YOUTUBE Downloader
 -- @author Tormy Van Cool
--- @version 2.9
+-- @version 3.0
 -- @Changelog:
 -- 1.0 2024-26-10
 --     # First Release
@@ -70,6 +70,8 @@
 --     + Checks IfFileExists: Overwrite, Newname, Exit
 --     + Checks if the subdir for yt-dlp exists. if not it warns the user and stops the script
 --     + If the video wasn't downloaded or the donloaded file is 0 bytes size, the script stops and doesn't generate any new track
+-- 3.0 2024-11-11
+--     - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
@@ -115,7 +117,7 @@ local slash = '\\'
 local backslash = '/'
 local clock = os.clock
 local debug = false
-local ver = 2.9
+local ver = 3.0
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -169,7 +171,7 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
         end
         if OS == "OSX64" or OS == "macOS-arm64" then
           MainPath  = './yt-dlp_macos'
-          Start = 'cd "' .. CallPath .. '" && chmod +x ' .. dlpMac .. ' && '
+          Start = 'cd "' .. CallPath .. '"' .. dlpMac .. ' && '
           os.execute('chmod +x "' ..  MainPath .. '"')
           OpSys = 2
         end
@@ -334,9 +336,9 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
           end
           
           
-          ---------------------------------------------
-          -- NETWORK DISRUPTION
-          ---------------------------------------------
+---------------------------------------------
+-- NETWORK DISRUPTION DETECTION
+---------------------------------------------
           
           -- GET RESIDUAL FILES AND REMOVE THEM
           local ResFiles ="" 
