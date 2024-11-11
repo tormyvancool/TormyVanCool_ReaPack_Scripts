@@ -324,6 +324,10 @@
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
+                <source main="main" platform="win64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="linux">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin-arm64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/a96594eb7991adfdad160c2d4150aac5a3cd1e3e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <changelog>
                 <![CDATA[
                     1.0 2024-26-10
