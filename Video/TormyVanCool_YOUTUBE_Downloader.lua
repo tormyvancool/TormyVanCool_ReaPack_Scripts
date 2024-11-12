@@ -72,6 +72,7 @@
 --     + If the video wasn't downloaded or the donloaded file is 0 bytes size, the script stops and doesn't generate any new track
 -- 3.0 2024-11-11
 --     - os.execute('chmod +x "' ..  MainPath .. '"')
+--
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
 --  
@@ -89,11 +90,14 @@
 --    and several other ones ...
 -- 
 --   [Full list here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
+--
 -- @Credits:
 --    Stefano marcantoni and Ben Talagan - to have helped for MAC implementation
 --    Paolo Saggese PMS67 - to have helped for Linux implementation
 --    cfillion - for his support during general debug
 --    smandrap - for his key suggestoin to that helped to improve the reliability. Topic https://forum.cockos.com/showthread.php?t=96087
+--    Sid - for his hint to imrpove the URL sanitization. Topic https://forum.cockos.com/showthread.php?p=2822190#post2822190
+--
 -- @provides
 --   [win64] yt-dlp/yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 --   [linux] yt-dlp/yt-dlp_linux https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
@@ -207,10 +211,10 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
       -- CHECK FOR URL VALIDITY
       function is_valid_url(url)
         -- Pattern to match a basic URL structure
-        local pattern = "^https?://[%w-_%.%?%.:/%+=&]+$"
+        local pattern = "^(https?://[%w-_%.%&%?%+=#/,]+)$"
         return url:match(pattern) ~= nil
       end
-
+      
       local minVersion = '7.27'
       if minVersion > version then
         reaper.MB('your Reaper verions is '..version..'\nPlease update REAPER to the last version!', 'ERROR: REAPER '..version..' OUTDATED', 0)
