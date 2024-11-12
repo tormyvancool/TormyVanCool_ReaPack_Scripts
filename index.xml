@@ -320,14 +320,14 @@
                 </description>
             </metadata>
             <version name="3.0" author="Tormy Van Cool" time="2024-11-11T14:30:35Z">
-                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2a57dc1e87c0f0a0fe88aff717716fc427d151b8/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47a99f43c3bc92f2b1d5a4877cceff261af55969/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="windows" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
                 <source platform="linux" file="yt-dlp/yt-dlp_linux">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp</source>
-                <source main="main" platform="win64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2a57dc1e87c0f0a0fe88aff717716fc427d151b8/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-                <source main="main" platform="linux">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2a57dc1e87c0f0a0fe88aff717716fc427d151b8/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-                <source main="main" platform="darwin64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2a57dc1e87c0f0a0fe88aff717716fc427d151b8/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
-                <source main="main" platform="darwin-arm64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/2a57dc1e87c0f0a0fe88aff717716fc427d151b8/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="win64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47a99f43c3bc92f2b1d5a4877cceff261af55969/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="linux">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47a99f43c3bc92f2b1d5a4877cceff261af55969/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47a99f43c3bc92f2b1d5a4877cceff261af55969/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
+                <source main="main" platform="darwin-arm64">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/47a99f43c3bc92f2b1d5a4877cceff261af55969/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <changelog>
                 <![CDATA[
                     1.0 2024-26-10
