@@ -38,7 +38,7 @@ With this script, you save that space.
 The instruments are exported from the beginning of the project, till the very end of their track or FX tail whichever occurs first.
 
 
-Import any video form youtube, Vimeo, Patreon, Facebook, Twitch etc etc into REAPER!
+Import any video from youtube, Vimeo, Patreon, Facebook, Twitch etc etc into REAPER!
 -------
 Click on the image to watch the video Tutorial
 
