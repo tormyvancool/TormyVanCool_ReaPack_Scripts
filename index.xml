@@ -321,7 +321,7 @@
                     \par }]]>
                 </description>
             </metadata>
-            <version name="3.0" author="Tormy Van Cool" time="2024-11-11T14:30:35Z">
+            <version name="3.1" author="Tormy Van Cool" time="2024-11-21T14:30:35Z">
                 <source main="main" file="TormyVanCool_YOUTUBE_Downloader.lua">https://github.com/tormyvancool/TormyVanCool_ReaPack_Scripts/raw/3618c138313c15ddb3de39971f27b14eed63665e/Video/TormyVanCool_YOUTUBE_Downloader.lua</source>
                 <source platform="win64" file="yt-dlp/yt-dlp.exe">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe</source>
                 <source platform="darwin" file="yt-dlp/yt-dlp_macos">https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos</source>
@@ -402,6 +402,9 @@
                        + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
                    3.0 2024-11-11
                        - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
+                   3.1 2024--11-21
+                       - -S vcodec:h264,res,acodec:aac 
+                       + --merge-output-format mp4
                 ]]>
                 </changelog>
             </version>
