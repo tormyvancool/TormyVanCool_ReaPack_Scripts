@@ -295,7 +295,8 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
       end
       
       -- ARGS
-      args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
+      -- args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
+      args = " --update-to master --merge-output-format mp4 " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
       upArgs = " --update-to master"
 
       -- TRIGGERS
