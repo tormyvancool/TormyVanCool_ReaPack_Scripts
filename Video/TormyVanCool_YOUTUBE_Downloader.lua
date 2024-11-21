@@ -72,6 +72,9 @@
 --     + If the video wasn't downloaded or the donloaded file is 0 bytes size, the script stops and doesn't generate any new track
 -- 3.0 2024-11-11
 --     - os.execute('chmod +x "' ..  MainPath .. '"')
+-- 3.1 2024--11-21
+--     - -S vcodec:h264,res,acodec:aac 
+--     + --merge-output-format mp4
 --
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
