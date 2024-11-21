@@ -1,6 +1,6 @@
 -- @description YOUTUBE Downloader
 -- @author Tormy Van Cool
--- @version 3.0
+-- @version 3.1
 -- @Changelog:
 -- 1.0 2024-26-10
 --     # First Release
@@ -124,7 +124,7 @@ local slash = '\\'
 local backslash = '/'
 local clock = os.clock
 local debug = false
-local ver = 3.0
+local ver = '3.1'
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
