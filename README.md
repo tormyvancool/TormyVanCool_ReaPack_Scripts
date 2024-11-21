@@ -38,6 +38,20 @@ With this script, you save that space.
 The instruments are exported from the beginning of the project, till the very end of their track or FX tail whichever occurs first.
 
 
+Import any video from youtube, Vimeo, Patreon, Facebook, Twitch etc etc into REAPER!
+-------
+Click on the image to watch the video Tutorial
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=-VYPGPCEQsk" target="_blank">
+  <img src="http://img.youtube.com/vi/-VYPGPCEQsk/maxresdefault.jpg" alt="Import any video form youtube, Vimeo, Patreon, Facebook, Twitch etc etc into REAPER!" width="500" height="281" border="10" />
+</a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=oI4xu6X8CKI" target="_blank">
+  <img src="http://img.youtube.com/vi/oI4xu6X8CKI/maxresdefault.jpg" alt="Import any video form youtube, Vimeo, Patreon, Facebook, Twitch etc etc into REAPER!" width="500" height="281" border="10" />
+</a>
+
+
+
+
 
 Audiobooks_ChapterMarkers and Audiobooks_ChapterMarkersUpdater in function:
 -------
