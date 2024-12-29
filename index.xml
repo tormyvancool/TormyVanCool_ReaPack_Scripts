@@ -402,9 +402,11 @@
                        + check if the subdir for yt-dlp exists. if not it warns the user and stops the script
                    3.0 2024-11-11
                        - ' && chmod +x' on if OS == "OSX64" or OS == "macOS-arm64"
-                   3.1 2024--11-21
+                   3.1 2024-11-21
                        - -S vcodec:h264,res,acodec:aac 
                        + --merge-output-format mp4
+                   3.2 2024-12-29
+                       + --compat-opt prefer-vp9-sort
                 ]]>
                 </changelog>
             </version>

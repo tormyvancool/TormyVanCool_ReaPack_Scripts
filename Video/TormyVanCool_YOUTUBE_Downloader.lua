@@ -75,7 +75,7 @@
 -- 3.1 2024-11-21
 --     - -S vcodec:h264,res,acodec:aac 
 --     + --merge-output-format mp4
--- 3.2 2024-11-29
+-- 3.2 2024-12-29
 --     + --compat-opt prefer-vp9-sort
 --
 -- @about:
