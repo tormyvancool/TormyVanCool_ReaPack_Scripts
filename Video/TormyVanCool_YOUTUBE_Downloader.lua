@@ -72,9 +72,11 @@
 --     + If the video wasn't downloaded or the donloaded file is 0 bytes size, the script stops and doesn't generate any new track
 -- 3.0 2024-11-11
 --     - os.execute('chmod +x "' ..  MainPath .. '"')
--- 3.1 2024--11-21
+-- 3.1 2024-11-21
 --     - -S vcodec:h264,res,acodec:aac 
 --     + --merge-output-format mp4
+-- 3.2 2024-11-29
+--     + --compat-opt prefer-vp9-sort
 --
 -- @about:
 -- # Import VIDEOs directly in TimeLine from YouTUBE, VIMEO, PATREONS and thousand other ones.
@@ -124,7 +126,7 @@ local slash = '\\'
 local backslash = '/'
 local clock = os.clock
 local debug = false
-local ver = '3.1'
+local ver = '3.2'
 local InputVariable = ""
 local dlpWin = 'yt-dlp.exe'
 local dlpMac = 'yt-dlp_macos'
@@ -299,7 +301,7 @@ local CallPath = ScriptPath .. 'yt-dlp/' -- Get FullPath to yt-dlp
       
       -- ARGS
       -- args = " --update-to master -S vcodec:h264,res,acodec:aac " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
-      args = " --update-to master --merge-output-format mp4 " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
+      args = " --update-to master --merge-output-format mp4 --compat-opt prefer-vp9-sort " .. url .. ' -P "' .. ProjDir .. '/Videos/"' .. argument .. " --force-overwrite"
       upArgs = " --update-to master"
 
       -- TRIGGERS
