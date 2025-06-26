@@ -28,10 +28,10 @@ end
 title="   - .. - .-..   " --TITL
 composer="   -.-. -- .--. ...   " --CMPS
 author="   .- ..- - ....   " --AUTH
-arranger="   . -  . - .  - .  . . -    " --ARNG
+arranger="   .- .-. -. --.    " --ARNG
 isrc="   .. ... .-. -.-.   " --ISRC
 year="   -.-- . .- .-.   " --YEAR
-genre="   ..- . -. .-.   " --GENR
+genre="   --. . -. .-.   " --GENR
 mixer="   -- .. -..- .-.   " --MIXR
 master="   -- ... - .-.   " --MSTR
 length="   -.. .-. - -.   " --DRTN
@@ -128,7 +128,7 @@ local function MORSE(InputData)
   MorseTable["/"]="-..-."
   MorseTable["@"]=".--.-."
   
-  MorseTable[" "]="             "
+  MorseTable[" "]="           "
   local OutputData=""
   i=1
   while i<=InputData:len() do
@@ -143,6 +143,13 @@ local function MORSE(InputData)
     i=i+1
   end
   return OutputData
+end
+
+-- TITLE
+if InputString:len()==0 then
+  title=""
+else
+  title=title..MORSE(InputString)
 end
 
 -- ISRC
@@ -222,7 +229,7 @@ OutputString=space(isrc)
   ..space(mixer)
   ..space(master)
   ..space(length)
-  ..space(title).."  "..InputString:sub(1,-4)
+  ..space(title).."  " --..InputString:sub(1,-1)
 
 --reaper.ShowConsoleMsg("\n"..OutputString.."\n")
 --os.exit()
