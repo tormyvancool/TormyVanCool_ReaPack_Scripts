@@ -1,4 +1,4 @@
-retval, InputFields=reaper.GetUserInputs("ASCII MIDIzarion", 10, "Title,separator=\n,ISRC,Composer,Author,Arranger (if any),Year,Genre,Mixer Engineer,Master Engineer,Duration (seconds)", "")
+retval, InputFields=reaper.GetUserInputs("ASCII MIDIzation",10, "Title,separator=\n,ISRC,Composer,Author,Arranger (if any),Year,Genre,Mixer Engineer,Master Engineer,Duration (seconds)", "")
 --retval, InputString_ISRC=reaper.GetUserInputs("Original string", 1, "ISRC", "")
 if retval then
   t = {}
@@ -21,16 +21,20 @@ InputString_MixerEngineer=t[8]:upper()
 InputString_MasterEngineer=t[9]:upper()
 InputString_Duration=t[10]:upper()
 
-title="-  . .  -  . - . .    " --TITL
-composer="- . - .  - -  . - - .  . . .    " --CMPS
-author=". -  . . -  -  . . . .    " --AUTH
-arranger=". -  . - .  - .  . . -    " --ARNG
-isrc=". .  . . .  . - .  - . - .    " --ISRC
-year="- . - -  .  . -  . - .    " --YEAR
-genre=". . -  .  - .  . - .    " --GENR
-mixer="- -  . .  - . . -  . - .    " --MIXR
-master="- -  . . .  -  . - .    " --MSTR
-length="- . .  . - .  -  - .    " --DRTN
+function space(a)
+  return a:gsub(".", "%1 "):sub(1,-2)
+end
+
+title="   - .. - .-..   " --TITL
+composer="   -.-. -- .--. ...   " --CMPS
+author="   .- ..- - ....   " --AUTH
+arranger="   . -  . - .  - .  . . -    " --ARNG
+isrc="   .. ... .-. -.-.   " --ISRC
+year="   -.-- . .- .-.   " --YEAR
+genre="   ..- . -. .-.   " --GENR
+mixer="   -- .. -..- .-.   " --MIXR
+master="   -- ... - .-.   " --MSTR
+length="   -.. .-. - -.   " --DRTN
 
 --reaper.ShowConsoleMsg("\n"..t[1].." "..t[2].." "..t[3].." "..t[4]..' '.."\n")
 --os.exit()
@@ -58,71 +62,71 @@ end
 -- FUNTCION
 local function MORSE(InputData)
   MorseTable={}
-  MorseTable["A"]=". -"
-  MorseTable["B"]="- . . ."
-  MorseTable["C"]="- . - ."
-  MorseTable["D"]="- . ."
+  MorseTable["A"]=".-"
+  MorseTable["B"]="-..."
+  MorseTable["C"]="-.-."
+  MorseTable["D"]="-.."
   MorseTable["E"]="."
-  MorseTable["F"]=". . - ."
-  MorseTable["G"]="- - ."
-  MorseTable["H"]=". . . ."
-  MorseTable["I"]=". ."
-  MorseTable["J"]=". - - -"
-  MorseTable["K"]="- . -"
-  MorseTable["L"]=". - . ."
-  MorseTable["M"]="- -"
-  MorseTable["N"]="- ."
-  MorseTable["O"]="- - -"
-  MorseTable["P"]=". - - ."
-  MorseTable["Q"]="- - . -"
-  MorseTable["R"]=". - ."
-  MorseTable["S"]=". . ."
+  MorseTable["F"]="..-."
+  MorseTable["G"]="--."
+  MorseTable["H"]="...."
+  MorseTable["I"]=".."
+  MorseTable["J"]=".---"
+  MorseTable["K"]="-.-"
+  MorseTable["L"]=".-.."
+  MorseTable["M"]="--"
+  MorseTable["N"]="-."
+  MorseTable["O"]="---"
+  MorseTable["P"]=".--."
+  MorseTable["Q"]="--.-"
+  MorseTable["R"]=".-."
+  MorseTable["S"]="..."
   MorseTable["T"]="-"
-  MorseTable["U"]=". . -"
-  MorseTable["V"]=". . . -"
-  MorseTable["W"]=". - -"
-  MorseTable["X"]="- . . -"
-  MorseTable["Y"]="- . - -"
-  MorseTable["Z"]="- - . ."
+  MorseTable["U"]="..-"
+  MorseTable["V"]="...-"
+  MorseTable["W"]=".--"
+  MorseTable["X"]="-..-"
+  MorseTable["Y"]="-.--"
+  MorseTable["Z"]="--.."
   
-  MorseTable["1"]=". - - - -"
-  MorseTable["2"]=". . - - -"
-  MorseTable["3"]=". . . - -"
-  MorseTable["4"]=". . . . -"
-  MorseTable["5"]=". . . . ."
-  MorseTable["6"]="- . . . ."
-  MorseTable["7"]="- - . . ."
-  MorseTable["8"]="- - - . ."
-  MorseTable["9"]="- - - - ."
-  MorseTable["0"]="- - - - -"
+  MorseTable["1"]=".----"
+  MorseTable["2"]="..---"
+  MorseTable["3"]="...--"
+  MorseTable["4"]="....-"
+  MorseTable["5"]="....."
+  MorseTable["6"]="-...."
+  MorseTable["7"]="--..."
+  MorseTable["8"]="---.."
+  MorseTable["9"]="----."
+  MorseTable["0"]="-----"
   
-  MorseTable["À"]=". - - . -"
-  MorseTable["Å"]=". - - . -"
-  MorseTable["Ä"]=". - . -"
-  MorseTable["È"]=". - . . -"
-  MorseTable["É"]=". . - . ."
-  MorseTable["Ö"]="- - - ."
-  MorseTable["Ü"]=". . - -"
-  MorseTable["ß"]=". . . - - . ."
-  MorseTable["CH"]="- - - -"
-  MorseTable["Ñ"]="- - . - -"
+  MorseTable["À"]=".--.-"
+  MorseTable["Å"]=".--.-"
+  MorseTable["Ä"]=".-.-"
+  MorseTable["È"]=".-..-"
+  MorseTable["É"]="..-.."
+  MorseTable["Ö"]="---."
+  MorseTable["Ü"]="..--"
+  MorseTable["ß"]="...--.."
+  MorseTable["CH"]="----"
+  MorseTable["Ñ"]="--.--"
   
-  MorseTable["."]=". - . - . -"
-  MorseTable[","]="- - . . - -"
-  MorseTable[":"]="- - - . . ."
-  MorseTable[";"]="- . - . - ."
-  MorseTable["?"]=". . - - . ."
-  MorseTable["!"]="- . - . - -"
-  MorseTable["-"]="- . . . . -"
-  MorseTable["_"]=". . - - . -"
-  MorseTable["("]="- . - - ."
-  MorseTable[")"]="- . - - . -"
-  MorseTable["'"]=". - - - - ."
-  MorseTable["\""]=". - . . - ."
-  MorseTable["="]="- . . . -"
-  MorseTable["+"]=". - . - ."
-  MorseTable["/"]="- . . - ."
-  MorseTable["@"]=". - - . - ."
+  MorseTable["."]=".-.-.-"
+  MorseTable[","]="--..--"
+  MorseTable[":"]="---..."
+  MorseTable[";"]="-.-.-."
+  MorseTable["?"]="..--.."
+  MorseTable["!"]="-.-.--"
+  MorseTable["-"]="-....-"
+  MorseTable["_"]="..--.-"
+  MorseTable["("]="-.--."
+  MorseTable[")"]="-.--.-"
+  MorseTable["'"]=".----."
+  MorseTable["\""]=".-..-."
+  MorseTable["="]="-...-"
+  MorseTable["+"]=".-.-."
+  MorseTable["/"]="-..-."
+  MorseTable["@"]=".--.-."
   
   MorseTable[" "]="             "
   local OutputData=""
@@ -134,7 +138,7 @@ local function MORSE(InputData)
       i=i+1
     end
     if MorseTable[k]~=nil then
-      OutputData=OutputData..MorseTable[k].."      "
+      OutputData=OutputData..MorseTable[k].."  "
     end
     i=i+1
   end
@@ -209,18 +213,18 @@ InputString=MORSE(InputString)
 
 -- END FUNCTION
 
-OutputString=isrc
-  ..composer
-  ..author
-  ..arranger
-  ..genre
-  ..year
-  ..mixer
-  ..master
-  ..length
-  ..title.."  "..InputString:sub(1,-4)
+OutputString=space(isrc)
+  ..space(composer)
+  ..space(author)
+  ..space(arranger)
+  ..space(genre)
+  ..space(year)
+  ..space(mixer)
+  ..space(master)
+  ..space(length)
+  ..space(title).."  "..InputString:sub(1,-4)
 
-reaper.ShowConsoleMsg("\n"..OutputString.."\n")
+--reaper.ShowConsoleMsg("\n"..OutputString.."\n")
 --os.exit()
 -- Insert MIDI item at edit cursor position with Morse message
 
