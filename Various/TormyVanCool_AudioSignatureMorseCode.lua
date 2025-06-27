@@ -128,7 +128,7 @@ local function MORSE(InputData)
   MorseTable["/"]="-..-."
   MorseTable["@"]=".--.-."
   
-  MorseTable[" "]="           "
+  MorseTable[" "]=" " --word space
   local OutputData=""
   i=1
   while i<=InputData:len() do
@@ -138,7 +138,7 @@ local function MORSE(InputData)
       i=i+1
     end
     if MorseTable[k]~=nil then
-      OutputData=OutputData..MorseTable[k].."  "
+      OutputData=OutputData..MorseTable[k].."  " --letter space
     end
     i=i+1
   end
